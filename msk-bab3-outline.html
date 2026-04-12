@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB III — Mengevaluasi Lingkungan Eksternal Perusahaan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #4ecdc4;   /* teal — chapter 3 color */
+    --accent2: #58a6ff;
+    --accent3: #e8c547;
+    --accent4: #ff6b6b;
+    --accent5: #a78bfa;
+    --accent6: #4ade80;
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 5rem;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--accent); color: #000;
+    padding: 0.3rem 0.9rem; border-radius: 2px;
+    margin-bottom: 1rem; font-weight: 700;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 5vw, 3rem);
+    font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem;
+  }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar {
+    margin: 1.5rem auto 0; width: 220px; height: 3px;
+    background: var(--border); border-radius: 99px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 99px; transition: width 0.5s ease;
+  }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── PETA KONSEP ── */
+  .mind-map {
+    margin: 0 0 2rem; padding: 1.5rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; text-align: center;
+  }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); letter-spacing: 0.05em; }
+  .mind-center {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #1a9e96);
+    color: #000; font-weight: 700; font-size: 0.88rem;
+    padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem;
+  }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.7rem; }
+  .branch {
+    padding: 0.8rem; border-radius: 10px; font-size: 0.75rem; font-weight: 500;
+    border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default; text-align: left;
+  }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.6rem; font-family: 'DM Mono', monospace; margin-bottom: 0.3rem; opacity: 0.7; }
+  .b1 { background: rgba(78,205,196,0.08);  border-color: rgba(78,205,196,0.25);  color: var(--accent); }
+  .b2 { background: rgba(88,166,255,0.08);  border-color: rgba(88,166,255,0.25);  color: var(--accent2); }
+  .b3 { background: rgba(232,197,71,0.08);  border-color: rgba(232,197,71,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.25); color: var(--accent4); }
+  .b5 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent5); }
+  .b6 { background: rgba(74,222,128,0.08);  border-color: rgba(74,222,128,0.25);  color: var(--accent6); }
+
+  /* ── SECTION CARD ── */
+  .section {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s;
+  }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700;
+    color: #000; padding: 0.25rem 0.5rem; border-radius: 4px;
+    min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap;
+  }
+  .c1 { background: var(--accent); }
+  .c2 { background: var(--accent2); }
+  .c3 { background: var(--accent3); color: #000 !important; }
+  .c4 { background: var(--accent4); }
+  .c5 { background: var(--accent5); }
+  .c6 { background: var(--accent6); color: #000 !important; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+    font-size: 0.87rem; line-height: 1.55; color: #c8c8e0;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7) { transition-delay: 0.28s; }
+  .section.open .point:nth-child(8) { transition-delay: 0.32s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1 { background: var(--accent); }
+  .d2 { background: var(--accent2); }
+  .d3 { background: var(--accent3); }
+  .d4 { background: var(--accent4); }
+  .d5 { background: var(--accent5); }
+  .d6 { background: var(--accent6); }
+  .point strong { color: var(--text); }
+
+  .badge {
+    display: inline-block; font-family: 'DM Mono', monospace;
+    font-size: 0.63rem; padding: 0.1rem 0.42rem;
+    border-radius: 99px; vertical-align: middle; margin-left: 0.3rem;
+  }
+  .badge-teal { background: rgba(78,205,196,0.15);  color: var(--accent); }
+  .badge-blue { background: rgba(88,166,255,0.15);  color: var(--accent2); }
+  .badge-gold { background: rgba(232,197,71,0.15);  color: var(--accent3); }
+  .badge-red  { background: rgba(255,107,107,0.15); color: var(--accent4); }
+  .badge-purp { background: rgba(167,139,250,0.15); color: var(--accent5); }
+  .badge-grn  { background: rgba(74,222,128,0.15);  color: var(--accent6); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection {
+    background: rgba(0,0,0,0.22); border-radius: 9px;
+    margin-bottom: 0.75rem; overflow: hidden;
+  }
+  .subsection-header {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.8rem 1rem; cursor: pointer;
+    font-size: 0.84rem; font-weight: 600;
+    border-left: 3px solid transparent; transition: background 0.2s;
+  }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip {
+    margin-top: 0.9rem; padding: 0.85rem 1rem;
+    background: rgba(78,205,196,0.07);
+    border: 1px solid rgba(78,205,196,0.2);
+    border-radius: 8px; font-size: 0.81rem;
+    color: var(--accent); display: flex; gap: 0.6rem;
+    align-items: flex-start; line-height: 1.5;
+  }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    margin-top: 0.9rem; padding: 0.9rem 1rem;
+    border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0;
+  }
+  .info-box.teal  { background: rgba(78,205,196,0.07);  border: 1px solid rgba(78,205,196,0.2); }
+  .info-box.blue  { background: rgba(88,166,255,0.07);  border: 1px solid rgba(88,166,255,0.2); }
+  .info-box.gold  { background: rgba(232,197,71,0.07);  border: 1px solid rgba(232,197,71,0.2); }
+  .info-box.red   { background: rgba(255,107,107,0.07); border: 1px solid rgba(255,107,107,0.2); }
+  .info-box.purp  { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box.green { background: rgba(74,222,128,0.07);  border: 1px solid rgba(74,222,128,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── MACRO ENV GRID (7 komponen) ── */
+  .macro-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.6rem; margin-top: 1rem;
+  }
+  .macro-card {
+    padding: 0.8rem 0.85rem; border-radius: 9px;
+    border: 1px solid var(--border); background: rgba(0,0,0,0.2);
+    font-size: 0.79rem; line-height: 1.4;
+  }
+  .macro-card .mc-num {
+    font-family: 'DM Mono', monospace; font-size: 0.6rem;
+    font-weight: 700; display: block; margin-bottom: 0.3rem;
+  }
+  .macro-card .mc-title { font-weight: 700; font-size: 0.82rem; color: var(--text); margin-bottom: 0.2rem; }
+  .macro-card .mc-desc { color: var(--muted); font-size: 0.75rem; }
+  .mc-1 { border-color: rgba(78,205,196,0.3);  } .mc-1 .mc-num { color: var(--accent); }
+  .mc-2 { border-color: rgba(88,166,255,0.3);  } .mc-2 .mc-num { color: var(--accent2); }
+  .mc-3 { border-color: rgba(232,197,71,0.3);  } .mc-3 .mc-num { color: var(--accent3); }
+  .mc-4 { border-color: rgba(255,107,107,0.3); } .mc-4 .mc-num { color: var(--accent4); }
+  .mc-5 { border-color: rgba(167,139,250,0.3); } .mc-5 .mc-num { color: var(--accent5); }
+  .mc-6 { border-color: rgba(74,222,128,0.3);  } .mc-6 .mc-num { color: var(--accent6); }
+  .mc-7 { border-color: rgba(248,113,113,0.3); } .mc-7 .mc-num { color: #f87171; }
+
+  /* ── PORTER'S 5 FORCES VISUAL ── */
+  .forces-layout {
+    display: grid;
+    grid-template-areas:
+      ". top ."
+      "left center right"
+      ". bottom .";
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 0.5rem; margin-top: 1rem;
+  }
+  .force-card {
+    padding: 0.85rem 0.75rem; border-radius: 9px;
+    font-size: 0.78rem; line-height: 1.45; text-align: center;
+    border: 1px solid var(--border); background: rgba(0,0,0,0.25);
+  }
+  .force-card .fc-icon { font-size: 1.2rem; display: block; margin-bottom: 0.3rem; }
+  .force-card .fc-title { font-weight: 700; font-size: 0.82rem; margin-bottom: 0.25rem; }
+  .force-card .fc-desc { color: var(--muted); font-size: 0.72rem; }
+  .f-top    { grid-area: top; }
+  .f-left   { grid-area: left; }
+  .f-center { grid-area: center; background: rgba(78,205,196,0.1); border-color: rgba(78,205,196,0.35); }
+  .f-right  { grid-area: right; }
+  .f-bottom { grid-area: bottom; }
+  .f-center .fc-title { color: var(--accent); font-size: 0.9rem; }
+  .f-top  .fc-title { color: var(--accent2); }
+  .f-left .fc-title { color: var(--accent3); }
+  .f-right .fc-title { color: var(--accent4); }
+  .f-bottom .fc-title { color: var(--accent5); }
+
+  /* ── LIFE CYCLE STAGES ── */
+  .lifecycle {
+    display: flex; gap: 0; margin-top: 1rem;
+    border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+  }
+  .lc-stage {
+    flex: 1; min-width: 80px; padding: 0.8rem 0.6rem;
+    text-align: center; border-right: 1px solid var(--border);
+    font-size: 0.73rem; line-height: 1.4;
+  }
+  .lc-stage:last-child { border-right: none; }
+  .lc-stage .ls-icon { font-size: 1.1rem; display: block; margin-bottom: 0.3rem; }
+  .lc-stage .ls-name { font-weight: 700; display: block; margin-bottom: 0.2rem; font-size: 0.76rem; }
+  .lc-stage .ls-desc { color: var(--muted); font-size: 0.68rem; }
+  .ls-1 { background: rgba(78,205,196,0.07);  } .ls-1 .ls-name { color: var(--accent); }
+  .ls-2 { background: rgba(88,166,255,0.07);  } .ls-2 .ls-name { color: var(--accent2); }
+  .ls-3 { background: rgba(232,197,71,0.07);  } .ls-3 .ls-name { color: var(--accent3); }
+  .ls-4 { background: rgba(255,107,107,0.07); } .ls-4 .ls-name { color: var(--accent4); }
+
+  /* ── 7 PERTANYAAN DIAGNOSTIK ── */
+  .q-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .q-item {
+    display: flex; gap: 0.8rem; align-items: flex-start;
+    background: rgba(0,0,0,0.2); border-radius: 8px;
+    padding: 0.7rem 0.9rem; font-size: 0.83rem; line-height: 1.5; color: #c8c8e0;
+    border-left: 3px solid var(--border);
+  }
+  .q-num {
+    font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700;
+    color: #000; width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 0.05rem;
+  }
+  .q-item strong { color: var(--text); }
+
+  /* ── KSF 3 PERTANYAAN ── */
+  .ksf-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.7rem; margin-top: 1rem;
+  }
+  .ksf-card {
+    padding: 1rem; border-radius: 10px;
+    border: 1px solid var(--border); background: rgba(0,0,0,0.25);
+    font-size: 0.81rem; line-height: 1.5; color: #c8c8e0;
+  }
+  .ksf-card .kc-q { font-weight: 700; font-size: 0.85rem; margin-bottom: 0.35rem; }
+  .ksf-card .kc-desc { color: var(--muted); font-size: 0.77rem; font-style: italic; }
+  .kc-1 { border-color: rgba(78,205,196,0.3);  } .kc-1 .kc-q { color: var(--accent); }
+  .kc-2 { border-color: rgba(88,166,255,0.3);  } .kc-2 .kc-q { color: var(--accent2); }
+  .kc-3 { border-color: rgba(232,197,71,0.3);  } .kc-3 .kc-q { color: var(--accent3); }
+
+  /* ── STEP FLOW ── */
+  .step-flow { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .step-item {
+    display: flex; gap: 0.9rem; align-items: flex-start;
+    background: rgba(0,0,0,0.2); border-radius: 8px;
+    padding: 0.75rem 0.9rem; border-left: 3px solid transparent;
+    font-size: 0.84rem; line-height: 1.5; color: #c8c8e0;
+  }
+  .step-num {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700;
+    color: #000; width: 22px; height: 22px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 0.05rem;
+  }
+  .step-item strong { color: var(--text); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn {
+    display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem;
+    background: none; border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem;
+    font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s;
+  }
+  .done-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+  .done-btn.checked { border-color: var(--accent3); color: var(--accent3); background: rgba(78,205,196,0.07); }
+
+  /* ── ULTIMATE OUTLINE ── */
+  .ultimate {
+    margin-top: 2.5rem;
+    background: linear-gradient(135deg, rgba(78,205,196,0.07), rgba(88,166,255,0.04));
+    border: 1px solid rgba(78,205,196,0.25);
+    border-radius: 16px; padding: 2rem 1.6rem;
+  }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent), #1a9e96);
+    border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    font-weight: 700; color: #000; flex-shrink: 0;
+  }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    padding: 0.15rem 0.5rem; border-radius: 99px;
+    background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border);
+  }
+
+  /* ── GRAND FORMULA ── */
+  .grand-formula {
+    margin-top: 1.5rem; padding: 1.2rem;
+    background: rgba(0,0,0,0.3); border-radius: 10px;
+    text-align: center; font-size: 0.88rem; line-height: 1.7;
+  }
+  .formula-line {
+    display: flex; align-items: center;
+    justify-content: center; flex-wrap: wrap; gap: 0.5rem; font-weight: 600;
+  }
+  .formula-term {
+    padding: 0.3rem 0.8rem; border-radius: 6px;
+    font-family: 'DM Mono', monospace; font-size: 0.78rem;
+  }
+  .ft-teal { background: rgba(78,205,196,0.15);  color: var(--accent); }
+  .ft-blue { background: rgba(88,166,255,0.15);  color: var(--accent2); }
+  .ft-gold { background: rgba(232,197,71,0.15);  color: var(--accent3); }
+  .ft-red  { background: rgba(255,107,107,0.15); color: var(--accent4); }
+  .ft-grn  { background: rgba(74,222,128,0.15);  color: var(--accent6); }
+  .formula-op { color: var(--muted); font-size: 1.1rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer {
+    text-align: center; margin-top: 3rem;
+    font-size: 0.7rem; color: var(--muted);
+    font-family: 'DM Mono', monospace; opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB III — <span>Mengevaluasi</span><br>Lingkungan Eksternal</h1>
+    <p class="subtitle">Makro Env · Industry Life Cycle · Porter's 5 Forces · Strategic Group Mapping · KSF</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 6 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab III</h2>
+    <div class="mind-center">🔭 Lingkungan Eksternal</div>
+    <div class="mind-branches">
+      <div class="branch b1">
+        <div class="blabel">3.3</div>
+        Lingkungan Makro<br><small style="opacity:0.7">7 komponen strategis</small>
+      </div>
+      <div class="branch b2">
+        <div class="blabel">3.4</div>
+        7 Pertanyaan Diagnostik<br><small style="opacity:0.7">Berpikir stratejik tentang industri</small>
+      </div>
+      <div class="branch b3">
+        <div class="blabel">3.5</div>
+        Industry Life Cycle<br><small style="opacity:0.7">4 fase siklus industri</small>
+      </div>
+      <div class="branch b4">
+        <div class="blabel">3.6</div>
+        Porter's 5 Forces<br><small style="opacity:0.7">Kekuatan daya saing industri</small>
+      </div>
+      <div class="branch b5">
+        <div class="blabel">3.7–3.9</div>
+        Dinamika &amp; Pemetaan<br><small style="opacity:0.7">Perubahan industri · SGM · CI</small>
+      </div>
+      <div class="branch b6">
+        <div class="blabel">3.10–3.11</div>
+        KSF &amp; Prospek Industri<br><small style="opacity:0.7">Faktor sukses · Daya tarik profit</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: PENDAHULUAN & KONTEKS ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">3.1–3.2</span>
+      <div>
+        <div class="section-title">Pendahuluan: Dua Fase Situasi Perusahaan</div>
+        <div class="section-eng">Introduction: Two Dimensions of Company Situation</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          Bab III menjawab pertanyaan sentral dari Bab I: <em>"Seperti apakah situasi perusahaan pada saat sekarang ini?"</em> — yang ternyata terdiri dari <strong>dua fase/dimensi</strong> utama yang harus dianalisis.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Fase 1 — Lingkungan Eksternal:</strong> Kondisi persaingan di dalam industri di mana perusahaan beroperasi — inilah yang menjadi fokus Bab III.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Fase 2 — Lingkungan Internal:</strong> Kemampuan sumber daya serta organisasional perusahaan itu sendiri — akan dibahas di Bab IV.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Tujuan Bab III: memahami konsep-konsep serta alat analisis untuk <em>mendiagnosa kondisi persaingan dalam industri</em>, memprediksi dinamikanya, memetakan posisi pesaing, dan menentukan faktor sukses kompetitif masa depan.
+        </span></li>
+      </ul>
+      <div class="info-box teal">
+        <strong>🔑 Inti Bab III:</strong> Sebelum memilih strategi, perusahaan harus memahami <em>"medan perang"</em> tempat ia bersaing — dari lingkungan makro terluas, hingga detail persaingan dalam industri. Tanpa pemahaman eksternal yang mendalam, strategi yang disusun hanyalah tebakan.
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: LINGKUNGAN MAKRO ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c1">3.3</span>
+      <div>
+        <div class="section-title">Komponen Lingkungan Makro yang Strategis Relevan</div>
+        <div class="section-eng">Strategically Relevant Components of the Macro-Environment</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Perusahaan beroperasi dalam "lingkungan makro" yang lebih besar. Ada <strong style="color:var(--text);">7 komponen utama</strong> yang secara strategis relevan karena sangat berpengaruh terhadap arah, tujuan, strategi, dan model bisnis perusahaan:</p>
+
+      <div class="macro-grid">
+        <div class="macro-card mc-1">
+          <span class="mc-num">① DEMOGRAFI</span>
+          <div class="mc-title">Demografi Penduduk</div>
+          <div class="mc-desc">Ukuran populasi, usia, distribusi, pertumbuhan penduduk — menentukan ukuran pasar dan tren konsumen</div>
+        </div>
+        <div class="macro-card mc-2">
+          <span class="mc-num">② SOSIAL</span>
+          <div class="mc-title">Gaya Hidup &amp; Nilai Sosial</div>
+          <div class="mc-desc">Perubahan gaya hidup, nilai-nilai, preferensi, dan norma sosial yang mempengaruhi perilaku konsumen</div>
+        </div>
+        <div class="macro-card mc-3">
+          <span class="mc-num">③ POLITIK</span>
+          <div class="mc-title">Politik &amp; Hukum</div>
+          <div class="mc-desc">Kebijakan pemerintah, regulasi, stabilitas politik, dan sistem hukum yang berlaku</div>
+        </div>
+        <div class="macro-card mc-4">
+          <span class="mc-num">④ REGULASI</span>
+          <div class="mc-title">Regulasi, Lingkungan &amp; Ekologi</div>
+          <div class="mc-desc">Peraturan lingkungan, tuntutan keberlanjutan, standar emisi, dan isu ekologis</div>
+        </div>
+        <div class="macro-card mc-5">
+          <span class="mc-num">⑤ EKONOMI</span>
+          <div class="mc-title">Kondisi Perekonomian</div>
+          <div class="mc-desc">Siklus bisnis, inflasi, suku bunga, pengangguran, pertumbuhan GDP — kondisi ekonomi makro secara umum</div>
+        </div>
+        <div class="macro-card mc-6">
+          <span class="mc-num">⑥ TEKNOLOGI</span>
+          <div class="mc-title">Kekuatan Teknologi</div>
+          <div class="mc-desc">Inovasi teknologi, digitalisasi, otomasi, kecepatan perubahan teknologi yang mendisrupsi industri</div>
+        </div>
+        <div class="macro-card mc-7">
+          <span class="mc-num">⑦ GLOBAL</span>
+          <div class="mc-title">Kekuatan Global</div>
+          <div class="mc-desc">Globalisasi, perdagangan internasional, geopolitik, kurs mata uang, dan persaingan lintas negara</div>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 7 Komponen Makro:</strong> <em>"DSPRTE-G"</em> → <em>"Demografi · Sosial · Politik · Regulasi · Teknologi · Ekonomi · Global"</em> → <em>"Dengan Sopan, Politik Rakyat Terasa Elegan Globalnya"</em></span>
+      </div>
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: 7 PERTANYAAN + LIFE CYCLE ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c2">3.4–3.5</span>
+      <div>
+        <div class="section-title">7 Pertanyaan Diagnostik &amp; Siklus Hidup Industri</div>
+        <div class="section-eng">7 Diagnostic Questions &amp; Industry Life Cycle</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub3a">
+        <div class="subsection-header" onclick="toggleSub('sub3a')">
+          ❓ 7 Pertanyaan untuk Berpikir Stratejik tentang Industri <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">Para manajer harus menjawab tujuh pertanyaan spesifik ini sebelum menentukan strategi bersaing:</p>
+          <div class="q-list">
+            <div class="q-item" style="border-left-color:rgba(78,205,196,0.5);">
+              <div class="q-num" style="background:var(--accent);">1</div>
+              <div><strong>Apakah industri ini menawarkan peluang pertumbuhan?</strong> — Ukuran pasar dan tingkat pertumbuhan saat ini dan ke depan</div>
+            </div>
+            <div class="q-item" style="border-left-color:rgba(88,166,255,0.5);">
+              <div class="q-num" style="background:var(--accent2);">2</div>
+              <div><strong>Kekuatan daya saing apa yang dihadapi dan seberapa kuatkah?</strong> — Intensitas persaingan menggunakan Porter's Five Forces</div>
+            </div>
+            <div class="q-item" style="border-left-color:rgba(232,197,71,0.5);">
+              <div class="q-num" style="background:var(--accent3); color:#000;">3</div>
+              <div><strong>Faktor apa yang mendorong perubahan industri?</strong> — Dinamika dan tren yang mengubah kondisi industri</div>
+            </div>
+            <div class="q-item" style="border-left-color:rgba(255,107,107,0.5);">
+              <div class="q-num" style="background:var(--accent4);">4</div>
+              <div><strong>Bagaimana para pesaing diposisikan?</strong> — Siapa berpengaruh kuat, siapa tidak — melalui Strategic Group Mapping</div>
+            </div>
+            <div class="q-item" style="border-left-color:rgba(167,139,250,0.5);">
+              <div class="q-num" style="background:var(--accent5);">5</div>
+              <div><strong>Tindakan stratejik apa yang akan dilakukan pesaing?</strong> — Competitive intelligence untuk mengantisipasi langkah pesaing</div>
+            </div>
+            <div class="q-item" style="border-left-color:rgba(74,222,128,0.5);">
+              <div class="q-num" style="background:var(--accent6); color:#000;">6</div>
+              <div><strong>Faktor utama apa yang mendorong keberhasilan kompetitif masa depan?</strong> — Key Success Factors (KSF) industri</div>
+            </div>
+            <div class="q-item" style="border-left-color:rgba(248,113,113,0.5);">
+              <div class="q-num" style="background:#f87171;">7</div>
+              <div><strong>Apakah industri menawarkan prospek keuntungan yang menarik?</strong> — Kesimpulan akhir: apakah industri ini layak dimasuki/dipertahankan?</div>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Cara ingat 7 pertanyaan:</strong> <em>"Tumbuh-Saing-Ubah-Posisi-Rencana pesaing-Sukses-Profit"</em> → <em>"TSUPRS-P"</em> → urutan logis dari makro ke mikro hingga kesimpulan kelayakan industri.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub3b">
+        <div class="subsection-header" onclick="toggleSub('sub3b')">
+          🔄 Industry Life Cycle — 4 Fase Siklus Hidup Industri <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;">Ukuran pasar dan tingkat pertumbuhan industri berubah mengikuti <em>pola siklus hidup</em> yang umum terjadi:</p>
+          <div class="lifecycle">
+            <div class="lc-stage ls-1">
+              <span class="ls-icon">🌱</span>
+              <span class="ls-name">Kemunculan</span>
+              <span class="ls-desc">Pasar baru lahir, pertumbuhan lambat, ketidakpastian tinggi, investasi besar</span>
+            </div>
+            <div class="lc-stage ls-2">
+              <span class="ls-icon">🚀</span>
+              <span class="ls-name">Pertumbuhan Cepat</span>
+              <span class="ls-desc">Permintaan melonjak, pemain baru masuk, kompetisi mulai ketat</span>
+            </div>
+            <div class="lc-stage ls-3">
+              <span class="ls-icon">🏔️</span>
+              <span class="ls-name">Stabil &amp; Matang</span>
+              <span class="ls-desc">Pertumbuhan melambat, persaingan intens, efisiensi jadi kunci</span>
+            </div>
+            <div class="lc-stage ls-4">
+              <span class="ls-icon">📉</span>
+              <span class="ls-name">Redup/Stagnasi</span>
+              <span class="ls-desc">Permintaan menurun, pemain keluar, inovasi atau perubahan diperlukan</span>
+            </div>
+          </div>
+          <div class="info-box blue" style="margin-top:0.9rem;">
+            <strong>💡 Implikasi Stratejik:</strong> Posisi industri dalam siklus hidupnya <em>sangat menentukan pilihan strategi</em> yang tepat. Industri yang baru tumbuh membutuhkan strategi ekspansi, sedangkan industri matang membutuhkan strategi efisiensi dan diferensiasi.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: PORTER'S 5 FORCES ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c3">3.6</span>
+      <div>
+        <div class="section-title">Kekuatan Daya Saing: Porter's Five Forces</div>
+        <div class="section-eng">Competitive Forces: Porter's Five Forces Model</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Lima kekuatan kompetitif yang secara bersamaan membentuk intensitas persaingan dan potensi keuntungan dalam suatu industri:</p>
+
+      <div class="forces-layout">
+        <div class="force-card f-top">
+          <span class="fc-icon">🆕</span>
+          <div class="fc-title">Ancaman Pemain Baru</div>
+          <div class="fc-desc">Seberapa mudah pendatang baru masuk ke industri? Hambatan masuk tinggi = ancaman rendah</div>
+        </div>
+        <div class="force-card f-left">
+          <span class="fc-icon">🏭</span>
+          <div class="fc-title">Daya Tawar Pemasok</div>
+          <div class="fc-desc">Kekuatan pemasok dalam menentukan harga dan kualitas input</div>
+        </div>
+        <div class="force-card f-center">
+          <span class="fc-icon">⚔️</span>
+          <div class="fc-title">Rivalitas Antar Pesaing</div>
+          <div class="fc-desc">Intensitas persaingan langsung di antara para pemain dalam industri yang sama</div>
+        </div>
+        <div class="force-card f-right">
+          <span class="fc-icon">🛒</span>
+          <div class="fc-title">Daya Tawar Pembeli</div>
+          <div class="fc-desc">Kekuatan pembeli dalam menekan harga dan menuntut kualitas lebih tinggi</div>
+        </div>
+        <div class="force-card f-bottom">
+          <span class="fc-icon">🔄</span>
+          <div class="fc-title">Ancaman Produk Substitusi</div>
+          <div class="fc-desc">Tersedianya produk/jasa alternatif yang dapat menggantikan produk industri</div>
+        </div>
+      </div>
+
+      <div class="info-box teal" style="margin-top:1rem;">
+        <strong>📊 Kesimpulan 5 Forces:</strong> Gabungan dari kelima kekuatan ini menentukan apakah industri <em>kondusif untuk profit yang baik</em>. Semakin kuat kelima kekuatan tersebut, semakin tertekan profitabilitas industri secara keseluruhan.
+      </div>
+
+      <ul class="points" style="margin-top:0.9rem;">
+        <li class="point"><span class="dot d3"></span><span>
+          <strong>Rivalitas antar pesaing</strong> — diciptakan melalui persaingan di antara para penjual dalam industri yang sama: perang harga, inovasi produk, layanan pelanggan, dan kapasitas
+        </span></li>
+        <li class="point"><span class="dot d3"></span><span>
+          <strong>Ancaman pemain baru</strong> — terkait dengan hambatan masuk (<em>barriers to entry</em>): skala ekonomi, kebutuhan modal, loyalitas merek, regulasi, akses distribusi
+        </span></li>
+        <li class="point"><span class="dot d3"></span><span>
+          <strong>Ancaman produk substitusi</strong> — produk dari industri lain yang memenuhi kebutuhan serupa dengan harga lebih murah atau kualitas lebih baik
+        </span></li>
+        <li class="point"><span class="dot d3"></span><span>
+          <strong>Daya tawar pemasok</strong> — kuat jika pemasok sedikit, input langka, biaya beralih pemasok tinggi, atau tidak ada substitusi input
+        </span></li>
+        <li class="point"><span class="dot d3"></span><span>
+          <strong>Daya tawar &amp; sensitivitas harga pembeli</strong> — kuat jika pembeli membeli dalam jumlah besar, produk terstandarisasi, biaya beralih merek rendah, atau informasi harga transparan
+        </span></li>
+      </ul>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 5 Forces:</strong> <em>"RASPP"</em> → <em>"Rivalitas · Ancaman baru · Substitusi · Pemasok · Pembeli"</em> → <em>"Ribut Antar Sesama, Pasokan Penting!"</em></span>
+      </div>
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: DINAMIKA, SGM & COMPETITIVE INTELLIGENCE ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c4">3.7–3.9</span>
+      <div>
+        <div class="section-title">Dinamika Industri, Pemetaan Stratejik &amp; Intelijen Pesaing</div>
+        <div class="section-eng">Industry Dynamics, Strategic Group Mapping &amp; Competitive Intelligence</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub5a">
+        <div class="subsection-header" onclick="toggleSub('sub5a')">
+          🌊 Faktor Pendorong Perubahan Industri (3.7) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              Intensitas kekuatan kompetitif <strong>sangat mudah berubah</strong> — semua industri terpengaruh oleh perkembangan baru dan tren yang merubah kondisi industri secara terus-menerus.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              Empat langkah analisis dinamika industri yang harus dilakukan manajer:
+            </span></li>
+          </ul>
+          <div class="step-flow">
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">1</div>
+              <div><strong>Menganalisa dinamika industri</strong> — memahami kekuatan-kekuatan yang sedang bergerak dalam industri</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">2</div>
+              <div><strong>Mengidentifikasi penyebab perubahan</strong> — apa yang mendorong pergeseran kondisi industri secara fundamental?</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">3</div>
+              <div><strong>Melakukan observasi atas dampak perubahan</strong> — bagaimana perubahan itu mempengaruhi struktur persaingan dan profitabilitas?</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">4</div>
+              <div><strong>Mengembangkan strategi yang mempertimbangkan perubahan</strong> — menyesuaikan atau mengubah strategi berdasarkan analisis dinamika tersebut</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5b">
+        <div class="subsection-header" onclick="toggleSub('sub5b')">
+          🗺 Strategic Group Mapping — Pemetaan Kelompok Stratejik (3.8) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              Perusahaan-perusahaan yang bersaing menjual produk dengan kisaran harga/kualitas berbeda, menekankan saluran distribusi berbeda, dan fitur produk berbeda — hal inilah yang menciptakan perbedaan posisi pasar yang menarik vs tidak menarik.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Strategic Group Mapping (SGM)</strong> adalah teknik analisis untuk memahami struktur daya saing industri — <em>memetakan siapa berpengaruh kuat dan siapa tidak</em> berdasarkan dimensi-dimensi stratejik yang relevan (harga, kualitas, cakupan geografis, dsb).
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Dua manfaat utama SGM:</strong>
+              <br>→ Meneliti posisi pasar dari para pesaing utama
+              <br>→ Mengambil intisari pelajaran stratejik dari pola yang terlihat pada peta
+            </span></li>
+          </ul>
+          <div class="info-box gold">
+            <strong>📌 Contoh nyata SGM:</strong> Di industri otomotif, kelompok stratejik bisa dipetakan berdasarkan sumbu harga (murah–premium) vs cakupan pasar (lokal–global). Toyota dan Honda satu kelompok (massal-global), Ferrari dan Lamborghini kelompok lain (premium-niche). Strategi masing-masing kelompok berbeda secara fundamental.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5c">
+        <div class="subsection-header" onclick="toggleSub('sub5c')">
+          🕵️ Competitive Intelligence — Intelijen Tindakan Pesaing (3.9) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              Perusahaan perlu memberikan perhatian pada <em>tindakan dan strategi apa saja yang mungkin dilakukan pesaing</em> — melalui pendekatan <strong>competitive intelligence</strong>.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Sumber-sumber competitive intelligence:</strong>
+              <br>→ Strategi pesaing &amp; tindakan beberapa waktu terakhir
+              <br>→ Pengumuman &amp; laporan kinerja keuangan
+              <br>→ Kekuatan &amp; kelemahan pesaing
+              <br>→ Gaya kepemimpinan top management pesaing
+              <br>→ Sinyal dari press release dan pernyataan publik petinggi pesaing
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Contoh sinyal penting:</strong> Pesaing dengan kinerja keuangan yang baik memiliki <em>lebih banyak opsi untuk memperkuat posisi mereka</em> di pasar — ini adalah sinyal peringatan yang harus diantisipasi.
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Prinsip CI:</strong> <em>Kenali pesaingmu sebelum mereka mengejutkanmu.</em> Competitive intelligence bukan mata-mata — ini adalah <em>pemantauan sistematis</em> atas informasi yang tersedia untuk publik guna mengantisipasi langkah pesaing.</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: KSF & PROSPEK INDUSTRI ══ -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <span class="num c6">3.10–3.11</span>
+      <div>
+        <div class="section-title">Faktor Sukses Utama (KSF) &amp; Prospek Keuntungan Industri</div>
+        <div class="section-eng">Key Success Factors &amp; Industry Profit Outlook</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub6a">
+        <div class="subsection-header" onclick="toggleSub('sub6a')">
+          🏆 Key Success Factors (KSF) — 3 Pertanyaan Pemandu <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;"><strong style="color:var(--text);">KSF</strong> = faktor kompetitif yang berdampak langsung pada kemampuan pemain industri untuk bertahan hidup dan bertumbuh. Digali melalui tiga pertanyaan:</p>
+          <div class="ksf-grid">
+            <div class="ksf-card kc-1">
+              <div class="kc-q">❓ Pertanyaan 1: Mengapa Pembeli Memilih?</div>
+              <div style="margin-bottom:0.3rem;">Atas dasar apa pembeli memilih produk di antara produk-produk serupa yang bersaing dalam industri?</div>
+              <div class="kc-desc">→ Temukan atribut produk/jasa yang <em>paling dihargai</em> pembeli</div>
+            </div>
+            <div class="ksf-card kc-2">
+              <div class="kc-q">❓ Pertanyaan 2: Apa yang Dibutuhkan untuk Berhasil?</div>
+              <div style="margin-bottom:0.3rem;">Sumber daya serta kemampuan bersaing apa saja yang harus dimiliki perusahaan untuk berhasil?</div>
+              <div class="kc-desc">→ Temukan <em>kapabilitas minimum</em> yang wajib dimiliki pemain industri</div>
+            </div>
+            <div class="ksf-card kc-3">
+              <div class="kc-q">❓ Pertanyaan 3: Apa yang Menyebabkan Gagal?</div>
+              <div style="margin-bottom:0.3rem;">Masalah apa yang dapat muncul yang menyebabkan perusahaan mengalami ketidak-unggulan dalam persaingan?</div>
+              <div class="kc-desc">→ Identifikasi <em>kelemahan fatal</em> yang harus dihindari</div>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Ingat KSF:</strong> <em>"Mengapa pembeli memilih? → Apa yang dibutuhkan? → Apa yang menyebabkan gagal?"</em> — tiga pertanyaan dari perspektif pembeli, kapabilitas, dan risiko kegagalan.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub6b">
+        <div class="subsection-header" onclick="toggleSub('sub6b')">
+          💰 Apakah Industri Menawarkan Prospek Keuntungan yang Menarik? (3.11) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">Pertanyaan penutup Bab III: setelah menganalisis enam pertanyaan sebelumnya, evaluasi keseluruhan dilakukan berdasarkan lima faktor penentu:</p>
+          <ul class="points">
+            <li class="point"><span class="dot d6"></span><span>
+              <strong>① Potensi pertumbuhan industri</strong> — seberapa besar dan cepat industri dapat tumbuh ke depan?
+            </span></li>
+            <li class="point"><span class="dot d6"></span><span>
+              <strong>② Dampak kekuatan persaingan terhadap profit</strong> — apakah kekuatan persaingan yang tinggi akan menurunkan keuntungan industri ke tingkat yang sangat rendah?
+            </span></li>
+            <li class="point"><span class="dot d6"></span><span>
+              <strong>③ Pengaruh faktor penyebab perubahan</strong> — apakah perubahan industri akan memperkuat atau melemahkan profitabilitas ke depan?
+            </span></li>
+            <li class="point"><span class="dot d6"></span><span>
+              <strong>④ Posisi pasar perusahaan vs pesaing</strong> — apakah perusahaan berada di posisi yang kuat, dan apakah posisi ini dapat dipertahankan saat persaingan berkembang?
+            </span></li>
+            <li class="point"><span class="dot d6"></span><span>
+              <strong>⑤ Kesesuaian strategi dengan KSF industri</strong> — seberapa baik strategi perusahaan menciptakan faktor-faktor utama keberhasilan industri tersebut?
+            </span></li>
+          </ul>
+          <div class="info-box green">
+            <strong>✅ Kesimpulan Akhir Analisis Eksternal:</strong> Setelah menjawab ketujuh pertanyaan diagnostik secara menyeluruh, manajer memiliki fondasi yang cukup untuk menentukan apakah industri ini <em>layak untuk dimasuki, dipertahankan, atau ditinggalkan</em> — dan strategi apa yang paling tepat untuk kondisi eksternal tersebut.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn6" onclick="markDone(6)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab III</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Situasi Perusahaan = Eksternal + Internal</h3>
+          <p>Bab III menjawab "Di mana kita sekarang?" dari sisi eksternal. Dua dimensi situasi: <strong style="color:#f0f0ff;">Lingkungan Eksternal</strong> (industri &amp; kompetisi) dan <strong style="color:#f0f0ff;">Lingkungan Internal</strong> (Bab IV). Keduanya harus dipahami sebelum memilih strategi.</p>
+          <div class="keywords"><span class="kw">2 dimensi situasi</span><span class="kw">eksternal = industri</span><span class="kw">internal = Bab IV</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">7 Komponen Makro — Lingkaran Terluar</h3>
+          <p>Dari lingkaran terluar ke dalam: Demografi · Sosial · Politik · Regulasi · Teknologi · Ekonomi · Global. Ketujuhnya mempengaruhi arah, tujuan, dan strategi perusahaan — meskipun tidak semua sama relevannya untuk setiap industri.</p>
+          <div class="keywords"><span class="kw">DSPRTE-G</span><span class="kw">lingkungan makro</span><span class="kw">relevansi stratejik</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3); color:#000;">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">7 Pertanyaan Diagnostik — Kerangka Analisis Industri</h3>
+          <p>Tujuh pertanyaan sistematis dari pertumbuhan → kekuatan saing → perubahan → posisi pesaing → rencana pesaing → faktor sukses → prospek profit. Ini adalah <strong style="color:#f0f0ff;">peta jalan analisis eksternal</strong> yang lengkap.</p>
+          <div class="keywords"><span class="kw">tumbuh-saing-ubah-posisi</span><span class="kw">TSUPRS-P</span><span class="kw">7 diagnostik</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">Porter's Five Forces — Mengukur Intensitas Persaingan</h3>
+          <p>Lima kekuatan kompetitif: <strong style="color:#f0f0ff;">Rivalitas · Ancaman pendatang baru · Produk substitusi · Daya tawar pemasok · Daya tawar pembeli</strong>. Gabungan kelimanya menentukan apakah industri kondusif untuk profit yang menarik.</p>
+          <div class="keywords"><span class="kw">RASPP</span><span class="kw">5 forces Porter</span><span class="kw">profitabilitas industri</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent5);">5</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent5);">SGM + CI — Memetakan &amp; Mengantisipasi Pesaing</h3>
+          <p><strong style="color:#f0f0ff;">Strategic Group Mapping</strong>: visualisasikan posisi pesaing berdasarkan dimensi stratejik. <strong style="color:#f0f0ff;">Competitive Intelligence</strong>: pantau sinyal dan tindakan pesaing secara sistematis. Keduanya membuat perusahaan tidak terkejut.</p>
+          <div class="keywords"><span class="kw">strategic group mapping</span><span class="kw">competitive intelligence</span><span class="kw">antisipasi pesaing</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent6); color:#000;">6</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent6);">KSF + Prospek Profit — Kesimpulan Analisis Eksternal</h3>
+          <p><strong style="color:#f0f0ff;">KSF</strong>: kenali mengapa pembeli memilih, apa yang dibutuhkan untuk sukses, dan apa yang menyebabkan gagal. Lalu buat <strong style="color:#f0f0ff;">kesimpulan akhir</strong>: apakah industri ini menawarkan prospek keuntungan yang menarik bagi perusahaan kita?</p>
+          <div class="keywords"><span class="kw">KSF</span><span class="kw">3 pertanyaan KSF</span><span class="kw">kelayakan industri</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-teal">7 Komponen Makro</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-blue">Industry Life Cycle</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-gold">Porter's 5 Forces</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-red">SGM + CI</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-grn">KSF + Prospek Profit</span>
+      </div>
+      <div class="formula-caption">Alur analisis lingkungan eksternal yang lengkap — dari makro terluas hingga kesimpulan kelayakan industri</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box teal" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab III:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">M</strong>akro 7 komponen, <strong style="color:#f0f0ff;">L</strong>ife Cycle 4 fase, <strong style="color:#f0f0ff;">F</strong>ive Forces Porter, <strong style="color:#f0f0ff;">P</strong>eta Stratejik pesaing, <strong style="color:#f0f0ff;">K</strong>SF 3 pertanyaan, <strong style="color:#f0f0ff;">P</strong>rospek profit!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">M-L-F-P-K-P</strong> → <em>"Manajer Lihai Fokus Pada Kunci Profit"</em> — enam lapisan analisis eksternal dari lingkaran terluar hingga kesimpulan akhir.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab III Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 6;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) {
+      btn.textContent = '✔  Sudah dipelajari!';
+      btn.classList.add('checked');
+    } else {
+      btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari';
+      btn.classList.remove('checked');
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    const pct = (count / totalSections) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

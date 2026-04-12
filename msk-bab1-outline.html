@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB I — Pengantar Manajemen Stratejik dan Kepemimpinan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #e8c547;   /* gold — chapter 1 color */
+    --accent2: #ff6b6b;
+    --accent3: #4ecdc4;
+    --accent4: #a78bfa;
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 5rem;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #000;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 5.5vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  h1 span { color: var(--accent); }
+  .subtitle {
+    font-size: 0.88rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .progress-bar {
+    margin: 1.5rem auto 0;
+    width: 220px;
+    height: 3px;
+    background: var(--border);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), #f0a500);
+    border-radius: 99px;
+    transition: width 0.5s ease;
+  }
+  .progress-label {
+    font-size: 0.7rem;
+    color: var(--muted);
+    margin-top: 0.4rem;
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* ── PETA KONSEP ── */
+  .mind-map {
+    margin: 0 0 2rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-align: center;
+  }
+  .mind-map h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    margin-bottom: 1.2rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+  .mind-center {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #f0a500);
+    color: #000;
+    font-weight: 700;
+    font-size: 0.88rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 99px;
+    margin-bottom: 1.4rem;
+  }
+  .mind-branches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.7rem;
+  }
+  .branch {
+    padding: 0.8rem;
+    border-radius: 10px;
+    font-size: 0.76rem;
+    font-weight: 500;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default;
+    text-align: left;
+  }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.62rem; font-family: 'DM Mono', monospace; margin-bottom: 0.3rem; opacity: 0.7; }
+  .b1 { background: rgba(232,197,71,0.08);  border-color: rgba(232,197,71,0.25);  color: var(--accent); }
+  .b2 { background: rgba(88,166,255,0.08);  border-color: rgba(88,166,255,0.25);  color: #58a6ff; }
+  .b3 { background: rgba(78,205,196,0.08);  border-color: rgba(78,205,196,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.25); color: var(--accent2); }
+  .b5 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent4); }
+
+  /* ── SECTION CARD ── */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 1.1rem;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.15rem 1.4rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+
+  .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #000;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    min-width: 2.4rem;
+    text-align: center;
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+  .c1 { background: var(--accent); }
+  .c2 { background: #58a6ff; }
+  .c3 { background: var(--accent3); }
+  .c4 { background: var(--accent2); }
+  .c5 { background: var(--accent4); }
+
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    padding: 0.7rem 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 0.87rem;
+    line-height: 1.55;
+    color: #c8c8e0;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1)  { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2)  { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3)  { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4)  { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5)  { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6)  { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7)  { transition-delay: 0.28s; }
+  .section.open .point:nth-child(8)  { transition-delay: 0.32s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1 { background: var(--accent); }
+  .d2 { background: #58a6ff; }
+  .d3 { background: var(--accent3); }
+  .d4 { background: var(--accent2); }
+  .d5 { background: var(--accent4); }
+  .point strong { color: var(--text); }
+
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.63rem;
+    padding: 0.1rem 0.42rem;
+    border-radius: 99px;
+    vertical-align: middle;
+    margin-left: 0.3rem;
+  }
+  .badge-gold { background: rgba(232,197,71,0.15); color: var(--accent); }
+  .badge-blue { background: rgba(88,166,255,0.15); color: #58a6ff; }
+  .badge-teal { background: rgba(78,205,196,0.15); color: var(--accent3); }
+  .badge-red  { background: rgba(255,107,107,0.15); color: var(--accent2); }
+  .badge-purp { background: rgba(167,139,250,0.15); color: var(--accent4); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection {
+    background: rgba(0,0,0,0.22);
+    border-radius: 9px;
+    margin-bottom: 0.75rem;
+    overflow: hidden;
+  }
+  .subsection-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.8rem 1rem;
+    cursor: pointer;
+    font-size: 0.84rem;
+    font-weight: 600;
+    border-left: 3px solid transparent;
+    transition: background 0.2s;
+  }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip {
+    margin-top: 0.9rem;
+    padding: 0.85rem 1rem;
+    background: rgba(232,197,71,0.07);
+    border: 1px solid rgba(232,197,71,0.2);
+    border-radius: 8px;
+    font-size: 0.81rem;
+    color: var(--accent);
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    line-height: 1.5;
+  }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    margin-top: 0.9rem;
+    padding: 0.9rem 1rem;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    line-height: 1.55;
+    color: #c8c8e0;
+  }
+  .info-box.blue  { background: rgba(88,166,255,0.07);  border: 1px solid rgba(88,166,255,0.2);  }
+  .info-box.teal  { background: rgba(78,205,196,0.07);  border: 1px solid rgba(78,205,196,0.2);  }
+  .info-box.red   { background: rgba(255,107,107,0.07); border: 1px solid rgba(255,107,107,0.2); }
+  .info-box.purp  { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── 3-GRID TEST CARDS ── */
+  .test-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1rem;
+  }
+  .test-card {
+    padding: 1rem;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.25);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+  .test-card .tc-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+    opacity: 0.8;
+  }
+  .test-card .tc-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 0.3rem; }
+  .test-card .tc-question { color: #9fa3c0; font-style: italic; font-size: 0.8rem; }
+  .tc-gold  { border-color: rgba(232,197,71,0.3);  }
+  .tc-gold  .tc-label, .tc-gold  .tc-title { color: var(--accent); }
+  .tc-blue  { border-color: rgba(88,166,255,0.3);  }
+  .tc-blue  .tc-label, .tc-blue  .tc-title { color: #58a6ff; }
+  .tc-teal  { border-color: rgba(78,205,196,0.3);  }
+  .tc-teal  .tc-label, .tc-teal  .tc-title { color: var(--accent3); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 1.1rem;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.5rem 0.9rem;
+    color: var(--muted);
+    font-size: 0.77rem;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .done-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+  .done-btn.checked { border-color: var(--accent3); color: var(--accent3); background: rgba(78,205,196,0.07); }
+
+  /* ── ULTIMATE OUTLINE (RANGKUMAN) ── */
+  .ultimate {
+    margin-top: 2.5rem;
+    background: linear-gradient(135deg, rgba(232,197,71,0.07), rgba(88,166,255,0.05));
+    border: 1px solid rgba(232,197,71,0.25);
+    border-radius: 16px;
+    padding: 2rem 1.6rem;
+  }
+  .ultimate-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.6rem;
+  }
+  .ultimate-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent), #f0a500);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+  .ultimate-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+  }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .chain-step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .chain-line {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .chain-dot {
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #000;
+    flex-shrink: 0;
+  }
+  .chain-connector {
+    width: 2px;
+    flex: 1;
+    min-height: 20px;
+    background: var(--border);
+    margin: 3px 0;
+  }
+  .chain-content {
+    flex: 1;
+    padding-bottom: 1.4rem;
+  }
+  .chain-content h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+  .chain-content p {
+    font-size: 0.82rem;
+    color: #9fa3c0;
+    line-height: 1.55;
+  }
+  .chain-content .keywords {
+    margin-top: 0.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+  .kw {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem;
+    padding: 0.15rem 0.5rem;
+    border-radius: 99px;
+    background: rgba(255,255,255,0.06);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  .grand-formula {
+    margin-top: 1.5rem;
+    padding: 1.2rem 1.2rem;
+    background: rgba(0,0,0,0.3);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .grand-formula .formula-line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-weight: 600;
+  }
+  .formula-term {
+    padding: 0.3rem 0.8rem;
+    border-radius: 6px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+  }
+  .ft-gold { background: rgba(232,197,71,0.15);  color: var(--accent); }
+  .ft-blue { background: rgba(88,166,255,0.15);  color: #58a6ff; }
+  .ft-teal { background: rgba(78,205,196,0.15);  color: var(--accent3); }
+  .formula-op { color: var(--muted); font-size: 1rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    margin-top: 3rem;
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB I — <span>Pengantar</span><br>Manajemen Stratejik</h1>
+    <p class="subtitle">Manajemen Stratejik dan Kepemimpinan</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab I</h2>
+    <div class="mind-center">🏆 Manajemen Stratejik</div>
+    <div class="mind-branches">
+      <div class="branch b1">
+        <div class="blabel">1.3</div>
+        Makna 'Strategi'<br><small style="opacity:0.7">3 pertanyaan sentral · 4 aspek</small>
+      </div>
+      <div class="branch b2">
+        <div class="blabel">1.4</div>
+        Model Bisnis<br><small style="opacity:0.7">Proposisi nilai · Formula profit</small>
+      </div>
+      <div class="branch b3">
+        <div class="blabel">1.5</div>
+        Strategi Kunci Menang<br><small style="opacity:0.7">Fit · Competitive Advantage · Performance</small>
+      </div>
+      <div class="branch b4">
+        <div class="blabel">1.6</div>
+        Strategi = Tugas Pokok<br><small style="opacity:0.7">Strategi baik + Eksekusi baik</small>
+      </div>
+      <div class="branch b5">
+        <div class="blabel">1.7</div>
+        Melihat ke Depan<br><small style="opacity:0.7">Keunggulan kompetitif berkelanjutan</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 1: Pendahuluan -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">1.1</span>
+      <div>
+        <div class="section-title">Pendahuluan</div>
+        <div class="section-eng">Introduction to Strategic Management</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Manajemen Stratejik</strong> adalah bidang ilmu yang relatif <em>baru dan modern</em>, diperkenalkan di dunia korporat maupun akademis setelah terbukti menjadi salah satu <strong>kunci keberhasilan jangka panjang</strong> perusahaan.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Bab ini membahas: bagaimana Manajemen Stratejik menjadi bagian penting dari perusahaan pemenang di industri, <strong>pendekatan-pendekatan stratejik</strong> yang saling bertautan, serta hal-hal yang harus dilakukan manajer ke depan.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Fokus utama modul: memahami Manajemen Stratejik sebagai <strong>konsep sekaligus tindakan</strong> yang menaikkan tingkat keberhasilan perusahaan dalam persaingan bisnis yang nyata.
+        </span></li>
+      </ul>
+      <div class="info-box blue">
+        <strong>Konteks Penting:</strong> Manajemen Stratejik bukan sekadar teori — ia merupakan <em>praktik tata kelola perusahaan modern</em> yang memisahkan perusahaan yang unggul dari yang biasa saja.
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- SECTION 2: Tujuan Pembelajaran -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c2">1.2</span>
+      <div>
+        <div class="section-title">Tujuan Pembelajaran</div>
+        <div class="section-eng">Learning Objectives</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>① Strategi untuk menang:</strong> Memahami mengapa setiap perusahaan perlu memiliki strategi usaha yang tepat untuk <em>memenangkan kompetisi</em>, mengelola cara kerja bisnis, dan memperkuat prospek jangka panjang.
+        </span></li>
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>② Empat pendekatan stratejik:</strong> Mengembangkan kesadaran akan pentingnya <em>empat pendekatan yang paling tertaut/bergantung</em> untuk memisahkan perusahaan dari pesaingnya dan mencapai keunggulan kompetitif berkelanjutan.
+        </span></li>
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>③ Strategi berevolusi:</strong> Memahami bahwa strategi <em>cenderung berubah dari waktu ke waktu</em> karena situasi yang berubah dan upaya manajemen yang terus-menerus untuk memperbaikinya.
+        </span></li>
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>④ Model bisnis yang dapat dilaksanakan:</strong> Belajar mengapa perusahaan perlu memiliki model bisnis yang <em>benar-benar dapat diwujudkan</em>, dengan proposisi nilai yang jelas bagi klien dan formula sukses yang nyata.
+        </span></li>
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>⑤ Tiga test strategi kemenangan:</strong> Mempelajari <em>Fit Test, Competitive Advantage Test,</em> dan <em>Performance Test</em> sebagai alat untuk menilai apakah sebuah strategi layak menang.
+        </span></li>
+      </ul>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Cara ingat 5 tujuan:</strong> <em>"STrategi-Empat-Berevolusi-Model-Test"</em> → <em>"SEBMT"</em> → <em>"Sebuah Bisnis Mau Tumbuh"</em></span>
+      </div>
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- SECTION 3: Makna Strategi -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c3">1.3</span>
+      <div>
+        <div class="section-title">Memahami Makna 'Strategi'</div>
+        <div class="section-eng">Understanding the Meaning of 'Strategy'</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub3a">
+        <div class="subsection-header" onclick="toggleSub('sub3a')">
+          ❓ Tiga Pertanyaan Sentral Setiap Manajer <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>(a) Bagaimana situasi kita saat ini?</strong> — Penilaian atas posisi kompetitif, kondisi pasar, dan kekuatan/kelemahan internal perusahaan.
+            </span></li>
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>(b) Dari situasi ini, ke mana kita akan beranjak?</strong> — Penentuan arah dan tujuan jangka panjang yang ingin dicapai perusahaan.
+            </span></li>
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>(c) Bagaimana kita akan sampai ke tujuan?</strong> — Pemilihan jalur, pendekatan, dan langkah-langkah konkret untuk mencapai tujuan tersebut.
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik:</strong> <em>"Di Mana — Ke Mana — Bagaimana"</em> — Tiga pertanyaan navigasi bisnis seperti GPS: posisi sekarang, tujuan, dan rute.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub3b">
+        <div class="subsection-header" onclick="toggleSub('sub3b')">
+          🎯 Empat Aspek Inti Strategi <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>① Mengungguli para pesaing</strong> — Strategi harus secara jelas menjelaskan bagaimana perusahaan berencana untuk <em>lebih baik dari kompetitornya</em> di pasar.
+            </span></li>
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>② Bereaksi atas perubahan ekonomi dan kondisi pasar</strong> — Strategi harus fleksibel dan mampu <em>memanfaatkan peluang</em> yang muncul dari perubahan eksternal sambil tetap bertumbuh.
+            </span></li>
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>③ Mengelola unit fungsional bisnis</strong> — Strategi harus mencakup bagaimana mengelola <em>riset & pengembangan, rantai suplai, produksi, penjualan dan pemasaran</em> secara terintegrasi.
+            </span></li>
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>④ Memperbaiki kinerja keuangan dan pasar</strong> — Strategi pada akhirnya harus bermuara pada <em>hasil yang terukur</em>: profitabilitas, pangsa pasar, dan pertumbuhan.
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 4 aspek:</strong> <em>"Unggul - Reaksi - Kelola - Kinerja"</em> → <em>"URKK"</em> → <em>"Untuk Raih Keunggulan, Kelola Kinerja"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="info-box teal">
+        <strong>📚 Studi Kasus:</strong> Peserta didik akan dipaparkan pada studi-studi kasus perusahaan nasional dan multinasional sebagai contoh konkret bagaimana keempat aspek strategi di atas diterapkan dan bagaimana strategi berevolusi dari waktu ke waktu.
+      </div>
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- SECTION 4: Hubungan Strategi dan Model Bisnis -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c4">1.4</span>
+      <div>
+        <div class="section-title">Hubungan Strategi & Model Bisnis</div>
+        <div class="section-eng">Strategy and Business Model Relationship</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub4a">
+        <div class="subsection-header" onclick="toggleSub('sub4a')">
+          🏗 Apa itu Model Bisnis? <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Definisi:</strong> Model bisnis sebuah perusahaan <em>mematrikan dan menentukan logika ekonomi</em> tentang bagaimana menciptakan uang dalam bisnis berdasarkan strategi yang diambil.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              Model bisnis mendeskripsikan <strong>dua elemen kritis</strong>:
+              <br>→ <strong>(a) Proposisi Nilai Pelanggan</strong> — apa nilai yang ditawarkan kepada pelanggan
+              <br>→ <strong>(b) Formula Keuntungan/Profit</strong> — bagaimana perusahaan menghasilkan uang dari nilai tersebut
+            </span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4b">
+        <div class="subsection-header" onclick="toggleSub('sub4b')">
+          💎 Proposisi Nilai Pelanggan <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              Semakin tinggi nilai yang ditawarkan kepada pelanggan <strong>ditambah</strong> semakin rendahnya harga → semakin meningkatlah <em>daya tarik proposisi nilai</em> produk yang ditawarkan.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Isu utama:</strong> Bagaimana perusahaan dapat <em>mengeksekusi proposisi nilai pelanggannya secara menguntungkan</em>? Ini adalah jantung dari model bisnis yang baik.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Contoh nyata:</strong> Apple — nilai tinggi (ekosistem, desain, status) dengan harga premium. IKEA — nilai cukup (desain modern, rakitan sendiri) dengan harga sangat terjangkau. Keduanya mengeksekusi proposisi nilai mereka secara konsisten dan menguntungkan.
+            </span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4c">
+        <div class="subsection-header" onclick="toggleSub('sub4c')">
+          💰 Formula Keuntungan (Profit Formula) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              Relevansi model bisnis adalah untuk mengklarifikasi bagaimana:
+              <br>→ <strong>(a)</strong> Menyediakan pelanggan dengan nilai yang menjadi daya tarik
+              <br>→ <strong>(b)</strong> Menghasilkan omzet yang <em>cukup menutup biaya operasional dan produksi</em> serta memastikan perusahaan mendapat keuntungan
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Formula sederhana:</strong> Model Bisnis yang Baik = <em>Proposisi Nilai yang Kuat</em> × <em>Kemampuan Eksekusi yang Menguntungkan</em>
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Analogi:</strong> Model bisnis adalah "resep masakan" — proposisi nilai adalah bahan-bahan berkualitas, formula profit adalah cara memasak yang efisien sehingga hidangan lezat bisa dijual dengan harga yang menguntungkan.</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- SECTION 5: Strategi Kunci Kemenangan -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">1.5–1.7</span>
+      <div>
+        <div class="section-title">Strategi Kunci Kemenangan & Jalan ke Depan</div>
+        <div class="section-eng">Winning Strategy Tests & The Road Ahead</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub5a">
+        <div class="subsection-header" onclick="toggleSub('sub5a')">
+          🏅 Tiga Test Strategi yang Memenangkan Persaingan <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.83rem;color:var(--muted);margin-bottom:0.9rem;">Untuk menyimpulkan apakah sebuah strategi mampu memenangkan persaingan, jalankan tiga test berikut:</p>
+          <div class="test-grid">
+            <div class="test-card tc-gold">
+              <div class="tc-label">Test 1</div>
+              <div class="tc-title">The Fit Test</div>
+              <div class="tc-question">"Seberapa baik strategi yang dipakai sudah sesuai/cocok dengan situasi perusahaan?"</div>
+              <br><span style="font-size:0.78rem;color:#c8c8e0;">Menilai <em>kesesuaian strategi</em> dengan kondisi internal (kekuatan, sumber daya) dan eksternal (pasar, kompetisi).</span>
+            </div>
+            <div class="test-card tc-blue">
+              <div class="tc-label">Test 2</div>
+              <div class="tc-title">The Competitive Advantage Test</div>
+              <div class="tc-question">"Apakah strategi yang dipakai mampu membawa perusahaan mencapai keunggulan kompetitif yang berkesinambungan?"</div>
+              <br><span style="font-size:0.78rem;color:#c8c8e0;">Menilai apakah strategi menciptakan <em>keunggulan yang sulit ditiru</em> oleh pesaing.</span>
+            </div>
+            <div class="test-card tc-teal">
+              <div class="tc-label">Test 3</div>
+              <div class="tc-title">The Performance Test</div>
+              <div class="tc-question">"Apakah strategi tersebut menghasilkan kinerja yang baik bagi perusahaan?"</div>
+              <br><span style="font-size:0.78rem;color:#c8c8e0;">Menilai hasil nyata: <em>profitabilitas, posisi kompetitif,</em> dan pertumbuhan berkelanjutan.</span>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 3 Test:</strong> <em>"FCP"</em> → <em>"Fit – Competitive – Performance"</em> → <em>"Falsafah: Cocok dulu, baru Bersaing, lalu ukur Performa!"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5b">
+        <div class="subsection-header" onclick="toggleSub('sub5b')">
+          ⚙️ Strategi + Eksekusi = Manajemen yang Baik <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Rumus fundamental:</strong> <em>Strategi yang baik + Eksekusi strategi yang baik = Manajemen yang baik</em>
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              Membangun dan mengeksekusi strategi adalah <strong>fungsi manajemen yang paling pokok</strong>. Tidak ada hal yang lebih berpengaruh fundamental atas sukses perusahaan daripada bagaimana tim manajemen memetakan arah ke mana perusahaan akan dibawa.
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Implikasi praktis:</strong> Strategi jenius tanpa eksekusi = kegagalan. Eksekusi giat tanpa strategi yang tepat = usaha sia-sia. Keduanya harus berjalan beriringan.
+            </span></li>
+          </ul>
+          <div class="info-box purp">
+            <strong>📌 Contoh nyata:</strong> Nokia memiliki strategi yang bagus di era ponsel biasa, namun gagal mengeksekusi transisi ke smartphone. Sebaliknya, Samsung memiliki strategi <em>dan</em> eksekusi yang kuat sehingga berhasil mendominasi pasar.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5c">
+        <div class="subsection-header" onclick="toggleSub('sub5c')">
+          🔭 Melihat Jalan ke Depan <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d5"></span><span>
+              Pertanyaan paling pokok yang harus dijawab manajer: <strong>"Apa yang harus dilakukan sebaik-baiknya untuk membawa perusahaan keluar sebagai pemenang dalam persaingan di pasar?"</strong>
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Keunggulan kompetitif yang berkelanjutan</strong> (<em>sustainable competitive advantage</em>) adalah prasyarat utama bagi perusahaan untuk berhasil memenangkan persaingan dalam jangka panjang.
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              Manajemen Stratejik adalah <em>perjalanan tanpa akhir</em> — perusahaan harus terus mengevaluasi, menyesuaikan, dan meningkatkan strategi mereka seiring perubahan lingkungan bisnis.
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Analogi:</strong> Strategi perusahaan seperti navigasi kapal — kapten harus tahu posisinya, menentukan tujuan, dan terus menyesuaikan kursnya saat badai datang. Yang berhenti menyesuaikan diri, tenggelam.</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab I</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Apa itu Manajemen Stratejik?</h3>
+          <p>Bidang ilmu modern yang menjadi kunci keberhasilan jangka panjang perusahaan. Bukan sekadar teori, melainkan tindakan nyata yang membedakan perusahaan pemenang dari yang lainnya.</p>
+          <div class="keywords">
+            <span class="kw">bidang modern</span>
+            <span class="kw">kunci keberhasilan</span>
+            <span class="kw">tata kelola perusahaan</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:#58a6ff;">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:#58a6ff;">3 Pertanyaan Sentral Strategi</h3>
+          <p>Setiap manajer harus menjawab: <strong style="color:#f0f0ff;">(1) Di mana kita sekarang?</strong> — <strong style="color:#f0f0ff;">(2) Ke mana kita akan pergi?</strong> — <strong style="color:#f0f0ff;">(3) Bagaimana kita akan sampai ke sana?</strong></p>
+          <div class="keywords">
+            <span class="kw">situasi saat ini</span>
+            <span class="kw">arah tujuan</span>
+            <span class="kw">jalur pencapaian</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">4 Aspek Inti Strategi (URKK)</h3>
+          <p><strong style="color:#f0f0ff;">Ungguli</strong> pesaing · <strong style="color:#f0f0ff;">Reaksi</strong> terhadap perubahan · <strong style="color:#f0f0ff;">Kelola</strong> unit fungsional · <strong style="color:#f0f0ff;">Kinerja</strong> keuangan & pasar yang lebih baik.</p>
+          <div class="keywords">
+            <span class="kw">kompetisi</span>
+            <span class="kw">adaptasi</span>
+            <span class="kw">operasional</span>
+            <span class="kw">hasil terukur</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">Model Bisnis = 2 Elemen Kritis</h3>
+          <p>Setiap strategi harus diterjemahkan ke dalam model bisnis yang layak: <strong style="color:#f0f0ff;">Proposisi Nilai Pelanggan</strong> (apa yang membuat pelanggan mau membeli) + <strong style="color:#f0f0ff;">Formula Profit</strong> (bagaimana perusahaan menghasilkan uang dari situ).</p>
+          <div class="keywords">
+            <span class="kw">proposisi nilai</span>
+            <span class="kw">formula profit</span>
+            <span class="kw">logika ekonomi</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);">5</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">3 Test Strategi Kemenangan (FCP)</h3>
+          <p><strong style="color:#f0f0ff;">Fit Test</strong> — sesuai dengan situasi? · <strong style="color:#f0f0ff;">Competitive Advantage Test</strong> — menciptakan keunggulan yang bertahan? · <strong style="color:#f0f0ff;">Performance Test</strong> — menghasilkan kinerja yang baik?</p>
+          <div class="keywords">
+            <span class="kw">fit test</span>
+            <span class="kw">competitive advantage</span>
+            <span class="kw">performance test</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:#4ade80;">6</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:#4ade80;">Rumus Manajemen yang Baik</h3>
+          <p>Strategi terbaik yang tidak dieksekusi = gagal. Eksekusi keras tanpa strategi = sia-sia. Keduanya adalah <strong style="color:#f0f0ff;">fungsi manajemen paling pokok</strong> untuk meraih keunggulan kompetitif yang berkelanjutan.</p>
+          <div class="keywords">
+            <span class="kw">strategi + eksekusi</span>
+            <span class="kw">sustainable advantage</span>
+            <span class="kw">tugas pokok manajer</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-gold">Strategi yang Baik</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-blue">Eksekusi yang Baik</span>
+        <span class="formula-op">=</span>
+        <span class="formula-term ft-teal">Manajemen yang Baik</span>
+      </div>
+      <div class="formula-caption">Persamaan inti Bab I — jika satu sisi hilang, manajemen tidak akan berhasil</div>
+    </div>
+
+    <!-- FINAL MNEMONIC CARD -->
+    <div class="info-box blue" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab I:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">S</strong>trategi itu <strong style="color:#f0f0ff;">T</strong>iga pertanyaan, <strong style="color:#f0f0ff;">E</strong>mpat aspek, <strong style="color:#f0f0ff;">M</strong>odel bisnis dua elemen, diuji <strong style="color:#f0f0ff;">T</strong>iga test — lalu <strong style="color:#f0f0ff;">E</strong>ksekusi!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;">S-T-E-M-T-E → <strong style="color:#f0f0ff;">"STEM Test Eksekusi"</strong> — kata kunci untuk mengingat seluruh struktur Bab I</span>
+    </div>
+
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab I Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 5;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  function toggleSub(id) {
+    document.getElementById(id).classList.toggle('open');
+  }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) {
+      btn.textContent = '✔  Sudah dipelajari!';
+      btn.classList.add('checked');
+    } else {
+      btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari';
+      btn.classList.remove('checked');
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    const pct = (count / totalSections) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  // Open first section by default
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB II — Menyusun Arah Dasar Perusahaan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #58a6ff;   /* blue — chapter 2 color */
+    --accent2: #e8c547;
+    --accent3: #4ecdc4;
+    --accent4: #ff6b6b;
+    --accent5: #a78bfa;
+    --accent6: #4ade80;
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 5rem;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.6;
+  }
+
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #000;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.7rem, 5vw, 3rem);
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+  }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar {
+    margin: 1.5rem auto 0;
+    width: 220px; height: 3px;
+    background: var(--border); border-radius: 99px; overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--accent3));
+    border-radius: 99px; transition: width 0.5s ease;
+  }
+  .progress-label {
+    font-size: 0.7rem; color: var(--muted);
+    margin-top: 0.4rem; font-family: 'DM Mono', monospace;
+  }
+
+  /* ── PETA KONSEP ── */
+  .mind-map {
+    margin: 0 0 2rem;
+    padding: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    text-align: center;
+  }
+  .mind-map h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; margin-bottom: 1.2rem;
+    color: var(--muted); letter-spacing: 0.05em;
+  }
+  .mind-center {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--accent), #1d6fa8);
+    color: #fff;
+    font-weight: 700; font-size: 0.88rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 99px; margin-bottom: 1.4rem;
+  }
+  .mind-branches {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.7rem;
+  }
+  .branch {
+    padding: 0.8rem; border-radius: 10px;
+    font-size: 0.75rem; font-weight: 500;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: default; text-align: left;
+  }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.6rem; font-family: 'DM Mono', monospace; margin-bottom: 0.3rem; opacity: 0.7; }
+  .b1 { background: rgba(88,166,255,0.08);  border-color: rgba(88,166,255,0.25);  color: var(--accent); }
+  .b2 { background: rgba(232,197,71,0.08);  border-color: rgba(232,197,71,0.25);  color: var(--accent2); }
+  .b3 { background: rgba(78,205,196,0.08);  border-color: rgba(78,205,196,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.25); color: var(--accent4); }
+  .b5 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent5); }
+  .b6 { background: rgba(74,222,128,0.08);  border-color: rgba(74,222,128,0.25);  color: var(--accent6); }
+
+  /* ── SECTION CARD ── */
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin-bottom: 1.1rem;
+    overflow: hidden;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+
+  .section-header {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.15rem 1.4rem;
+    cursor: pointer; user-select: none;
+    transition: background 0.2s;
+  }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+
+  .num {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; font-weight: 700;
+    color: #000; padding: 0.25rem 0.5rem;
+    border-radius: 4px; min-width: 2.4rem;
+    text-align: center; flex-shrink: 0; white-space: nowrap;
+  }
+  .c1 { background: var(--accent); }
+  .c2 { background: var(--accent2); }
+  .c3 { background: var(--accent3); }
+  .c4 { background: var(--accent4); }
+  .c5 { background: var(--accent5); }
+  .c6 { background: var(--accent6); color: #000 !important; }
+
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point {
+    display: flex; gap: 0.75rem; align-items: flex-start;
+    padding: 0.7rem 0; border-bottom: 1px solid var(--border);
+    font-size: 0.87rem; line-height: 1.55; color: #c8c8e0;
+    opacity: 0; transform: translateY(6px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7) { transition-delay: 0.28s; }
+  .section.open .point:nth-child(8) { transition-delay: 0.32s; }
+  .section.open .point:nth-child(9) { transition-delay: 0.36s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1 { background: var(--accent); }
+  .d2 { background: var(--accent2); }
+  .d3 { background: var(--accent3); }
+  .d4 { background: var(--accent4); }
+  .d5 { background: var(--accent5); }
+  .d6 { background: var(--accent6); }
+  .point strong { color: var(--text); }
+
+  .badge {
+    display: inline-block; font-family: 'DM Mono', monospace;
+    font-size: 0.63rem; padding: 0.1rem 0.42rem;
+    border-radius: 99px; vertical-align: middle; margin-left: 0.3rem;
+  }
+  .badge-blue { background: rgba(88,166,255,0.15);  color: var(--accent); }
+  .badge-gold { background: rgba(232,197,71,0.15);  color: var(--accent2); }
+  .badge-teal { background: rgba(78,205,196,0.15);  color: var(--accent3); }
+  .badge-red  { background: rgba(255,107,107,0.15); color: var(--accent4); }
+  .badge-purp { background: rgba(167,139,250,0.15); color: var(--accent5); }
+  .badge-grn  { background: rgba(74,222,128,0.15);  color: var(--accent6); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection {
+    background: rgba(0,0,0,0.22); border-radius: 9px;
+    margin-bottom: 0.75rem; overflow: hidden;
+  }
+  .subsection-header {
+    display: flex; align-items: center; gap: 0.6rem;
+    padding: 0.8rem 1rem; cursor: pointer;
+    font-size: 0.84rem; font-weight: 600;
+    border-left: 3px solid transparent; transition: background 0.2s;
+  }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip {
+    margin-top: 0.9rem; padding: 0.85rem 1rem;
+    background: rgba(88,166,255,0.07);
+    border: 1px solid rgba(88,166,255,0.2);
+    border-radius: 8px; font-size: 0.81rem;
+    color: var(--accent); display: flex; gap: 0.6rem;
+    align-items: flex-start; line-height: 1.5;
+  }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box {
+    margin-top: 0.9rem; padding: 0.9rem 1rem;
+    border-radius: 8px; font-size: 0.84rem;
+    line-height: 1.55; color: #c8c8e0;
+  }
+  .info-box.blue  { background: rgba(88,166,255,0.07);  border: 1px solid rgba(88,166,255,0.2); }
+  .info-box.gold  { background: rgba(232,197,71,0.07);  border: 1px solid rgba(232,197,71,0.2); }
+  .info-box.teal  { background: rgba(78,205,196,0.07);  border: 1px solid rgba(78,205,196,0.2); }
+  .info-box.red   { background: rgba(255,107,107,0.07); border: 1px solid rgba(255,107,107,0.2); }
+  .info-box.purp  { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box.green { background: rgba(74,222,128,0.07);  border: 1px solid rgba(74,222,128,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── STEP FLOW ── */
+  .step-flow {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    margin-top: 0.9rem;
+  }
+  .step-item {
+    display: flex; gap: 0.9rem; align-items: flex-start;
+    background: rgba(0,0,0,0.2); border-radius: 8px;
+    padding: 0.75rem 0.9rem;
+    border-left: 3px solid transparent;
+    font-size: 0.84rem; line-height: 1.5; color: #c8c8e0;
+  }
+  .step-num {
+    font-family: 'DM Mono', monospace; font-size: 0.68rem;
+    font-weight: 700; color: #000;
+    width: 22px; height: 22px;
+    border-radius: 50%; display: flex;
+    align-items: center; justify-content: center;
+    flex-shrink: 0; margin-top: 0.05rem;
+  }
+  .step-item strong { color: var(--text); }
+
+  /* ── COMPARISON TABLE ── */
+  .compare-table {
+    width: 100%; border-collapse: collapse;
+    margin-top: 0.9rem; font-size: 0.82rem;
+  }
+  .compare-table th {
+    padding: 0.65rem 0.9rem; text-align: left;
+    font-weight: 700; font-size: 0.78rem;
+    border-bottom: 2px solid var(--border);
+  }
+  .compare-table td {
+    padding: 0.6rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: #c8c8e0; vertical-align: top;
+    line-height: 1.5;
+  }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .th-blue { color: var(--accent); }
+  .th-gold { color: var(--accent2); }
+
+  /* ── LEVEL PYRAMID GRID ── */
+  .level-grid {
+    display: flex; flex-direction: column; gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .level-card {
+    border-radius: 9px; padding: 0.75rem 1rem;
+    font-size: 0.82rem; line-height: 1.5;
+    border: 1px solid var(--border);
+    display: flex; align-items: flex-start; gap: 0.8rem;
+  }
+  .level-icon {
+    font-size: 1.1rem; flex-shrink: 0; margin-top: 0.05rem;
+  }
+  .level-card strong { display: block; font-size: 0.85rem; margin-bottom: 0.2rem; }
+  .lc-1 { background: rgba(88,166,255,0.08);  border-color: rgba(88,166,255,0.25);  color: #c8c8e0; }
+  .lc-1 strong { color: var(--accent); }
+  .lc-2 { background: rgba(232,197,71,0.08);  border-color: rgba(232,197,71,0.25);  color: #c8c8e0; }
+  .lc-2 strong { color: var(--accent2); }
+  .lc-3 { background: rgba(78,205,196,0.08);  border-color: rgba(78,205,196,0.25);  color: #c8c8e0; }
+  .lc-3 strong { color: var(--accent3); }
+  .lc-4 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: #c8c8e0; }
+  .lc-4 strong { color: var(--accent5); }
+
+  /* ── BOD CARDS ── */
+  .bod-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 0.7rem; margin-top: 1rem;
+  }
+  .bod-card {
+    padding: 1rem; border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,0.25);
+    font-size: 0.81rem; line-height: 1.5; color: #c8c8e0;
+  }
+  .bod-card .bc-num {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    font-weight: 700; margin-bottom: 0.4rem;
+    display: block;
+  }
+  .bod-card .bc-title { font-weight: 700; font-size: 0.86rem; margin-bottom: 0.3rem; color: var(--text); }
+  .bc-1 { border-color: rgba(88,166,255,0.3); }
+  .bc-1 .bc-num { color: var(--accent); }
+  .bc-2 { border-color: rgba(232,197,71,0.3); }
+  .bc-2 .bc-num { color: var(--accent2); }
+  .bc-3 { border-color: rgba(78,205,196,0.3); }
+  .bc-3 .bc-num { color: var(--accent3); }
+  .bc-4 { border-color: rgba(255,107,107,0.3); }
+  .bc-4 .bc-num { color: var(--accent4); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn {
+    display: flex; align-items: center; gap: 0.5rem;
+    margin-top: 1.1rem; background: none;
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 0.5rem 0.9rem; color: var(--muted);
+    font-size: 0.77rem; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .done-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+  .done-btn.checked { border-color: var(--accent3); color: var(--accent3); background: rgba(78,205,196,0.07); }
+
+  /* ── ULTIMATE OUTLINE ── */
+  .ultimate {
+    margin-top: 2.5rem;
+    background: linear-gradient(135deg, rgba(88,166,255,0.07), rgba(78,205,196,0.04));
+    border: 1px solid rgba(88,166,255,0.25);
+    border-radius: 16px; padding: 2rem 1.6rem;
+  }
+  .ultimate-header {
+    display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem;
+  }
+  .ultimate-icon {
+    width: 40px; height: 40px;
+    background: linear-gradient(135deg, var(--accent), #1d6fa8);
+    border-radius: 10px; display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem; flex-shrink: 0;
+  }
+  .ultimate-header h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900;
+  }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  /* ── CHAIN ── */
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot {
+    width: 28px; height: 28px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'DM Mono', monospace; font-size: 0.65rem;
+    font-weight: 700; color: #000; flex-shrink: 0;
+  }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords {
+    margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem;
+  }
+  .kw {
+    font-family: 'DM Mono', monospace; font-size: 0.62rem;
+    padding: 0.15rem 0.5rem; border-radius: 99px;
+    background: rgba(255,255,255,0.06); color: var(--muted);
+    border: 1px solid var(--border);
+  }
+
+  /* ── PIPELINE (5 TUGAS) ── */
+  .pipeline {
+    display: flex; flex-wrap: wrap; gap: 0;
+    margin-top: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+  }
+  .pipe-step {
+    flex: 1; min-width: 120px;
+    padding: 0.85rem 0.75rem;
+    font-size: 0.76rem; line-height: 1.4;
+    text-align: center;
+    border-right: 1px solid var(--border);
+    position: relative;
+  }
+  .pipe-step:last-child { border-right: none; }
+  .pipe-num {
+    display: block; font-family: 'DM Mono', monospace;
+    font-size: 0.6rem; font-weight: 700;
+    margin-bottom: 0.35rem; opacity: 0.8;
+  }
+  .pipe-label { font-weight: 600; color: var(--text); font-size: 0.78rem; }
+  .pipe-sub { color: var(--muted); font-size: 0.71rem; margin-top: 0.2rem; }
+  .ps-1 { background: rgba(88,166,255,0.07);  }  .ps-1 .pipe-num { color: var(--accent); }
+  .ps-2 { background: rgba(232,197,71,0.07);  }  .ps-2 .pipe-num { color: var(--accent2); }
+  .ps-3 { background: rgba(78,205,196,0.07);  }  .ps-3 .pipe-num { color: var(--accent3); }
+  .ps-4 { background: rgba(255,107,107,0.07); }  .ps-4 .pipe-num { color: var(--accent4); }
+  .ps-5 { background: rgba(167,139,250,0.07); }  .ps-5 .pipe-num { color: var(--accent5); }
+
+  /* ── GRAND FORMULA ── */
+  .grand-formula {
+    margin-top: 1.5rem; padding: 1.2rem;
+    background: rgba(0,0,0,0.3); border-radius: 10px;
+    text-align: center; font-size: 0.88rem; line-height: 1.7;
+  }
+  .formula-line {
+    display: flex; align-items: center;
+    justify-content: center; flex-wrap: wrap; gap: 0.5rem; font-weight: 600;
+  }
+  .formula-term {
+    padding: 0.3rem 0.8rem; border-radius: 6px;
+    font-family: 'DM Mono', monospace; font-size: 0.78rem;
+  }
+  .ft-blue { background: rgba(88,166,255,0.15);  color: var(--accent); }
+  .ft-gold { background: rgba(232,197,71,0.15);  color: var(--accent2); }
+  .ft-teal { background: rgba(78,205,196,0.15);  color: var(--accent3); }
+  .ft-purp { background: rgba(167,139,250,0.15); color: var(--accent5); }
+  .formula-op { color: var(--muted); font-size: 1.1rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; margin-top: 3rem;
+    font-size: 0.7rem; color: var(--muted);
+    font-family: 'DM Mono', monospace; opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB II — <span>Menyusun Arah Dasar</span><br>Perusahaan</h1>
+    <p class="subtitle">Visi &amp; Misi · Tujuan · Strategi · Implementasi · Evaluasi · Tata Kelola</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 6 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab II</h2>
+    <div class="mind-center">🧭 Arah Dasar Perusahaan</div>
+    <div class="mind-branches">
+      <div class="branch b1">
+        <div class="blabel">2.3</div>
+        Visi, Misi &amp; Nilai<br><small style="opacity:0.7">Kembangkan · Komunikasi · Hubungkan</small>
+      </div>
+      <div class="branch b2">
+        <div class="blabel">2.4</div>
+        Menentukan Tujuan<br><small style="opacity:0.7">Finansial vs Stratejik · BSC</small>
+      </div>
+      <div class="branch b3">
+        <div class="blabel">2.5</div>
+        Menyusun Strategi<br><small style="opacity:0.7">4 Level · Rencana Stratejik</small>
+      </div>
+      <div class="branch b4">
+        <div class="blabel">2.6</div>
+        Implementasi<br><small style="opacity:0.7">9 aspek operasional</small>
+      </div>
+      <div class="branch b5">
+        <div class="blabel">2.7</div>
+        Evaluasi &amp; Koreksi<br><small style="opacity:0.7">Monitor · Adaptasi</small>
+      </div>
+      <div class="branch b6">
+        <div class="blabel">2.8</div>
+        Tata Kelola / BOD<br><small style="opacity:0.7">4 kewajiban dewan direksi</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 5 TAHAP MANAJERIAL (PIPELINE) ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">2.1–2.2</span>
+      <div>
+        <div class="section-title">Pendahuluan &amp; Lima Tahap Manajerial</div>
+        <div class="section-eng">Introduction &amp; Five Managerial Tasks</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          Bab ini membahas <strong>gambar besar</strong> dinamika penyusunan dan pengimplementasian strategi perusahaan — tanggung jawab manajemen dalam menentukan arah, menetapkan target, memilih strategi, dan mengeksekusinya.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Penyusunan strategi adalah <strong>tugas keseluruhan tim manajemen</strong>, bukan hanya satu bagian — melibatkan koordinasi di semua level organisasi untuk mencapai target kinerja perusahaan secara menyeluruh.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Lima tahap manajerial</strong> yang saling berhubungan dalam proses penyusunan dan pengimplementasian strategi:
+        </span></li>
+      </ul>
+
+      <div class="pipeline">
+        <div class="pipe-step ps-1">
+          <span class="pipe-num">TAHAP 1</span>
+          <div class="pipe-label">Visi, Misi &amp; Nilai</div>
+          <div class="pipe-sub">Arah jangka panjang perusahaan</div>
+        </div>
+        <div class="pipe-step ps-2">
+          <span class="pipe-num">TAHAP 2</span>
+          <div class="pipe-label">Tujuan Kinerja</div>
+          <div class="pipe-sub">Tolok ukur kemajuan &amp; kinerja</div>
+        </div>
+        <div class="pipe-step ps-3">
+          <span class="pipe-num">TAHAP 3</span>
+          <div class="pipe-label">Menyusun Strategi</div>
+          <div class="pipe-sub">Mencapai tujuan secara stratejik</div>
+        </div>
+        <div class="pipe-step ps-4">
+          <span class="pipe-num">TAHAP 4</span>
+          <div class="pipe-label">Implementasi</div>
+          <div class="pipe-sub">Eksekusi efektif &amp; efisien</div>
+        </div>
+        <div class="pipe-step ps-5">
+          <span class="pipe-num">TAHAP 5</span>
+          <div class="pipe-label">Evaluasi &amp; Koreksi</div>
+          <div class="pipe-sub">Monitor, evaluasi, penyesuaian</div>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 5 Tahap:</strong> <em>"Visi Tujuan Strategi Implementasi Evaluasi"</em> → <em>"VTSIE"</em> → <em>"Visi Tanpa Strategi Itu Eror!"</em></span>
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: VISI, MISI, NILAI ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c1">2.3</span>
+      <div>
+        <div class="section-title">Menyusun Visi, Misi Stratejik &amp; Nilai-Nilai Utama</div>
+        <div class="section-eng">Crafting Vision, Mission &amp; Core Values</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub2a">
+        <div class="subsection-header" onclick="toggleSub('sub2a')">
+          🔭 Mengembangkan Visi Stratejik <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Visi stratejik</strong> hanya berdampak bila <em>dipatrikan ke dalam benak dan hati</em> keseluruhan perangkat organisasi, yang kemudian diterjemahkan ke dalam tujuan serta strategi perusahaan.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              Visi menggambarkan <strong>aspirasi manajemen untuk masa depan</strong> — ke mana perusahaan akan dibawa dan mengapa arah itu dipilih.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Langkah awal:</strong> Para manajer harus bergumul dengan pertanyaan apakah langkah perusahaan selama ini sudah benar, menawarkan peluang pertumbuhan yang menghasilkan profit, atau perlu perubahan arah jangka panjang.
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Analogi:</strong> Visi adalah bintang penunjuk arah pelaut di tengah lautan — tanpa bintang itu, kapal berlayar tanpa tujuan. Namun bintang hanya berguna jika seluruh awak kapal tahu ke mana mereka menuju.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub2b">
+        <div class="subsection-header" onclick="toggleSub('sub2b')">
+          📢 Mengkomunikasikan Visi Stratejik <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d1"></span><span>
+              Visi yang <strong>dikomunikasikan secara efektif</strong> adalah perangkat untuk mengikat komitmen para karyawan agar bergerak ke arah yang diinginkan perusahaan.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              Visi yang baik bukan sekadar slogan — ia harus <em>memotivasi, menginspirasi, dan memperjelas</em> tujuan akhir bagi setiap orang di organisasi.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Contoh:</strong> Visi Amazon — "To be Earth's most customer-centric company." Singkat, jelas, dan mengikat seluruh keputusan operasional. Setiap karyawan Amazon tahu bahwa pelanggan selalu jadi prioritas utama.
+            </span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub2c">
+        <div class="subsection-header" onclick="toggleSub('sub2c')">
+          📋 Menyusun Pernyataan Misi <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Misi</strong> mendeskripsikan <em>maksud dan tujuan perusahaan, serta bisnisnya saat ini</em> — berbeda dengan visi yang berorientasi masa depan, misi menggambarkan jati diri perusahaan hari ini.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              Pernyataan misi menjawab pertanyaan: <em>"Apa bisnis kita? Siapa yang kami layani? Bagaimana kami menciptakan nilai?"</em>
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Perbedaan kunci Visi vs Misi:</strong>
+              <br>→ <em>Visi</em> = Ke mana kita akan pergi (masa depan / aspirasi)
+              <br>→ <em>Misi</em> = Siapa kita dan apa yang kita lakukan sekarang (masa kini / identitas)
+            </span></li>
+          </ul>
+          <div class="info-box gold">
+            <strong>📌 Contoh nyata:</strong> Tesla — <em>Misi:</em> "Accelerate the world's transition to sustainable energy." (apa yang mereka lakukan sekarang) vs <em>Visi:</em> Menjadi pemimpin energi berkelanjutan global. Misi adalah aktivitas, visi adalah tujuan akhir.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub2d">
+        <div class="subsection-header" onclick="toggleSub('sub2d')">
+          💎 Menghubungkan Visi &amp; Misi dengan Nilai Perusahaan <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Nilai utama perusahaan</strong> adalah keyakinan, kepribadian, dan norma perilaku yang ditunjukkan oleh para karyawannya — panduan tentang bagaimana bisnis dijalankan dalam mengejar visi dan misi.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              Nilai-nilai ini bukanlah slogan dinding kantor — mereka harus <em>hidup dalam tindakan nyata</em> setiap hari, dari pembuatan keputusan strategis hingga interaksi dengan pelanggan.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Tiga elemen satu kesatuan:</strong> Visi (ke mana) + Misi (apa yang kita lakukan) + Nilai (bagaimana kita melakukannya) = <em>Fondasi arah dasar perusahaan yang utuh</em>.
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik VMN:</strong> <em>"Visi = Tujuan akhir | Misi = Aktivitas saat ini | Nilai = Cara berperilaku"</em> — seperti GPS: tujuan (visi) + jenis kendaraan (misi) + aturan berkendara (nilai).</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: TUJUAN ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c2">2.4</span>
+      <div>
+        <div class="section-title">Menentukan Tujuan Perusahaan</div>
+        <div class="section-eng">Setting Objectives</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub3a">
+        <div class="subsection-header" onclick="toggleSub('sub3a')">
+          🎯 Definisi &amp; Syarat Tujuan yang Baik <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>Tujuan perusahaan</strong> = target kinerja yang sangat spesifik yang ingin dicapai oleh manajemen. Fungsi utama: <em>mengkonversikan visi dan misi menjadi target yang terukur</em>.
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              Tujuan yang baik harus: <strong>Kongkrit</strong> (tidak abstrak) · <strong>Dapat dikuantifikasi</strong> · <strong>Dapat diukur</strong> · <strong>Memiliki rentang dan batas waktu</strong> (deadline) yang ditentukan.
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>Tiga alasan tujuan harus kongkrit, terukur, dan ber-deadline:</strong>
+              <br>→ <strong>(a)</strong> Memfokuskan daya upaya &amp; menyelaraskan aktivitas semua level
+              <br>→ <strong>(b)</strong> Berperan sebagai <em>tolok ukur/alat ukur</em> kemajuan dan kinerja
+              <br>→ <strong>(c)</strong> Memberi <em>motivasi dan inspirasi</em> bagi karyawan untuk bekerja optimal
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Syarat tujuan:</strong> <em>SMART</em> — <strong>S</strong>pecific (kongkrit) · <strong>M</strong>easurable (terukur) · <strong>A</strong>chievable · <strong>R</strong>elevant · <strong>T</strong>ime-bound (ber-deadline)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub3b">
+        <div class="subsection-header" onclick="toggleSub('sub3b')">
+          ⚖️ Dua Jenis Tujuan: Finansial vs Stratejik <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <table class="compare-table">
+            <thead>
+              <tr>
+                <th class="th-gold">🏦 Tujuan Finansial</th>
+                <th class="th-blue">🏆 Tujuan Stratejik</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mengkomunikasikan <strong>target kinerja finansial</strong> manajemen</td>
+                <td>Berkaitan dengan <strong>pemasaran serta vitalitas kompetitif</strong> perusahaan</td>
+              </tr>
+              <tr>
+                <td>Contoh: pertumbuhan pendapatan, margin laba, ROI, arus kas</td>
+                <td>Contoh: pangsa pasar, loyalitas pelanggan, inovasi produk, posisi kompetitif</td>
+              </tr>
+              <tr>
+                <td>Terlihat dalam <strong>laporan keuangan</strong></td>
+                <td>Terlihat dalam <strong>posisi di pasar</strong> jangka panjang</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="info-box blue" style="margin-top:0.9rem;">
+            <strong>⚠️ Penting:</strong> Kedua jenis tujuan ini <em>saling melengkapi</em>, bukan saling menggantikan. Kinerja stratejik yang kuat pada akhirnya memperkuat kinerja finansial jangka panjang.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub3c">
+        <div class="subsection-header" onclick="toggleSub('sub3c')">
+          📊 Balanced Scorecard (BSC) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>Balanced Scorecard (BSC)</strong> adalah kerangka kerja yang menyeimbangkan tujuan finansial dan stratejik dengan <em>empat prinsip utama</em>:
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>(a)</strong> Kinerja stratejik yang semakin baik akan <em>mempercepat kinerja finansial</em> yang lebih baik.
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>(b)</strong> Keuntungan menyusun tujuan yang bisa <em>dikembangkan lebih lanjut</em> ke tahap berikutnya.
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>(c)</strong> Perlunya tujuan <em>jangka pendek sekaligus jangka panjang</em> — keduanya harus ada.
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>(d)</strong> Perlunya tujuan untuk <em>semua level organisasi</em> dalam perusahaan — dari eksekutif hingga lini terdepan.
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Ingat BSC:</strong> <em>"Balance antara Finansial dan Stratejik, antara Jangka Pendek dan Panjang, di Semua Level organisasi"</em> — BSC adalah jembatan antara visi dan eksekusi nyata.</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: MENYUSUN STRATEGI ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c3">2.5</span>
+      <div>
+        <div class="section-title">Menyusun Strategi</div>
+        <div class="section-eng">Crafting a Strategy</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub4a">
+        <div class="subsection-header" onclick="toggleSub('sub4a')">
+          🧠 Hakikat Penyusunan Strategi <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d3"></span><span>
+              Menyusun strategi adalah tugas yang harus memperhatikan hal-hal <strong>'bagaimana melakukannya'</strong>: bagaimana mengembangkan bisnis, memuaskan pelanggan, mengungguli pesaing, menyikapi perubahan pasar, mengelola unit fungsional, dan mencapai tujuan finansial.
+            </span></li>
+            <li class="point"><span class="dot d3"></span><span>
+              Semakin cepat lingkungan bisnis berubah, semakin kritis bagi manajer untuk <strong>bertindak seperti wirausahawan yang lihai</strong> — mendiagnosa arah dan kekuatan perubahan yang berlangsung, dan merespons segera bila diperlukan penyesuaian strategi.
+            </span></li>
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>Rumus Rencana Stratejik:</strong>
+              <em>Visi Stratejik + Tujuan Perusahaan + Strategi = Rencana Stratejik</em>
+              <br>Rencana stratejik mencakup: komitmen alokasi sumberdaya + batas waktu pencapaian tujuan.
+            </span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4b">
+        <div class="subsection-header" onclick="toggleSub('sub4b')">
+          🏗 Empat Level Strategi dalam Perusahaan Multi-Bisnis <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;">Penyusunan strategi melibatkan manajer di <em>setiap level organisasi</em>. Pada perusahaan multi-bisnis, terdapat empat level strategi:</p>
+          <div class="level-grid">
+            <div class="level-card lc-1">
+              <div class="level-icon">🏢</div>
+              <div>
+                <strong>① Strategi Korporat</strong>
+                Level tertinggi. Menentukan di bisnis apa saja perusahaan beroperasi dan bagaimana sumber daya korporat dialokasikan di antara unit-unit bisnis.
+              </div>
+            </div>
+            <div class="level-card lc-2">
+              <div class="level-icon">💼</div>
+              <div>
+                <strong>② Strategi Bisnis</strong>
+                Bagaimana masing-masing unit bisnis bersaing dan membangun keunggulan kompetitif di segmen pasarnya masing-masing.
+              </div>
+            </div>
+            <div class="level-card lc-3">
+              <div class="level-icon">⚙️</div>
+              <div>
+                <strong>③ Strategi Area Fungsional</strong>
+                Strategi di level departemen: pemasaran, keuangan, SDM, R&amp;D, operasional — bagaimana tiap fungsi mendukung strategi bisnis.
+              </div>
+            </div>
+            <div class="level-card lc-4">
+              <div class="level-icon">🔧</div>
+              <div>
+                <strong>④ Strategi Operasi Pada Setiap Lini Bisnis</strong>
+                Level paling operasional. Cara kerja spesifik pada tiap lini atau unit terkecil dalam menjalankan strategi di atas.
+              </div>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 4 Level:</strong> <em>"KBFO"</em> → <em>"Korporat – Bisnis – Fungsional – Operasional"</em> → <em>"Koordinasi Bisnis Fokus Operasional"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: IMPLEMENTASI & EVALUASI ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c4">2.6–2.7</span>
+      <div>
+        <div class="section-title">Implementasi &amp; Evaluasi Strategi</div>
+        <div class="section-eng">Strategy Execution &amp; Corrective Adjustments</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub5a">
+        <div class="subsection-header" onclick="toggleSub('sub5a')">
+          🚀 Sembilan Aspek Mengimplementasikan Strategi <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;">Implementasi strategi menuntut banyak perhatian. Proses mengelola pengimplementasian mencakup:</p>
+          <div class="step-flow">
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">a</div>
+              <div><strong>Merekrut staff</strong> — memastikan orang yang tepat di posisi yang tepat untuk menjalankan strategi</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">b</div>
+              <div><strong>Membangun dan memperkuat semua sumberdaya</strong> — kapabilitas, kompetensi, dan aset yang dibutuhkan</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">c</div>
+              <div><strong>Mengorganisir upaya kerja</strong> — menstrukturkan organisasi agar sejalan dengan kebutuhan eksekusi strategi</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">d</div>
+              <div><strong>Mengalokasikan sumberdaya</strong> — anggaran, waktu, dan tenaga diarahkan ke prioritas stratejik</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">e</div>
+              <div><strong>Memastikan kebijakan dan prosedur</strong> — peraturan internal mendukung, bukan menghambat eksekusi</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">f</div>
+              <div><strong>Menciptakan sistem informasi dan operasi</strong> — data dan proses yang mendukung pengambilan keputusan cepat</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">g</div>
+              <div><strong>Memotivasi karyawan</strong> — menyelaraskan insentif dan penghargaan dengan tujuan stratejik</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">h</div>
+              <div><strong>Menciptakan budaya perusahaan serta iklim kerja kondusif</strong> — budaya yang mendorong kolaborasi dan inovasi</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(255,107,107,0.4);">
+              <div class="step-num" style="background:var(--accent4);">i</div>
+              <div><strong>Menampilkan kepemimpinan internal</strong> — manajemen memimpin dengan contoh nyata</div>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Rangkuman 9 Aspek:</strong> <em>"Rekrut Bangun Organisir Alokasi Kebijakan Sistem Motivasi Budaya Kepemimpinan"</em> → <em>"RBOAKSMB K"</em> — Inti: <em>People · Structure · Culture · Leadership</em></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5b">
+        <div class="subsection-header" onclick="toggleSub('sub5b')">
+          🔄 Mengevaluasi Kinerja &amp; Melakukan Koreksi <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              Tahap ini bertujuan <strong>memonitor perkembangan eksternal terbaru</strong>, mengevaluasi kemajuan yang dicapai, dan melakukan perbaikan bila dirasa perlu.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Dasar pertimbangan eksekutif:</strong> apakah akan mempertahankan atau merubah visi, misi, tujuan, strategi, dan metoda berdasarkan evaluasi kondisi terkini.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Kapan strategi TIDAK perlu diubah?</strong> Jika strategi masih melampaui tiga test kemenangan: <em>(a)</em> keunggulan kompetitif, <em>(b)</em> kinerja yang baik dan kuat, serta <em>(c)</em> perusahaan sehat — maka cukup penyesuaian minor.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Sifat evaluasi:</strong> terus-menerus dan <em>adaptif</em> — bukan hanya review tahunan, melainkan proses yang hidup dan responsif terhadap perubahan.
+            </span></li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: TATA KELOLA / BOD ══ -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <span class="num c5">2.8</span>
+      <div>
+        <div class="section-title">Tata Kelola: Peran BOD dalam Proses Stratejik</div>
+        <div class="section-eng">Corporate Governance &amp; Board of Directors</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d5"></span><span>
+          Meskipun manajer senior memiliki tanggung jawab utama, pada akhirnya <strong>tanggung jawab besar ada pada dewan direksi (BOD)</strong> untuk memastikan kelima tugas manajemen stratejik dilaksanakan demi kepentingan pemegang saham dan pemangku kepentingan lain.
+        </span></li>
+      </ul>
+
+      <p style="font-size:0.83rem;color:var(--muted);margin: 0.9rem 0 0.5rem;">Empat kewajiban penting dewan direksi perusahaan:</p>
+      <div class="bod-grid">
+        <div class="bod-card bc-1">
+          <span class="bc-num">KEWAJIBAN 1</span>
+          <div class="bc-title">Menilai Pendekatan &amp; Strategi</div>
+          Secara kritis menilai pendekatan-pendekatan bisnis, strategi, serta ke mana perusahaan akan dibawa.
+        </div>
+        <div class="bod-card bc-2">
+          <span class="bc-num">KEWAJIBAN 2</span>
+          <div class="bc-title">Mengevaluasi Kepemimpinan Eksekutif</div>
+          Memberikan evaluasi atas keahlian dan keterampilan kepemimpinan para eksekutif seniornya.
+        </div>
+        <div class="bod-card bc-3">
+          <span class="bc-num">KEWAJIBAN 3</span>
+          <div class="bc-title">Rencana Kompensasi Eksekutif</div>
+          Membuat rencana kompensasi bagi eksekutif puncak yang berhasil memberikan hasil terbaik bagi pemangku kepentingan, khususnya pemegang saham.
+        </div>
+        <div class="bod-card bc-4">
+          <span class="bc-num">KEWAJIBAN 4</span>
+          <div class="bc-title">Mengawasi Pelaporan Keuangan</div>
+          Mengawasi praktik pelaporan keuangan dan akuntansi perusahaan — memastikan transparansi dan kepatuhan.
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 4 Kewajiban BOD:</strong> <em>"Nilai-Evaluasi-Kompensasi-Pengawasan"</em> → <em>"NEKP"</em> → <em>"Nilai Eksekutif: Kompensasi &amp; Pengawasan"</em></span>
+      </div>
+      <button class="done-btn" id="btn6" onclick="markDone(6)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab II</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">5 Tahap Manajerial — Satu Rantai yang Tak Terputus</h3>
+          <p>Manajemen stratejik bukan satu tindakan, melainkan lima tahap yang saling terhubung: <strong style="color:#f0f0ff;">Visi/Misi → Tujuan → Strategi → Implementasi → Evaluasi</strong>. Berhenti di satu tahap berarti gagal di seluruh proses.</p>
+          <div class="keywords">
+            <span class="kw">siklus berkelanjutan</span><span class="kw">tanggung jawab tim</span><span class="kw">VTSIE</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">Visi ≠ Misi ≠ Nilai — Tiga Hal yang Berbeda Namun Satu Kesatuan</h3>
+          <p><strong style="color:#f0f0ff;">Visi</strong> = aspirasi masa depan | <strong style="color:#f0f0ff;">Misi</strong> = identitas &amp; aktivitas saat ini | <strong style="color:#f0f0ff;">Nilai</strong> = norma perilaku dalam mengejar keduanya. Ketiganya harus selaras dan hidup dalam tindakan nyata.</p>
+          <div class="keywords">
+            <span class="kw">visi = ke mana</span><span class="kw">misi = siapa kita</span><span class="kw">nilai = bagaimana</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">Tujuan = Visi yang Diukur — SMART + BSC</h3>
+          <p>Tujuan mengubah visi yang abstrak menjadi target yang kongkrit dan terukur. Butuh dua jenis: <strong style="color:#f0f0ff;">Finansial</strong> (angka keuangan) dan <strong style="color:#f0f0ff;">Stratejik</strong> (posisi kompetitif). BSC memastikan keseimbangan keduanya di semua level, jangka pendek maupun panjang.</p>
+          <div class="keywords">
+            <span class="kw">SMART</span><span class="kw">finansial vs stratejik</span><span class="kw">Balanced Scorecard</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">Strategi = 4 Level, Semua Orang Terlibat</h3>
+          <p>Strategi bukan hanya urusan CEO. Ia disusun di <strong style="color:#f0f0ff;">4 level</strong>: Korporat → Bisnis → Fungsional → Operasional. Hasil akhirnya adalah <strong style="color:#f0f0ff;">Rencana Stratejik</strong> = Visi + Tujuan + Strategi + Alokasi Sumber Daya + Deadline.</p>
+          <div class="keywords">
+            <span class="kw">KBFO</span><span class="kw">rencana stratejik</span><span class="kw">multi-level</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent5);">5</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent5);">Implementasi = 9 Aspek yang Menggerakkan Strategi</h3>
+          <p>Strategi terbaik mati tanpa implementasi yang kuat. Intinya ada di <strong style="color:#f0f0ff;">People</strong> (rekrut, motivasi) + <strong style="color:#f0f0ff;">Structure</strong> (organisir, alokasi) + <strong style="color:#f0f0ff;">Culture</strong> (budaya, iklim kerja) + <strong style="color:#f0f0ff;">Leadership</strong> (kepemimpinan internal).</p>
+          <div class="keywords">
+            <span class="kw">people</span><span class="kw">structure</span><span class="kw">culture</span><span class="kw">leadership</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent6); color:#000;">6</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent6);">Evaluasi = Siklus Tak Berhenti</h3>
+          <p>Strategi dievaluasi terus-menerus. Selama masih lulus tiga test kemenangan (unggul kompetitif, kinerja kuat, perusahaan sehat), cukup penyesuaian minor. Jika tidak, ubah secara menyeluruh.</p>
+          <div class="keywords">
+            <span class="kw">monitor</span><span class="kw">adaptasi</span><span class="kw">3 test kemenangan</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:#f472b6;">7</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:#f472b6;">BOD = Pengawas Tertinggi Proses Stratejik</h3>
+          <p>Di atas semua manajer, ada <strong style="color:#f0f0ff;">dewan direksi (BOD)</strong> yang memastikan seluruh proses stratejik berjalan untuk kepentingan pemegang saham. Empat kewajiban: <strong style="color:#f0f0ff;">Nilai strategi · Evaluasi eksekutif · Atur kompensasi · Awasi pelaporan</strong>.</p>
+          <div class="keywords">
+            <span class="kw">NEKP</span><span class="kw">corporate governance</span><span class="kw">pemegang saham</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-blue">Visi + Misi + Nilai</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-gold">Tujuan SMART</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-teal">Strategi 4 Level</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-purp">Implementasi + Evaluasi</span>
+      </div>
+      <div class="formula-caption">Rantai stratejik lengkap Bab II — diawasi oleh BOD untuk kepentingan seluruh pemangku kepentingan</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box blue" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab II:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">V</strong>isi &amp; Misi itu <strong style="color:#f0f0ff;">T</strong>ujuan SMART, <strong style="color:#f0f0ff;">S</strong>trategi 4 Level, <strong style="color:#f0f0ff;">I</strong>mplementasi 9 Aspek, <strong style="color:#f0f0ff;">E</strong>valuasi terus — diawasi <strong style="color:#f0f0ff;">BOD</strong>!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">V-T-S-I-E + BOD</strong> — Lima tahap manajerial ditambah pengawas tertinggi. Ini adalah <em>arsitektur lengkap</em> manajemen stratejik yang baik.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab II Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 6;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) {
+      btn.textContent = '✔  Sudah dipelajari!';
+      btn.classList.add('checked');
+    } else {
+      btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari';
+      btn.classList.remove('checked');
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    const pct = (count / totalSections) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  // Open first section by default
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

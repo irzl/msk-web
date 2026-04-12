@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB VI — Memperkuat Posisi Daya Saing Perusahaan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #f59e0b;   /* amber — chapter 6 color */
+    --accent2: #ef4444;   /* red — ofensif */
+    --accent3: #3b82f6;   /* blue — defensif */
+    --accent4: #8b5cf6;   /* violet — timing */
+    --accent5: #10b981;   /* emerald — merger/akuisisi */
+    --accent6: #06b6d4;   /* cyan — integrasi vertikal */
+    --accent7: #f472b6;   /* pink — outsourcing */
+    --accent8: #84cc16;   /* lime — aliansi */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--accent); color: #000; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent5)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── MIND MAP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #d97706); color: #000; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+  .branch { padding: 0.75rem; border-radius: 10px; font-size: 0.73rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.58rem; font-family: 'DM Mono', monospace; margin-bottom: 0.25rem; opacity: 0.7; }
+  .b1 { background: rgba(239,68,68,0.08);   border-color: rgba(239,68,68,0.25);   color: var(--accent2); }
+  .b2 { background: rgba(59,130,246,0.08);  border-color: rgba(59,130,246,0.25);  color: var(--accent3); }
+  .b3 { background: rgba(139,92,246,0.08);  border-color: rgba(139,92,246,0.25);  color: var(--accent4); }
+  .b4 { background: rgba(16,185,129,0.08);  border-color: rgba(16,185,129,0.25);  color: var(--accent5); }
+  .b5 { background: rgba(6,182,212,0.08);   border-color: rgba(6,182,212,0.25);   color: var(--accent6); }
+  .b6 { background: rgba(244,114,182,0.08); border-color: rgba(244,114,182,0.25); color: var(--accent7); }
+  .b7 { background: rgba(132,204,22,0.08);  border-color: rgba(132,204,22,0.25);  color: var(--accent8); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; color: #000; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent2); color: #fff !important; }
+  .c2 { background: var(--accent3); color: #fff !important; }
+  .c3 { background: var(--accent4); color: #fff !important; }
+  .c4 { background: var(--accent5); color: #000 !important; }
+  .c5 { background: var(--accent6); color: #000 !important; }
+  .c6 { background: var(--accent7); color: #000 !important; }
+  .c7 { background: var(--accent8); color: #000 !important; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7) { transition-delay: 0.28s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1{background:var(--accent2);} .d2{background:var(--accent3);} .d3{background:var(--accent4);}
+  .d4{background:var(--accent5);} .d5{background:var(--accent6);} .d6{background:var(--accent7);}
+  .d7{background:var(--accent8);} .da{background:var(--accent);}
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.red    { background: rgba(239,68,68,0.07);   border: 1px solid rgba(239,68,68,0.2); }
+  .info-box.blue   { background: rgba(59,130,246,0.07);  border: 1px solid rgba(59,130,246,0.2); }
+  .info-box.violet { background: rgba(139,92,246,0.07);  border: 1px solid rgba(139,92,246,0.2); }
+  .info-box.green  { background: rgba(16,185,129,0.07);  border: 1px solid rgba(16,185,129,0.2); }
+  .info-box.cyan   { background: rgba(6,182,212,0.07);   border: 1px solid rgba(6,182,212,0.2); }
+  .info-box.pink   { background: rgba(244,114,182,0.07); border: 1px solid rgba(244,114,182,0.2); }
+  .info-box.lime   { background: rgba(132,204,22,0.07);  border: 1px solid rgba(132,204,22,0.2); }
+  .info-box.amber  { background: rgba(245,158,11,0.07);  border: 1px solid rgba(245,158,11,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── OFENSIF vs DEFENSIF SPLIT ── */
+  .od-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .od-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.81rem; line-height: 1.5; color: #c8c8e0; }
+  .od-card .oc-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+  .od-card .oc-icon { font-size: 1.2rem; }
+  .od-card .oc-title { font-weight: 700; font-size: 0.88rem; }
+  .od-card ul { list-style: none; }
+  .od-card ul li { padding: 0.25rem 0; border-bottom: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+  .od-card ul li:last-child { border-bottom: none; }
+  .od-card ul li::before { content: "→ "; color: var(--muted); }
+  .od-o { border-color: rgba(239,68,68,0.3); } .od-o .oc-title { color: var(--accent2); }
+  .od-d { border-color: rgba(59,130,246,0.3); } .od-d .oc-title { color: var(--accent3); }
+
+  /* ── TIMING CARDS ── */
+  .timing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.7rem; margin-top: 1rem; }
+  .timing-card { padding: 0.9rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.79rem; line-height: 1.5; color: #c8c8e0; }
+  .timing-card .tc-icon { font-size: 1.3rem; display: block; margin-bottom: 0.35rem; }
+  .timing-card .tc-name { font-weight: 700; font-size: 0.86rem; display: block; margin-bottom: 0.3rem; }
+  .timing-card .tc-pro { color: var(--accent8); font-size: 0.76rem; }
+  .timing-card .tc-con { color: var(--accent2); font-size: 0.76rem; margin-top: 0.25rem; }
+  .tc-pioneer { border-color: rgba(139,92,246,0.35); } .tc-pioneer .tc-name { color: var(--accent4); }
+  .tc-fast    { border-color: rgba(245,158,11,0.35);  } .tc-fast    .tc-name { color: var(--accent); }
+  .tc-late    { border-color: rgba(59,130,246,0.35);  } .tc-late    .tc-name { color: var(--accent3); }
+
+  /* ── SCOPE CARDS ── */
+  .scope-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .scope-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.81rem; line-height: 1.5; color: #c8c8e0; }
+  .scope-card .sc-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.4rem; display: block; }
+  .scope-card .sc-sub   { font-size: 0.74rem; color: var(--muted); font-style: italic; margin-bottom: 0.5rem; display: block; }
+  .sc-h { border-color: rgba(16,185,129,0.3); } .sc-h .sc-title { color: var(--accent5); }
+  .sc-v { border-color: rgba(6,182,212,0.3);  } .sc-v .sc-title { color: var(--accent6); }
+
+  /* ── STEP FLOW ── */
+  .step-flow { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .step-item { display: flex; gap: 0.9rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.75rem 0.9rem; border-left: 3px solid transparent; font-size: 0.84rem; line-height: 1.5; color: #c8c8e0; }
+  .step-num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; color: #000; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.05rem; }
+  .step-item strong { color: var(--text); }
+
+  /* ── BENEFIT/RISK COLUMNS ── */
+  .br-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .br-col { padding: 0.9rem; border-radius: 9px; font-size: 0.8rem; line-height: 1.5; }
+  .br-col .bc-title { font-weight: 700; font-size: 0.82rem; margin-bottom: 0.45rem; display: flex; align-items: center; gap: 0.4rem; }
+  .br-col ul { list-style: none; }
+  .br-col ul li { padding: 0.22rem 0; border-bottom: 1px solid var(--border); font-size: 0.76rem; color: var(--muted); }
+  .br-col ul li:last-child { border-bottom: none; }
+  .bc-benefit { background: rgba(16,185,129,0.07); border: 1px solid rgba(16,185,129,0.2); } .bc-benefit .bc-title { color: var(--accent5); }
+  .bc-risk    { background: rgba(239,68,68,0.07);  border: 1px solid rgba(239,68,68,0.2);  } .bc-risk    .bc-title { color: var(--accent2); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent8); color: var(--accent8); }
+  .done-btn.checked { border-color: var(--accent8); color: var(--accent8); background: rgba(132,204,22,0.07); }
+
+  /* ── ULTIMATE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(245,158,11,0.07), rgba(16,185,129,0.04)); border: 1px solid rgba(245,158,11,0.25); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #d97706); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.75rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.75rem; }
+  .ft-red   { background: rgba(239,68,68,0.15);   color: var(--accent2); }
+  .ft-blue  { background: rgba(59,130,246,0.15);  color: var(--accent3); }
+  .ft-vio   { background: rgba(139,92,246,0.15);  color: var(--accent4); }
+  .ft-grn   { background: rgba(16,185,129,0.15);  color: var(--accent5); }
+  .ft-cyan  { background: rgba(6,182,212,0.15);   color: var(--accent6); }
+  .ft-pink  { background: rgba(244,114,182,0.15); color: var(--accent7); }
+  .ft-lime  { background: rgba(132,204,22,0.15);  color: var(--accent8); }
+  .formula-op { color: var(--muted); font-size: 0.9rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB VI — <span>Memperkuat Posisi</span><br>Daya Saing Perusahaan</h1>
+    <p class="subtitle">Ofensif · Defensif · Timing · Scope · Merger · Integrasi Vertikal · Outsourcing · Aliansi</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 6 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab VI</h2>
+    <div class="mind-center">🏰 Memperkuat Posisi Daya Saing</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">6.3</div>⚔️ Strategi Ofensif<br><small style="opacity:0.7">Basis serangan · Blue Ocean</small></div>
+      <div class="branch b2"><div class="blabel">6.4</div>🛡 Strategi Defensif<br><small style="opacity:0.7">Tutup peluang · Beri sinyal</small></div>
+      <div class="branch b3"><div class="blabel">6.5</div>⏱ Pengaturan Waktu<br><small style="opacity:0.7">Pelopor · Pengikut cepat · Lambat</small></div>
+      <div class="branch b4"><div class="blabel">6.6–6.7</div>🔀 Scope &amp; Merger<br><small style="opacity:0.7">Horizontal · 5 manfaat · Risiko gagal</small></div>
+      <div class="branch b5"><div class="blabel">6.8</div>⛓ Integrasi Vertikal<br><small style="opacity:0.7">Hulu ke hilir · Untung &amp; rugi</small></div>
+      <div class="branch b6"><div class="blabel">6.9</div>📤 Outsourcing<br><small style="opacity:0.7">6 kondisi · Risiko utama</small></div>
+      <div class="branch b7"><div class="blabel">6.10</div>🤝 Aliansi Stratejik<br><small style="opacity:0.7">5 ciri aliansi · 4 aspek efektif</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: PENDAHULUAN & 3 DIMENSI ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num" style="background:var(--accent);color:#000;">6.1–6.2</span>
+      <div>
+        <div class="section-title">Pendahuluan: Tiga Dimensi Memperkuat Posisi Saing</div>
+        <div class="section-eng">Introduction: Three Dimensions for Strengthening Competitive Position</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot da"></span><span>
+          Setelah memilih salah satu dari lima strategi generik (Bab V), perhatian bergeser pada <strong>dimensi-dimensi tambahan</strong> yang dapat melengkapi dan memaksimalkan kekuatan strategi secara keseluruhan.
+        </span></li>
+        <li class="point"><span class="dot da"></span><span>
+          <strong>Tiga dimensi utama Bab VI:</strong>
+          <br>→ <strong>Dimensi 1:</strong> Tindakan kompetitif — sifatnya ofensif atau defensif
+          <br>→ <strong>Dimensi 2:</strong> Dinamika kompetitif &amp; pengaturan waktu tindakan stratejik
+          <br>→ <strong>Dimensi 3:</strong> Scope operasional — seberapa luas aktivitas dan jangkauan pasar perusahaan
+        </span></li>
+        <li class="point"><span class="dot da"></span><span>
+          <strong>Enam pertanyaan kritis</strong> yang harus dijawab manajer dalam memperkuat posisi daya saing:
+        </span></li>
+      </ul>
+      <div class="step-flow" style="margin-top:0.5rem;">
+        <div class="step-item" style="border-left-color:rgba(245,158,11,0.4);"><div class="step-num" style="background:var(--accent);color:#000;">1</div><div>Apakah perusahaan akan mengambil jalan <strong>ofensif atau defensif</strong> untuk memperbaiki posisi pasar?</div></div>
+        <div class="step-item" style="border-left-color:rgba(245,158,11,0.4);"><div class="step-num" style="background:var(--accent);color:#000;">2</div><div>Kapan perusahaan akan mengambil tindakan stratejik? Apakah menjadi <strong>pelopor, pengikut cepat, atau pengikut belakangan</strong>?</div></div>
+        <div class="step-item" style="border-left-color:rgba(245,158,11,0.4);"><div class="step-num" style="background:var(--accent);color:#000;">3</div><div>Apakah perusahaan berencana melakukan <strong>merger atau akuisisi</strong> atas perusahaan sejenis?</div></div>
+        <div class="step-item" style="border-left-color:rgba(245,158,11,0.4);"><div class="step-num" style="background:var(--accent);color:#000;">4</div><div>Apakah perusahaan perlu mengintegrasikan diri ke depan atau ke belakang melalui <strong>integrasi vertikal</strong>?</div></div>
+        <div class="step-item" style="border-left-color:rgba(245,158,11,0.4);"><div class="step-num" style="background:var(--accent);color:#000;">5</div><div>Apakah perusahaan memilih <strong>outsourcing</strong> untuk aktivitas tertentu, ataukah memproduksinya sendiri?</div></div>
+        <div class="step-item" style="border-left-color:rgba(245,158,11,0.4);"><div class="step-num" style="background:var(--accent);color:#000;">6</div><div>Apakah perusahaan melihat perlunya melakukan <strong>aliansi dengan mitra stratejik</strong>?</div></div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 6 Pertanyaan:</strong> <em>"Ofensif-Waktu-Merger-Vertikal-Outsource-Aliansi"</em> → <em>"OWMVOA"</em> → <em>"Orang Waras Memang Versatil, Outperform Alians!"</em></span>
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: OFENSIF & DEFENSIF ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c1">6.3–6.4</span>
+      <div>
+        <div class="section-title">Strategi Ofensif &amp; Defensif</div>
+        <div class="section-eng">Offensive &amp; Defensive Competitive Moves</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="od-grid">
+        <!-- OFENSIF -->
+        <div class="od-card od-o">
+          <div class="oc-header"><span class="oc-icon">⚔️</span><span class="oc-title">Strategi Ofensif (6.3)</span></div>
+          <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">Digunakan untuk memperkuat posisi pasar dan memperbaiki kinerja bisnis. Dipilih saat perusahaan menemukan peluang pangsa pasar menguntungkan atau tidak punya pilihan selain menghadang keunggulan pesaing.</p>
+          <ul>
+            <li>Memanfaatkan pangsa pasar pesaing yang menguntungkan</li>
+            <li>Meraih kepemimpinan pangsa pasar</li>
+            <li>Mendapatkan laba jauh melebihi pesaing</li>
+            <li>Pertumbuhan bisnis yang lebih cepat</li>
+            <li>Membangun reputasi sebagai perusahaan unggul</li>
+          </ul>
+        </div>
+        <!-- DEFENSIF -->
+        <div class="od-card od-d">
+          <div class="oc-header"><span class="oc-icon">🛡️</span><span class="oc-title">Strategi Defensif (6.4)</span></div>
+          <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.6rem;">Tujuan: (a) menurunkan risiko diserang, (b) memperlemah dampak serangan pesaing, (c) mempengaruhi pesaing untuk menyerang target lain.</p>
+          <ul>
+            <li><strong>Menutup peluang bagi pesaing:</strong> fitur baru, perbanyak lini produk, perpanjang garansi, diskon signifikan untuk dealer/distributor</li>
+            <li><strong>Memberikan sinyal pembalasan:</strong> sampaikan pesan bahwa serangan akan dibalas lebih besar — pertempuran akan sangat mahal bagi penyerang</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub2a">
+        <div class="subsection-header" onclick="toggleSub('sub2a')">
+          🌊 Strategi Lautan Biru — Satu Jenis Strategi Ofensif Khusus <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Strategi Lautan Biru</strong> adalah bentuk strategi ofensif di mana perusahaan menciptakan <em>ruang pasar yang sama sekali baru dan belum diperebutkan</em> — berbeda dari "lautan merah" yang penuh persaingan dan pertumpahan darah kompetitif.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              Dalam lautan biru, perusahaan menciptakan permintaan baru yang belum ada, bukan sekadar merebut pangsa pasar yang sudah ada dari pesaing. Ini mengubah logika kompetisi secara fundamental.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Contoh klasik:</strong> Cirque du Soleil menciptakan "lautan biru" di antara sirkus tradisional dan teater pertunjukan — bukan bersaing dengan keduanya, melainkan menciptakan kategori hiburan baru yang unik.
+            </span></li>
+          </ul>
+          <div class="info-box red">
+            <strong>🔑 Inti Lautan Biru:</strong> Bukan tentang mengalahkan pesaing, melainkan tentang <em>membuat persaingan menjadi tidak relevan</em> dengan menciptakan nilai yang belum pernah ada sebelumnya di pasar.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: PENGATURAN WAKTU (TIMING) ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c3">6.5</span>
+      <div>
+        <div class="section-title">Pengaturan Waktu Tindakan Stratejik</div>
+        <div class="section-eng">Timing of Strategic Moves: Pioneer vs. Late Mover</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Pengaturan waktu tindakan stratejik sama pentingnya dengan tindakan itu sendiri. Tiga pilihan posisi:</p>
+      <div class="timing-grid">
+        <div class="timing-card tc-pioneer">
+          <span class="tc-icon">🚀</span>
+          <span class="tc-name">Perintis/Pelopor</span>
+          <div class="tc-pro">✅ Keunggulan:<br>Menentukan standar industri · Membangun loyalitas merek awal · Kurva belajar lebih panjang · Akses sumber daya terbaik lebih dulu</div>
+          <div class="tc-con">⚠️ Risiko:<br>Biaya pengembangan tinggi · Pasar belum tentu siap · Ketidakpastian teknologi tinggi · Pesaing bisa belajar dari kesalahan kita</div>
+        </div>
+        <div class="timing-card tc-fast">
+          <span class="tc-icon">⚡</span>
+          <span class="tc-name">Pengikut Cepat</span>
+          <div class="tc-pro">✅ Keunggulan:<br>Belajar dari kesalahan pelopor · Pasar sudah mulai terbukti · Bisa langsung masuk dengan produk yang lebih baik</div>
+          <div class="tc-con">⚠️ Risiko:<br>Harus bergerak sangat cepat dan tepat · Pelopor sudah membangun keunggulan awal yang harus dikejar</div>
+        </div>
+        <div class="timing-card tc-late">
+          <span class="tc-icon">🐢</span>
+          <span class="tc-name">Pengikut Belakangan</span>
+          <div class="tc-pro">✅ Keunggulan:<br>Pasar sudah terbukti · Teknologi sudah matang · Bisa masuk dengan solusi yang benar-benar lebih baik</div>
+          <div class="tc-con">⚠️ Risiko:<br>Pelopor sudah memiliki keunggulan kompetitif yang besar · Switching cost pelanggan tinggi · Bisa terlambat secara permanen</div>
+        </div>
+      </div>
+      <div class="info-box violet" style="margin-top:1rem;">
+        <strong>🎯 Prinsip Kunci Timing:</strong> Tidak ada posisi yang universally terbaik. Keputusan menjadi pelopor, pengikut cepat, atau pengikut belakangan harus didasarkan pada <em>kondisi industri, kesiapan sumber daya perusahaan, dan tahap siklus hidup teknologi/pasar</em> yang relevan.
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik Timing:</strong> <em>"Pelopor-Cepat-Lambat"</em> → <em>"PCL"</em> → <em>"Pilih Cepat atau Lambat tergantung kondisi, bukan ego!"</em> — yang terpenting adalah ketepatan waktu relatif terhadap pasar dan pesaing, bukan kecepatan absolut.</span>
+      </div>
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: SCOPE & MERGER/AKUISISI ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c4">6.6–6.7</span>
+      <div>
+        <div class="section-title">Scope Operasional &amp; Merger / Akuisisi Horisontal</div>
+        <div class="section-eng">Operational Scope &amp; Horizontal Mergers &amp; Acquisitions</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub4a">
+        <div class="subsection-header" onclick="toggleSub('sub4a')">
+          📐 Dua Dimensi Scope Operasional (6.6) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">Scope operasional berkaitan dengan keputusan tentang <em>aktivitas mana yang dilakukan internal</em> dan seberapa luas jangkauan pasar perusahaan:</p>
+          <div class="scope-grid">
+            <div class="scope-card sc-h">
+              <span class="sc-title">🔀 Scope Horisontal</span>
+              <span class="sc-sub">Jajaran segmen produk &amp; jasa di pasar</span>
+              <p style="font-size:0.79rem;color:#c8c8e0;">Berkaitan dengan seberapa luas lini produk dan jasa yang ditawarkan di pasar. <strong style="color:var(--text);">Contoh: Merger dan Akuisisi</strong> adalah cara memperluas scope horisontal secara signifikan.</p>
+            </div>
+            <div class="scope-card sc-v">
+              <span class="sc-title">⬆️⬇️ Scope Vertikal</span>
+              <span class="sc-sub">Keterlibatan dalam rantai nilai industri</span>
+              <p style="font-size:0.79rem;color:#c8c8e0;">Sejauh mana perusahaan terlibat dalam aktivitas-aktivitas yang menciptakan keseluruhan mata rantai nilai, dari hulu ke hilir. <strong style="color:var(--text);">Contoh: Integrasi Vertikal.</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4b">
+        <div class="subsection-header" onclick="toggleSub('sub4b')">
+          🤝 Merger &amp; Akuisisi: Definisi, 5 Manfaat &amp; Penyebab Gagal (6.7) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Merger</strong> = penggabungan dua atau lebih perusahaan menjadi satu perusahaan baru.
+              <br><strong>Akuisisi</strong> = kombinasi di mana satu perusahaan membeli perusahaan lain dan menyerap aktivitas operasionalnya. Perbedaan prinsip: kepemilikan, kontrol manajemen, dan pengaturan keuangan.
+            </span></li>
+          </ul>
+          <p style="font-size:0.82rem;color:var(--muted);margin: 0.8rem 0 0.5rem;"><strong style="color:var(--text);">Lima manfaat Merger &amp; Akuisisi:</strong></p>
+          <div class="br-grid">
+            <div class="br-col bc-benefit">
+              <div class="bc-title">✅ Manfaat M&amp;A</div>
+              <ul>
+                <li>Meningkatkan efisiensi operasional perusahaan</li>
+                <li>Mengembangkan diferensiasi produk</li>
+                <li>Mengurangi persaingan di pasar</li>
+                <li>Meningkatkan daya tawar terhadap supplier &amp; pembeli</li>
+                <li>Meningkatkan fleksibilitas &amp; kemampuan dinamis</li>
+              </ul>
+            </div>
+            <div class="br-col bc-risk">
+              <div class="bc-title">⚠️ Penyebab Gagal M&amp;A</div>
+              <ul>
+                <li>Penghematan biaya terlalu kecil &amp; tak berdampak</li>
+                <li>Pencapaian kapabilitas saing terlalu lama/gagal</li>
+                <li>Upaya integrasi budaya mendapat hambatan besar</li>
+                <li>Perbenturan kultur atau kepentingan pemangku</li>
+                <li>Overestimasi sinergi yang tidak terwujud</li>
+              </ul>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 5 Manfaat M&amp;A:</strong> <em>"Efisiensi-Diferensiasi-Persaingan-Daya Tawar-Fleksibilitas"</em> → <em>"EDPDF"</em> → <em>"Ekspansi Dengan Pertimbangan Daya saing &amp; Fleksibilitas"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: INTEGRASI VERTIKAL & OUTSOURCING ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">6.8–6.9</span>
+      <div>
+        <div class="section-title">Integrasi Vertikal &amp; Outsourcing (Alihdaya)</div>
+        <div class="section-eng">Vertical Integration &amp; Outsourcing Strategies</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub5a">
+        <div class="subsection-header" onclick="toggleSub('sub5a')">
+          ⛓️ Integrasi Vertikal — Dari Hulu ke Hilir (6.8) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Integrasi vertikal</strong> = strategi membangun mata rantai operasi (dan produksi) menyeluruh — dari hulu (sumber bahan baku) ke hilir (penjualan langsung ke pelanggan akhir).
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              Perusahaan dengan integrasi vertikal penuh memiliki kemampuan: <em>mengamankan suplai bahan baku secara internal → memproses dalam produksi → melakukan pengemasan → distribusi melalui divisi internal → memiliki outlet penjualan sendiri.</em>
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Dua arah integrasi:</strong>
+              <br>→ <strong>Ke Belakang (Backward):</strong> memperluas ke aktivitas pemasok — mengamankan suplai bahan baku
+              <br>→ <strong>Ke Depan (Forward):</strong> memperluas ke aktivitas distribusi/pengecer — langsung berinteraksi dengan pelanggan
+            </span></li>
+          </ul>
+          <div class="br-grid">
+            <div class="br-col bc-benefit">
+              <div class="bc-title">✅ Keunggulan Integrasi Vertikal</div>
+              <ul>
+                <li>Kontrol penuh atas kualitas input dan output</li>
+                <li>Mengurangi ketergantungan pada pemasok eksternal</li>
+                <li>Potensi pengurangan biaya jangka panjang</li>
+                <li>Akses langsung ke pelanggan akhir</li>
+                <li>Proteksi pengetahuan dan teknologi proprietary</li>
+              </ul>
+            </div>
+            <div class="br-col bc-risk">
+              <div class="bc-title">⚠️ Kelemahan Integrasi Vertikal</div>
+              <ul>
+                <li>Investasi modal yang sangat besar</li>
+                <li>Kompleksitas manajemen meningkat drastis</li>
+                <li>Kehilangan fleksibilitas dan kecepatan adaptasi</li>
+                <li>Risiko terkena dampak jika satu tahap bermasalah</li>
+                <li>Mungkin tidak seefisien spesialis di tiap tahap</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5b">
+        <div class="subsection-header" onclick="toggleSub('sub5b')">
+          📤 Outsourcing (Alihdaya) — Merampingkan Scope Operasional (6.9) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d6"></span><span>
+              <strong>Outsourcing</strong> = keputusan manajemen untuk <em>meninggalkan beberapa mata rantai nilai</em> dan melimpahkannya ke pihak ketiga eksternal yang lebih efisien. Kebalikan dari integrasi vertikal.
+            </span></li>
+            <li class="point"><span class="dot d6"></span><span>
+              Manajemen dapat fokus pada <em>menjaga image dan merek serta pemasaran yang efektif</em> — sedangkan aktivitas non-inti dijalankan oleh spesialis eksternal.
+            </span></li>
+          </ul>
+          <p style="font-size:0.82rem;color:var(--muted);margin: 0.8rem 0 0.5rem;"><strong style="color:var(--text);">Outsourcing menjadi keunggulan kompetitif jika:</strong></p>
+          <div class="step-flow">
+            <div class="step-item" style="border-left-color:rgba(244,114,182,0.4);"><div class="step-num" style="background:var(--accent7);color:#000;">a</div><div>Aktivitas bisa dilakukan <strong>lebih baik atau lebih murah</strong> oleh pihak luar yang memiliki spesialisasi</div></div>
+            <div class="step-item" style="border-left-color:rgba(244,114,182,0.4);"><div class="step-num" style="background:var(--accent7);color:#000;">b</div><div>Aktivitas yang dialihdayakan <strong>bukan aktivitas krusial</strong> yang berpengaruh pada keunggulan kompetitif berkelanjutan</div></div>
+            <div class="step-item" style="border-left-color:rgba(244,114,182,0.4);"><div class="step-num" style="background:var(--accent7);color:#000;">c</div><div>Outsourcing <strong>merampingkan operasional</strong> — meningkatkan fleksibilitas dan mempercepat pelemparan produk ke pasar</div></div>
+            <div class="step-item" style="border-left-color:rgba(244,114,182,0.4);"><div class="step-num" style="background:var(--accent7);color:#000;">d</div><div>Outsourcing <strong>mengurangi risiko</strong> saat teknologi atau preferensi konsumen berubah dengan cepat</div></div>
+            <div class="step-item" style="border-left-color:rgba(244,114,182,0.4);"><div class="step-num" style="background:var(--accent7);color:#000;">e</div><div>Outsourcing membantu perusahaan <strong>mendiversifikasi keahlian</strong> secara cepat dan efisien</div></div>
+            <div class="step-item" style="border-left-color:rgba(244,114,182,0.4);"><div class="step-num" style="background:var(--accent7);color:#000;">f</div><div>Outsourcing membantu perusahaan <strong>berkonsentrasi pada bisnis inti</strong>, mengoptimalkan sumber daya intinya</div></div>
+          </div>
+          <div class="info-box pink" style="margin-top:0.9rem;">
+            <strong>⚠️ Risiko Terbesar Outsourcing:</strong> Perusahaan berpotensi menghasilkan terlalu banyak aktivitas yang salah (terlalu banyak yang di-outsource), yang pada akhirnya <em>melemahkan kapabilitasnya sendiri</em> — termasuk risiko melemahkan kemampuan inovasi produk karena kompetensi inti ikut ter-outsource.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: ALIANSI STRATEJIK ══ -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <span class="num c7">6.10</span>
+      <div>
+        <div class="section-title">Strategi Aliansi &amp; Kemitraan Stratejik</div>
+        <div class="section-eng">Strategic Alliances &amp; Collaborative Partnerships</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d7"></span><span>
+          <strong>Aliansi stratejik</strong> = kesepakatan formal antara dua atau lebih perusahaan terpisah yang di dalamnya terkandung kolaborasi yang secara stratejik relevan — keduanya sama-sama memberi kontribusi sumber daya, berbagi risiko dan kendali, serta saling bergantung satu sama lain.
+        </span></li>
+        <li class="point"><span class="dot d7"></span><span>
+          Aliansi stratejik menyediakan cara untuk mendapatkan manfaat dari <em>integrasi vertikal, outsourcing, dan merger/akuisisi</em> sekaligus, sambil meminimalkan masalah-masalah yang mungkin timbul dari ketiganya.
+        </span></li>
+        <li class="point"><span class="dot d7"></span><span>
+          <strong>Ruang lingkup aktivitas aliansi:</strong> penjualan, pemasaran, distribusi bersama · kolaborasi mendesain dan memproduksi produk baru · bersama-sama mengembangkan teknologi baru.
+        </span></li>
+      </ul>
+
+      <div class="subsection" id="sub6a">
+        <div class="subsection-header" onclick="toggleSub('sub6a')">
+          ⭐ 5 Ciri yang Membuat Aliansi Disebut 'Stratejik' <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">Lima faktor yang membedakan aliansi <em>stratejik</em> dari kerjasama biasa:</p>
+          <div class="step-flow">
+            <div class="step-item" style="border-left-color:rgba(132,204,22,0.4);"><div class="step-num" style="background:var(--accent8);color:#000;">a</div><div>Aliansi membantu <strong>membangun, mempertahankan, atau meningkatkan kompetensi utama</strong> atau keunggulan kompetitif perusahaan</div></div>
+            <div class="step-item" style="border-left-color:rgba(132,204,22,0.4);"><div class="step-num" style="background:var(--accent8);color:#000;">b</div><div>Aliansi membantu <strong>menghadapi ancaman-ancaman persaingan</strong> yang tidak bisa diatasi sendiri</div></div>
+            <div class="step-item" style="border-left-color:rgba(132,204,22,0.4);"><div class="step-num" style="background:var(--accent8);color:#000;">c</div><div>Aliansi meningkatkan <strong>daya tawar para anggota aliansi</strong> terhadap supplier ataupun pembeli</div></div>
+            <div class="step-item" style="border-left-color:rgba(132,204,22,0.4);"><div class="step-num" style="background:var(--accent8);color:#000;">d</div><div>Aliansi membantu <strong>membuka peluang-peluang pasar baru</strong> yang penting dan belum bisa dicapai sendiri</div></div>
+            <div class="step-item" style="border-left-color:rgba(132,204,22,0.4);"><div class="step-num" style="background:var(--accent8);color:#000;">e</div><div>Aliansi <strong>memperhitungkan risiko yang signifikan</strong> terhadap bisnis perusahaan — bukan sekadar kerjasama operasional kecil</div></div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 5 Ciri Aliansi Stratejik:</strong> <em>"Kompetensi-Ancaman-Daya Tawar-Peluang-Risiko"</em> → <em>"KADPR"</em> → <em>"Kolaborasi Andal Dorong Perusahaan Bertumbuh Relevan"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub6b">
+        <div class="subsection-header" onclick="toggleSub('sub6b')">
+          🏗 4 Aspek Memperkuat Posisi Melalui Aliansi yang Efektif <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d7"></span><span>
+              <strong>(a) Mengapa aliansi stratejik bisa menjadi keunggulan tersendiri</strong> — kolaborasi yang tepat bisa menghasilkan sumber daya gabungan yang lebih kuat dari kapabilitas masing-masing secara terpisah.
+            </span></li>
+            <li class="point"><span class="dot d7"></span><span>
+              <strong>(b) Cara memperoleh manfaat aliansi stratejik</strong> — dengan memilih mitra yang komplementer, menetapkan tujuan yang jelas, dan membangun kepercayaan operasional secara bertahap.
+            </span></li>
+            <li class="point"><span class="dot d7"></span><span>
+              <strong>(c) Kemungkinan kegagalan kemitraan</strong> — karena konflik kepentingan, perbedaan budaya organisasi, atau satu pihak tidak memenuhi komitmen kontribusi sumber daya.
+            </span></li>
+            <li class="point"><span class="dot d7"></span><span>
+              <strong>(d) Bagaimana menciptakan aliansi stratejik yang efektif</strong> — aliansi terbaik selalu <em>selektif</em>, berfokus pada aktivitas-aktivitas penciptaan nilai tertentu, di dalam atau melampaui batasan industri, termasuk saat mencapai manfaat kompetitif spesifik.
+            </span></li>
+          </ul>
+          <div class="info-box lime">
+            <strong>🌟 Catatan Penting:</strong> Aliansi-aliansi bisnis terbaik selalu selektif — <em>berfokus pada aktivitas penciptaan nilai tertentu</em> yang membuat perusahaan lebih mampu membangun kekuatannya dan terus belajar. Aliansi yang terlalu luas atau tanpa fokus cenderung berakhir dengan konflik dan kegagalan.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn6" onclick="markDone(6)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab VI</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);color:#000;">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Bab VI = Melengkapi Strategi Generik (Bab V)</h3>
+          <p>Setelah memilih satu dari lima strategi generik, Bab VI memberikan tujuh "pelengkap" yang memperkuat posisi daya saing: Ofensif · Defensif · Timing · Scope (Horizontal &amp; Vertikal) · Merger/Akuisisi · Outsourcing · Aliansi.</p>
+          <div class="keywords"><span class="kw">3 dimensi tambahan</span><span class="kw">6 pertanyaan kritis</span><span class="kw">OWMVOA</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);color:#fff;">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">Ofensif vs Defensif — Menyerang atau Bertahan?</h3>
+          <p><strong style="color:#f0f0ff;">Ofensif:</strong> Rebut pangsa pasar pesaing, tumbuhkan bisnis lebih cepat, bangun reputasi unggul. <strong style="color:#f0f0ff;">Defensif:</strong> Tutup peluang pesaing masuk, beri sinyal pembalasan. <strong style="color:#f0f0ff;">Blue Ocean:</strong> Ciptakan pasar baru yang belum ada — buat persaingan tidak relevan.</p>
+          <div class="keywords"><span class="kw">ofensif</span><span class="kw">defensif</span><span class="kw">blue ocean strategy</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);color:#fff;">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">Timing — Kapan Bergerak Sama Pentingnya dengan Bagaimana</h3>
+          <p>Pelopor membangun standar dan loyalitas awal tapi menanggung biaya dan risiko tinggi. Pengikut cepat belajar dari kesalahan pelopor. Pengikut belakangan masuk saat pasar matang tapi mungkin terlambat. Pilih berdasarkan kondisi, bukan ego.</p>
+          <div class="keywords"><span class="kw">pelopor</span><span class="kw">pengikut cepat</span><span class="kw">PCL</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent5);color:#000;">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent5);">Merger &amp; Akuisisi — Perluas Scope Horisontal</h3>
+          <p>Lima manfaat: efisiensi, diferensiasi, kurangi persaingan, tingkatkan daya tawar, fleksibilitas. Tapi sering gagal karena: sinergi tidak terwujud, benturan budaya, dan integrasi yang lambat. Kesuksesan M&amp;A bergantung pada eksekusi integrasi pasca-akuisisi.</p>
+          <div class="keywords"><span class="kw">merger</span><span class="kw">akuisisi</span><span class="kw">EDPDF</span><span class="kw">scope horisontal</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent6);color:#000;">5</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent6);">Integrasi Vertikal vs Outsourcing — Dalam atau Luar?</h3>
+          <p><strong style="color:#f0f0ff;">Integrasi Vertikal</strong>: bangun rantai penuh hulu ke hilir — kontrol tinggi tapi investasi besar &amp; kompleksitas tinggi. <strong style="color:#f0f0ff;">Outsourcing</strong>: serahkan non-inti ke spesialis eksternal — efisien tapi risiko melemahkan kapabilitas internal jika berlebihan.</p>
+          <div class="keywords"><span class="kw">backward integration</span><span class="kw">forward integration</span><span class="kw">6 kondisi outsourcing</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent8);color:#000;">6</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent8);">Aliansi Stratejik — Kolaborasi yang Selektif &amp; Bernilai</h3>
+          <p>Aliansi stratejik menawarkan manfaat integrasi vertikal, outsourcing, dan M&amp;A sekaligus — dengan risiko lebih kecil. Kuncinya: <strong style="color:#f0f0ff;">selektif</strong>, fokus pada penciptaan nilai spesifik, membangun kompetensi, dan hubungan yang benar-benar saling menguntungkan.</p>
+          <div class="keywords"><span class="kw">5 ciri stratejik</span><span class="kw">KADPR</span><span class="kw">selektif</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-red">⚔️ Ofensif</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-blue">🛡 Defensif</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-vio">⏱ Timing</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-grn">🔀 M&amp;A</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-cyan">⛓ Integrasi</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-pink">📤 Outsourcing</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-lime">🤝 Aliansi</span>
+      </div>
+      <div class="formula-caption">Tujuh dimensi pelengkap yang memperkuat strategi generik — dipilih sesuai situasi, kondisi industri, dan sumber daya perusahaan</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box amber" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab VI:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">O</strong>fensif atau Defensif dulu, atur <strong style="color:#f0f0ff;">W</strong>aktu (Timing), pertimbangkan <strong style="color:#f0f0ff;">M</strong>erger, pilih <strong style="color:#f0f0ff;">V</strong>ertikal atau <strong style="color:#f0f0ff;">O</strong>utsource, atau <strong style="color:#f0f0ff;">A</strong>liansi saja!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">O-W-M-V-O-A</strong> → <em>"Orang Waras Memang Versatil, Outperform &amp; Aliansi!"</em> — enam pertanyaan kritis yang harus dijawab manajer untuk memperkuat posisi daya saing setelah strategi generik dipilih.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab VI Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 6;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

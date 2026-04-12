@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB IV — Mengevaluasi Sumber Daya, Kapabilitas, dan Daya Saing Perusahaan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #ff6b6b;   /* red/coral — chapter 4 color */
+    --accent2: #4ecdc4;
+    --accent3: #e8c547;
+    --accent4: #58a6ff;
+    --accent5: #a78bfa;
+    --accent6: #4ade80;
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg); color: var(--text);
+    min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.6;
+  }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag {
+    display: inline-block; font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--accent); color: #fff;
+    padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700;
+  }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── PETA KONSEP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); letter-spacing: 0.05em; }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #b83333); color: #fff; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.7rem; }
+  .branch { padding: 0.8rem; border-radius: 10px; font-size: 0.75rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.6rem; font-family: 'DM Mono', monospace; margin-bottom: 0.3rem; opacity: 0.7; }
+  .b1 { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.25); color: var(--accent); }
+  .b2 { background: rgba(78,205,196,0.08);  border-color: rgba(78,205,196,0.25);  color: var(--accent2); }
+  .b3 { background: rgba(232,197,71,0.08);  border-color: rgba(232,197,71,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(88,166,255,0.08);  border-color: rgba(88,166,255,0.25);  color: var(--accent4); }
+  .b5 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent5); }
+  .b6 { background: rgba(74,222,128,0.08);  border-color: rgba(74,222,128,0.25);  color: var(--accent6); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; color: #fff; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent); }
+  .c2 { background: var(--accent2); color: #000 !important; }
+  .c3 { background: var(--accent3); color: #000 !important; }
+  .c4 { background: var(--accent4); }
+  .c5 { background: var(--accent5); }
+  .c6 { background: var(--accent6); color: #000 !important; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7) { transition-delay: 0.28s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1 { background: var(--accent); }
+  .d2 { background: var(--accent2); }
+  .d3 { background: var(--accent3); }
+  .d4 { background: var(--accent4); }
+  .d5 { background: var(--accent5); }
+  .d6 { background: var(--accent6); }
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(255,107,107,0.07); border: 1px solid rgba(255,107,107,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.red   { background: rgba(255,107,107,0.07); border: 1px solid rgba(255,107,107,0.2); }
+  .info-box.teal  { background: rgba(78,205,196,0.07);  border: 1px solid rgba(78,205,196,0.2); }
+  .info-box.gold  { background: rgba(232,197,71,0.07);  border: 1px solid rgba(232,197,71,0.2); }
+  .info-box.blue  { background: rgba(88,166,255,0.07);  border: 1px solid rgba(88,166,255,0.2); }
+  .info-box.purp  { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box.green { background: rgba(74,222,128,0.07);  border: 1px solid rgba(74,222,128,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── 6 PERTANYAAN DIAGNOSTIK ── */
+  .q-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .q-item { display: flex; gap: 0.8rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.7rem 0.9rem; font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; border-left: 3px solid var(--border); }
+  .q-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.05rem; }
+  .q-item strong { color: var(--text); }
+
+  /* ── VRIN TEST CARDS ── */
+  .vrin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 0.7rem; margin-top: 1rem; }
+  .vrin-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.81rem; line-height: 1.5; color: #c8c8e0; }
+  .vrin-card .vc-letter { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; display: block; line-height: 1; margin-bottom: 0.3rem; }
+  .vrin-card .vc-word { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; display: block; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 0.5rem; opacity: 0.7; }
+  .vrin-card .vc-q { font-weight: 600; font-size: 0.83rem; color: var(--text); margin-bottom: 0.25rem; }
+  .vv { border-color: rgba(255,107,107,0.35); } .vv .vc-letter { color: var(--accent); }
+  .vr { border-color: rgba(78,205,196,0.35);  } .vr .vc-letter { color: var(--accent2); }
+  .vi { border-color: rgba(232,197,71,0.35);  } .vi .vc-letter { color: var(--accent3); }
+  .vn { border-color: rgba(88,166,255,0.35);  } .vn .vc-letter { color: var(--accent4); }
+
+  /* ── SWOT GRID ── */
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin-top: 1rem; }
+  .swot-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.22); font-size: 0.81rem; line-height: 1.5; color: #c8c8e0; }
+  .swot-card .sc-header { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; }
+  .swot-card .sc-letter { font-family: 'DM Mono', monospace; font-size: 0.7rem; font-weight: 700; color: #000; padding: 0.2rem 0.45rem; border-radius: 4px; }
+  .swot-card .sc-title { font-weight: 700; font-size: 0.85rem; }
+  .swot-card ul { padding-left: 0; list-style: none; }
+  .swot-card ul li { padding: 0.25rem 0; border-bottom: 1px solid var(--border); font-size: 0.78rem; color: var(--muted); }
+  .swot-card ul li:last-child { border-bottom: none; }
+  .swot-card ul li::before { content: "→ "; color: var(--muted); }
+  .sw-s { border-color: rgba(74,222,128,0.3);  }  .sw-s .sc-letter { background: var(--accent6); }  .sw-s .sc-title { color: var(--accent6); }
+  .sw-w { border-color: rgba(255,107,107,0.3); }  .sw-w .sc-letter { background: var(--accent); }   .sw-w .sc-title { color: var(--accent); }
+  .sw-o { border-color: rgba(88,166,255,0.3);  }  .sw-o .sc-letter { background: var(--accent4); }  .sw-o .sc-title { color: var(--accent4); }
+  .sw-t { border-color: rgba(232,197,71,0.3);  }  .sw-t .sc-letter { background: var(--accent3); color:#000; }  .sw-t .sc-title { color: var(--accent3); }
+
+  /* ── VALUE CHAIN VISUAL ── */
+  .vc-primary { display: flex; gap: 0; margin-top: 1rem; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .vc-act { flex: 1; min-width: 80px; padding: 0.75rem 0.6rem; text-align: center; border-right: 1px solid var(--border); font-size: 0.71rem; line-height: 1.4; position: relative; }
+  .vc-act:last-child { border-right: none; }
+  .vc-act .va-icon { font-size: 1rem; display: block; margin-bottom: 0.25rem; }
+  .vc-act .va-name { font-weight: 700; font-size: 0.73rem; display: block; margin-bottom: 0.15rem; }
+  .vc-act .va-desc { color: var(--muted); font-size: 0.65rem; }
+  .va-1 { background: rgba(255,107,107,0.07); } .va-1 .va-name { color: var(--accent); }
+  .va-2 { background: rgba(78,205,196,0.07);  } .va-2 .va-name { color: var(--accent2); }
+  .va-3 { background: rgba(232,197,71,0.07);  } .va-3 .va-name { color: var(--accent3); }
+  .va-4 { background: rgba(88,166,255,0.07);  } .va-4 .va-name { color: var(--accent4); }
+  .va-5 { background: rgba(167,139,250,0.07); } .va-5 .va-name { color: var(--accent5); }
+
+  .vc-support { background: rgba(0,0,0,0.2); border: 1px solid var(--border); border-radius: 9px; padding: 0.75rem 1rem; margin-top: 0.6rem; font-size: 0.79rem; color: #c8c8e0; }
+  .vc-support .vs-title { font-weight: 700; color: var(--muted); font-size: 0.75rem; font-family: 'DM Mono', monospace; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  .vc-support .vs-items { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .vs-item { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-radius: 6px; padding: 0.3rem 0.65rem; font-size: 0.73rem; color: var(--muted); }
+
+  /* ── COMPETITIVE STRENGTH TABLE ── */
+  .cs-table { width: 100%; border-collapse: collapse; margin-top: 0.9rem; font-size: 0.81rem; }
+  .cs-table th { padding: 0.6rem 0.8rem; text-align: left; font-weight: 700; font-size: 0.75rem; border-bottom: 2px solid var(--border); color: var(--muted); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.06em; }
+  .cs-table td { padding: 0.55rem 0.8rem; border-bottom: 1px solid var(--border); color: #c8c8e0; vertical-align: top; line-height: 1.45; }
+  .cs-table tr:last-child td { border-bottom: none; }
+  .cs-table .factor { font-weight: 600; color: var(--text); font-size: 0.82rem; }
+  .cs-table .score-strong { color: var(--accent6); font-weight: 700; font-family: 'DM Mono', monospace; }
+  .cs-table .score-weak { color: var(--accent); font-weight: 700; font-family: 'DM Mono', monospace; }
+
+  /* ── STEP FLOW ── */
+  .step-flow { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .step-item { display: flex; gap: 0.9rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.75rem 0.9rem; border-left: 3px solid transparent; font-size: 0.84rem; line-height: 1.5; color: #c8c8e0; }
+  .step-num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.05rem; }
+  .step-item strong { color: var(--text); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+  .done-btn.checked { border-color: var(--accent2); color: var(--accent2); background: rgba(78,205,196,0.07); }
+
+  /* ── ULTIMATE OUTLINE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(255,107,107,0.07), rgba(232,197,71,0.04)); border: 1px solid rgba(255,107,107,0.25); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #b83333); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; color: #000; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; font-size: 0.88rem; line-height: 1.7; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.8rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.78rem; }
+  .ft-red  { background: rgba(255,107,107,0.15); color: var(--accent); }
+  .ft-teal { background: rgba(78,205,196,0.15);  color: var(--accent2); }
+  .ft-gold { background: rgba(232,197,71,0.15);  color: var(--accent3); }
+  .ft-blue { background: rgba(88,166,255,0.15);  color: var(--accent4); }
+  .ft-grn  { background: rgba(74,222,128,0.15);  color: var(--accent6); }
+  .formula-op { color: var(--muted); font-size: 1.1rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB IV — <span>Mengevaluasi</span><br>Lingkungan Internal</h1>
+    <p class="subtitle">Sumber Daya · Kapabilitas · VRIN · SWOT · Value Chain · Daya Saing</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 6 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab IV</h2>
+    <div class="mind-center">🏭 Lingkungan Internal Perusahaan</div>
+    <div class="mind-branches">
+      <div class="branch b1">
+        <div class="blabel">4.3</div>
+        Seberapa Baik Strategi Berjalan?<br><small style="opacity:0.7">2 indikator kunci kinerja</small>
+      </div>
+      <div class="branch b2">
+        <div class="blabel">4.4</div>
+        Sumber Daya &amp; Kapabilitas<br><small style="opacity:0.7">VRIN Test — 4 pertanyaan kompetitif</small>
+      </div>
+      <div class="branch b3">
+        <div class="blabel">4.5</div>
+        Analisis SWOT<br><small style="opacity:0.7">Kekuatan · Kelemahan · Peluang · Ancaman</small>
+      </div>
+      <div class="branch b4">
+        <div class="blabel">4.6</div>
+        Value Chain &amp; Benchmarking<br><small style="opacity:0.7">Mata rantai nilai · Perbandingan biaya</small>
+      </div>
+      <div class="branch b5">
+        <div class="blabel">4.7</div>
+        Competitive Strength Assessment<br><small style="opacity:0.7">Kuat atau lemah vs pesaing?</small>
+      </div>
+      <div class="branch b6">
+        <div class="blabel">4.8</div>
+        Isu-Isu Stratejik<br><small style="opacity:0.7">Prioritas perhatian manajer</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: PENDAHULUAN & 6 PERTANYAAN DIAGNOSTIK ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">4.1–4.2</span>
+      <div>
+        <div class="section-title">Pendahuluan: 6 Pertanyaan Diagnostik Internal</div>
+        <div class="section-eng">Introduction: Six Internal Diagnostic Questions</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:0.9rem;">Bab IV melengkapi Bab III. Jika Bab III membahas <em>luar</em> (industri &amp; kompetisi), Bab IV membahas <em>dalam</em> — sumber daya, kapabilitas, dan aktivitas nilai perusahaan. Enam pertanyaan diagnostik yang harus dijawab:</p>
+      <div class="q-list">
+        <div class="q-item" style="border-left-color:rgba(255,107,107,0.5);">
+          <div class="q-num" style="background:var(--accent);">1</div>
+          <div><strong>Seberapa baik strategi perusahaan saat ini berjalan?</strong> — Apakah tujuan finansial dan stratejik tercapai? Apakah kinerja di atas rata-rata industri?</div>
+        </div>
+        <div class="q-item" style="border-left-color:rgba(78,205,196,0.5);">
+          <div class="q-num" style="background:var(--accent2); color:#000;">2</div>
+          <div><strong>Apa kapabilitas dan sumber daya paling penting dan kompetitif?</strong> — Aset kompetitif apa yang menentukan kekuatan daya saing perusahaan di pasar?</div>
+        </div>
+        <div class="q-item" style="border-left-color:rgba(232,197,71,0.5);">
+          <div class="q-num" style="background:var(--accent3); color:#000;">3</div>
+          <div><strong>Apakah perusahaan mampu memanfaatkan peluang dan mengatasi ancaman?</strong> — Analisis SWOT lengkap atas situasi keseluruhan perusahaan</div>
+        </div>
+        <div class="q-item" style="border-left-color:rgba(88,166,255,0.5);">
+          <div class="q-num" style="background:var(--accent4);">4</div>
+          <div><strong>Apakah biaya dan harga cukup bersaing vs pesaing utama?</strong> — Apakah proposisi nilai yang ditawarkan menarik bagi pelanggan? (Value Chain + Benchmarking)</div>
+        </div>
+        <div class="q-item" style="border-left-color:rgba(167,139,250,0.5);">
+          <div class="q-num" style="background:var(--accent5);">5</div>
+          <div><strong>Apakah perusahaan lebih kuat atau lebih lemah dari pesaing utama?</strong> — Competitive Strength Assessment secara menyeluruh</div>
+        </div>
+        <div class="q-item" style="border-left-color:rgba(74,222,128,0.5);">
+          <div class="q-num" style="background:var(--accent6); color:#000;">6</div>
+          <div><strong>Isu-isu stratejik apa yang memerlukan perhatian besar manajer?</strong> — Kesimpulan: agenda tindakan prioritas yang harus segera ditangani</div>
+        </div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 6 Pertanyaan:</strong> <em>"Strategi-Sumber Daya-SWOT-Biaya-Kekuatan-Isu"</em> → <em>"SSSB-KI"</em> → <em>"Strategi Solid Selalu Butuh Keunggulan Internal"</em></span>
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: STRATEGI BERJALAN + SUMBER DAYA & VRIN ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c1">4.3–4.4</span>
+      <div>
+        <div class="section-title">Menilai Kinerja Strategi &amp; Kekuatan Sumber Daya</div>
+        <div class="section-eng">Evaluating Strategy Performance &amp; VRIN Resource Test</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub2a">
+        <div class="subsection-header" onclick="toggleSub('sub2a')">
+          📊 Dua Indikator Kunci: Seberapa Baik Strategi Berjalan? (4.3) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d1"></span><span>
+              Evaluasi kinerja strategi tidak hanya soal tindakan terbaru (menurunkan harga, memasuki pasar baru, merger), tetapi juga soal <strong>apakah strategi fungsional</strong> (R&amp;D, produksi, pemasaran, keuangan, SDM, IT) mengokohkan strategi perusahaan secara keseluruhan.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Indikator (a):</strong> Apakah perusahaan <em>mencapai tujuan-tujuan finansial serta stratejik</em> yang telah ditetapkan sebelumnya?
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Indikator (b):</strong> Apakah perusahaan memiliki <em>kinerja di atas rata-rata</em> perusahaan sejenis di industri yang sama?
+            </span></li>
+          </ul>
+          <div class="info-box red">
+            <strong>💡 Prinsip Kunci:</strong> Tanda paling kuat bahwa strategi berjalan baik adalah <em>kombinasi</em> dari pencapaian tujuan yang ditetapkan DAN kinerja yang melampaui rata-rata industri — bukan hanya salah satunya.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub2b">
+        <div class="subsection-header" onclick="toggleSub('sub2b')">
+          🔬 VRIN Test — 4 Pertanyaan untuk Menguji Kekuatan Kompetitif Sumber Daya (4.4) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;">Tidak semua sumber daya dan kapabilitas sama nilainya. Empat pertanyaan VRIN menguji apakah sebuah sumber daya benar-benar mampu memberi keunggulan kompetitif yang berkelanjutan:</p>
+          <div class="vrin-grid">
+            <div class="vrin-card vv">
+              <span class="vc-letter">V</span>
+              <span class="vc-word">Valuable</span>
+              <div class="vc-q">Apakah sumber daya ini secara kompetitif bernilai?</div>
+              <div style="font-size:0.76rem;color:var(--muted);">Apakah ia membantu perusahaan memanfaatkan peluang atau mengatasi ancaman?</div>
+            </div>
+            <div class="vrin-card vr">
+              <span class="vc-letter">R</span>
+              <span class="vc-word">Rare</span>
+              <div class="vc-q">Apakah sumber daya ini langka?</div>
+              <div style="font-size:0.76rem;color:var(--muted);">Apakah sumber daya itu tidak dimiliki oleh para pesaing?</div>
+            </div>
+            <div class="vrin-card vi">
+              <span class="vc-letter">I</span>
+              <span class="vc-word">Inimitable</span>
+              <div class="vc-q">Apakah sumber daya ini sulit untuk ditiru atau dijiplak?</div>
+              <div style="font-size:0.76rem;color:var(--muted);">Apakah pesaing akan kesulitan mereplikasinya — karena kompleksitas, sejarah, atau budaya unik?</div>
+            </div>
+            <div class="vrin-card vn">
+              <span class="vc-letter">N</span>
+              <span class="vc-word">Non-substitutable</span>
+              <div class="vc-q">Apakah sumber daya ini dapat digantikan?</div>
+              <div style="font-size:0.76rem;color:var(--muted);">Apakah di luar sana ada sumber daya pengganti yang baik yang dapat dimiliki pesaing?</div>
+            </div>
+          </div>
+          <div class="info-box teal" style="margin-top:1rem;">
+            <strong>🎯 Implikasi VRIN:</strong> Sumber daya yang memenuhi <em>keempat kriteria VRIN</em> adalah fondasi keunggulan kompetitif yang berkelanjutan (<em>sustainable competitive advantage</em>). Jika hanya memenuhi sebagian, keunggulan tersebut bersifat sementara. Catatan: rangkaian sumber daya bersama kadang melampaui nilai komponen individunya masing-masing.
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik VRIN:</strong> <em>"Valuable – Rare – Inimitable – Non-substitutable"</em> → <em>"VRIN"</em> → <em>"Visi yang Rapi dan Inovatif, tak bisa Niru!"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: ANALISIS SWOT ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c3">4.5</span>
+      <div>
+        <div class="section-title">Analisis SWOT — Situasi Menyeluruh Perusahaan</div>
+        <div class="section-eng">SWOT Analysis — Full Company Situation Diagnosis</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">SWOT memberikan dasar bagi proses penyusunan strategi yang memberdayakan semaksimal mungkin sumber daya, mengatasi kelemahan, menangkap peluang, dan bertahan dari ancaman. Lima analisis identifikasi:</p>
+
+      <div class="swot-grid">
+        <div class="swot-card sw-s">
+          <div class="sc-header">
+            <span class="sc-letter">S</span>
+            <span class="sc-title">Kekuatan (Strengths)</span>
+          </div>
+          <ul>
+            <li>Kompetensi inti yang unggul dari pesaing</li>
+            <li>Sumber daya kompetitif yang berharga (VRIN)</li>
+            <li>Posisi pasar yang kuat</li>
+            <li>Kapabilitas yang sulit ditiru pesaing</li>
+            <li>Aliansi strategis yang menguntungkan</li>
+          </ul>
+        </div>
+        <div class="swot-card sw-w">
+          <div class="sc-header">
+            <span class="sc-letter">W</span>
+            <span class="sc-title">Kelemahan (Weaknesses)</span>
+          </div>
+          <ul>
+            <li>Defisiensi kompetensi atau sumber daya kritis</li>
+            <li>Hambatan kompetitif internal yang membatasi kinerja</li>
+            <li>Biaya operasional lebih tinggi dari pesaing</li>
+            <li>Kapabilitas yang tertinggal dari standar industri</li>
+            <li>Lini produk terlalu sempit dibanding pesaing</li>
+          </ul>
+        </div>
+        <div class="swot-card sw-o">
+          <div class="sc-header">
+            <span class="sc-letter">O</span>
+            <span class="sc-title">Peluang (Opportunities)</span>
+          </div>
+          <ul>
+            <li>Segmen pasar baru yang belum tersentuh</li>
+            <li>Memasuki pasar baru (domestik/luar negeri)</li>
+            <li>Perubahan regulasi yang menguntungkan</li>
+            <li>Pertumbuhan permintaan baru di industri</li>
+            <li>Teknologi baru yang dapat dimanfaatkan</li>
+          </ul>
+        </div>
+        <div class="swot-card sw-t">
+          <div class="sc-header">
+            <span class="sc-letter">T</span>
+            <span class="sc-title">Ancaman (Threats)</span>
+          </div>
+          <ul>
+            <li>Pesaing baru dengan biaya lebih rendah</li>
+            <li>Perubahan teknologi yang mendisrupsi bisnis</li>
+            <li>Perubahan preferensi/gaya hidup konsumen</li>
+            <li>Regulasi baru yang merugikan industri</li>
+            <li>Kondisi ekonomi yang memburuk</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="info-box green" style="margin-top:1rem;">
+        <strong>🎯 Kesimpulan SWOT:</strong> Analisa SWOT harus diterjemahkan menjadi <em>serangkaian tindakan konkret</em> untuk memperbaiki strategi dan prospek bisnis. Kekuatan internal perusahaan seharusnya menjadi <strong>basis strategi</strong> — andalkan aset kompetitif terbaik untuk menarik pelanggan dan memenangkan persaingan.
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>SWOT bukan sekadar daftar!</strong> Nilai SWOT ada pada <em>persilangan</em>: S×O = strategi agresif, S×T = strategi defensif, W×O = strategi perbaikan diri, W×T = strategi bertahan. SWOT harus berakhir pada <em>keputusan stratejik yang konkret</em>.</span>
+      </div>
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: VALUE CHAIN & BENCHMARKING ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c4">4.6</span>
+      <div>
+        <div class="section-title">Mata Rantai Nilai &amp; Benchmarking</div>
+        <div class="section-eng">Value Chain Analysis &amp; Benchmarking</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub4a">
+        <div class="subsection-header" onclick="toggleSub('sub4a')">
+          ⛓️ Konsep Mata Rantai Nilai (Value Chain) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;">Value chain menggambarkan seluruh rangkaian aktivitas perusahaan yang menciptakan nilai bagi pelanggan. Aktivitas <strong>primer</strong> (langsung menciptakan nilai):</p>
+          <div class="vc-primary">
+            <div class="vc-act va-1">
+              <span class="va-icon">📦</span>
+              <span class="va-name">Inbound Logistics</span>
+              <span class="va-desc">Penerimaan, penyimpanan, manajemen bahan baku</span>
+            </div>
+            <div class="vc-act va-2">
+              <span class="va-icon">⚙️</span>
+              <span class="va-name">Operasi</span>
+              <span class="va-desc">Produksi, manufaktur, konversi input → output</span>
+            </div>
+            <div class="vc-act va-3">
+              <span class="va-icon">🚛</span>
+              <span class="va-name">Outbound Logistics</span>
+              <span class="va-desc">Distribusi, pengiriman produk ke pelanggan</span>
+            </div>
+            <div class="vc-act va-4">
+              <span class="va-icon">📣</span>
+              <span class="va-name">Pemasaran &amp; Penjualan</span>
+              <span class="va-desc">Promosi, harga, distribusi, penjualan</span>
+            </div>
+            <div class="vc-act va-5">
+              <span class="va-icon">🛠️</span>
+              <span class="va-name">Layanan</span>
+              <span class="va-desc">After-sales, dukungan pelanggan, garansi</span>
+            </div>
+          </div>
+
+          <div class="vc-support" style="margin-top:0.6rem;">
+            <div class="vs-title">⬆ Aktivitas Pendukung (Support Activities)</div>
+            <div class="vs-items">
+              <span class="vs-item">🏗️ Infrastruktur Perusahaan</span>
+              <span class="vs-item">👥 Manajemen SDM</span>
+              <span class="vs-item">🔬 Penelitian &amp; Pengembangan (R&amp;D)</span>
+              <span class="vs-item">🛒 Pengadaan (Procurement)</span>
+              <span class="vs-item">💻 Teknologi Informasi</span>
+            </div>
+          </div>
+          <div class="info-box blue" style="margin-top:0.9rem;">
+            <strong>🌐 Sistem Mata Rantai Nilai untuk Keseluruhan Industri:</strong> Value chain perusahaan terhubung ke value chain pemasok (hulu) dan distributor/pengecer (hilir). Posisi biaya dan nilai relatif perusahaan terhadap pesaing ditentukan oleh bagaimana keseluruhan sistem ini bekerja — bukan hanya aktivitas internal saja.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4b">
+        <div class="subsection-header" onclick="toggleSub('sub4b')">
+          📏 Benchmarking — Alat Menilai Biaya &amp; Efektivitas <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Benchmarking</strong> adalah proses membandingkan biaya dan efektivitas aktivitas-aktivitas value chain perusahaan dengan biaya dan cara terbaik yang dilakukan oleh pesaing atau perusahaan berkelas dunia di industri lain.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Prinsip utama:</strong> Semakin tinggi biaya perusahaan dibanding pesaing terdekat → daya saing semakin rapuh. Sebaliknya, semakin besar nilai yang ditawarkan → semakin menguntungkan dan berkelanjutan.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Tiga pilihan stratejik untuk memperbaiki masalah biaya/efektivitas:</strong>
+              <br>→ Renegosiasi dengan pemasok untuk mendapatkan harga lebih baik
+              <br>→ Mengintegrasikan aktivitas secara vertikal (insourcing) atau menggunakan outsourcing yang lebih efisien
+              <br>→ Mengubah model distribusi / logistik untuk mengurangi biaya hilir
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Tujuan akhir:</strong> Menjalankan aktivitas value chain dengan cara yang memberi perusahaan kemampuan untuk <em>mengungguli pesaing melalui diferensiasi</em> ATAU <em>mengalahkan mereka dari sisi biaya</em>.
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Analogi Benchmarking:</strong> Seperti atlet yang menonton rekaman dirinya dan membandingkan dengan juara dunia — bukan untuk meniru, tapi untuk menemukan <em>celah yang harus diperbaiki</em> agar bisa bersaing di level tertinggi.</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: COMPETITIVE STRENGTH ASSESSMENT ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">4.7</span>
+      <div>
+        <div class="section-title">Competitive Strength Assessment — Kuat atau Lemah?</div>
+        <div class="section-eng">Competitive Strength Assessment vs Rivals</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d5"></span><span>
+          Analisis kapabilitas, sumber daya, value chain, dan benchmarking bersama-sama mengungkap apakah perusahaan memiliki <strong>keunggulan kompetitif atau tidak</strong> dibandingkan pesaingnya.
+        </span></li>
+        <li class="point"><span class="dot d5"></span><span>
+          <strong>Prinsip penting:</strong> Rangkaian sumber daya terkadang dapat melampaui empat pengujian kekuatan kompetitif sumber daya bahkan saat satu komponen rangkaian sumber daya individu (satu jenis sumber daya saja) tidak dapat melampauinya — <em>sinergitas sumber daya</em> adalah kunci.
+        </span></li>
+        <li class="point"><span class="dot d5"></span><span>
+          <strong>Assessment yang menyeluruh</strong> diperlukan karena keunggulan kompetitif di satu komponen dapat menjadi tidak ada artinya bila komponen-komponen lainnya sama sekali tidak memiliki keunggulan kompetitif.
+        </span></li>
+      </ul>
+
+      <p style="font-size:0.82rem;color:var(--muted);margin: 0.9rem 0 0.5rem;">Dua pertanyaan kunci dalam Competitive Strength Assessment:</p>
+      <div class="step-flow">
+        <div class="step-item" style="border-left-color:rgba(167,139,250,0.4);">
+          <div class="step-num" style="background:var(--accent5);">1</div>
+          <div><strong>Bagaimana perusahaan merangking dirinya terhadap pesaing</strong> dalam setiap faktor penting yang menentukan keberhasilan di pasar? — Penilaian per faktor, bukan keseluruhan.</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(167,139,250,0.4);">
+          <div class="step-num" style="background:var(--accent5);">2</div>
+          <div><strong>Dengan memperhatikan semua hal, apakah perusahaan memiliki keunggulan kompetitif yang telak, atau sebaliknya, melawan pesaingnya?</strong> — Penilaian holistik atas posisi kompetitif keseluruhan.</div>
+        </div>
+      </div>
+
+      <p style="font-size:0.82rem;color:var(--muted);margin: 0.9rem 0 0.5rem;">Contoh ilustratif faktor yang dinilai dalam assessment:</p>
+      <table class="cs-table">
+        <thead>
+          <tr>
+            <th>Faktor Penilaian</th>
+            <th>Bobot</th>
+            <th>Posisi Kita</th>
+            <th>Interpretasi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="factor">Kualitas produk / layanan</td>
+            <td style="color:var(--muted);font-family:'DM Mono',monospace;font-size:0.78rem;">Tinggi</td>
+            <td class="score-strong">KUAT ✓</td>
+            <td>Diferensiasi yang sulit ditiru pesaing</td>
+          </tr>
+          <tr>
+            <td class="factor">Posisi biaya relatif</td>
+            <td style="color:var(--muted);font-family:'DM Mono',monospace;font-size:0.78rem;">Tinggi</td>
+            <td class="score-weak">LEMAH ✗</td>
+            <td>Perlu efisiensi value chain segera</td>
+          </tr>
+          <tr>
+            <td class="factor">Kekuatan merek / reputasi</td>
+            <td style="color:var(--muted);font-family:'DM Mono',monospace;font-size:0.78rem;">Sedang</td>
+            <td class="score-strong">KUAT ✓</td>
+            <td>Aset merek bernilai tinggi di pasar</td>
+          </tr>
+          <tr>
+            <td class="factor">Kapabilitas inovasi / R&amp;D</td>
+            <td style="color:var(--muted);font-family:'DM Mono',monospace;font-size:0.78rem;">Sedang</td>
+            <td class="score-weak">LEMAH ✗</td>
+            <td>Investasi R&amp;D perlu ditingkatkan</td>
+          </tr>
+          <tr>
+            <td class="factor">Jaringan distribusi</td>
+            <td style="color:var(--muted);font-family:'DM Mono',monospace;font-size:0.78rem;">Tinggi</td>
+            <td class="score-strong">KUAT ✓</td>
+            <td>Jangkauan pasar lebih luas dari pesaing</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="info-box purp" style="margin-top:0.9rem;">
+        <strong>📌 Implikasi Stratejik CSA:</strong> Peringkat yang tersaji menunjukkan di mana perusahaan paling kuat dan paling lemah. Faktor terkuat = <em>basis strategi yang harus dieksploitasi</em>. Faktor terlemah = <em>prioritas perbaikan</em> atau area yang membutuhkan aliansi strategis untuk menutupi kekurangan.
+      </div>
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: ISU-ISU STRATEJIK ══ -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <span class="num c6">4.8</span>
+      <div>
+        <div class="section-title">Isu-Isu Stratejik yang Perlu Perhatian Utama Manajer</div>
+        <div class="section-eng">Strategic Issues Requiring Priority Management Attention</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d6"></span><span>
+          Bab IV ditutup dengan <strong>penutup analitis</strong>: menyusun daftar isu-isu dan permasalahan yang memerlukan perhatian ekstra dari manajer — agenda prioritas tindakan stratejik.
+        </span></li>
+        <li class="point"><span class="dot d6"></span><span>
+          <strong>Panduan pertanyaan yang harus dijawab untuk menyusun agenda isu:</strong>
+        </span></li>
+      </ul>
+      <div class="step-flow" style="margin-top:0.6rem;">
+        <div class="step-item" style="border-left-color:rgba(74,222,128,0.4);">
+          <div class="step-num" style="background:var(--accent6); color:#000;">a</div>
+          <div><strong>Tantangan stratejik &amp; daya saing apa yang sedang dihadapi perusahaan saat ini?</strong></div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(74,222,128,0.4);">
+          <div class="step-num" style="background:var(--accent6); color:#000;">b</div>
+          <div><strong>Permasalahan keunggulan mana yang perlu segera diperbaiki atau disikapiA</strong> — celah antara kekuatan aktual dengan yang dibutuhkan?</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(74,222,128,0.4);">
+          <div class="step-num" style="background:var(--accent6); color:#000;">c</div>
+          <div><strong>Hambatan apa saja yang menghadang proses perbaikan posisi daya saing</strong> di pasar yang harus diatasi?</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(74,222,128,0.4);">
+          <div class="step-num" style="background:var(--accent6); color:#000;">d</div>
+          <div><strong>Masalah-masalah spesifik apa yang perlu perhatian ekstra dan segera ditindak-lanjuti</strong> oleh para manajer perusahaan?</div>
+        </div>
+      </div>
+      <div class="info-box green" style="margin-top:0.9rem;">
+        <strong>✅ Output Akhir Bab IV:</strong> Setelah menjawab keenam pertanyaan diagnostik internal, manajer memiliki <em>pemahaman menyeluruh atas situasi internal perusahaan</em> dan daftar agenda tindakan prioritas yang harus ditangani. Ini menjadi dasar untuk Bab V — memilih strategi kompetitif yang tepat.
+      </div>
+      <button class="done-btn" id="btn6" onclick="markDone(6)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab IV</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Bab IV = Cermin Internal — Pasangan Bab III</h3>
+          <p>Bab III melihat ke luar (industri), Bab IV melihat ke dalam (sumber daya &amp; kapabilitas). Bersama-sama keduanya menjawab pertanyaan sentral: <strong style="color:#f0f0ff;">"Seperti apakah situasi perusahaan kita saat ini?"</strong> — lengkap dari dua sisi.</p>
+          <div class="keywords"><span class="kw">internal vs eksternal</span><span class="kw">pasangan Bab III</span><span class="kw">6 pertanyaan diagnostik</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2); color:#000;">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">Kinerja Strategi: 2 Indikator yang Tidak Bisa Dipilih Salah Satu</h3>
+          <p>Strategi berjalan baik jika <strong style="color:#f0f0ff;">tujuan tercapai</strong> DAN <strong style="color:#f0f0ff;">kinerja di atas rata-rata industri</strong>. Satu tanpa yang lain tidak cukup — strategi yang menghasilkan angka tapi kalah dari pesaing tetap perlu dievaluasi.</p>
+          <div class="keywords"><span class="kw">capai tujuan</span><span class="kw">above-average performance</span><span class="kw">2 indikator</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3); color:#000;">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">VRIN Test — Apakah Sumber Dayamu Benar-Benar Unggul?</h3>
+          <p>Empat kriteria: <strong style="color:#f0f0ff;">Valuable · Rare · Inimitable · Non-substitutable</strong>. Hanya sumber daya yang memenuhi keempat kriteria ini yang menjadi fondasi keunggulan kompetitif yang berkelanjutan. Kombinasi sumber daya bisa lebih kuat dari satu sumber daya saja.</p>
+          <div class="keywords"><span class="kw">VRIN</span><span class="kw">sustainable competitive advantage</span><span class="kw">kombinasi sumber daya</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">SWOT — Dari Daftar Menjadi Tindakan Stratejik</h3>
+          <p>SWOT bukan sekadar daftar empat kotak. Kekuatan harus jadi <strong style="color:#f0f0ff;">basis strategi</strong>. Persilangan S×O, S×T, W×O, W×T menghasilkan pilihan stratejik yang konkret. Kekuatan internal = senjata untuk menarik pelanggan dan memenangkan persaingan.</p>
+          <div class="keywords"><span class="kw">SWOT</span><span class="kw">S×O W×T</span><span class="kw">basis strategi = kekuatan</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent5);">5</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent5);">Value Chain + Benchmarking — Di Mana Biaya Bocor?</h3>
+          <p>Setiap aktivitas (inbound → operasi → outbound → marketing → layanan) + aktivitas pendukung memiliki struktur biaya. <strong style="color:#f0f0ff;">Benchmarking</strong> membandingkannya dengan pesaing terbaik untuk menemukan di mana biaya bocor dan di mana nilai bisa ditingkatkan.</p>
+          <div class="keywords"><span class="kw">value chain primer</span><span class="kw">value chain pendukung</span><span class="kw">benchmarking</span></div>
+        </div>
+      </div>
+
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent6); color:#000;">6</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent6);">CSA + Agenda Isu — Dari Analisis ke Tindakan</h3>
+          <p><strong style="color:#f0f0ff;">Competitive Strength Assessment</strong> merangking posisi per faktor vs pesaing. Hasilnya menentukan mana yang dieksploitasi (faktor terkuat) dan mana yang diperbaiki (faktor terlemah). Ditutup dengan <strong style="color:#f0f0ff;">daftar isu prioritas</strong> yang harus segera ditindaklanjuti manajer.</p>
+          <div class="keywords"><span class="kw">CSA ranking</span><span class="kw">eksploitasi kekuatan</span><span class="kw">agenda prioritas</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-red">VRIN Test</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-gold">SWOT</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-blue">Value Chain + Benchmarking</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-teal">CSA</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-grn">Agenda Stratejik</span>
+      </div>
+      <div class="formula-caption">Alur analisis internal lengkap — dari menguji sumber daya hingga agenda tindakan prioritas untuk manajer</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box red" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab IV:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">K</strong>inerja strategi 2 indikator, <strong style="color:#f0f0ff;">V</strong>RIN test sumber daya, <strong style="color:#f0f0ff;">S</strong>WOT situasi menyeluruh, <strong style="color:#f0f0ff;">V</strong>alue Chain &amp; Benchmarking, <strong style="color:#f0f0ff;">A</strong>ssessment kekuatan bersaing, lalu buat <strong style="color:#f0f0ff;">A</strong>genda prioritas!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">K-V-S-V-A-A</strong> → <em>"Karena Visi Selalu Vital, Analisis &amp; Aksi!"</em> — enam alat analisis internal dari kinerja hingga agenda tindakan.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab IV Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 6;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) {
+      btn.textContent = '✔  Sudah dipelajari!';
+      btn.classList.add('checked');
+    } else {
+      btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari';
+      btn.classList.remove('checked');
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    const pct = (count / totalSections) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB V — Lima Strategi Kompetitif Generik</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #a78bfa;   /* purple — chapter 5 color */
+    --accent2: #f59e0b;   /* amber */
+    --accent3: #38bdf8;   /* sky blue */
+    --accent4: #34d399;   /* emerald */
+    --accent5: #fb923c;   /* orange */
+    --accent6: #f472b6;   /* pink */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── MIND MAP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #7c3aed); color: #fff; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.7rem; }
+  .branch { padding: 0.8rem; border-radius: 10px; font-size: 0.75rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.6rem; font-family: 'DM Mono', monospace; margin-bottom: 0.3rem; opacity: 0.7; }
+  .b1 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent); }
+  .b2 { background: rgba(245,158,11,0.08);  border-color: rgba(245,158,11,0.25);  color: var(--accent2); }
+  .b3 { background: rgba(56,189,248,0.08);  border-color: rgba(56,189,248,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25);  color: var(--accent4); }
+  .b5 { background: rgba(251,146,60,0.08);  border-color: rgba(251,146,60,0.25);  color: var(--accent5); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; color: #fff; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent); }
+  .c2 { background: var(--accent2); color: #000 !important; }
+  .c3 { background: var(--accent3); color: #000 !important; }
+  .c4 { background: var(--accent4); color: #000 !important; }
+  .c5 { background: var(--accent5); }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7) { transition-delay: 0.28s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1 { background: var(--accent); }   .d2 { background: var(--accent2); }
+  .d3 { background: var(--accent3); }  .d4 { background: var(--accent4); }
+  .d5 { background: var(--accent5); }
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.purp  { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box.amber { background: rgba(245,158,11,0.07);  border: 1px solid rgba(245,158,11,0.2); }
+  .info-box.sky   { background: rgba(56,189,248,0.07);  border: 1px solid rgba(56,189,248,0.2); }
+  .info-box.green { background: rgba(52,211,153,0.07);  border: 1px solid rgba(52,211,153,0.2); }
+  .info-box.orange{ background: rgba(251,146,60,0.07);  border: 1px solid rgba(251,146,60,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── POSITIONING MATRIX ── */
+  .matrix-wrap { margin-top: 1.2rem; }
+  .matrix-label-top { display: flex; justify-content: center; margin-bottom: 0.4rem; }
+  .matrix-label-top span { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); letter-spacing: 0.08em; }
+  .matrix-outer { display: grid; grid-template-columns: auto 1fr 1fr; gap: 0; }
+  .matrix-side-label { display: flex; flex-direction: column; justify-content: center; align-items: center; padding-right: 0.6rem; }
+  .matrix-side-label span { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--muted); writing-mode: vertical-rl; transform: rotate(180deg); letter-spacing: 0.08em; }
+  .matrix-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 0.5rem; }
+  .matrix-cell { border-radius: 10px; padding: 1rem 0.9rem; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.78rem; line-height: 1.45; text-align: center; }
+  .matrix-cell .mc-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; display: block; margin-bottom: 0.3rem; opacity: 0.8; }
+  .matrix-cell .mc-name { font-weight: 700; font-size: 0.85rem; display: block; margin-bottom: 0.25rem; }
+  .matrix-cell .mc-sub { color: var(--muted); font-size: 0.72rem; font-style: italic; }
+  .mc-biaya-luas  { border-color: rgba(167,139,250,0.35); } .mc-biaya-luas  .mc-num { color: var(--accent); } .mc-biaya-luas  .mc-name { color: var(--accent); }
+  .mc-diff-luas   { border-color: rgba(245,158,11,0.35);  } .mc-diff-luas   .mc-num { color: var(--accent2); } .mc-diff-luas   .mc-name { color: var(--accent2); }
+  .mc-biaya-fokus { border-color: rgba(56,189,248,0.35);  } .mc-biaya-fokus .mc-num { color: var(--accent3); } .mc-biaya-fokus .mc-name { color: var(--accent3); }
+  .mc-diff-fokus  { border-color: rgba(52,211,153,0.35);  } .mc-diff-fokus  .mc-num { color: var(--accent4); } .mc-diff-fokus  .mc-name { color: var(--accent4); }
+  .mc-hybrid { grid-column: span 2; border-color: rgba(251,146,60,0.35); margin-top: 0.1rem; }
+  .mc-hybrid .mc-num { color: var(--accent5); } .mc-hybrid .mc-name { color: var(--accent5); }
+  .matrix-row-labels { display: grid; grid-template-rows: 1fr 1fr; gap: 0.5rem; padding-left: 0.4rem; }
+  .row-label { display: flex; align-items: center; font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--muted); }
+
+  /* ── 5-STRATEGY DETAILED CARDS ── */
+  .strategy-card { border-radius: 12px; border: 1px solid var(--border); overflow: hidden; margin-bottom: 0.8rem; }
+  .sc-header { display: flex; align-items: center; gap: 0.9rem; padding: 1rem 1.1rem; }
+  .sc-badge { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 700; color: #000; padding: 0.2rem 0.55rem; border-radius: 4px; flex-shrink: 0; white-space: nowrap; }
+  .sc-title { font-weight: 700; font-size: 0.9rem; }
+  .sc-subtitle { font-size: 0.75rem; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .sc-body { padding: 0 1.1rem 1.1rem; }
+  .sc-body .row { display: flex; gap: 0.6rem; margin-bottom: 0.5rem; align-items: flex-start; font-size: 0.82rem; line-height: 1.5; color: #c8c8e0; }
+  .sc-body .row .lbl { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; color: #000; padding: 0.15rem 0.4rem; border-radius: 3px; flex-shrink: 0; margin-top: 0.18rem; white-space: nowrap; }
+  .sc-risks { margin-top: 0.5rem; padding: 0.65rem 0.8rem; border-radius: 7px; font-size: 0.79rem; line-height: 1.5; }
+  /* per-strategy colors */
+  .str-1 .sc-header { background: rgba(167,139,250,0.08); border-bottom: 1px solid rgba(167,139,250,0.15); }
+  .str-1 .sc-title { color: var(--accent); } .str-1 .sc-badge { background: var(--accent); }
+  .str-1 .sc-risks { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.18); color: var(--accent); }
+  .str-2 .sc-header { background: rgba(245,158,11,0.08);  border-bottom: 1px solid rgba(245,158,11,0.15); }
+  .str-2 .sc-title { color: var(--accent2); } .str-2 .sc-badge { background: var(--accent2); }
+  .str-2 .sc-risks { background: rgba(245,158,11,0.07);  border: 1px solid rgba(245,158,11,0.18);  color: var(--accent2); }
+  .str-3 .sc-header { background: rgba(56,189,248,0.08);  border-bottom: 1px solid rgba(56,189,248,0.15); }
+  .str-3 .sc-title { color: var(--accent3); } .str-3 .sc-badge { background: var(--accent3); }
+  .str-3 .sc-risks { background: rgba(56,189,248,0.07);  border: 1px solid rgba(56,189,248,0.18);  color: var(--accent3); }
+  .str-4 .sc-header { background: rgba(52,211,153,0.08);  border-bottom: 1px solid rgba(52,211,153,0.15); }
+  .str-4 .sc-title { color: var(--accent4); } .str-4 .sc-badge { background: var(--accent4); }
+  .str-4 .sc-risks { background: rgba(52,211,153,0.07);  border: 1px solid rgba(52,211,153,0.18);  color: var(--accent4); }
+  .str-5 .sc-header { background: rgba(251,146,60,0.08);  border-bottom: 1px solid rgba(251,146,60,0.15); }
+  .str-5 .sc-title { color: var(--accent5); } .str-5 .sc-badge { background: var(--accent5); }
+  .str-5 .sc-risks { background: rgba(251,146,60,0.07);  border: 1px solid rgba(251,146,60,0.18);  color: var(--accent5); }
+
+  /* ── COMPARISON TABLE ── */
+  .comp-table-wrap { overflow-x: auto; margin-top: 1rem; }
+  .comp-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; min-width: 560px; }
+  .comp-table th { padding: 0.55rem 0.65rem; text-align: left; font-weight: 700; font-size: 0.68rem; border-bottom: 2px solid var(--border); font-family: 'DM Mono', monospace; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); white-space: nowrap; }
+  .comp-table th.th-s1 { color: var(--accent); }
+  .comp-table th.th-s2 { color: var(--accent2); }
+  .comp-table th.th-s3 { color: var(--accent3); }
+  .comp-table th.th-s4 { color: var(--accent4); }
+  .comp-table th.th-s5 { color: var(--accent5); }
+  .comp-table td { padding: 0.55rem 0.65rem; border-bottom: 1px solid var(--border); color: #c8c8e0; vertical-align: top; line-height: 1.4; }
+  .comp-table .row-header { font-weight: 700; color: var(--text); font-size: 0.75rem; white-space: nowrap; background: rgba(0,0,0,0.2); }
+  .comp-table tr:last-child td { border-bottom: none; }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent4); color: var(--accent4); }
+  .done-btn.checked { border-color: var(--accent4); color: var(--accent4); background: rgba(52,211,153,0.07); }
+
+  /* ── ULTIMATE OUTLINE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(167,139,250,0.07), rgba(245,158,11,0.04)); border: 1px solid rgba(167,139,250,0.25); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #7c3aed); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  /* ── 5 STRATEGY SUMMARY PILLS ── */
+  .strategy-pills { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 1.5rem; }
+  .pill { display: flex; align-items: flex-start; gap: 0.9rem; padding: 0.9rem 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; }
+  .pill-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 700; color: #000; padding: 0.2rem 0.5rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.15rem; }
+  .pill-content .pill-name { font-weight: 700; font-size: 0.86rem; display: block; margin-bottom: 0.2rem; }
+  .pill-content .pill-core { color: var(--muted); font-size: 0.78rem; }
+  .pill-content .pill-when { font-style: italic; font-size: 0.76rem; margin-top: 0.15rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; color: #000; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.5rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.8rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.78rem; }
+  .ft-purp  { background: rgba(167,139,250,0.15); color: var(--accent); }
+  .ft-amber { background: rgba(245,158,11,0.15);  color: var(--accent2); }
+  .ft-sky   { background: rgba(56,189,248,0.15);  color: var(--accent3); }
+  .ft-green { background: rgba(52,211,153,0.15);  color: var(--accent4); }
+  .ft-orng  { background: rgba(251,146,60,0.15);  color: var(--accent5); }
+  .formula-op { color: var(--muted); font-size: 1rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB V — <span>Lima Strategi</span><br>Kompetitif Generik</h1>
+    <p class="subtitle">Biaya Rendah · Diferensiasi · Terfokus · Biaya Terbaik · Yang Manakah Tepat untuk Anda?</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab V</h2>
+    <div class="mind-center">⚔️ Strategi Kompetitif Generik</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">5.4</div>Biaya Rendah<br><small style="opacity:0.7">Pasar luas · Tekan biaya</small></div>
+      <div class="branch b2"><div class="blabel">5.5</div>Diferensiasi Luas<br><small style="opacity:0.7">Pasar luas · Keunikan produk</small></div>
+      <div class="branch b3"><div class="blabel">5.6</div>Terfokus<br><small style="opacity:0.7">Segmen sempit · 2 varian</small></div>
+      <div class="branch b4"><div class="blabel">5.7</div>Biaya Terbaik<br><small style="opacity:0.7">Hibrida · Nilai optimal</small></div>
+      <div class="branch b5"><div class="blabel">5.8</div>Perbandingan 7 Komponen<br><small style="opacity:0.7">Tabel kontras kelima strategi</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: PENDAHULUAN & KERANGKA 2 FAKTOR ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">5.1–5.3</span>
+      <div>
+        <div class="section-title">Pendahuluan: Nilai Unggul &amp; Kerangka 2 Faktor Pembeda</div>
+        <div class="section-eng">Introduction: Superior Value &amp; Two Differentiating Dimensions</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          Inti dari setiap strategi kompetitif yang berhasil adalah kemampuan perusahaan untuk memberikan <strong>nilai tambah bagi pelanggan</strong> yang lebih unggul dibanding pesaing — entah melalui harga lebih rendah, kualitas lebih tinggi, atau kombinasi yang paling menarik dari keduanya.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Strategi kompetitif berkaitan dengan <strong>'rencana permainan'</strong> spesifik: upaya menyenangkan pelanggan, respons terhadap manuver pesaing, reaksi terhadap perubahan pasar, dan inisiatif untuk memperkuat posisi pasar.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Lima strategi generik meruncing pada <strong>dua faktor pembeda</strong> utama yang membedakan satu strategi dari lainnya:
+          <br>→ <strong>(a) Luas pasar:</strong> apakah target pasar bersifat luas (semua segmen) atau sempit (terfokus pada niche tertentu)?
+          <br>→ <strong>(b) Basis keunggulan:</strong> apakah mengejar keunggulan melalui <em>diferensiasi biaya rendah</em> atau <em>diferensiasi produk/jasa</em>?
+        </span></li>
+      </ul>
+
+      <!-- POSITIONING MATRIX -->
+      <div class="matrix-wrap">
+        <div class="matrix-label-top"><span>BASIS KEUNGGULAN KOMPETITIF →</span></div>
+        <div style="display:flex;gap:0.5rem;">
+          <div class="matrix-side-label"><span>LUAS PASAR →</span></div>
+          <div style="flex:1;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:0.5rem;">
+              <div style="text-align:center;font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--muted);padding:0.3rem;">⬇ BIAYA RENDAH</div>
+              <div style="text-align:center;font-family:'DM Mono',monospace;font-size:0.62rem;color:var(--muted);padding:0.3rem;">⬇ DIFERENSIASI</div>
+            </div>
+            <div style="display:grid;grid-template-rows:auto auto auto;gap:0.5rem;">
+              <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:0.5rem;">
+                <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--muted);display:flex;align-items:center;padding-right:0.4rem;">LUAS</div>
+                <div class="matrix-cell mc-biaya-luas"><span class="mc-num">STRATEGI 1</span><span class="mc-name">Biaya Rendah</span><span class="mc-sub">Cost Leadership</span></div>
+                <div class="matrix-cell mc-diff-luas"><span class="mc-num">STRATEGI 2</span><span class="mc-name">Diferensiasi Luas</span><span class="mc-sub">Broad Differentiation</span></div>
+              </div>
+              <div style="display:grid;grid-template-columns:auto 1fr 1fr;gap:0.5rem;">
+                <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--muted);display:flex;align-items:center;padding-right:0.4rem;">SEMPIT</div>
+                <div class="matrix-cell mc-biaya-fokus"><span class="mc-num">STRATEGI 3</span><span class="mc-name">Biaya Rendah Terfokus</span><span class="mc-sub">Focused Low-Cost</span></div>
+                <div class="matrix-cell mc-diff-fokus"><span class="mc-num">STRATEGI 4</span><span class="mc-name">Diferensiasi Terfokus</span><span class="mc-sub">Focused Differentiation</span></div>
+              </div>
+              <div style="display:grid;grid-template-columns:auto 1fr;gap:0.5rem;">
+                <div style="font-family:'DM Mono',monospace;font-size:0.6rem;color:var(--muted);display:flex;align-items:center;padding-right:0.4rem;">TENGAH</div>
+                <div class="matrix-cell mc-hybrid"><span class="mc-num">STRATEGI 5</span><span class="mc-name">Penyedia Biaya Terbaik</span><span class="mc-sub">Best-Cost Provider — Hibrida Biaya Rendah + Diferensiasi</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Cara ingat 5 Strategi:</strong> <em>"BR-DL-BF-DF-BT"</em> → <em>"Biaya Rendah, Diferensiasi Luas, Biaya Fokus, Diferensiasi Fokus, Biaya Terbaik"</em> → <em>"Beli Dulu, Biar Dapat Bargain Terbaik!"</em></span>
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: STRATEGI 1 & 2 (PASAR LUAS) ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c1">5.4–5.5</span>
+      <div>
+        <div class="section-title">Strategi Pasar Luas: Biaya Rendah &amp; Diferensiasi</div>
+        <div class="section-eng">Broad Market Strategies: Low-Cost &amp; Differentiation</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <!-- STRATEGI 1: BIAYA RENDAH -->
+      <div class="strategy-card str-1">
+        <div class="sc-header">
+          <span class="sc-badge">STRATEGI 1</span>
+          <div>
+            <div class="sc-title">Strategi Penyedia Biaya Rendah</div>
+            <div class="sc-subtitle">Low-Cost Provider Strategy · Target: Pasar Luas · Basis: Biaya Terendah</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="row"><span class="lbl" style="background:var(--accent);">INTI</span><span>Menjadi penyedia biaya rendah secara <strong>menyeluruh di industri</strong> — pendekatan keunggulan kompetitif paling kuat di pasar yang dipenuhi pembeli dengan <em>sensitivitas harga tinggi</em>.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent);">CARA</span><span>Dua cara utama: <strong>(1)</strong> Manajemen aktivitas mata rantai nilai berbiaya rendah — efisiensi di setiap tahap produksi, distribusi, dan layanan. <strong>(2)</strong> Memperbaiki sistem mata rantai nilai untuk menurunkan biaya secara struktural.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent);">HASIL</span><span>Perusahaan dapat mematok harga lebih rendah dari pesaing dan tetap untung, ATAU mematok harga setara tapi margin lebih tebal. Keunggulan hanya terjaga jika <em>pendekatan penekanan biaya sulit ditiru pesaing</em>.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent);">KAPAN</span><span>Berfungsi paling baik saat: persaingan harga sangat intens, produk terstandarisasi, switching cost rendah, dan sebagian besar pembeli sensitif terhadap harga.</span></div>
+          <div class="sc-risks">⚠️ <strong>Risiko:</strong> Terjebak mengejar biaya murah namun mengabaikan kualitas minimum yang diharapkan pelanggan — dan akhirnya ditinggalkan. Pesaing mungkin menemukan cara baru yang lebih murah lagi.</div>
+        </div>
+      </div>
+
+      <!-- STRATEGI 2: DIFERENSIASI LUAS -->
+      <div class="strategy-card str-2">
+        <div class="sc-header">
+          <span class="sc-badge">STRATEGI 2</span>
+          <div>
+            <div class="sc-title">Strategi Diferensiasi Luas</div>
+            <div class="sc-subtitle">Broad Differentiation Strategy · Target: Pasar Luas · Basis: Keunikan Produk/Jasa</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="row"><span class="lbl" style="background:var(--accent2); color:#000;">INTI</span><span>Menawarkan produk/jasa yang <strong>unik dan berbeda</strong> dari pesaing dalam cara-cara yang benar-benar <em>dihargai dan bersedia dibayar oleh pembeli</em>. Berlaku di pasar luas, bukan segmen tertentu saja.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent2); color:#000;">SYARAT</span><span>Diferensiasi hanya menarik jika kebutuhan dan preferensi pembeli <em>sangat beragam</em> — tidak bisa dipuaskan oleh satu standar produk. Membutuhkan studi mendalam tentang apa yang benar-benar dihargai pembeli dan seberapa besar mereka bersedia membayar.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent2); color:#000;">HASIL</span><span>Tiga manfaat: <strong>(1)</strong> Bisa mematok harga premium. <strong>(2)</strong> Meningkatkan unit penjualan karena fitur pembeda memenangkan pembeli baru. <strong>(3)</strong> Membangun <em>loyalitas pelanggan</em> yang kuat karena pelanggan terikat pada fitur unik produk.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent2); color:#000;">KAPAN</span><span>Bekerja baik saat: ada banyak cara bermakna untuk diferensiasi, kebutuhan pembeli beragam, tidak banyak pesaing yang menggunakan pendekatan diferensiasi serupa, dan teknologi berubah cepat.</span></div>
+          <div class="sc-risks">⚠️ <strong>Risiko:</strong> Over-diferensiasi (pembeda yang tidak cukup dihargai pembeli), harga premium terlalu tinggi, dan fitur diferensiasi mudah ditiru pesaing dalam waktu singkat.</div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: STRATEGI 3 & 4 (TERFOKUS) ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c3">5.6</span>
+      <div>
+        <div class="section-title">Strategi Pasar Terfokus (Niche)</div>
+        <div class="section-eng">Focused Market Strategies: Niche Low-Cost &amp; Niche Differentiation</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Yang membedakan strategi terfokus dari strategi pasar luas adalah <strong>perhatian yang terpusat pada segmen yang sempit (niche)</strong> dari pasar secara total. Segmen bisa berdasarkan: kekhasan geografis, syarat pemakaian produk yang sangat khas, atau atribut yang hanya menarik bagi pelanggan-pelanggan tertentu saja.</p>
+
+      <!-- STRATEGI 3: BIAYA RENDAH TERFOKUS -->
+      <div class="strategy-card str-3">
+        <div class="sc-header">
+          <span class="sc-badge">STRATEGI 3</span>
+          <div>
+            <div class="sc-title">Strategi Biaya Rendah yang Terfokus</div>
+            <div class="sc-subtitle">Focused Low-Cost Strategy · Target: Segmen Sempit · Basis: Biaya Rendah di Niche</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="row"><span class="lbl" style="background:var(--accent3); color:#000;">INTI</span><span>Melayani segmen sempit yang spesifik dengan <strong>biaya lebih rendah dari pesaing</strong> yang melayani segmen tersebut. Fokus memungkinkan efisiensi yang tidak mungkin dicapai pemain pasar luas.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent3); color:#000;">KAPAN</span><span>Menarik saat: segmen niche cukup besar dan menguntungkan, pemain besar kurang tertarik melayaninya secara khusus, dan kebutuhan segmen tersebut <em>berbeda secara signifikan</em> dari pembeli umum.</span></div>
+          <div class="sc-risks">⚠️ <strong>Risiko:</strong> Segmen niche bisa menyusut. Pesaing besar bisa masuk dengan sumber daya lebih besar. Preferensi niche bisa bergeser sehingga perbedaan antara niche dan pasar umum menghilang.</div>
+        </div>
+      </div>
+
+      <!-- STRATEGI 4: DIFERENSIASI TERFOKUS -->
+      <div class="strategy-card str-4">
+        <div class="sc-header">
+          <span class="sc-badge">STRATEGI 4</span>
+          <div>
+            <div class="sc-title">Strategi Diferensiasi yang Terfokus</div>
+            <div class="sc-subtitle">Focused Differentiation Strategy · Target: Segmen Sempit · Basis: Produk Premium Niche</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="row"><span class="lbl" style="background:var(--accent4); color:#000;">INTI</span><span>Menawarkan produk/jasa <strong>yang sangat terdiferensiasi</strong> untuk memenuhi selera dan kebutuhan spesifik dari segmen yang sempit — seringkali dengan harga premium yang bersedia dibayar segmen tersebut.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent4); color:#000;">CONTOH</span><span>Ferrari (mobil super-premium), Rolex (jam tangan mewah), restoran fine-dining bintang Michelin. Setiap produk dirancang khusus untuk segmen yang memiliki preferensi unik dan daya beli tinggi.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent4); color:#000;">KAPAN</span><span>Menarik saat: ada kelompok pelanggan dengan kebutuhan atau preferensi yang sangat berbeda dari pasar umum, dan tidak ada/sedikit pesaing yang fokus pada segmen tersebut.</span></div>
+          <div class="sc-risks">⚠️ <strong>Risiko:</strong> Sama dengan biaya rendah terfokus: segmen bisa menyusut, pesaing bisa masuk, atau pergeseran preferensi membuat segmen tidak lagi berbeda dari pasar umum.</div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: STRATEGI 5 (BIAYA TERBAIK / HIBRIDA) ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c5">5.7</span>
+      <div>
+        <div class="section-title">Strategi Penyedia Biaya Terbaik — Hibrida</div>
+        <div class="section-eng">Best-Cost Provider Strategy — The Hybrid Approach</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="strategy-card str-5">
+        <div class="sc-header">
+          <span class="sc-badge">STRATEGI 5</span>
+          <div>
+            <div class="sc-title">Strategi Penyedia Biaya Terbaik</div>
+            <div class="sc-subtitle">Best-Cost Provider Strategy · Posisi Tengah · Hibrida Biaya + Diferensiasi</div>
+          </div>
+        </div>
+        <div class="sc-body">
+          <div class="row"><span class="lbl" style="background:var(--accent5);">INTI</span><span>Mengambil <strong>posisi tengah</strong> antara biaya rendah dan diferensiasi, serta antara pasar luas dan terfokus. Menawarkan <em>nilai terbaik</em> bagi pembeli — kualitas baik hingga sangat baik dengan harga yang ekonomis dan terjangkau.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent5);">TARGET</span><span>Membidik pembeli yang <strong>sensitif terhadap nilai produk</strong> — jumlah mereka sangat banyak, bersedia membayar fitur dan fungsionalitas ekstra, namun pada harga yang "adil" dan tidak berlebihan.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent5);">POSISI</span><span>Dari sudut pandang <em>competitive-positioning</em>, Strategi Biaya Terbaik adalah <strong>hibrida (campuran)</strong> yang menyeimbangkan penekanan stratejik pada biaya rendah dan diferensiasi secara bersamaan. Ini sulit dilakukan — tapi sangat kuat jika berhasil.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent5);">CONTOH</span><span>Toyota dengan lini Lexus: kualitas setara mobil mewah Eropa tapi dengan harga lebih kompetitif. H&amp;M: desain mode terkini (diferensiasi) dengan harga terjangkau (biaya rendah). IKEA: desain Skandinavia modern + harga sangat terjangkau.</span></div>
+          <div class="row"><span class="lbl" style="background:var(--accent5);">KAPAN</span><span>Paling berhasil saat ada <em>segmen besar pembeli value-conscious</em> yang menginginkan kualitas lebih dari produk murah standar, namun tidak mau/mampu membayar harga premium.</span></div>
+          <div class="sc-risks">⚠️ <strong>Risiko:</strong> Terjepit di tengah — diserang dari bawah oleh penyedia biaya rendah yang lebih murah, dan dari atas oleh strategi diferensiasi yang lebih premium. Harus benar-benar menguasai keduanya secara bersamaan.</div>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Analogi Biaya Terbaik:</strong> Seperti Toyota Camry di antara Daihatsu Sigra (biaya rendah) dan Mercedes-Benz E-Class (diferensiasi premium). Ia menawarkan <em>kualitas mendekati premium dengan harga yang masuk akal</em> — inilah sweet spot yang memenangkan segmen terbesar.</span>
+      </div>
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: TABEL PERBANDINGAN 7 KOMPONEN ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c2">5.8</span>
+      <div>
+        <div class="section-title">Perbandingan Kelima Strategi: 7 Komponen Pembeda</div>
+        <div class="section-eng">Contrasting Features: Seven-Component Comparison</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:0.9rem;">Kelima strategi dibandingkan berdasarkan tujuh komponen pembeda. Strategi yang berhasil dibangun di atas <strong>sumber daya yang kompetitif lebih baik dari pesaing</strong>:</p>
+
+      <div class="comp-table-wrap">
+        <table class="comp-table">
+          <thead>
+            <tr>
+              <th>Komponen</th>
+              <th class="th-s1">① Biaya Rendah</th>
+              <th class="th-s2">② Diferensiasi</th>
+              <th class="th-s3">③ Biaya Fokus</th>
+              <th class="th-s4">④ Diff Fokus</th>
+              <th class="th-s5">⑤ Biaya Terbaik</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-header">Target Stratejik</td>
+              <td>Pasar luas — semua segmen pembeli</td>
+              <td>Pasar luas — pembeli yang menghargai keunikan</td>
+              <td>Niche sempit — sensitif harga</td>
+              <td>Niche sempit — preferensi unik</td>
+              <td>Pembeli value-conscious yang besar</td>
+            </tr>
+            <tr>
+              <td class="row-header">Basis Bersaing</td>
+              <td>Biaya paling rendah di industri</td>
+              <td>Fitur unik yang dihargai pembeli</td>
+              <td>Biaya lebih rendah dalam melayani niche</td>
+              <td>Atribut unik untuk niche tertentu</td>
+              <td>Kualitas baik – harga ekonomis (hibrida)</td>
+            </tr>
+            <tr>
+              <td class="row-header">Jajaran Produk</td>
+              <td>Baik, terbatas, sederhana — fitur minimum</td>
+              <td>Bervariasi luas — banyak pilihan fitur</td>
+              <td>Disesuaikan kebutuhan niche</td>
+              <td>Disesuaikan selera premium niche</td>
+              <td>Pilihan luas — fitur baik, harga terjangkau</td>
+            </tr>
+            <tr>
+              <td class="row-header">Penekanan Produksi</td>
+              <td>Cari terus efisiensi biaya tanpa mengorbankan kualitas dasar</td>
+              <td>Inovasi fitur pembeda yang relevan dan bernilai tinggi</td>
+              <td>Efisiensi biaya khusus untuk niche</td>
+              <td>Produk khusus berkualitas tinggi untuk niche</td>
+              <td>Masukkan fitur dan atribut menarik dengan biaya rendah</td>
+            </tr>
+            <tr>
+              <td class="row-header">Penekanan Pemasaran</td>
+              <td>Tonjolkan harga rendah yang menarik bagi pembeli sensitif harga</td>
+              <td>Tonjolkan fitur unik, premium, dan nilai diferensiasi</td>
+              <td>Komunikasi penghematan biaya pada niche</td>
+              <td>Tonjolkan bagaimana produk memenuhi kebutuhan unik niche</td>
+              <td>Tawarkan nilai terbaik (kualitas + harga wajar)</td>
+            </tr>
+            <tr>
+              <td class="row-header">Kunci Mempertahankan</td>
+              <td>Harga bersaing; efisiensi biaya yang terus-menerus</td>
+              <td>Inovasi berkelanjutan; loyalitas pelanggan terhadap fitur unik</td>
+              <td>Komitmen pada niche; efisiensi biaya terus-menerus</td>
+              <td>Reputasi kualitas dan keunikan dalam niche</td>
+              <td>Kemampuan menurunkan biaya sambil mempertahankan kualitas</td>
+            </tr>
+            <tr>
+              <td class="row-header">Sumber Daya Diperlukan</td>
+              <td>Manajemen rantai pasokan efisien; teknologi produksi murah</td>
+              <td>R&amp;D kuat; pemahaman mendalam tentang pelanggan</td>
+              <td>Pemahaman mendalam tentang kebutuhan spesifik niche</td>
+              <td>Keahlian khusus dan kapabilitas diferensiasi untuk niche</td>
+              <td>Keahlian ganda: efisiensi biaya DAN kapabilitas diferensiasi</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="info-box purp" style="margin-top:1rem;">
+        <strong>🎯 Kesimpulan Utama Bab V:</strong> Strategi kompetitif yang berhasil adalah yang <em>berbasis pada sumber daya</em> yang kompetitif lebih baik dari pesaing. Untuk memastikan tingkat keberhasilan strategi bersaing, perusahaan harus mempersiapkan <strong>serangkaian sumber daya, pengetahuan, teknologi, serta kemampuan yang kompetitif lebih baik daripada para pesaing</strong>.
+      </div>
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab V</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <!-- 5 STRATEGY SUMMARY PILLS -->
+    <div class="strategy-pills">
+      <div class="pill">
+        <span class="pill-num" style="background:var(--accent);">1</span>
+        <div class="pill-content">
+          <span class="pill-name" style="color:var(--accent);">Biaya Rendah — "Lebih Murah dari Siapapun"</span>
+          <span class="pill-core">Pasar luas · Efisiensi biaya total di seluruh value chain · Harga terendah = daya saing utama</span>
+          <span class="pill-when">✓ Terbaik saat: pasar sensitif harga, produk terstandarisasi, persaingan harga sangat intens</span>
+        </div>
+      </div>
+      <div class="pill">
+        <span class="pill-num" style="background:var(--accent2); color:#000;">2</span>
+        <div class="pill-content">
+          <span class="pill-name" style="color:var(--accent2);">Diferensiasi Luas — "Unik yang Dihargai Banyak"</span>
+          <span class="pill-core">Pasar luas · Fitur unik yang benar-benar dihargai pembeli · Premium price + loyalitas pelanggan</span>
+          <span class="pill-when">✓ Terbaik saat: kebutuhan pembeli beragam, tidak ada standar tunggal yang memuaskan semua</span>
+        </div>
+      </div>
+      <div class="pill">
+        <span class="pill-num" style="background:var(--accent3); color:#000;">3</span>
+        <div class="pill-content">
+          <span class="pill-name" style="color:var(--accent3);">Biaya Rendah Terfokus — "Paling Murah di Niche"</span>
+          <span class="pill-core">Segmen sempit · Efisiensi khusus untuk niche · Melayani yang diabaikan pemain besar</span>
+          <span class="pill-when">✓ Terbaik saat: niche cukup besar, pemain besar kurang tertarik, kebutuhan niche berbeda dari pasar umum</span>
+        </div>
+      </div>
+      <div class="pill">
+        <span class="pill-num" style="background:var(--accent4); color:#000;">4</span>
+        <div class="pill-content">
+          <span class="pill-name" style="color:var(--accent4);">Diferensiasi Terfokus — "Paling Unik di Niche"</span>
+          <span class="pill-core">Segmen sempit · Produk super-premium khusus · Harga premium untuk kebutuhan sangat spesifik</span>
+          <span class="pill-when">✓ Terbaik saat: ada kelompok yang sangat berbeda kebutuhannya dan bersedia bayar premium</span>
+        </div>
+      </div>
+      <div class="pill">
+        <span class="pill-num" style="background:var(--accent5);">5</span>
+        <div class="pill-content">
+          <span class="pill-name" style="color:var(--accent5);">Biaya Terbaik — "Nilai Terbaik di Harga Adil"</span>
+          <span class="pill-core">Posisi tengah · Hibrida biaya rendah + diferensiasi · Kualitas baik, harga ekonomis</span>
+          <span class="pill-when">✓ Terbaik saat: ada segmen besar pembeli value-conscious yang ingin lebih dari "standar" tapi tak mau harga premium</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);">A</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Semua Strategi Bertolak dari Satu Prinsip</h3>
+          <p>Memberikan nilai tambah yang lebih unggul dari pesaing kepada pelanggan. Beda strateginya hanya pada <strong style="color:#f0f0ff;">cara dan segmen</strong> yang dipilih — bukan pada tujuan akhirnya.</p>
+          <div class="keywords"><span class="kw">nilai unggul</span><span class="kw">2 faktor pembeda</span><span class="kw">luas vs sempit</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2); color:#000;">B</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">Tidak Ada Strategi yang Universal Terbaik</h3>
+          <p>Pilihan strategi yang tepat bergantung pada: kondisi industri, posisi pesaing, sumber daya perusahaan, dan karakteristik pembeli. Strategi biaya rendah bisa menjadi bencana di industri di mana pembeli tidak sensitif harga.</p>
+          <div class="keywords"><span class="kw">kontekstual</span><span class="kw">kondisi industri</span><span class="kw">profil pembeli</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent5);">C</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent5);">Strategi yang Berhasil = Berbasis Sumber Daya Superior</h3>
+          <p>Strategi apapun yang dipilih, keberhasilannya dijamin oleh <strong style="color:#f0f0ff;">sumber daya, pengetahuan, teknologi, dan kemampuan yang kompetitif lebih baik dari pesaing</strong> — bukan hanya pilihan posisi strategisnya.</p>
+          <div class="keywords"><span class="kw">resource-based strategy</span><span class="kw">kemampuan superior</span><span class="kw">sustainable advantage</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-purp">① Biaya Rendah</span>
+        <span class="formula-op">|</span>
+        <span class="formula-term ft-amber">② Diferensiasi</span>
+        <span class="formula-op">|</span>
+        <span class="formula-term ft-sky">③ Biaya Fokus</span>
+        <span class="formula-op">|</span>
+        <span class="formula-term ft-green">④ Diff Fokus</span>
+        <span class="formula-op">|</span>
+        <span class="formula-term ft-orng">⑤ Biaya Terbaik</span>
+      </div>
+      <div class="formula-caption">Pilih satu berdasarkan: kondisi industri + profil pembeli + sumber daya perusahaan + posisi pesaing</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box purp" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab V:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">B</strong>iaya Rendah untuk pasar luas sensitif harga, <strong style="color:#f0f0ff;">D</strong>iferensiasi untuk yang menghargai keunikan, <strong style="color:#f0f0ff;">F</strong>okus biaya atau diferensiasi untuk niche, dan <strong style="color:#f0f0ff;">T</strong>erbaik untuk yang mau kualitas-harga seimbang!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">B-D-F-T</strong> → <em>"Beli Dulu Fokus Terbaik"</em> — empat pilihan dasar (5 strategi: BR, Diff Luas, 2×Fokus, Biaya Terbaik). Semua bertumpu pada <em>sumber daya yang lebih kuat dari pesaing</em>.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab V Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 5;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

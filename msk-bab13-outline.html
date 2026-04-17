@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB XIII — Kepemimpinan Stratejik</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #2dd4bf;   /* teal — chapter 13 color */
+    --accent2: #a78bfa;   /* violet */
+    --accent3: #f59e0b;   /* amber */
+    --accent4: #60a5fa;   /* blue */
+    --accent5: #f43f5e;   /* rose */
+    --accent6: #4ade80;   /* green */
+    --accent7: #fb923c;   /* orange */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--accent); color: #000; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent6)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── MIND MAP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #0d9488); color: #000; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+  .branch { padding: 0.75rem; border-radius: 10px; font-size: 0.73rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.58rem; font-family: 'DM Mono', monospace; margin-bottom: 0.25rem; opacity: 0.7; }
+  .b1 { background: rgba(45,212,191,0.08);  border-color: rgba(45,212,191,0.25);  color: var(--accent); }
+  .b2 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent2); }
+  .b3 { background: rgba(245,158,11,0.08);  border-color: rgba(245,158,11,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(96,165,250,0.08);  border-color: rgba(96,165,250,0.25);  color: var(--accent4); }
+  .b5 { background: rgba(74,222,128,0.08);  border-color: rgba(74,222,128,0.25);  color: var(--accent6); }
+  .b6 { background: rgba(251,146,60,0.08);  border-color: rgba(251,146,60,0.25);  color: var(--accent7); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent);  color: #000; }
+  .c2 { background: var(--accent2); color: #fff; }
+  .c3 { background: var(--accent3); color: #000; }
+  .c4 { background: var(--accent4); color: #000; }
+  .c5 { background: var(--accent6); color: #000; }
+  .c6 { background: var(--accent7); color: #000; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7) { transition-delay: 0.28s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1{background:var(--accent);} .d2{background:var(--accent2);} .d3{background:var(--accent3);}
+  .d4{background:var(--accent4);} .d5{background:var(--accent5);} .d6{background:var(--accent6);}
+  .d7{background:var(--accent7);}
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(45,212,191,0.07); border: 1px solid rgba(45,212,191,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.teal   { background: rgba(45,212,191,0.07);  border: 1px solid rgba(45,212,191,0.2); }
+  .info-box.violet { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box.amber  { background: rgba(245,158,11,0.07);  border: 1px solid rgba(245,158,11,0.2); }
+  .info-box.blue   { background: rgba(96,165,250,0.07);  border: 1px solid rgba(96,165,250,0.2); }
+  .info-box.green  { background: rgba(74,222,128,0.07);  border: 1px solid rgba(74,222,128,0.2); }
+  .info-box.orange { background: rgba(251,146,60,0.07);  border: 1px solid rgba(251,146,60,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── KEPEMIMPINAN vs MANAJEMEN ── */
+  .km-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .km-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.8rem; line-height: 1.5; color: #c8c8e0; }
+  .km-card .kmc-icon { font-size: 1.2rem; display: block; margin-bottom: 0.3rem; }
+  .km-card .kmc-title { font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 0.35rem; }
+  .km-card ul { list-style: none; }
+  .km-card ul li { padding: 0.22rem 0; border-bottom: 1px solid var(--border); font-size: 0.77rem; color: var(--muted); }
+  .km-card ul li:last-child { border-bottom: none; }
+  .km-card ul li::before { content: "→ "; }
+  .kmc-mgmt { border-color: rgba(96,165,250,0.3);  } .kmc-mgmt .kmc-title  { color: var(--accent4); }
+  .kmc-lead { border-color: rgba(45,212,191,0.3);  } .kmc-lead .kmc-title  { color: var(--accent); }
+
+  /* ── 3 PERAN PEMIMPIN ── */
+  .roles-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.7rem; margin-top: 1rem; }
+  .role-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.8rem; line-height: 1.5; color: #c8c8e0; text-align: center; }
+  .role-card .rc-icon { font-size: 1.4rem; display: block; margin-bottom: 0.3rem; }
+  .role-card .rc-title { font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 0.3rem; }
+  .role-card .rc-desc { color: var(--muted); font-size: 0.75rem; }
+  .rc-1 { border-color: rgba(45,212,191,0.3);  } .rc-1 .rc-title  { color: var(--accent); }
+  .rc-2 { border-color: rgba(167,139,250,0.3); } .rc-2 .rc-title  { color: var(--accent2); }
+  .rc-3 { border-color: rgba(74,222,128,0.3);  } .rc-3 .rc-title  { color: var(--accent6); }
+
+  /* ── EQ 5 KOMPONEN ── */
+  .eq-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.6rem; margin-top: 1rem; }
+  .eq-card { padding: 0.85rem; border-radius: 9px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); font-size: 0.78rem; line-height: 1.45; color: #c8c8e0; text-align: center; }
+  .eq-card .ec-icon { font-size: 1.1rem; display: block; margin-bottom: 0.25rem; }
+  .eq-card .ec-title { font-weight: 700; font-size: 0.82rem; display: block; margin-bottom: 0.2rem; }
+  .eq-card .ec-desc { color: var(--muted); font-size: 0.72rem; }
+  .eq-1 { border-color: rgba(45,212,191,0.3);  } .eq-1 .ec-title  { color: var(--accent); }
+  .eq-2 { border-color: rgba(167,139,250,0.3); } .eq-2 .ec-title  { color: var(--accent2); }
+  .eq-3 { border-color: rgba(245,158,11,0.3);  } .eq-3 .ec-title  { color: var(--accent3); }
+  .eq-4 { border-color: rgba(96,165,250,0.3);  } .eq-4 .ec-title  { color: var(--accent4); }
+  .eq-5 { border-color: rgba(74,222,128,0.3);  } .eq-5 .ec-title  { color: var(--accent6); }
+
+  /* ── NARSIS PRO vs CON ── */
+  .narsis-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .narsis-card { padding: 0.9rem; border-radius: 9px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); font-size: 0.79rem; line-height: 1.5; color: #c8c8e0; }
+  .narsis-card .nc-title { font-weight: 700; font-size: 0.86rem; display: block; margin-bottom: 0.4rem; }
+  .narsis-card ul { list-style: none; }
+  .narsis-card ul li { padding: 0.22rem 0; border-bottom: 1px solid var(--border); font-size: 0.76rem; color: var(--muted); }
+  .narsis-card ul li:last-child { border-bottom: none; }
+  .narsis-card ul li::before { content: "→ "; }
+  .nc-pro { border-color: rgba(74,222,128,0.3);  } .nc-pro  .nc-title { color: var(--accent6); }
+  .nc-con { border-color: rgba(244,63,94,0.3);   } .nc-con  .nc-title { color: var(--accent5); }
+
+  /* ── HOFSTEDE 4 DIMENSI ── */
+  .hofstede-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 0.65rem; margin-top: 1rem; }
+  .hof-card { padding: 0.9rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.79rem; line-height: 1.5; color: #c8c8e0; }
+  .hof-card .hc-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; display: block; margin-bottom: 0.25rem; }
+  .hof-card .hc-title { font-weight: 700; font-size: 0.86rem; display: block; margin-bottom: 0.2rem; }
+  .hof-card .hc-desc { color: var(--muted); font-size: 0.74rem; }
+  .hc-1 { border-color: rgba(45,212,191,0.3);  } .hc-1 .hc-num,.hc-1 .hc-title { color: var(--accent); }
+  .hc-2 { border-color: rgba(167,139,250,0.3); } .hc-2 .hc-num,.hc-2 .hc-title { color: var(--accent2); }
+  .hc-3 { border-color: rgba(245,158,11,0.3);  } .hc-3 .hc-num,.hc-3 .hc-title { color: var(--accent3); }
+  .hc-4 { border-color: rgba(96,165,250,0.3);  } .hc-4 .hc-num,.hc-4 .hc-title { color: var(--accent4); }
+
+  /* ── SCHNEIDER 4 ALASAN ── */
+  .schneider-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .sch-item { display: flex; gap: 0.8rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.75rem 0.9rem; border-left: 3px solid rgba(251,146,60,0.4); font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; }
+  .sch-alpha { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; background: var(--accent7); color: #000; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
+  .sch-item strong { color: var(--text); }
+
+  /* ── KEPEMIMPINAN TRANSFORMASIONAL vs TRANSAKSIONAL ── */
+  .tt-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .tt-card { padding: 0.9rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.79rem; line-height: 1.5; color: #c8c8e0; }
+  .tt-card .tc-title { font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 0.35rem; }
+  .tt-card .tc-desc { color: var(--muted); font-size: 0.75rem; margin-bottom: 0.5rem; display: block; font-style: italic; }
+  .tt-card ul { list-style: none; }
+  .tt-card ul li { padding: 0.22rem 0; border-bottom: 1px solid var(--border); font-size: 0.76rem; color: var(--muted); }
+  .tt-card ul li:last-child { border-bottom: none; }
+  .tt-card ul li::before { content: "→ "; }
+  .tt-trans  { border-color: rgba(45,212,191,0.3);  } .tt-trans  .tc-title { color: var(--accent); }
+  .tt-transa { border-color: rgba(245,158,11,0.3);  } .tt-transa .tc-title { color: var(--accent3); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent6); color: var(--accent6); }
+  .done-btn.checked { border-color: var(--accent6); color: var(--accent6); background: rgba(74,222,128,0.07); }
+
+  /* ── ULTIMATE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(45,212,191,0.07), rgba(74,222,128,0.04)); border: 1px solid rgba(45,212,191,0.25); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #0d9488); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.75rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.76rem; }
+  .ft-teal { background: rgba(45,212,191,0.15);  color: var(--accent); }
+  .ft-vio  { background: rgba(167,139,250,0.15); color: var(--accent2); }
+  .ft-amr  { background: rgba(245,158,11,0.15);  color: var(--accent3); }
+  .ft-blu  { background: rgba(96,165,250,0.15);  color: var(--accent4); }
+  .ft-grn  { background: rgba(74,222,128,0.15);  color: var(--accent6); }
+  .ft-orng { background: rgba(251,146,60,0.15);  color: var(--accent7); }
+  .formula-op { color: var(--muted); font-size: 0.9rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB XIII — <span>Kepemimpinan</span><br>Stratejik</h1>
+    <p class="subtitle">Kepemimpinan vs Manajemen · EQ · Narsis · Hofstede · Perubahan Stratejik · Kinerja Berkelanjutan</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 6 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab XIII</h2>
+    <div class="mind-center">👑 Kepemimpinan Stratejik</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">13.3</div>⚖️ Kepemimpinan vs Manajemen<br><small style="opacity:0.7">Kotter: kompleksitas vs perubahan</small></div>
+      <div class="branch b2"><div class="blabel">13.4</div>🎓 Peran Pemimpin<br><small style="opacity:0.7">Designer · Guru · Steward</small></div>
+      <div class="branch b3"><div class="blabel">13.5</div>❤️ Kecerdasan Emosional<br><small style="opacity:0.7">5 Komponen EQ pemimpin besar</small></div>
+      <div class="branch b4"><div class="blabel">13.6–13.7</div>🎭 Narsis &amp; Visi<br><small style="opacity:0.7">Tipe pemimpin · Peran visi &amp; nilai</small></div>
+      <div class="branch b5"><div class="blabel">13.8</div>🌍 Budaya Nasional<br><small style="opacity:0.7">Hofstede 4 dimensi</small></div>
+      <div class="branch b6"><div class="blabel">13.9–13.11</div>🔄 Perubahan &amp; Kinerja<br><small style="opacity:0.7">Schneider · Transformasional vs Transaksional</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: KEPEMIMPINAN vs MANAJEMEN & 4 TEORI ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">13.1–13.3</span>
+      <div>
+        <div class="section-title">Kepemimpinan vs Manajemen &amp; Perkembangan Teori Kepemimpinan</div>
+        <div class="section-eng">Leadership vs Management &amp; Evolution of Leadership Theories</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Kualitas kepemimpinan stratejik</strong> dari manajemen puncak adalah faktor kunci dalam implementasi strategi. Pemimpin yang efektif mengkomunikasikan tujuan organisasi dengan jelas dan mendorong karyawan fokus pada pencapaiannya.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Formulasi strategi terbaik di dunia dapat gagal</strong> jika diimplementasikan dengan buruk — pemimpin organisasi adalah pihak yang paling bertanggung jawab terhadap keberhasilan atau kegagalan strategi.
+        </span></li>
+      </ul>
+
+      <div class="subsection" id="sub1a">
+        <div class="subsection-header" onclick="toggleSub('sub1a')">
+          ⚖️ Perbedaan Kepemimpinan dan Manajemen (Kotter 1990) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <div class="km-split">
+            <div class="km-card kmc-mgmt">
+              <span class="kmc-icon">⚙️</span>
+              <span class="kmc-title">Manajemen</span>
+              <ul>
+                <li>Menangani <strong>kompleksitas</strong> untuk memberikan hasil yang konsisten</li>
+                <li>Merencanakan, mengorganisir, mengontrol, dan memecahkan masalah</li>
+                <li>Berlandaskan pada asas <em>konsistensi</em></li>
+                <li>Fokus: sistem, struktur, proses</li>
+                <li>Bertanya: "Bagaimana caranya?"</li>
+              </ul>
+            </div>
+            <div class="km-card kmc-lead">
+              <span class="kmc-icon">🔥</span>
+              <span class="kmc-title">Kepemimpinan</span>
+              <ul>
+                <li>Berhubungan dengan segala sesuatu yang berkaitan dengan <strong>perubahan</strong></li>
+                <li>Menetapkan arah, menyelaraskan, memotivasi, dan menginspirasi orang</li>
+                <li>Berorientasi pada <em>transformasi</em></li>
+                <li>Fokus: visi, nilai, orang, perubahan</li>
+                <li>Bertanya: "Mengapa?" dan "Ke mana?"</li>
+              </ul>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Kotter:</strong> <em>"Manajemen = menangani kompleksitas | Kepemimpinan = menangani perubahan"</em> → Sebuah organisasi membutuhkan keduanya — manajemen tanpa kepemimpinan menjadi statis; kepemimpinan tanpa manajemen menjadi kacau.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub1b">
+        <div class="subsection-header" onclick="toggleSub('sub1b')">
+          📚 4 Periode Perkembangan Teori Kepemimpinan <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>① Teori Awal (1800–1939)</strong> — Fokus pada sifat bawaan pemimpin ("great man theory") — pemimpin dilahirkan, bukan dibentuk. Mencari ciri-ciri fisik dan kepribadian yang membedakan pemimpin dari bukan pemimpin.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>② Teori Interaktif (1941–1960)</strong> — Fokus bergeser dari sifat bawaan ke perilaku dan gaya kepemimpinan. Kepemimpinan dapat dipelajari dan dikembangkan melalui pelatihan dan pengalaman.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>③ Teori Organisasi (1960–1971)</strong> — Kepemimpinan dipahami dalam konteks situasi dan lingkungan organisasi. Tidak ada satu gaya kepemimpinan yang terbaik untuk semua situasi (contingency theory).
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>④ Teori Modern (1981–1999)</strong> — Kepemimpinan transformasional, servant leadership, kepemimpinan berbasis nilai. Fokus pada visi, inspirasi, pemberdayaan, dan transformasi organisasi jangka panjang.
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Evolusi 4 Teori:</strong> <em>"Lahir → Belajar → Situasional → Transformasional"</em> → dari "pemimpin dilahirkan" ke "kepemimpinan adalah tentang transformasi melalui nilai dan visi". Perjalanan panjang pemahaman manusia tentang kepemimpinan.</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: PERAN PEMIMPIN DALAM PEMBELAJARAN ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c2">13.4</span>
+      <div>
+        <div class="section-title">Peran Pemimpin dalam Pembelajaran Organisasi</div>
+        <div class="section-eng">The Leader's Role in Organizational Learning</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Pemimpin dalam pembelajaran organisasi berperan sebagai tiga hal sekaligus:</p>
+      <div class="roles-grid">
+        <div class="role-card rc-1">
+          <span class="rc-icon">🏗️</span>
+          <span class="rc-title">Designer</span>
+          <span class="rc-desc">Membangun nilai utama dan tujuan organisasi — merancang struktur, sistem, dan proses yang memungkinkan organisasi belajar dan berkembang secara berkelanjutan</span>
+        </div>
+        <div class="role-card rc-2">
+          <span class="rc-icon">👨‍🏫</span>
+          <span class="rc-title">Guru</span>
+          <span class="rc-desc">Membantu individu dalam organisasi menyadari model mental dan asumsi yang mendasarinya — mempertanyakan cara pandang yang sudah usang dan membuka perspektif baru</span>
+        </div>
+        <div class="role-card rc-3">
+          <span class="rc-icon">🤲</span>
+          <span class="rc-title">Steward (Pendamping)</span>
+          <span class="rc-desc">Secara aktif mencari cara bagaimana lingkungan kerja yang kompetitif dapat mendorong keberhasilan organisasi — memastikan kepuasan kerja karyawan sambil meningkatkan kinerja</span>
+        </div>
+      </div>
+      <ul class="points" style="margin-top:1rem;">
+        <li class="point"><span class="dot d2"></span><span>
+          Pemimpin mempengaruhi perspektif individu melalui tiga cara: <strong>peristiwa</strong> (mengelola momen-momen penting yang membentuk budaya) · <strong>pola perilaku</strong> (mencontohkan secara konsisten) · <strong>struktur sistemik</strong> (merancang sistem yang mendorong perilaku yang diinginkan).
+        </span></li>
+        <li class="point"><span class="dot d2"></span><span>
+          Sebagai <strong>steward</strong>, pemimpin menciptakan lingkungan kerja yang kondusif yang meningkatkan kepuasan kerja karyawan — sesuatu yang <em>tidak seperti apa yang dilakukan oleh organisasi tradisional</em>, yang lebih fokus pada kontrol daripada pemberdayaan.
+        </span></li>
+      </ul>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 3 Peran:</strong> <em>"Designer-Guru-Steward"</em> → <em>"DGS"</em> → <em>"Desain Sistem, Gurukan Perspektif, Setia Dampingi!"</em></span>
+      </div>
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: EQ + PEMIMPIN NARSIS ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c3">13.5–13.6</span>
+      <div>
+        <div class="section-title">Kecerdasan Emosional (EQ) &amp; Pemimpin Narsis</div>
+        <div class="section-eng">Emotional Intelligence &amp; Narcissistic Leaders</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub3a">
+        <div class="subsection-header" onclick="toggleSub('sub3a')">
+          ❤️ 5 Komponen Kecerdasan Emosional (EQ) Pemimpin Besar (13.5) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;"><strong style="color:var(--text);">Pemimpin yang besar</strong> tidak hanya memiliki kemampuan analitis atau ide bagus — mereka juga memiliki <em>kecerdasan emosional</em>. Lima komponen EQ:</p>
+          <div class="eq-grid">
+            <div class="eq-card eq-1">
+              <span class="ec-icon">🪞</span>
+              <span class="ec-title">Kesadaran Pribadi</span>
+              <span class="ec-desc">Self-awareness — mengenali emosi, kekuatan, kelemahan, dan dampak diri sendiri terhadap orang lain</span>
+            </div>
+            <div class="eq-card eq-2">
+              <span class="ec-icon">🎛️</span>
+              <span class="ec-title">Kesadaran akan Peraturan</span>
+              <span class="ec-desc">Self-regulation — mengelola dan mengendalikan emosi impulsif; berpikir sebelum bertindak dalam situasi tekanan</span>
+            </div>
+            <div class="eq-card eq-3">
+              <span class="ec-icon">🔥</span>
+              <span class="ec-title">Motivasi</span>
+              <span class="ec-desc">Dorongan internal untuk mencapai standar yang tinggi — bukan sekadar karena uang atau status, tapi karena keinginan untuk unggul</span>
+            </div>
+            <div class="eq-card eq-4">
+              <span class="ec-icon">🫂</span>
+              <span class="ec-title">Empati</span>
+              <span class="ec-desc">Memahami perspektif dan perasaan orang lain — kemampuan menempatkan diri dalam posisi orang lain</span>
+            </div>
+            <div class="eq-card eq-5">
+              <span class="ec-icon">🤝</span>
+              <span class="ec-title">Keterampilan Sosial</span>
+              <span class="ec-desc">Membangun hubungan, jaringan, dan mengelola kelompok — kemampuan mempengaruhi orang lain menuju tujuan bersama</span>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 5 Komponen EQ:</strong> <em>"Kesadaran-Regulasi-Motivasi-Empati-Sosial"</em> → <em>"KRMES"</em> → <em>"Kunci Rahasia Memimpin: Emosi &amp; Sosial!"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub3b">
+        <div class="subsection-header" onclick="toggleSub('sub3b')">
+          🎭 Pemimpin Narsis: Manfaat &amp; Bahaya (13.6) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d3"></span><span>
+              Freud mengidentifikasi tiga tipe pribadi: <strong>erotis</strong> (mencintai dan dicintai), <strong>obsesif</strong> (self-reliant &amp; conscientious, membantu karyawan mendengarkan instruksi dan mencapai win-win), dan <strong>narsistik</strong> (independen, agresif, inovatif, dan maunya diagungkan).
+            </span></li>
+          </ul>
+          <div class="narsis-split">
+            <div class="narsis-card nc-pro">
+              <span class="nc-title">✅ Kekuatan Pemimpin Narsis Produktif</span>
+              <ul>
+                <li>Risk takers yang dapat melihat gambaran besar organisasi</li>
+                <li>Memiliki visi yang kuat dan jelas</li>
+                <li>Kemampuan mengkomunikasikan visi melalui kepiawaian pidato (oratory)</li>
+                <li>Keinginan meninggalkan kenangan atau warisan (legacy)</li>
+                <li>Contoh: Jack Welch (GE) — pemimpin narsis produktif</li>
+              </ul>
+            </div>
+            <div class="narsis-card nc-con">
+              <span class="nc-title">⚠️ Kelemahan Pemimpin Narsis</span>
+              <ul>
+                <li>Sangat sensitif terhadap kritik</li>
+                <li>Tidak mau mendengarkan pendapat orang lain</li>
+                <li>Keras terhadap karyawan yang mempertanyakan cara pandang mereka</li>
+                <li>Kecenderungan membuat keputusan berdasarkan ego, bukan data</li>
+                <li>Dapat mengisolasi diri dari realita organisasi</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box amber">
+            <strong>💡 Catatan:</strong> Pemimpin narsis bisa sangat efektif saat organisasi butuh visi berani dan transformasi besar — tapi menjadi destruktif saat sudah sukses dan tidak ada lagi yang berani memberikan umpan balik jujur. <em>Keseimbangan antara visi kuat dan keterbukaan terhadap masukan adalah kuncinya.</em>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: VISI, NILAI & BUDAYA NASIONAL HOFSTEDE ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c4">13.7–13.8</span>
+      <div>
+        <div class="section-title">Visi, Nilai, Budaya Organisasi &amp; Pengaruh Budaya Nasional</div>
+        <div class="section-eng">Vision, Values, Organizational Culture &amp; Hofstede's Cultural Dimensions</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub4a">
+        <div class="subsection-header" onclick="toggleSub('sub4a')">
+          🔭 Peran Kepemimpinan dalam Mengembangkan Visi &amp; Nilai (13.7) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Pemimpin visioner</strong> dapat menerapkan manajemen simultan secara kontinu dan melakukan perubahan — memiliki ideologi yang sejalan dengan nilai utama dan tujuan organisasi.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              <strong>Nilai utama organisasi</strong> = prinsip sebuah organisasi didirikan. <strong>Tujuan organisasi</strong> = alasan mengapa organisasi itu ada.
+            </span></li>
+            <li class="point"><span class="dot d4"></span><span>
+              Pemimpin visioner mengejar tujuan mereka secara <em>kontinyu</em> melalui nilai utama dan tujuan organisasi — bukan melalui ancaman, melainkan melalui inspirasi dan penyelarasan.
+            </span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4b">
+        <div class="subsection-header" onclick="toggleSub('sub4b')">
+          🌍 4 Dimensi Budaya Nasional Hofstede (13.8) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;">Hofstede (1997) menemukan bahwa budaya nasional berpengaruh pada nilai-nilai yang dimiliki individu di lebih dari 50 negara. Empat dimensi budaya yang mempengaruhi gaya kepemimpinan:</p>
+          <div class="hofstede-grid">
+            <div class="hof-card hc-1">
+              <span class="hc-num">DIMENSI 1</span>
+              <span class="hc-title">Power Distance</span>
+              <span class="hc-desc">Sejauh mana anggota yang paling tidak memiliki kekuasaan dalam sebuah institusi/organisasi di suatu negara dapat menerima distribusi kekuasaan yang tidak sama. <em>High PD</em> (Indonesia, Malaysia): hierarki diterima. <em>Low PD</em> (Skandinavia): hierarki dikritisi.</span>
+            </div>
+            <div class="hof-card hc-2">
+              <span class="hc-num">DIMENSI 2</span>
+              <span class="hc-title">Individualisme vs Kolektivisme</span>
+              <span class="hc-desc"><em>Individualisme</em>: kurangnya keterikatan antar individu — setiap orang mengurus dirinya sendiri. <em>Kolektivisme</em>: keterikatan erat antar individu dalam kelompok — kepentingan individu terintegrasi dalam kepentingan kelompok.</span>
+            </div>
+            <div class="hof-card hc-3">
+              <span class="hc-num">DIMENSI 3</span>
+              <span class="hc-title">Masculinity vs Femininity</span>
+              <span class="hc-desc"><em>Masculinity</em> (Jepang, Austria, Venezuela): perilaku asertif, peran gender jelas, laki-laki harus tangguh. <em>Femininity</em> (Swedia, Norwegia, Belanda): perilaku modis, tidak membedakan gender, kualitas hidup diutamakan.</span>
+            </div>
+            <div class="hof-card hc-4">
+              <span class="hc-num">DIMENSI 4</span>
+              <span class="hc-title">Uncertainty Avoidance</span>
+              <span class="hc-desc">Sejauh mana karyawan merasa terancam oleh situasi yang tidak jelas atau tidak diketahui. <em>High UA</em>: butuh struktur dan kepastian. <em>Low UA</em>: lebih toleran terhadap ambiguitas dan risiko.</span>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 4 Dimensi Hofstede:</strong> <em>"Power-Individu-Maskulin-Uncertainty"</em> → <em>"PIMU"</em> → <em>"Pemimpin Internasional Mesti Ukur budaya nasional!"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: MEMIMPIN PERUBAHAN STRATEJIK (SCHNEIDER) ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">13.9</span>
+      <div>
+        <div class="section-title">Memimpin Perubahan Stratejik — Schneider (2000)</div>
+        <div class="section-eng">Leading Strategic Change: Schneider's Four Principles</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d6"></span><span>
+          <strong>Schneider (2000):</strong> Ide yang brilian akan gagal jika tidak diselaraskan dengan strategi organisasi, kepemimpinan, dan budaya organisasi. Empat alasan mengapa ide manajemen yang baik tidak diadopsi:
+        </span></li>
+      </ul>
+      <div class="schneider-list">
+        <div class="sch-item">
+          <div class="sch-alpha">a</div>
+          <div><strong>Organisasi adalah living social organism</strong> — Organisasi terdiri dari orang-orang, bukan mesin. Bertumbuh dan berkembang dari dalam ke luar, memiliki pola yang unik dan tidak linear. Intervensi harus mempertimbangkan kompleksitas biologis ini.</div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-alpha">b</div>
+          <div><strong>Budaya organisasi lebih berkuasa dari segalanya</strong> — Organisasi boleh memiliki strategi brilian, tetapi jika tidak sejalan dengan budaya organisasi maka tidak akan berhasil. Setiap perubahan harus selaras dengan salah satu dari 4 jenis budaya: <em>kontrol, kolaborasi, kompetensi, dan kultivasi.</em></div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-alpha">c</div>
+          <div><strong>Intervensi system-focused lebih efektif</strong> — Ketika intervensi component-focused tidak bekerja. Pendekatan sistem yang menekankan kesesuaian antara berbagai bagian organisasi lebih berhasil dalam implementasi perubahan.</div>
+        </div>
+        <div class="sch-item">
+          <div class="sch-alpha">d</div>
+          <div><strong>Intervensi harus terhubung dengan strategi organisasi</strong> — Semua ide perubahan manajemen harus jelas selaras dengan strategi organisasi yang ada; perubahan demi perubahan tanpa arah stratejik tidak akan menghasilkan perbaikan.</div>
+        </div>
+      </div>
+      <div class="info-box orange">
+        <strong>⚠️ Paradoks Perubahan:</strong> Semua organisasi bersaing dalam lingkungan yang berubah, tetapi individu-individu yang terlibat dalam organisasi <em>resisten terhadap perubahan</em>. Perubahan membutuhkan agen perubahan yang efektif — seperti CEO yang memiliki kekuasaan dan otoritas untuk mengarahkan inisiatif perubahan. Agen perubahan haruslah seorang visioner dengan kombinasi karismatik dan peran sebagai arsitek organisasi.
+      </div>
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: KINERJA ORGANISASI & BERKELANJUTAN ══ -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <span class="num c6">13.10–13.11</span>
+      <div>
+        <div class="section-title">Kepemimpinan, Kinerja Organisasi &amp; Kinerja Berkelanjutan</div>
+        <div class="section-eng">Leadership Impact on Organizational Performance &amp; Sustainable Performance</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub6a">
+        <div class="subsection-header" onclick="toggleSub('sub6a')">
+          📊 Kepemimpinan Transformasional vs Transaksional &amp; Kinerja (13.10) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <div class="tt-split">
+            <div class="tt-card tt-trans">
+              <span class="tc-title">🔥 Transformasional</span>
+              <span class="tc-desc">"Inspirasi dan ubah"</span>
+              <ul>
+                <li>Mempengaruhi kinerja NON-FINANSIAL melalui budaya fleksibel</li>
+                <li>Mendorong strategi diferensiasi</li>
+                <li>Sistem akuntansi manajemen terkait diferensiasi</li>
+                <li>Menginspirasi, memotivasi, mengubah nilai-nilai pengikut</li>
+                <li>Cocok untuk lingkungan yang berubah cepat</li>
+              </ul>
+            </div>
+            <div class="tt-card tt-transa">
+              <span class="tc-title">💼 Transaksional</span>
+              <span class="tc-desc">"Reward dan pertukaran"</span>
+              <ul>
+                <li>Mempengaruhi kinerja FINANSIAL melalui budaya kontrol</li>
+                <li>Mendorong strategi low cost</li>
+                <li>Sistem akuntansi manajemen terkait biaya rendah</li>
+                <li>Motivasi melalui reward, bonus, dan insentif yang jelas</li>
+                <li>Cocok untuk lingkungan yang stabil dan terstruktur</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box blue">
+            <strong>📌 Temuan Penelitian Yuliana (2011):</strong> Gaya kepemimpinan tidak mempengaruhi kinerja organisasi <em>secara langsung</em>, tetapi melalui dua variabel kontinjensi: strategi dan sistem akuntansi manajemen. Ini berarti <strong style="color:var(--text);">sistem akuntansi manajemen adalah variabel penting dalam pencapaian kinerja organisasi</strong> — bukan sekadar alat pelaporan.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub6b">
+        <div class="subsection-header" onclick="toggleSub('sub6b')">
+          🌱 Kepemimpinan &amp; Kinerja Berkelanjutan (13.11) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d6"></span><span>
+              <strong>Kinerja berkesinambungan</strong> menolong perusahaan mengurangi risiko, meningkatkan efisiensi, melakukan inovasi baru, serta menghasilkan produk dan jasa ramah lingkungan — integrasi ekonomi perusahaan dengan kondisi sosial dan lingkungan.
+            </span></li>
+            <li class="point"><span class="dot d6"></span><span>
+              Kinerja berkelanjutan terjadi saat pemimpin atau manajer <strong>mentransformasikan perusahaan</strong> sehingga memiliki kinerja berkesinambungan dan peduli pada lingkungan — pemimpin transformasional memulai pekerjaan dengan menguji semua faktor yang menentukan kinerja berkesinambungan.
+            </span></li>
+            <li class="point"><span class="dot d6"></span><span>
+              <strong>Peran kepemimpinan dalam kinerja berkelanjutan:</strong> Menjamin komitmen manajemen · mengembangkan sistem insentif untuk semua pemimpin di semua level · memberi respons fleksibel terhadap perubahan · melakukan dialog dan kerjasama dengan anggota masyarakat.
+            </span></li>
+          </ul>
+          <div class="info-box green">
+            <strong>🌍 Inti Kinerja Berkelanjutan:</strong> Pemimpin yang benar-benar efektif tidak hanya mengoptimalkan kinerja finansial jangka pendek — mereka membangun organisasi yang mampu bertahan, berkembang, dan berkontribusi positif bagi masyarakat dan lingkungan secara <em>berkesinambungan</em>.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn6" onclick="markDone(6)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab XIII</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);color:#000;">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Kepemimpinan ≠ Manajemen — Perubahan vs Konsistensi</h3>
+          <p><strong style="color:#f0f0ff;">Manajemen</strong> = menangani kompleksitas untuk konsistensi. <strong style="color:#f0f0ff;">Kepemimpinan</strong> = menangani perubahan untuk transformasi. Organisasi butuh keduanya. Teori kepemimpinan berevolusi: Lahir → Belajar → Situasional → Transformasional.</p>
+          <div class="keywords"><span class="kw">Kotter 1990</span><span class="kw">kompleksitas vs perubahan</span><span class="kw">4 teori evolusi</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);color:#fff;">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">3 Peran DGS: Designer · Guru · Steward</h3>
+          <p>Pemimpin dalam pembelajaran organisasi berperan sebagai: <strong style="color:#f0f0ff;">Designer</strong> (bangun nilai &amp; tujuan), <strong style="color:#f0f0ff;">Guru</strong> (bantu menyadari model mental), <strong style="color:#f0f0ff;">Steward</strong> (dampingi menuju kinerja lebih tinggi sambil jaga kepuasan karyawan).</p>
+          <div class="keywords"><span class="kw">DGS</span><span class="kw">learning organization</span><span class="kw">peristiwa-pola-struktur</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);color:#000;">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">EQ 5 Komponen KRMES — IQ Saja Tidak Cukup</h3>
+          <p>Pemimpin besar memiliki kecerdasan emosional: <strong style="color:#f0f0ff;">Kesadaran diri · Regulasi diri · Motivasi intrinsik · Empati · Keterampilan Sosial</strong>. Tanpa EQ, kecerdasan analitis seorang pemimpin tidak bisa dikonversi menjadi pengaruh nyata.</p>
+          <div class="keywords"><span class="kw">KRMES</span><span class="kw">EQ pemimpin besar</span><span class="kw">empati + sosial</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);color:#000;">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">Hofstede 4 Dimensi PIMU — Budaya Nasional Mempengaruhi Kepemimpinan</h3>
+          <p>Gaya kepemimpinan tidak bisa seragam di semua negara. <strong style="color:#f0f0ff;">Power Distance · Individualism/Collectivism · Masculinity/Femininity · Uncertainty Avoidance</strong> — keempat dimensi ini menentukan bagaimana kepemimpinan dipersepsikan dan diterima di konteks budaya yang berbeda.</p>
+          <div class="keywords"><span class="kw">PIMU</span><span class="kw">Hofstede 1997</span><span class="kw">kontekstual budaya</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent7);color:#000;">5</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent7);">Schneider: Budaya Lebih Berkuasa dari Strategi</h3>
+          <p>Ide brilian gagal tanpa keselarasan strategi-kepemimpinan-budaya. Empat prinsip: organisasi adalah <strong style="color:#f0f0ff;">makhluk hidup</strong> · <strong style="color:#f0f0ff;">budaya lebih berkuasa</strong> dari strategi · intervensi <strong style="color:#f0f0ff;">sistemik</strong> lebih efektif · perubahan harus <strong style="color:#f0f0ff;">selaras strategi</strong>. Butuh agen perubahan: visioner + karismatik + arsitek.</p>
+          <div class="keywords"><span class="kw">Schneider 2000</span><span class="kw">living organism</span><span class="kw">4 jenis budaya</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent6);color:#000;">6</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent6);">Transformasional vs Transaksional — Pilih Sesuai Strategi &amp; Konteks</h3>
+          <p><strong style="color:#f0f0ff;">Transformasional</strong>: kinerja non-finansial, budaya fleksibel, strategi diferensiasi. <strong style="color:#f0f0ff;">Transaksional</strong>: kinerja finansial, budaya kontrol, strategi low cost. Kepemimpinan tidak langsung mempengaruhi kinerja — mediasi melalui strategi dan sistem akuntansi manajemen.</p>
+          <div class="keywords"><span class="kw">transformasional</span><span class="kw">transaksional</span><span class="kw">kinerja berkelanjutan</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-teal">Kepemimpinan ≠ Manajemen</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-vio">Peran DGS</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-amr">EQ KRMES</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-blu">Hofstede PIMU</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-grn">Kinerja Berkelanjutan</span>
+      </div>
+      <div class="formula-caption">Kepemimpinan stratejik yang efektif: pahami perbedaannya dari manajemen, kembangkan EQ, kenali konteks budaya, dan pimpin perubahan menuju kinerja yang berkelanjutan</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box teal" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab XIII:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">K</strong>otter: Kepemimpinan = Perubahan (bukan manajemen). Pemimpin berperan sebagai <strong style="color:#f0f0ff;">DGS</strong>. Miliki <strong style="color:#f0f0ff;">EQ</strong> dengan 5 komponen KRMES. Pahami <strong style="color:#f0f0ff;">Hofstede PIMU</strong>. Ingat <strong style="color:#f0f0ff;">Schneider</strong>: budaya > strategi. Pilih <strong style="color:#f0f0ff;">Transformasional</strong> atau Transaksional sesuai konteks!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">K-DGS-EQ-PIMU-S-TT</strong> — Enam blok kunci Bab XIII. Pemimpin stratejik bukan hanya orang yang <em>paling pintar</em> di ruangan, melainkan orang yang mampu <em>menggerakkan orang lain</em> menuju visi yang bermakna melalui empati, nilai, dan keteladanan.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab XIII Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 6;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

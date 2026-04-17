@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB XII — Kepemimpinan dan Budaya Korporat</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #818cf8;   /* indigo — chapter 12 color */
+    --accent2: #f472b6;   /* pink */
+    --accent3: #34d399;   /* emerald */
+    --accent4: #fb923c;   /* orange */
+    --accent5: #facc15;   /* yellow */
+    --accent6: #60a5fa;   /* blue */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--accent); color: #fff; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── MIND MAP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #4f46e5); color: #fff; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+  .branch { padding: 0.75rem; border-radius: 10px; font-size: 0.73rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.58rem; font-family: 'DM Mono', monospace; margin-bottom: 0.25rem; opacity: 0.7; }
+  .b1 { background: rgba(129,140,248,0.08); border-color: rgba(129,140,248,0.25); color: var(--accent); }
+  .b2 { background: rgba(244,114,182,0.08); border-color: rgba(244,114,182,0.25); color: var(--accent2); }
+  .b3 { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(96,165,250,0.08);  border-color: rgba(96,165,250,0.25);  color: var(--accent6); }
+  .b5 { background: rgba(251,146,60,0.08);  border-color: rgba(251,146,60,0.25);  color: var(--accent4); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent);  color: #fff; }
+  .c2 { background: var(--accent2); color: #fff; }
+  .c3 { background: var(--accent3); color: #000; }
+  .c4 { background: var(--accent4); color: #000; }
+  .c5 { background: var(--accent6); color: #000; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7) { transition-delay: 0.28s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1{background:var(--accent);} .d2{background:var(--accent2);} .d3{background:var(--accent3);}
+  .d4{background:var(--accent4);} .d5{background:var(--accent5);} .d6{background:var(--accent6);}
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(129,140,248,0.07); border: 1px solid rgba(129,140,248,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.indigo { background: rgba(129,140,248,0.07); border: 1px solid rgba(129,140,248,0.2); }
+  .info-box.pink   { background: rgba(244,114,182,0.07); border: 1px solid rgba(244,114,182,0.2); }
+  .info-box.green  { background: rgba(52,211,153,0.07);  border: 1px solid rgba(52,211,153,0.2); }
+  .info-box.orange { background: rgba(251,146,60,0.07);  border: 1px solid rgba(251,146,60,0.2); }
+  .info-box.blue   { background: rgba(96,165,250,0.07);  border: 1px solid rgba(96,165,250,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── KONTEKS STRIP ── */
+  .context-strip { display: flex; gap: 0; margin-bottom: 1.5rem; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .cs-done { flex: 1; padding: 0.65rem 0.75rem; background: rgba(52,211,153,0.07); font-size: 0.73rem; text-align: center; }
+  .cs-done .csd-l { font-family: 'DM Mono', monospace; font-size: 0.56rem; color: var(--accent3); display: block; margin-bottom: 0.15rem; font-weight: 700; }
+  .cs-done .csd-v { color: var(--accent3); font-weight: 600; font-size: 0.75rem; }
+  .cs-now { flex: 1.2; padding: 0.65rem 0.75rem; background: rgba(129,140,248,0.1); font-size: 0.73rem; text-align: center; border-left: 1px solid var(--border); }
+  .cs-now .csn-l { font-family: 'DM Mono', monospace; font-size: 0.56rem; color: var(--accent); display: block; margin-bottom: 0.15rem; font-weight: 700; }
+  .cs-now .csn-v { color: var(--accent); font-weight: 700; font-size: 0.75rem; }
+
+  /* ── BUDAYA SEHAT vs TIDAK SEHAT ── */
+  .culture-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .culture-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.8rem; line-height: 1.5; color: #c8c8e0; }
+  .culture-card .cc-icon { font-size: 1.2rem; display: block; margin-bottom: 0.25rem; }
+  .culture-card .cc-title { font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 0.4rem; }
+  .culture-card ul { list-style: none; }
+  .culture-card ul li { padding: 0.22rem 0; border-bottom: 1px solid var(--border); font-size: 0.77rem; color: var(--muted); }
+  .culture-card ul li:last-child { border-bottom: none; }
+  .culture-card ul li::before { content: "→ "; }
+  .cc-healthy  { border-color: rgba(52,211,153,0.3);  } .cc-healthy  .cc-title { color: var(--accent3); }
+  .cc-unhealthy{ border-color: rgba(244,114,182,0.3); } .cc-unhealthy .cc-title { color: var(--accent2); }
+
+  /* ── FITUR BUDAYA ── */
+  .feature-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .feat-item { display: flex; gap: 0.8rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.7rem 0.9rem; font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; border-left: 3px solid rgba(129,140,248,0.4); }
+  .feat-icon { font-size: 1rem; flex-shrink: 0; }
+  .feat-item strong { color: var(--text); }
+
+  /* ── CARA MEROMBAK BUDAYA ── */
+  .revamp-steps { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+  .rvs-item { display: flex; gap: 0.8rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.75rem 0.9rem; border-left: 3px solid rgba(244,114,182,0.4); font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; }
+  .rvs-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; background: var(--accent2); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
+  .rvs-item strong { color: var(--text); }
+
+  /* ── 3 TINDAKAN KEPEMIMPINAN ── */
+  .leadership-cards { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
+  .lc-item { border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+  .lci-header { display: flex; align-items: center; gap: 0.8rem; padding: 0.85rem 1rem; }
+  .lci-badge { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px; flex-shrink: 0; }
+  .lci-title { font-weight: 700; font-size: 0.9rem; }
+  .lci-body { padding: 0 1rem 1rem; font-size: 0.82rem; line-height: 1.55; color: #c8c8e0; }
+  .lc-1 .lci-header { background: rgba(52,211,153,0.08);  border-bottom: 1px solid rgba(52,211,153,0.15); }  .lc-1 .lci-title { color: var(--accent3); } .lc-1 .lci-badge { background: var(--accent3); color: #000; }
+  .lc-2 .lci-header { background: rgba(251,146,60,0.08);  border-bottom: 1px solid rgba(251,146,60,0.15); }  .lc-2 .lci-title { color: var(--accent4); } .lc-2 .lci-badge { background: var(--accent4); color: #000; }
+  .lc-3 .lci-header { background: rgba(96,165,250,0.08);  border-bottom: 1px solid rgba(96,165,250,0.15); }  .lc-3 .lci-title { color: var(--accent6); } .lc-3 .lci-badge { background: var(--accent6); color: #000; }
+
+  /* ── GRAND CLOSING SECTION ── */
+  .closing-box { margin-top: 1.5rem; padding: 1.5rem 1.6rem; background: linear-gradient(135deg, rgba(129,140,248,0.1), rgba(244,114,182,0.07)); border: 1px solid rgba(129,140,248,0.3); border-radius: 14px; }
+  .closing-box h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 900; color: var(--accent); margin-bottom: 0.8rem; }
+  .closing-box p { font-size: 0.84rem; line-height: 1.7; color: #c8c8e0; margin-bottom: 0.8rem; }
+  .test-leadership { display: flex; flex-direction: column; gap: 0.5rem; margin: 0.9rem 0; }
+  .tl-item { display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.82rem; color: #c8c8e0; line-height: 1.5; }
+  .tl-check { color: var(--accent3); font-size: 0.9rem; flex-shrink: 0; margin-top: 0.1rem; }
+  .tl-item strong { color: var(--text); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+  .done-btn.checked { border-color: var(--accent3); color: var(--accent3); background: rgba(52,211,153,0.07); }
+
+  /* ── ULTIMATE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(129,140,248,0.08), rgba(244,114,182,0.05)); border: 1px solid rgba(129,140,248,0.3); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #4f46e5); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  /* ── MEGA SUMMARY (12 BAB) ── */
+  .mega-summary { margin-top: 1.5rem; padding: 1.4rem 1.5rem; background: rgba(0,0,0,0.35); border-radius: 12px; border: 1px solid rgba(129,140,248,0.2); }
+  .ms-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 900; color: var(--accent); margin-bottom: 1rem; text-align: center; }
+  .ms-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 0.5rem; }
+  .ms-item { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.76rem; line-height: 1.45; color: #c8c8e0; padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
+  .ms-item:last-child { border-bottom: none; }
+  .ms-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; color: #000; padding: 0.15rem 0.35rem; border-radius: 3px; flex-shrink: 0; margin-top: 0.1rem; white-space: nowrap; }
+  .ms-item strong { color: var(--text); font-weight: 600; }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.75rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.76rem; }
+  .ft-ind { background: rgba(129,140,248,0.15); color: var(--accent); }
+  .ft-pnk { background: rgba(244,114,182,0.15); color: var(--accent2); }
+  .ft-grn { background: rgba(52,211,153,0.15);  color: var(--accent3); }
+  .ft-blu { background: rgba(96,165,250,0.15);  color: var(--accent6); }
+  .formula-op { color: var(--muted); font-size: 0.9rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK · BAB TERAKHIR</div>
+    <h1>BAB XII — <span>Kepemimpinan</span><br>&amp; Budaya Korporat</h1>
+    <p class="subtitle">Tugas 9: Budaya Korporat · Tugas 10: Kepemimpinan Stratejik · Penutup Seluruh Modul MSK</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab XII</h2>
+    <div class="mind-center">👑 Kepemimpinan &amp; Budaya = Puncak Implementasi</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">Tugas 9</div>🏛️ Fitur Budaya Korporat<br><small style="opacity:0.7">Sehat vs tidak sehat</small></div>
+      <div class="branch b2"><div class="blabel">Tugas 9</div>🔄 Merombak Budaya<br><small style="opacity:0.7">Bagaimana mengubah budaya bermasalah</small></div>
+      <div class="branch b3"><div class="blabel">Tugas 10</div>🎯 3 Tindakan Kepemimpinan<br><small style="opacity:0.7">Update · Tekanan · Koreksi</small></div>
+      <div class="branch b4"><div class="blabel">12.5</div>🧪 Test Kepemimpinan Stratejik<br><small style="opacity:0.7">Ukuran kepemimpinan yang efektif</small></div>
+      <div class="branch b5"><div class="blabel">Penutup</div>🏁 Rangkuman Seluruh Modul<br><small style="opacity:0.7">12 Bab MSK dalam satu pandangan</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: KONTEKS & POSISI BAB XII ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">12.1–12.2</span>
+      <div>
+        <div class="section-title">Pendahuluan: Dua Tugas Puncak Implementasi Strategi</div>
+        <div class="section-eng">Introduction: The Two Capstone Tasks of Strategy Execution</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <div class="context-strip">
+        <div class="cs-done">
+          <span class="csd-l">✅ BAB X–XI (TUGAS 1–8)</span>
+          <span class="csd-v">SDM · Kompetensi · Struktur · AKPSI</span>
+        </div>
+        <div class="cs-now">
+          <span class="csn-l">▶ BAB XII (TUGAS 9–10) — PUNCAK</span>
+          <span class="csn-v">Budaya Korporat · Kepemimpinan Stratejik</span>
+        </div>
+      </div>
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          Bab XII mengeksplorasi <strong>dua tugas puncak eksekutif</strong> yang paling berpengaruh pada kualitas implementasi strategi: (a) menciptakan budaya korporat yang mendukung strategi, dan (b) menerapkan kepemimpinan internal yang mendorong kemajuan implementasi.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Mengapa budaya dan kepemimpinan adalah puncak?</strong> Karena semua tugas sebelumnya (SDM, kompetensi, struktur, alokasi, kebijakan, proses, sistem, insentif) hanya akan berdampak maksimal jika ada <em>budaya yang mendukung dan kepemimpinan yang menggerakkan</em>. Keduanya adalah "jiwa" dari implementasi strategi.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Keterkaitan dua tugas ini:</strong> Dalam prakteknya, akan sulit memisahkan memimpin keseluruhan proses pengimplementasian strategi dengan memimpin aktivitas-aktivitas lain yang mengarah pada proses strategi itu sendiri. Keduanya berjalan bersamaan.
+        </span></li>
+      </ul>
+      <div class="info-box indigo">
+        <strong>💡 Inti Bab XII:</strong> Budaya korporat yang kuat dan kepemimpinan yang efektif adalah <em>enabler</em> terbesar implementasi strategi — mereka yang membuat semua komponen lain bekerja bersama secara kohesif. Tanpa keduanya, sistem terbaik pun akan berjalan di bawah potensinya.
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: TUGAS 9 — BUDAYA KORPORAT ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c1">Tugas 9</span>
+      <div>
+        <div class="section-title">Membangun Budaya Korporat yang Mendukung Strategi</div>
+        <div class="section-eng">Building a Strategy-Supportive Corporate Culture</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub2a">
+        <div class="subsection-header" onclick="toggleSub('sub2a')">
+          🔍 Apa itu Budaya Korporat? — Fitur-Fitur Kunci <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Budaya korporat</strong> adalah karakteristik budaya perusahaan atau iklim bekerja yang merupakan produk dari: nilai-nilai utama dan prinsip-prinsip berbisnis yang dipegang erat oleh para eksekutif · norma-norma etika yang dapat diterima · praktik-praktik perilaku yang mendefinisikan <em>"bagaimana kita mengerjakan segala hal di sini"</em>.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              Budaya mencakup: pendekatan pengelolaan SDM · gaya mengoperasikan perusahaan · kemistri sekaligus personalitas yang menciptakan lingkungan kerja kondusif · nilai-nilai yang dijunjung · serta praktek bisnis dan tradisi-tradisinya.
+            </span></li>
+          </ul>
+          <p style="font-size:0.82rem;color:var(--muted);margin: 0.8rem 0 0.5rem;"><strong style="color:var(--text);">Fitur-fitur kunci budaya korporat yang perlu dipahami:</strong></p>
+          <div class="feature-list">
+            <div class="feat-item"><span class="feat-icon">🌊</span><div><strong>Dapat diinternalisasikan secara kuat maupun lemah</strong> — budaya perusahaan dapat secara kuat maupun lemah diinternalisasikan oleh para karyawan dan eksekutifnya; semakin kuat internalisasinya, semakin besar dampaknya pada perilaku nyata</div></div>
+            <div class="feat-item"><span class="feat-icon">⚙️</span><div><strong>Bahan pertimbangan dalam implementasi</strong> — budaya layak menjadi bahan pertimbangan penting dalam proses pelaksanaan atau implementasi strategi karena ia menentukan bagaimana orang berperilaku sehari-hari</div></div>
+            <div class="feat-item"><span class="feat-icon">🧬</span><div><strong>Berakar dalam dan sulit diubah</strong> — budaya yang sudah lama terbentuk berakar sangat dalam dalam nilai-nilai dan perilaku organisasi; mengubahnya membutuhkan waktu, komitmen, dan pendekatan yang sangat sistematis</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub2b">
+        <div class="subsection-header" onclick="toggleSub('sub2b')">
+          ✅ Budaya Sehat vs ❌ Budaya Tidak Sehat <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <div class="culture-split">
+            <div class="culture-card cc-healthy">
+              <span class="cc-icon">✅</span>
+              <span class="cc-title">Budaya Sehat yang Mendorong Eksekusi</span>
+              <ul>
+                <li>Nilai-nilai sejalan dengan strategi dan orientasi kinerja</li>
+                <li>Karyawan merasa bangga dengan pekerjaan dan perusahaan</li>
+                <li>Kolaborasi, inovasi, dan perbaikan berkelanjutan dipromosikan</li>
+                <li>Pemimpin mencontohkan nilai-nilai yang dijunjung perusahaan</li>
+                <li>Etika bisnis terintegrasi dalam setiap keputusan</li>
+                <li>Karyawan diberdayakan dan dihargai kontribusinya</li>
+              </ul>
+            </div>
+            <div class="culture-card cc-unhealthy">
+              <span class="cc-icon">❌</span>
+              <span class="cc-title">Budaya Tidak Sehat yang Menghambat Eksekusi</span>
+              <ul>
+                <li>Nilai-nilai bertentangan dengan arah strategi perusahaan</li>
+                <li>Politik internal dan silo departemen mendominasi</li>
+                <li>Perubahan dianggap ancaman, bukan peluang</li>
+                <li>Manajer hanya fokus pada kepentingan unit masing-masing</li>
+                <li>Standar etika diabaikan demi kepentingan jangka pendek</li>
+                <li>Karyawan terbaik tidak merasa dihargai dan memilih pergi</li>
+              </ul>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Kunci membedakan:</strong> Tanyakan <em>"Apakah budaya kami membuat karyawan ingin melakukan yang terbaik untuk strategi perusahaan, atau justru mendorong mereka bertindak untuk kepentingan sendiri?"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub2c">
+        <div class="subsection-header" onclick="toggleSub('sub2c')">
+          🔨 Merombak Budaya yang Bermasalah <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">Mengubah budaya yang bermasalah adalah salah satu tugas manajemen yang paling sulit dan membutuhkan waktu panjang. Beberapa langkah yang dapat dilakukan:</p>
+          <div class="revamp-steps">
+            <div class="rvs-item"><div class="rvs-num">1</div><div><strong>Identifikasi aspek budaya mana yang bermasalah</strong> — diagnosis yang jelas adalah langkah pertama; tidak semua aspek budaya perlu diubah, hanya yang bertentangan dengan strategi</div></div>
+            <div class="rvs-item"><div class="rvs-num">2</div><div><strong>Komunikasikan nilai-nilai dan standar perilaku baru dengan jelas</strong> — manajemen puncak harus secara konsisten mengkomunikasikan apa yang diharapkan dan mengapa perubahan diperlukan</div></div>
+            <div class="rvs-item"><div class="rvs-num">3</div><div><strong>Ganti pemimpin dan manajer yang menolak perubahan budaya</strong> — mereka yang secara aktif melawan perubahan budaya yang diperlukan tidak bisa dibiarkan karena akan merusak upaya transformasi</div></div>
+            <div class="rvs-item"><div class="rvs-num">4</div><div><strong>Selaraskan insentif dan penghargaan dengan nilai-nilai baru</strong> — ubah sistem penghargaan agar mendorong perilaku yang sejalan dengan budaya baru yang diinginkan</div></div>
+            <div class="rvs-item"><div class="rvs-num">5</div><div><strong>Pemimpin harus mencontohkan perilaku budaya yang diinginkan</strong> — "walk the talk": perubahan budaya dimulai dari atas; karyawan mengamati apa yang dilakukan pemimpin, bukan apa yang dikatakannya</div></div>
+          </div>
+          <div class="info-box pink">
+            <strong>⏱️ Realitas Perubahan Budaya:</strong> Merombak budaya adalah maraton, bukan sprint. <em>Perubahan budaya yang substansial biasanya membutuhkan 3–10 tahun</em> tergantung seberapa dalam budaya lama tertanam. Konsistensi dan keteladanan pemimpin adalah kunci keberhasilan.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: TUGAS 10 — KEPEMIMPINAN STRATEJIK ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c2">Tugas 10</span>
+      <div>
+        <div class="section-title">Memimpin Proses Pengimplementasian Strategi</div>
+        <div class="section-eng">Leading the Strategy Execution Process</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d2"></span><span>
+          Agar strategi diimplementasikan dengan benar-benar penuh penguasaan serta pendekatan operasional berkualitas, <strong>para eksekutif puncak harus memimpin</strong> dalam keseluruhan proses eksekusi strategi dan secara pribadi mendorong percepatan progresnya.
+        </span></li>
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>Kelihaian pengimplementasian strategi</strong> menuntut para manajer perusahaan untuk: berpikir dan bertindak cerdas · cekatan dalam mengidentifikasi berbagai permasalahan · mempelajari dengan seksama apa sajakah halangan yang ada di depan · dan memastikan jalan menuju progres yang diinginkan diperlancar.
+        </span></li>
+      </ul>
+
+      <p style="font-size:0.82rem;color:var(--muted);margin: 0.9rem 0 0.5rem;"><strong style="color:var(--text);">Tiga tindakan kunci kepemimpinan dalam implementasi strategi:</strong></p>
+      <div class="leadership-cards">
+        <div class="lc-item lc-1">
+          <div class="lci-header">
+            <span class="lci-badge">TINDAKAN 1</span>
+            <div class="lci-title">🔭 Tetap Up-to-Date &amp; Monitor Cermat</div>
+          </div>
+          <div class="lci-body">
+            Tetap <em>up-to-date</em> atau selalu meng-<em>update</em> diri akan hal-hal yang sedang terjadi serta secara cermat dan hati-hati memonitor perkembangannya. Tujuannya adalah untuk melihat seberapa baik atau buruknya hal-hal di sekitar sedang atau telah terjadi — agar respons dapat diberikan secara tepat waktu.
+          </div>
+        </div>
+        <div class="lc-item lc-2">
+          <div class="lci-header">
+            <span class="lci-badge">TINDAKAN 2</span>
+            <div class="lci-title">⚡ Berikan Tekanan Konstruktif untuk Akselerasi</div>
+          </div>
+          <div class="lci-body">
+            Memberikan <strong>tekanan-tekanan konstruktif</strong> pada organisasi perusahaan untuk segera mengimplementasikan strateginya dengan baik, dan mencapai level operasi yang sangat baik. Tekanan konstruktif ≠ tekanan destruktif — ia mendorong kemajuan tanpa merusak motivasi dan kreativitas tim.
+          </div>
+        </div>
+        <div class="lc-item lc-3">
+          <div class="lci-header">
+            <span class="lci-badge">TINDAKAN 3</span>
+            <div class="lci-title">🔧 Pimpin Proses Koreksi &amp; Penyesuaian</div>
+          </div>
+          <div class="lci-body">
+            Memimpin keseluruhan proses penyesuaian-penyesuaian yang sifatnya mengkoreksi atau memperbaiki — saat implementasi tidak berjalan sesuai rencana, pemimpin harus dengan cepat mengidentifikasi masalah, menentukan tindakan koreksi, dan memastikan penyesuaian dilakukan secara efektif.
+          </div>
+        </div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 3 Tindakan:</strong> <em>"Update-Tekanan-Koreksi"</em> → <em>"UTK"</em> → <em>"Update terus, beri Tekanan konstruktif, Koreksi bila perlu!"</em> — siklus kepemimpinan yang terus berputar selama implementasi berlangsung.</span>
+      </div>
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: TEST KEPEMIMPINAN STRATEJIK ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c3">12.5</span>
+      <div>
+        <div class="section-title">Test Kepemimpinan Stratejik: Apa Ukurannya?</div>
+        <div class="section-eng">The Test of Strategic Leadership Effectiveness</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Pengujian terbaik untuk menilai apakah kepemimpinan strategik itu baik atau tidak adalah dengan mengamati:</p>
+
+      <div class="closing-box">
+        <h3>🧪 Tiga Indikator Kepemimpinan Stratejik yang Efektif</h3>
+        <div class="test-leadership">
+          <div class="tl-item"><span class="tl-check">✦</span><div><strong>Apakah perusahaan memiliki model dan strategi bisnis yang baik?</strong> — Kepemimpinan yang baik menghasilkan strategi yang tepat, bukan sekadar strategi yang terlihat bagus di atas kertas.</div></div>
+          <div class="tl-item"><span class="tl-check">✦</span><div><strong>Apakah strategi tersebut diimplementasikan dengan kompetensi tinggi?</strong> — Kepemimpinan yang baik memastikan eksekusi yang benar-benar terjadi di lapangan dengan kualitas tinggi.</div></div>
+          <div class="tl-item"><span class="tl-check">✦</span><div><strong>Apakah perusahaan berhasil atau gagal mencapai target-target kinerjanya?</strong> — Kepemimpinan yang baik menghasilkan hasil nyata yang terukur, bukan hanya proses yang terlihat sibuk.</div></div>
+        </div>
+        <p style="font-size:0.82rem;color:#9fa3c0;margin-top:0.5rem;">Faktor keberhasilan implementasi sangatlah tergantung pada <strong style="color:#f0f0ff;">kejelian para eksekutif dan manajemen puncak</strong> dalam menganalisa secara mendalam: karakteristik perusahaan mereka · lokasi di mana perusahaan berada dan berekspansi · serta bagaimana keseluruhan organisasi perusahaan diatur serta dikelola.</p>
+      </div>
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: PENUTUP — RANGKUMAN 12 BAB ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">Penutup</span>
+      <div>
+        <div class="section-title">🏁 Rangkuman Keseluruhan Modul MSK — 12 Bab dalam Satu Pandangan</div>
+        <div class="section-eng">Complete Module Summary: Strategic Management &amp; Leadership in 12 Chapters</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Inilah intisari dari keseluruhan modul Manajemen Stratejik yang telah kita pelajari dari bab ke bab:</p>
+
+      <div class="mega-summary">
+        <div class="ms-title">📚 12 Bab Manajemen Stratejik — Peta Lengkap</div>
+        <div class="ms-grid">
+          <div class="ms-item"><span class="ms-num" style="background:#e8c547;color:#000;">I</span><div><strong>Pengantar</strong> — Strategi, model bisnis, 3 test FCP</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#58a6ff;">II</span><div><strong>Arah Dasar</strong> — Visi, Misi, Tujuan SMART, 5 Tahap</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#4ecdc4;color:#000;">III</span><div><strong>Lingkungan Eksternal</strong> — Makro, 5 Forces, SGM, KSF</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#ff6b6b;">IV</span><div><strong>Lingkungan Internal</strong> — VRIN, SWOT, Value Chain</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#a78bfa;">V</span><div><strong>5 Strategi Generik</strong> — BR, Diff, Fokus, Biaya Terbaik</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#f59e0b;color:#000;">VI</span><div><strong>Perkuat Posisi</strong> — Ofensif, Defensif, M&amp;A, Aliansi</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#38bdf8;color:#000;">VII</span><div><strong>Internasional</strong> — Go Global, MD/Global/TN, Profit Sanctuary</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#34d399;color:#000;">VIII</span><div><strong>Diversifikasi</strong> — 3 Test DBH, AIJ, Berkaitan vs Tak Berkaitan</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#fb923c;color:#000;">IX</span><div><strong>Etika &amp; CSR</strong> — URI, 3 faktor, 2 pondasi, Piramida ELEF</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#e879f9;color:#000;">X</span><div><strong>Organisasi</strong> — 10 Tugas, SDM, IAK, Struktur ISSF</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#2dd4bf;color:#000;">XI</span><div><strong>Operasional</strong> — AKPSI: Alokasi, Kebijakan, Proses, Sistem, Insentif</div></div>
+          <div class="ms-item"><span class="ms-num" style="background:#818cf8;">XII</span><div><strong>Budaya &amp; Kepemimpinan</strong> — Budaya sehat, UTK, Test kepemimpinan</div></div>
+        </div>
+      </div>
+
+      <div class="info-box indigo" style="margin-top:1rem;">
+        <strong>🎓 Pesan Penutup Modul MSK:</strong><br>
+        Manajemen Stratejik adalah perjalanan tanpa henti dari analisis → perumusan → implementasi → evaluasi. Bukan satu tindakan, melainkan <em>siklus yang terus berputar</em>. Pemimpin yang sukses adalah mereka yang mampu <strong>membangun strategi yang tepat, mengeksekusinya dengan kompetensi tinggi, dan terus mengevaluasi serta menyesuaikan</strong> seiring perubahan lingkungan bisnis.
+      </div>
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">👑</div>
+      <div>
+        <h2>Ultimate Outline — Bab XII</h2>
+        <p>Rangkuman inti bab terakhir + penutup keseluruhan modul MSK</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);color:#fff;">9</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Tugas 9 — Budaya: "Bagaimana Kita Mengerjakan Segala Hal di Sini"</h3>
+          <p>Budaya korporat adalah produk nilai-nilai, norma etika, dan praktik perilaku yang mendefinisikan cara kerja organisasi. Budaya yang <strong style="color:#f0f0ff;">sehat mendorong eksekusi</strong>; budaya yang tidak sehat menghambatnya. Merombak budaya butuh 3–10 tahun dan dimulai dari keteladanan pemimpin di atas.</p>
+          <div class="keywords"><span class="kw">budaya = jiwa organisasi</span><span class="kw">sehat vs tidak sehat</span><span class="kw">keteladanan pemimpin</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);color:#fff;">10</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">Tugas 10 — Kepemimpinan: Update + Tekanan + Koreksi (UTK)</h3>
+          <p>Pemimpin stratejik yang efektif selalu melakukan tiga hal: <strong style="color:#f0f0ff;">Update</strong> diri tentang perkembangan terkini · memberikan <strong style="color:#f0f0ff;">Tekanan konstruktif</strong> untuk mendorong akselerasi · memimpin <strong style="color:#f0f0ff;">Koreksi</strong> saat implementasi menyimpang. Siklus UTK ini terus berputar sepanjang implementasi.</p>
+          <div class="keywords"><span class="kw">UTK</span><span class="kw">tekanan konstruktif</span><span class="kw">koreksi proaktif</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);color:#000;">✓</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">Test Kepemimpinan: Strategi Baik + Eksekusi Kompeten + Hasil Nyata</h3>
+          <p>Kepemimpinan stratejik yang efektif diukur dari tiga hal: apakah <strong style="color:#f0f0ff;">strategi bisnis baik</strong> · apakah <strong style="color:#f0f0ff;">dieksekusi dengan kompetensi tinggi</strong> · apakah <strong style="color:#f0f0ff;">target kinerja tercapai</strong>. Bukan dari seberapa sibuk pemimpin, melainkan dari kualitas hasil yang dicapai.</p>
+          <div class="keywords"><span class="kw">strategi baik</span><span class="kw">eksekusi kompeten</span><span class="kw">target tercapai</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-ind">Budaya Sehat (T9)</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-pnk">Kepemimpinan UTK (T10)</span>
+        <span class="formula-op">=</span>
+        <span class="formula-term ft-grn">Implementasi Strategi Berhasil</span>
+      </div>
+      <div class="formula-caption" style="margin-top:0.8rem;">Ditambah dengan fondasi Bab X (SDM+Kompetensi+Struktur) dan Bab XI (AKPSI), inilah kerangka implementasi strategi yang lengkap dan kohesif</div>
+      <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+        <div class="formula-line" style="font-size:0.8rem;">
+          <span class="formula-term ft-ind" style="font-size:0.72rem;">Bab I–IX: STRATEGI</span>
+          <span class="formula-op">+</span>
+          <span class="formula-term ft-grn" style="font-size:0.72rem;">Bab X–XII: IMPLEMENTASI</span>
+          <span class="formula-op">=</span>
+          <span class="formula-term ft-blu" style="font-size:0.72rem; background:rgba(129,140,248,0.2);color:#c7d2fe;">MANAJEMEN STRATEJIK SEMPURNA</span>
+        </div>
+        <div class="formula-caption">Rumus besar modul MSK — 9 bab membangun strategi + 3 bab mengimplementasikannya = manajemen stratejik yang utuh</div>
+      </div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box indigo" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab XII + Penutup Modul:</strong><br>
+      <em>"Budaya korporat adalah <strong style="color:#f0f0ff;">jiwa</strong> implementasi — bangun yang <strong style="color:#f0f0ff;">sehat</strong>, rombak yang bermasalah. Pemimpin stratejik <strong style="color:#f0f0ff;">UTK</strong>: Update, Tekanan konstruktif, Koreksi. Diuji dengan: strategi baik + eksekusi kompeten + <strong style="color:#f0f0ff;">hasil nyata</strong>."</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;">
+        <strong style="color:#f0f0ff;">PESAN AKHIR MODUL MSK:</strong> Manajemen Stratejik adalah tentang <em>pilihan yang dibuat dengan sengaja</em> — memilih di industri mana bersaing, bagaimana bersaing, bagaimana mengorganisasi diri untuk menang, dan bagaimana terus memperbaiki diri. Pemimpin yang memahami dan menguasai 12 bab ini memiliki peta jalan yang lengkap untuk membawa perusahaannya memenangkan persaingan secara berkelanjutan.
+      </span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab XII (Terakhir) · Manajemen Stratejik dan Kepemimpinan<br>🎓 Selamat! Anda telah menyelesaikan seluruh 12 bab MSK.</footer>
+</div>
+
+<script>
+  const totalSections = 5;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

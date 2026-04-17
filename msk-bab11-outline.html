@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB XI — Mengelola Operasional Internal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #2dd4bf;   /* teal/cyan — chapter 11 color */
+    --accent2: #818cf8;   /* indigo */
+    --accent3: #fb923c;   /* orange */
+    --accent4: #4ade80;   /* green */
+    --accent5: #f43f5e;   /* rose */
+    --accent6: #facc15;   /* yellow */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--accent); color: #000; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent4)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── MIND MAP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #0d9488); color: #000; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+  .branch { padding: 0.75rem; border-radius: 10px; font-size: 0.73rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.58rem; font-family: 'DM Mono', monospace; margin-bottom: 0.25rem; opacity: 0.7; }
+  .b1 { background: rgba(45,212,191,0.08);  border-color: rgba(45,212,191,0.25);  color: var(--accent); }
+  .b2 { background: rgba(129,140,248,0.08); border-color: rgba(129,140,248,0.25); color: var(--accent2); }
+  .b3 { background: rgba(251,146,60,0.08);  border-color: rgba(251,146,60,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(74,222,128,0.08);  border-color: rgba(74,222,128,0.25);  color: var(--accent4); }
+  .b5 { background: rgba(250,204,21,0.08);  border-color: rgba(250,204,21,0.25);  color: var(--accent6); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent);  color: #000; }
+  .c2 { background: var(--accent2); color: #fff; }
+  .c3 { background: var(--accent3); color: #000; }
+  .c4 { background: var(--accent4); color: #000; }
+  .c5 { background: var(--accent6); color: #000; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1{background:var(--accent);} .d2{background:var(--accent2);} .d3{background:var(--accent3);}
+  .d4{background:var(--accent4);} .d5{background:var(--accent5);} .d6{background:var(--accent6);}
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(45,212,191,0.07); border: 1px solid rgba(45,212,191,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.teal   { background: rgba(45,212,191,0.07);  border: 1px solid rgba(45,212,191,0.2); }
+  .info-box.indigo { background: rgba(129,140,248,0.07); border: 1px solid rgba(129,140,248,0.2); }
+  .info-box.orange { background: rgba(251,146,60,0.07);  border: 1px solid rgba(251,146,60,0.2); }
+  .info-box.green  { background: rgba(74,222,128,0.07);  border: 1px solid rgba(74,222,128,0.2); }
+  .info-box.yellow { background: rgba(250,204,21,0.07);  border: 1px solid rgba(250,204,21,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── CONTEXT STRIP (koneksi ke Bab X) ── */
+  .context-strip { display: flex; gap: 0; margin-bottom: 1.5rem; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; }
+  .cs-done { flex: 1; padding: 0.7rem 0.9rem; background: rgba(74,222,128,0.07); font-size: 0.75rem; text-align: center; }
+  .cs-done .csd-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--accent4); display: block; margin-bottom: 0.2rem; font-weight: 700; }
+  .cs-done .csd-val { color: var(--accent4); font-weight: 600; font-size: 0.78rem; }
+  .cs-now { flex: 1; padding: 0.7rem 0.9rem; background: rgba(45,212,191,0.1); font-size: 0.75rem; text-align: center; border-left: 1px solid var(--border); }
+  .cs-now .csn-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--accent); display: block; margin-bottom: 0.2rem; font-weight: 700; }
+  .cs-now .csn-val { color: var(--accent); font-weight: 700; font-size: 0.78rem; }
+  .cs-next { flex: 1; padding: 0.7rem 0.9rem; background: rgba(129,140,248,0.07); font-size: 0.75rem; text-align: center; border-left: 1px solid var(--border); }
+  .cs-next .csne-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--accent2); display: block; margin-bottom: 0.2rem; font-weight: 700; }
+  .cs-next .csne-val { color: var(--accent2); font-weight: 600; font-size: 0.78rem; }
+
+  /* ── 5 TINDAKAN MANAJERIAL CARDS ── */
+  .tindakan-list { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
+  .tindakan-item { border-radius: 10px; border: 1px solid var(--border); overflow: hidden; }
+  .ti-header { display: flex; align-items: center; gap: 0.8rem; padding: 0.85rem 1rem; }
+  .ti-badge { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 700; color: #000; padding: 0.2rem 0.5rem; border-radius: 4px; flex-shrink: 0; }
+  .ti-title { font-weight: 700; font-size: 0.9rem; }
+  .ti-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--muted); margin-left: auto; flex-shrink: 0; }
+  .ti-body { padding: 0 1rem 1rem; font-size: 0.82rem; line-height: 1.55; color: #c8c8e0; }
+  .ti-row { display: flex; gap: 0.6rem; margin-bottom: 0.45rem; align-items: flex-start; }
+  .ti-lbl { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; color: #000; padding: 0.15rem 0.4rem; border-radius: 3px; flex-shrink: 0; margin-top: 0.15rem; white-space: nowrap; }
+  .ti-1 .ti-header { background: rgba(45,212,191,0.08);  border-bottom: 1px solid rgba(45,212,191,0.15); }  .ti-1 .ti-title { color: var(--accent); }  .ti-1 .ti-badge { background: var(--accent); }  .ti-1 .ti-lbl { background: var(--accent); }
+  .ti-2 .ti-header { background: rgba(129,140,248,0.08); border-bottom: 1px solid rgba(129,140,248,0.15); } .ti-2 .ti-title { color: var(--accent2); } .ti-2 .ti-badge { background: var(--accent2); } .ti-2 .ti-lbl { background: var(--accent2); color:#fff; }
+  .ti-3 .ti-header { background: rgba(251,146,60,0.08);  border-bottom: 1px solid rgba(251,146,60,0.15); }  .ti-3 .ti-title { color: var(--accent3); } .ti-3 .ti-badge { background: var(--accent3); } .ti-3 .ti-lbl { background: var(--accent3); }
+  .ti-4 .ti-header { background: rgba(74,222,128,0.08);  border-bottom: 1px solid rgba(74,222,128,0.15); }  .ti-4 .ti-title { color: var(--accent4); } .ti-4 .ti-badge { background: var(--accent4); } .ti-4 .ti-lbl { background: var(--accent4); }
+  .ti-5 .ti-header { background: rgba(250,204,21,0.08);  border-bottom: 1px solid rgba(250,204,21,0.15); }  .ti-5 .ti-title { color: var(--accent6); } .ti-5 .ti-badge { background: var(--accent6); } .ti-5 .ti-lbl { background: var(--accent6); }
+
+  /* ── BEST PRACTICES ── */
+  .bp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 0.6rem; margin-top: 0.9rem; }
+  .bp-card { padding: 0.8rem; border-radius: 9px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); font-size: 0.78rem; line-height: 1.45; color: #c8c8e0; text-align: center; }
+  .bp-card .bpc-icon { font-size: 1.1rem; display: block; margin-bottom: 0.3rem; }
+  .bp-card .bpc-title { font-weight: 700; font-size: 0.8rem; display: block; margin-bottom: 0.2rem; color: var(--accent3); }
+  .bp-card .bpc-desc { color: var(--muted); font-size: 0.72rem; }
+
+  /* ── INSENTIF PRINCIPLES ── */
+  .incentive-list { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .inc-item { display: flex; gap: 0.8rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.7rem 0.9rem; font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; border-left: 3px solid rgba(250,204,21,0.4); }
+  .inc-icon { font-size: 1rem; flex-shrink: 0; }
+  .inc-item strong { color: var(--text); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent4); color: var(--accent4); }
+  .done-btn.checked { border-color: var(--accent4); color: var(--accent4); background: rgba(74,222,128,0.07); }
+
+  /* ── ULTIMATE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(45,212,191,0.07), rgba(74,222,128,0.04)); border: 1px solid rgba(45,212,191,0.25); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #0d9488); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.75rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.75rem; }
+  .ft-teal  { background: rgba(45,212,191,0.15);  color: var(--accent); }
+  .ft-ind   { background: rgba(129,140,248,0.15); color: var(--accent2); }
+  .ft-orng  { background: rgba(251,146,60,0.15);  color: var(--accent3); }
+  .ft-grn   { background: rgba(74,222,128,0.15);  color: var(--accent4); }
+  .ft-yel   { background: rgba(250,204,21,0.15);  color: var(--accent6); }
+  .formula-op { color: var(--muted); font-size: 0.9rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB XI — <span>Mengelola</span><br>Operasional Internal</h1>
+    <p class="subtitle">Alokasi Sumber Daya · Kebijakan &amp; Prosedur · Manajemen Proses · Sistem Informasi · Insentif</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab XI</h2>
+    <div class="mind-center">⚙️ Operasional Internal Stratejik</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">Tugas 4</div>💰 Alokasi Sumber Daya<br><small style="opacity:0.7">Prioritas stratejik · Anggaran</small></div>
+      <div class="branch b2"><div class="blabel">Tugas 5</div>📋 Kebijakan &amp; Prosedur<br><small style="opacity:0.7">Fasilitasi · Bukan hambatan</small></div>
+      <div class="branch b3"><div class="blabel">Tugas 6</div>🔄 Manajemen Proses<br><small style="opacity:0.7">Best practices · Perbaikan berkelanjutan</small></div>
+      <div class="branch b4"><div class="blabel">Tugas 7</div>💻 Sistem Operasi &amp; Informasi<br><small style="opacity:0.7">Memberdayakan karyawan stratejik</small></div>
+      <div class="branch b5"><div class="blabel">Tugas 8</div>🏆 Insentif &amp; Penghargaan<br><small style="opacity:0.7">Alat paling handal manajemen</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: KONTEKS & POSISI BAB XI ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">11.1–11.2</span>
+      <div>
+        <div class="section-title">Pendahuluan: Posisi Bab XI dalam Rangkaian Implementasi</div>
+        <div class="section-eng">Introduction: Context Within the 10 Managerial Tasks Framework</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <!-- KONTEKS STRIP -->
+      <div class="context-strip">
+        <div class="cs-done">
+          <span class="csd-label">✅ BAB X (TUGAS 1–3)</span>
+          <span class="csd-val">SDM · Kompetensi · Struktur Org</span>
+        </div>
+        <div class="cs-now">
+          <span class="csn-label">▶ BAB XI (TUGAS 4–8)</span>
+          <span class="csn-val">Alokasi · Kebijakan · Proses · Sistem · Insentif</span>
+        </div>
+        <div class="cs-next">
+          <span class="csne-label">⏭ BAB XII (TUGAS 9–10)</span>
+          <span class="csne-val">Budaya Korporat · Kepemimpinan</span>
+        </div>
+      </div>
+
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          Bab XI melanjutkan Bab X — membahas <strong>lima tindakan manajerial tambahan (Tugas 4–8)</strong> yang mendukung pelaksanaan strategi secara baik dan efektif, dengan fokus pada operasional internal perusahaan.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Penekanan bab ini: membangun kemampuan perusahaan serta mengembangkan upaya-upaya kerja untuk memastikan <strong>pelaksanaan kritis aktivitas-aktivitas mata rantai nilai</strong> melalui cara-cara yang terkoordinasi dan penuh kompetensi.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Orientasi:</strong> Kelima tindakan manajerial ini bersifat lebih operasional — bukan tentang <em>siapa</em> yang menjalankan strategi (Bab X), melainkan tentang <em>bagaimana kondisi, sistem, dan insentif</em> yang memungkinkan strategi dijalankan dengan baik.
+        </span></li>
+      </ul>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 5 Tindakan Bab XI:</strong> <em>"Alokasi-Kebijakan-Proses-Sistem-Insentif"</em> → <em>"AKPSI"</em> → <em>"Alokasi Karena Proses Sistem Insentif menentukan keberhasilan eksekusi!"</em></span>
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: TUGAS 4 — ALOKASI SUMBER DAYA ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c1">Tugas 4</span>
+      <div>
+        <div class="section-title">Mengalokasikan Sumber Daya Bagi Upaya Pelaksanaan Strategi</div>
+        <div class="section-eng">Allocating Resources to Strategy-Critical Activities</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Prinsip utama:</strong> Alokasi sumber daya harus selalu didasarkan pada <em>prioritas-prioritas strategik</em> — bukan pada kebiasaan historis, kekuatan politik internal, atau pembagian rata-rata ke semua unit.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Unit bisnis, departemen, dan tim yang menjalankan <strong>aktivitas-aktivitas yang paling kritis</strong> bagi keberhasilan strategi harus mendapat prioritas anggaran dan sumber daya yang lebih besar.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Alokasi mencakup:</strong> anggaran finansial · tenaga SDM · waktu eksekutif · teknologi · fasilitas · kapasitas produksi — semua ini harus diarahkan ke area yang paling berkontribusi pada pencapaian target stratejik.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Risiko alokasi yang salah:</strong> Jika sumber daya tidak dialokasikan sesuai prioritas stratejik, unit-unit yang paling penting justru kekurangan dukungan sementara unit yang kurang kritis mendapat terlalu banyak — strategi tidak akan bisa dieksekusi dengan baik.
+        </span></li>
+      </ul>
+      <div class="info-box teal">
+        <strong>💡 Prinsip:</strong> <em>"Uang mengikuti strategi"</em> — bukan sebaliknya. Jika anggaran tidak mencerminkan prioritas stratejik, maka strategi tersebut hanyalah dokumen rencana tanpa eksekusi nyata.
+      </div>
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: TUGAS 5 & 6 — KEBIJAKAN & PROSES ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c2">Tugas 5–6</span>
+      <div>
+        <div class="section-title">Kebijakan &amp; Prosedur + Manajemen Proses Perbaikan Berkelanjutan</div>
+        <div class="section-eng">Policies &amp; Procedures + Process Management for Continuous Improvement</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub3a">
+        <div class="subsection-header" onclick="toggleSub('sub3a')">
+          📋 Tugas 5: Melembagakan Kebijakan dan Prosedur Suportif <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>Tujuan kebijakan dan prosedur:</strong> Bukan untuk mengontrol dan membatasi, melainkan untuk <em>memfasilitasi</em> — memberikan panduan dan kerangka kerja yang memudahkan karyawan menjalankan aktivitas-aktivitas stratejik dengan konsisten dan berkualitas.
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>Kebijakan yang baik</strong> memberikan arahan operasional tentang: apa yang boleh dan tidak boleh dilakukan · cara menangani situasi tertentu · standar kualitas yang harus dicapai · dan cara berkoordinasi lintas departemen.
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>Bahaya kebijakan yang berlebihan:</strong> Terlalu banyak kebijakan dan prosedur yang terlalu kaku justru <em>menghambat fleksibilitas, kreativitas, dan kecepatan respons</em> yang diperlukan dalam lingkungan bisnis yang berubah cepat — bureaucratic drag.
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>Prinsip desain kebijakan:</strong> Kebijakan dirancang untuk <em>mendukung eksekusi strategi</em> — bukan untuk mempertahankan status quo atau melindungi kepentingan departemen tertentu.
+            </span></li>
+          </ul>
+          <div class="info-box indigo">
+            <strong>⚠️ Perhatikan:</strong> Kebijakan dan prosedur yang baik seharusnya menjawab pertanyaan: <em>"Apakah kebijakan ini membuat eksekusi strategi lebih mudah atau lebih sulit?"</em> Jika jawabannya lebih sulit — ubah kebijakan tersebut.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub3b">
+        <div class="subsection-header" onclick="toggleSub('sub3b')">
+          🔄 Tugas 6: Alat Manajemen Proses untuk Perbaikan Terus-Menerus <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>Tujuan:</strong> Menggerakkan perbaikan terus-menerus pada bagaimana aktivitas-aktivitas mata rantai nilai dikerjakan — tidak cukup hanya melakukan aktivitas dengan baik, tapi harus terus <em>menjadi semakin baik</em>.
+            </span></li>
+            <li class="point"><span class="dot d3"></span><span>
+              Alat manajemen proses membantu perusahaan mencapai <strong>pelaksanaan strategi yang handal</strong> dengan cara mengidentifikasi inefisiensi, mengurangi variasi, dan mengoptimalkan alur kerja secara sistematis.
+            </span></li>
+          </ul>
+          <p style="font-size:0.82rem;color:var(--muted);margin: 0.8rem 0 0.5rem;"><strong style="color:var(--text);">Alat-alat manajemen proses perbaikan berkelanjutan yang umum digunakan:</strong></p>
+          <div class="bp-grid">
+            <div class="bp-card">
+              <span class="bpc-icon">🎯</span>
+              <span class="bpc-title">TQM</span>
+              <span class="bpc-desc">Total Quality Management — fokus pada kualitas di setiap tahap proses, melibatkan semua karyawan</span>
+            </div>
+            <div class="bp-card">
+              <span class="bpc-icon">📊</span>
+              <span class="bpc-title">Six Sigma</span>
+              <span class="bpc-desc">Metodologi pengurangan defect secara drastis menggunakan analisis data statistik yang ketat</span>
+            </div>
+            <div class="bp-card">
+              <span class="bpc-icon">🔁</span>
+              <span class="bpc-title">Kaizen / CI</span>
+              <span class="bpc-desc">Continuous Improvement — perbaikan kecil yang terus-menerus setiap hari oleh semua orang di organisasi</span>
+            </div>
+            <div class="bp-card">
+              <span class="bpc-icon">🏃</span>
+              <span class="bpc-title">Reengineering</span>
+              <span class="bpc-desc">Business Process Reengineering — merancang ulang proses bisnis secara radikal untuk peningkatan dramatis</span>
+            </div>
+            <div class="bp-card">
+              <span class="bpc-icon">📏</span>
+              <span class="bpc-title">Benchmarking</span>
+              <span class="bpc-desc">Membandingkan praktik dan kinerja dengan perusahaan terbaik untuk menemukan celah perbaikan</span>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Cara ingat 5 Alat:</strong> <em>"TQM-6σ-Kaizen-Reengineering-Benchmarking"</em> → <em>"T6KRB"</em> → <em>"Terus meningkat, Kualitas Rekor Bisnis!"</em> — dari pendekatan menyeluruh (TQM) ke radikal (Reengineering) ke bertahap (Kaizen).</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: TUGAS 7 — SISTEM OPERASI & INFORMASI ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c4">Tugas 7</span>
+      <div>
+        <div class="section-title">Membangun Sistem Operasi dan Informasi yang Memberdayakan</div>
+        <div class="section-eng">Building Empowering Operations &amp; Information Systems</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d4"></span><span>
+          <strong>Tujuan:</strong> Menciptakan sistem operasi serta informasi yang <em>memberdayakan karyawan perusahaan</em> dalam menjalankan peran strategik mereka dengan baik — bukan sekadar sistem untuk merekam data atau mengontrol karyawan.
+        </span></li>
+        <li class="point"><span class="dot d4"></span><span>
+          Sistem informasi yang baik harus memberikan kepada setiap karyawan <strong>data dan informasi yang tepat, pada waktu yang tepat, dalam format yang tepat</strong> untuk mendukung keputusan dan tindakan yang berkontribusi pada eksekusi strategi.
+        </span></li>
+        <li class="point"><span class="dot d4"></span><span>
+          <strong>Sistem operasi</strong> mencakup: ERP (Enterprise Resource Planning), sistem CRM (Customer Relationship Management), sistem manajemen rantai pasokan (SCM), dan berbagai platform operasional lainnya yang mengintegrasikan alur kerja lintas departemen.
+        </span></li>
+        <li class="point"><span class="dot d4"></span><span>
+          <strong>Prinsip sistem yang memberdayakan:</strong>
+          <br>→ Memberikan <em>visibilitas real-time</em> atas kinerja vs target
+          <br>→ Memudahkan <em>pengambilan keputusan</em> di level operasional
+          <br>→ Mengurangi birokrasi dan waktu yang terbuang untuk mencari informasi
+          <br>→ Memfasilitasi <em>kolaborasi</em> lintas tim dan departemen
+        </span></li>
+        <li class="point"><span class="dot d4"></span><span>
+          <strong>Hubungan dengan strategi:</strong> Sistem informasi harus dirancang selaras dengan aktivitas-aktivitas mata rantai nilai yang paling kritis bagi strategi — sistem yang tidak mendukung proses stratejik utama adalah pemborosan investasi.
+        </span></li>
+      </ul>
+      <div class="info-box green">
+        <strong>💡 Implikasi Praktis:</strong> Karyawan yang memiliki akses ke informasi yang tepat pada saat yang tepat membuat keputusan yang lebih baik, merespons pelanggan lebih cepat, dan mengidentifikasi masalah sebelum menjadi krisis. <em>Sistem informasi yang baik = karyawan yang lebih berdaya = eksekusi strategi yang lebih efektif.</em>
+      </div>
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: TUGAS 8 — INSENTIF & PENGHARGAAN ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">Tugas 8</span>
+      <div>
+        <div class="section-title">Memadukan Penghargaan &amp; Insentif dalam Pelaksanaan Strategi</div>
+        <div class="section-eng">Tying Rewards &amp; Incentives to Strategy Execution</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d6"></span><span>
+          <strong>Mengapa insentif adalah alat paling handal?</strong> Menggunakan pendekatan insentif serta penghargaan yang dirancang dengan baik dapat menjadi <em>alat yang paling handal bagi manajemen</em> untuk mempromosikan pelaksanaan strategi serta pencapaian target-target stratejik dan finansial yang lebih baik.
+        </span></li>
+        <li class="point"><span class="dot d6"></span><span>
+          <strong>Prinsip fundamental:</strong> Karyawan cenderung berperilaku sesuai dengan apa yang <em>diukur dan dihargai</em> — bukan sesuai dengan apa yang dikatakan manajemen. Jika insentif tidak selaras dengan target stratejik, karyawan akan fokus pada hal yang dihargai, bukan pada yang diperlukan strategi.
+        </span></li>
+      </ul>
+
+      <p style="font-size:0.82rem;color:var(--muted);margin: 0.9rem 0 0.5rem;"><strong style="color:var(--text);">Prinsip-prinsip kunci dalam merancang sistem insentif yang efektif:</strong></p>
+      <div class="incentive-list">
+        <div class="inc-item"><span class="inc-icon">🎯</span><div><strong>Hubungkan langsung dengan target stratejik</strong> — insentif harus mendorong perilaku dan hasil yang paling kritis bagi keberhasilan strategi, bukan hanya pencapaian angka finansial jangka pendek.</div></div>
+        <div class="inc-item"><span class="inc-icon">📊</span><div><strong>Seimbangkan target jangka pendek dan jangka panjang</strong> — hindari insentif yang mendorong perilaku jangka pendek yang merusak posisi kompetitif jangka panjang (mis: potong R&amp;D demi keuntungan kuartal ini).</div></div>
+        <div class="inc-item"><span class="inc-icon">🏆</span><div><strong>Buat insentif menarik namun realistis</strong> — target yang terlalu mudah tidak memotivasi; target yang mustahil dicapai justru mendemotivasi dan mendorong manipulasi angka.</div></div>
+        <div class="inc-item"><span class="inc-icon">🌐</span><div><strong>Terapkan di semua level organisasi</strong> — insentif tidak hanya untuk eksekutif; karyawan di semua level harus memiliki target yang jelas dan penghargaan yang sesuai dengan kontribusi mereka pada strategi.</div></div>
+        <div class="inc-item"><span class="inc-icon">⚡</span><div><strong>Insentif non-finansial sama pentingnya</strong> — pengakuan publik, tanggung jawab yang lebih besar, kesempatan pengembangan karir, dan otonomi yang lebih besar seringkali lebih memotivasi daripada bonus finansial semata.</div></div>
+      </div>
+
+      <div class="subsection" id="sub5a">
+        <div class="subsection-header" onclick="toggleSub('sub5a')">
+          ⚠️ Insentif yang Buruk = Perilaku yang Salah <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Contoh insentif yang salah arah:</strong> Menghargai jumlah penjualan tanpa memperhatikan profitabilitas → tenaga penjual akan memberikan diskon berlebihan. Menghargai efisiensi biaya semata → manajer akan memotong investasi yang kritis untuk masa depan.
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Prinsip "You get what you measure":</strong> Sistem insentif yang tidak selaras dengan strategi akan secara aktif <em>menggagalkan eksekusi strategi</em> meskipun semua elemen lain sudah tepat.
+            </span></li>
+          </ul>
+          <div class="info-box yellow">
+            <strong>🎯 Kesimpulan:</strong> Sistem insentif dan penghargaan yang selaras dengan strategi adalah <em>multiplier effect</em> — ia menggandakan efektivitas semua upaya implementasi lainnya. Sebaliknya, insentif yang salah adalah sabotase diam-diam terhadap strategi yang telah dirancang dengan baik.
+          </div>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Prinsip Insentif:</strong> <em>"Karyawan melakukan apa yang DIUKUR dan DIHARGAI, bukan apa yang DIKATAKAN manajemen."</em> — Pastikan sistem insentif mendorong perilaku yang mendukung strategi, bukan menghambatnya.</span>
+      </div>
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab XI</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);color:#000;">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Tugas 4 — Alokasi: "Uang Mengikuti Strategi"</h3>
+          <p>Sumber daya harus dialokasikan berdasarkan <strong style="color:#f0f0ff;">prioritas stratejik</strong>, bukan kebiasaan historis atau politik internal. Unit yang menjalankan aktivitas paling kritis bagi strategi harus mendapat dukungan terbesar. Tanpa ini, strategi tidak bisa dieksekusi.</p>
+          <div class="keywords"><span class="kw">prioritas stratejik</span><span class="kw">uang mengikuti strategi</span><span class="kw">anggaran = komitmen</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);color:#fff;">5</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">Tugas 5 — Kebijakan: Fasilitasi, Bukan Penghalang</h3>
+          <p>Kebijakan dan prosedur yang baik <strong style="color:#f0f0ff;">memfasilitasi eksekusi strategi</strong> — memberikan panduan operasional yang konsisten tanpa menciptakan birokrasi yang menghambat. Kebijakan yang terlalu kaku adalah musuh fleksibilitas dan kecepatan respons.</p>
+          <div class="keywords"><span class="kw">kebijakan suportif</span><span class="kw">panduan operasional</span><span class="kw">hindari bureaucratic drag</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);color:#000;">6</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">Tugas 6 — Proses: Perbaikan Berkelanjutan (TQM/Six Sigma/Kaizen)</h3>
+          <p>Gunakan alat manajemen proses untuk terus menggerakkan perbaikan pada aktivitas rantai nilai. Lima alat utama: <strong style="color:#f0f0ff;">TQM · Six Sigma · Kaizen · Reengineering · Benchmarking</strong> — dari pendekatan menyeluruh hingga bertahap, dari bertahap hingga radikal.</p>
+          <div class="keywords"><span class="kw">T6KRB</span><span class="kw">continuous improvement</span><span class="kw">best practices</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);color:#000;">7</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">Tugas 7 — Sistem: Memberdayakan Karyawan Stratejik</h3>
+          <p>Sistem operasi dan informasi harus <strong style="color:#f0f0ff;">memberdayakan</strong> karyawan (bukan sekadar mengontrol) dengan memberikan data tepat, pada waktu tepat, dalam format yang mendukung keputusan. Selaraskan sistem dengan aktivitas rantai nilai yang paling kritis.</p>
+          <div class="keywords"><span class="kw">ERP CRM SCM</span><span class="kw">real-time visibility</span><span class="kw">sistem = pemberdayaan</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent6);color:#000;">8</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent6);">Tugas 8 — Insentif: Alat Paling Handal Manajemen</h3>
+          <p>Insentif yang selaras dengan strategi adalah <strong style="color:#f0f0ff;">multiplier effect</strong> untuk semua upaya implementasi. Karyawan melakukan apa yang diukur dan dihargai — bukan apa yang dikatakan. Seimbangkan jangka pendek-panjang, finansial-non-finansial, individual-tim.</p>
+          <div class="keywords"><span class="kw">selaras strategi</span><span class="kw">you get what you measure</span><span class="kw">multiplier effect</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-teal">Alokasi (T4)</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-ind">Kebijakan (T5)</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-orng">Proses CI (T6)</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-grn">Sistem Info (T7)</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-yel">Insentif (T8)</span>
+      </div>
+      <div class="formula-caption">Lima tindakan manajerial operasional yang memastikan strategi dapat dieksekusi di level aktivitas sehari-hari</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box teal" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab XI:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">A</strong>lokasi sumber daya ikuti prioritas stratejik, <strong style="color:#f0f0ff;">K</strong>ebijakan fasilitasi bukan hambat, <strong style="color:#f0f0ff;">P</strong>roses diperbaiki terus (TQM/6σ/Kaizen), <strong style="color:#f0f0ff;">S</strong>istem informasi berdayakan karyawan, <strong style="color:#f0f0ff;">I</strong>nsentif selaras strategi — alat paling handal!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">AKPSI</strong> = Lima tindakan operasional Bab XI. Ingat juga: Bab X = SDM+Kompetensi+Struktur · Bab XI = AKPSI · Bab XII = Budaya+Kepemimpinan. Ketiganya bersama membentuk kerangka implementasi strategi yang lengkap.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab XI Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 5;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

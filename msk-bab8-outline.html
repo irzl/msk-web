@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB VIII — Strategi Perusahaan: Diversifikasi dan Perusahaan Multi-Bisnis</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #34d399;   /* emerald — chapter 8 color */
+    --accent2: #f59e0b;   /* amber */
+    --accent3: #60a5fa;   /* blue */
+    --accent4: #f43f5e;   /* rose */
+    --accent5: #a78bfa;   /* violet */
+    --accent6: #fb923c;   /* orange */
+    --accent7: #e879f9;   /* fuchsia */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--accent); color: #000; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── MIND MAP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #059669); color: #000; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+  .branch { padding: 0.75rem; border-radius: 10px; font-size: 0.73rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.58rem; font-family: 'DM Mono', monospace; margin-bottom: 0.25rem; opacity: 0.7; }
+  .b1 { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25);  color: var(--accent); }
+  .b2 { background: rgba(245,158,11,0.08);  border-color: rgba(245,158,11,0.25);  color: var(--accent2); }
+  .b3 { background: rgba(96,165,250,0.08);  border-color: rgba(96,165,250,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(244,63,94,0.08);   border-color: rgba(244,63,94,0.25);   color: var(--accent4); }
+  .b5 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent5); }
+  .b6 { background: rgba(232,121,249,0.08); border-color: rgba(232,121,249,0.25); color: var(--accent7); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent);  color: #000; }
+  .c2 { background: var(--accent2); color: #000; }
+  .c3 { background: var(--accent3); color: #000; }
+  .c4 { background: var(--accent4); color: #fff; }
+  .c5 { background: var(--accent5); color: #fff; }
+  .c6 { background: var(--accent7); color: #000; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1{background:var(--accent);}  .d2{background:var(--accent2);} .d3{background:var(--accent3);}
+  .d4{background:var(--accent4);} .d5{background:var(--accent5);} .d6{background:var(--accent6);}
+  .d7{background:var(--accent7);}
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(52,211,153,0.07); border: 1px solid rgba(52,211,153,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.green  { background: rgba(52,211,153,0.07);  border: 1px solid rgba(52,211,153,0.2); }
+  .info-box.amber  { background: rgba(245,158,11,0.07);  border: 1px solid rgba(245,158,11,0.2); }
+  .info-box.blue   { background: rgba(96,165,250,0.07);  border: 1px solid rgba(96,165,250,0.2); }
+  .info-box.rose   { background: rgba(244,63,94,0.07);   border: 1px solid rgba(244,63,94,0.2); }
+  .info-box.violet { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box.fuchsia{ background: rgba(232,121,249,0.07); border: 1px solid rgba(232,121,249,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── 4 SYARAT DIVERSIFIKASI ── */
+  .cond-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0.65rem; margin-top: 1rem; }
+  .cond-card { padding: 0.9rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.79rem; line-height: 1.5; color: #c8c8e0; }
+  .cond-card .cc-letter { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 900; display: block; line-height: 1; margin-bottom: 0.25rem; }
+  .cond-card .cc-title { font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 0.25rem; }
+  .cond-card .cc-desc { color: var(--muted); font-size: 0.74rem; }
+  .cc-1 { border-color: rgba(52,211,153,0.3);  } .cc-1 .cc-letter,.cc-1 .cc-title { color: var(--accent); }
+  .cc-2 { border-color: rgba(245,158,11,0.3);  } .cc-2 .cc-letter,.cc-2 .cc-title { color: var(--accent2); }
+  .cc-3 { border-color: rgba(96,165,250,0.3);  } .cc-3 .cc-letter,.cc-3 .cc-title { color: var(--accent3); }
+  .cc-4 { border-color: rgba(244,63,94,0.3);   } .cc-4 .cc-letter,.cc-4 .cc-title { color: var(--accent4); }
+
+  /* ── 3 TEST NILAI PEMEGANG SAHAM ── */
+  .test-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.65rem; margin-top: 1rem; }
+  .test-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.8rem; line-height: 1.5; color: #c8c8e0; text-align: center; }
+  .test-card .tc-icon { font-size: 1.3rem; display: block; margin-bottom: 0.35rem; }
+  .test-card .tc-name { font-weight: 700; font-size: 0.86rem; display: block; margin-bottom: 0.3rem; }
+  .test-card .tc-q { color: var(--muted); font-size: 0.73rem; font-style: italic; }
+  .tt-1 { border-color: rgba(52,211,153,0.35);  } .tt-1 .tc-name { color: var(--accent); }
+  .tt-2 { border-color: rgba(245,158,11,0.35);  } .tt-2 .tc-name { color: var(--accent2); }
+  .tt-3 { border-color: rgba(96,165,250,0.35);  } .tt-3 .tc-name { color: var(--accent3); }
+
+  /* ── 3 CARA MASUK BISNIS BARU ── */
+  .entry-cols { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
+  .entry-row { display: flex; gap: 0.9rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 9px; padding: 0.85rem 1rem; border-left: 3px solid transparent; font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; }
+  .er-badge { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.5rem; border-radius: 4px; flex-shrink: 0; margin-top: 0.15rem; white-space: nowrap; }
+  .entry-row strong { color: var(--text); }
+  .er-1 { border-left-color: rgba(52,211,153,0.5);  } .er-1 .er-badge { background: var(--accent);  color: #000; }
+  .er-2 { border-left-color: rgba(245,158,11,0.5);  } .er-2 .er-badge { background: var(--accent2); color: #000; }
+  .er-3 { border-left-color: rgba(96,165,250,0.5);  } .er-3 .er-badge { background: var(--accent3); color: #000; }
+
+  /* ── BERKAITAN vs TAK BERKAITAN ── */
+  .div-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .div-card { padding: 1rem; border-radius: 11px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.8rem; line-height: 1.5; color: #c8c8e0; }
+  .div-card .dc-icon { font-size: 1.2rem; display: block; margin-bottom: 0.3rem; }
+  .div-card .dc-title { font-weight: 700; font-size: 0.9rem; display: block; margin-bottom: 0.2rem; }
+  .div-card .dc-sub { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-bottom: 0.5rem; display: block; }
+  .div-card ul { list-style: none; }
+  .div-card ul li { padding: 0.22rem 0; border-bottom: 1px solid var(--border); font-size: 0.77rem; color: var(--muted); }
+  .div-card ul li:last-child { border-bottom: none; }
+  .div-card ul li::before { content: "→ "; }
+  .dc-rel   { border-color: rgba(52,211,153,0.3);  } .dc-rel  .dc-title { color: var(--accent); }
+  .dc-unrel { border-color: rgba(244,63,94,0.3);   } .dc-unrel .dc-title { color: var(--accent4); }
+
+  /* ── 6 LANGKAH EVALUASI ── */
+  .eval-steps { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+  .eval-step { display: flex; gap: 0.9rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.8rem 1rem; border-left: 3px solid transparent; font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; }
+  .es-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; color: #000; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.05rem; }
+  .eval-step strong { color: var(--text); }
+  .es-a { border-left-color: rgba(52,211,153,0.5);  } .es-a .es-num { background: var(--accent); }
+  .es-b { border-left-color: rgba(245,158,11,0.5);  } .es-b .es-num { background: var(--accent2); }
+  .es-c { border-left-color: rgba(96,165,250,0.5);  } .es-c .es-num { background: var(--accent3); }
+  .es-d { border-left-color: rgba(244,63,94,0.5);   } .es-d .es-num { background: var(--accent4); color: #fff; }
+  .es-e { border-left-color: rgba(167,139,250,0.5); } .es-e .es-num { background: var(--accent5); color: #fff; }
+  .es-f { border-left-color: rgba(232,121,249,0.5); } .es-f .es-num { background: var(--accent7); color: #000; }
+
+  /* ── STEP FLOW ── */
+  .step-flow { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .step-item { display: flex; gap: 0.9rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.75rem 0.9rem; border-left: 3px solid transparent; font-size: 0.84rem; line-height: 1.5; color: #c8c8e0; }
+  .step-num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; color: #000; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.05rem; }
+  .step-item strong { color: var(--text); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .done-btn.checked { border-color: var(--accent); color: var(--accent); background: rgba(52,211,153,0.07); }
+
+  /* ── ULTIMATE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(52,211,153,0.07), rgba(96,165,250,0.04)); border: 1px solid rgba(52,211,153,0.25); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #059669); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.75rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.76rem; }
+  .ft-grn  { background: rgba(52,211,153,0.15);  color: var(--accent); }
+  .ft-amr  { background: rgba(245,158,11,0.15);  color: var(--accent2); }
+  .ft-blu  { background: rgba(96,165,250,0.15);  color: var(--accent3); }
+  .ft-ros  { background: rgba(244,63,94,0.15);   color: var(--accent4); }
+  .ft-vio  { background: rgba(167,139,250,0.15); color: var(--accent5); }
+  .ft-fcs  { background: rgba(232,121,249,0.15); color: var(--accent7); }
+  .formula-op { color: var(--muted); font-size: 0.9rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB VIII — <span>Strategi Korporat:</span><br>Diversifikasi &amp; Multi-Bisnis</h1>
+    <p class="subtitle">Kapan Diversifikasi · 3 Test · 3 Cara Masuk · Berkaitan vs Tak Berkaitan · 6 Langkah Evaluasi</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 6 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab VIII</h2>
+    <div class="mind-center">🏢 Strategi Korporat Multi-Bisnis</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">8.3</div>📋 Kapan Diversifikasi?<br><small style="opacity:0.7">4 persyaratan layak diversifikasi</small></div>
+      <div class="branch b2"><div class="blabel">8.4</div>💰 Membangun Nilai PS<br><small style="opacity:0.7">3 test diversifikasi</small></div>
+      <div class="branch b3"><div class="blabel">8.5</div>🚪 Memasuki Bisnis Baru<br><small style="opacity:0.7">Akuisisi · Internal · JV</small></div>
+      <div class="branch b4"><div class="blabel">8.6–8.7</div>🔗 Diversifikasi Berkaitan<br><small style="opacity:0.7">Ketersesuaian strategik lintas bisnis</small></div>
+      <div class="branch b5"><div class="blabel">8.8–8.9</div>🎲 Diversifikasi Tak Berkaitan<br><small style="opacity:0.7">Peran induk · Risiko · Kombinasi</small></div>
+      <div class="branch b6"><div class="blabel">8.10</div>📊 6 Langkah Evaluasi<br><small style="opacity:0.7">Daya tarik · Kekuatan · Sinergi · Prioritas</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: PENDAHULUAN & KAPAN DIVERSIFIKASI ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">8.1–8.3</span>
+      <div>
+        <div class="section-title">Pendahuluan &amp; Kapan Perlu Melakukan Diversifikasi</div>
+        <div class="section-eng">Introduction &amp; When to Diversify</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          Bab VIII naik ke <strong>level strategi korporat</strong> — dari strategi bisnis tunggal ke strategi multi-bisnis. Perusahaan yang melakukan diversifikasi adalah kumpulan bisnis yang masing-masing mandiri, sehingga proses penyusunan strategi menjadi jauh lebih kompleks.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Empat pertimbangan utama manajemen puncak</strong> dalam diversifikasi: (a) memilih industri baru yang akan dimasuki, (b) mencari peluang ketersesuaian rantai nilai lintas bisnis, (c) memilih prioritas investasi, dan (d) memulai aktivitas peningkatan kinerja bisnis.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Prinsip penting:</strong> Selama perusahaan masih dapat memaksimalkan pertumbuhan yang menguntungkan di industri yang ada saat ini, sebenarnya <em>tidak ada urgensi untuk melakukan diversifikasi</em>. Diversifikasi baru relevan saat peluang pertumbuhan di industri utama mulai terbatas.
+        </span></li>
+      </ul>
+
+      <p style="font-size:0.83rem;color:var(--muted);margin: 0.9rem 0 0.5rem;"><strong style="color:var(--text);">Empat persyaratan agar diversifikasi layak dilakukan:</strong></p>
+      <div class="cond-grid">
+        <div class="cond-card cc-1">
+          <span class="cc-letter">A</span>
+          <span class="cc-title">Peluang di Industri Baru</span>
+          <span class="cc-desc">Perusahaan melihat peluang di industri baru yang produk/teknologinya dapat melengkapi bisnis yang ada saat ini</span>
+        </div>
+        <div class="cond-card cc-2">
+          <span class="cc-letter">B</span>
+          <span class="cc-title">Sumber Daya &amp; Kemampuan</span>
+          <span class="cc-desc">Perusahaan mampu mengoptimalkan sumber daya dan kemampuannya hingga keduanya menjadi aset daya saing yang andal di bisnis baru</span>
+        </div>
+        <div class="cond-card cc-3">
+          <span class="cc-letter">C</span>
+          <span class="cc-title">Pengurangan Biaya</span>
+          <span class="cc-desc">Diversifikasi membuka jalan untuk mengurangi biaya melalui sharing biaya lintas-bisnis dan optimalisasi semua sumber daya perusahaan</span>
+        </div>
+        <div class="cond-card cc-4">
+          <span class="cc-letter">D</span>
+          <span class="cc-title">Kekuatan Merek</span>
+          <span class="cc-desc">Perusahaan memiliki merek yang kuat yang dapat ditransfer kepada lini usaha yang lain — leverage merek lintas bisnis</span>
+        </div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 4 Syarat ABCD:</strong> <em>"Adakah Bisnis baru yang Cocok, sumber Daya mendukung?"</em> → <em>A = peluAng industri, B = sBerdaya, C = kurangi biaya (Cost), D = merek kuat (brAnD)"</em></span>
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: 3 TEST NILAI PEMEGANG SAHAM ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c2">8.4</span>
+      <div>
+        <div class="section-title">Membangun Nilai Pemegang Saham: 3 Test Diversifikasi</div>
+        <div class="section-eng">Building Shareholder Value: Three Tests for Diversification</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>Prinsip utama:</strong> Diversifikasi dianggap berhasil hanya jika menghasilkan <em>nilai tambah jangka panjang bagi pemegang saham</em> — sebuah nilai tambah yang tidak bisa diperoleh pemegang saham dari sekadar membeli lembar-lembar saham industri lain atau dengan berinvestasi di reksadana.
+        </span></li>
+        <li class="point"><span class="dot d2"></span><span>
+          Untuk memutuskan tindakan diversifikasi bisnis, sebuah perusahaan harus melewati <strong>tiga tahapan test</strong>:
+        </span></li>
+      </ul>
+      <div class="test-row">
+        <div class="test-card tt-1">
+          <span class="tc-icon">🎯</span>
+          <span class="tc-name">Test Daya Tarik Industri</span>
+          <span class="tc-q">"Apakah industri (atau bisnis) baru ini memiliki daya tarik yang kuat untuk secara konsisten menghasilkan pengembalian investasi yang sangat baik?"</span>
+        </div>
+        <div class="test-card tt-2">
+          <span class="tc-icon">💸</span>
+          <span class="tc-name">Test Biaya Masuk</span>
+          <span class="tc-q">"Apakah biaya yang bakal dikeluarkan untuk masuk ke bisnis baru ini tidak terlalu membebani potensi keuntungan di masa depan?"</span>
+        </div>
+        <div class="test-card tt-3">
+          <span class="tc-icon">🚀</span>
+          <span class="tc-name">Test 'Harus Lebih Baik'</span>
+          <span class="tc-q">"Apakah diversifikasi yang akan dilakukan memberikan potensi yang sangat besar bagi perusahaan untuk menjadi lebih baik, lebih menguntungkan?"</span>
+        </div>
+      </div>
+      <div class="info-box amber" style="margin-top:1rem;">
+        <strong>⚠️ Penting:</strong> Diversifikasi yang gagal melewati <em>ketiga test ini</em> tidak seharusnya dilakukan — ia akan menghancurkan nilai pemegang saham, bukan menciptakannya. Diversifikasi <em>bukan sekadar menyebarkan risiko bisnis</em> ke beberapa industri — itu bisa dilakukan sendiri oleh pemegang saham.
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 3 Test:</strong> <em>"Daya Tarik-Biaya Masuk-Harus Lebih Baik"</em> → <em>"DBH"</em> → <em>"Diversifikasi Butuh Harapan nilai yang nyata!"</em></span>
+      </div>
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: CARA MASUK BISNIS BARU ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c3">8.5</span>
+      <div>
+        <div class="section-title">Strategi Memasuki Bisnis-Bisnis Baru</div>
+        <div class="section-eng">Strategies for Entering New Businesses</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:0.9rem;">Tiga strategi lazim digunakan perusahaan untuk memasuki bisnis baru dalam proses diversifikasi:</p>
+      <div class="entry-cols">
+        <div class="entry-row er-1">
+          <span class="er-badge">CARA 1</span>
+          <div>
+            <strong>Akuisisi atas bisnis yang sudah berjalan</strong> — cara paling populer untuk mendiversifikasi lini usaha ke industri yang berbeda. Keunggulan: lebih cepat dibanding membangun dari nol, menghindari kompleksitas hambatan masuk (entry barriers) seperti teknologi, hubungan supplier, dan biaya awal. Dilema: beli perusahaan bagus tapi mahal, atau perusahaan goyah tapi murah?
+          </div>
+        </div>
+        <div class="entry-row er-2">
+          <span class="er-badge">CARA 2</span>
+          <div>
+            <strong>Pengembangan Internal</strong> — memulai bisnis baru dari waktu ke waktu melalui pengembangan internal dari awal (dari nol). Melibatkan pembangunan dan pengembangan bisnis baru secara organik. Lebih lambat tapi potensi kepemilikan dan kendali lebih penuh.
+          </div>
+        </div>
+        <div class="entry-row er-3">
+          <span class="er-badge">CARA 3</span>
+          <div>
+            <strong>Joint Venture</strong> — upaya sebuah perusahaan untuk memiliki secara bersama (<em>co-ownership</em>) serta mengoperasikan bersama unit bisnis baru bersama perusahaan lain. Berbagi risiko, sumber daya, dan pengetahuan — cocok untuk bisnis yang masih berkembang atau industri baru yang penuh ketidakpastian.
+          </div>
+        </div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 3 Cara Masuk:</strong> <em>"Akuisisi-Internal-Joint Venture"</em> → <em>"AIJ"</em> → <em>"Ada Inisiatif? Jangan tunggu lama!"</em> — pilihan tergantung: kecepatan masuk, ketersediaan modal, toleransi risiko, dan kebutuhan kontrol.</span>
+      </div>
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: BERKAITAN vs TAK BERKAITAN ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c4">8.6–8.9</span>
+      <div>
+        <div class="section-title">Diversifikasi Berkaitan vs Tak Berkaitan &amp; Kombinasinya</div>
+        <div class="section-eng">Related vs Unrelated Diversification &amp; Combination Strategy</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub4a">
+        <div class="subsection-header" onclick="toggleSub('sub4a')">
+          🔗 Perbandingan: Diversifikasi Berkaitan vs Tak Berkaitan (8.6) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <div class="div-split">
+            <div class="div-card dc-rel">
+              <span class="dc-icon">🔗</span>
+              <span class="dc-title">Diversifikasi Berkaitan</span>
+              <span class="dc-sub">Related Diversification</span>
+              <ul>
+                <li>Masuk ke bisnis baru yang masih ada kaitannya dengan bisnis utama</li>
+                <li>Ada ketersesuaian strategik antara rantai nilai lintas-bisnis yang sangat berharga</li>
+                <li>Bisa berbagi sumber daya, teknologi, distribusi, merek lintas bisnis</li>
+                <li>Menciptakan keunggulan kompetitif melalui sinergi</li>
+                <li>Contoh: Apple masuk ke bisnis musik (iTunes) yang berkaitan dengan iPhone</li>
+              </ul>
+            </div>
+            <div class="div-card dc-unrel">
+              <span class="dc-icon">🎲</span>
+              <span class="dc-title">Diversifikasi Tak Berkaitan</span>
+              <span class="dc-sub">Unrelated Diversification</span>
+              <ul>
+                <li>Masuk ke bisnis baru yang sama sekali tak ada kaitannya dengan bisnis yang berjalan</li>
+                <li>Tidak ada ketersesuaian strategik lintas lini usaha</li>
+                <li>Berfokus hanya pada hasil akhir: operasikan dengan maksimal, naikkan penghasilan</li>
+                <li>Pertimbangan pragmatis: selama hasil positif bisa didapat, kompleksitas diabaikan</li>
+                <li>Contoh: Konglomerat yang memiliki bisnis properti, pertambangan, dan retail sekaligus</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box green" style="margin-top:0.9rem;">
+            <strong>🎯 Perbedaan kunci:</strong> Diversifikasi berkaitan menciptakan keunggulan kompetitif melalui <em>ketersesuaian strategik (strategic fit)</em> yang dimanfaatkan secara aktif. Diversifikasi tak berkaitan bergantung pada <em>kemampuan perusahaan induk</em> untuk mengelola bisnis-bisnis yang sangat berbeda secara efisien.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4b">
+        <div class="subsection-header" onclick="toggleSub('sub4b')">
+          🏗 Ketersesuaian Strategik dalam Diversifikasi Berkaitan (8.7) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Ketersesuaian strategik (strategic fit)</strong> muncul bila satu atau lebih aktivitas yang membentuk rantai nilai lini-lini usaha yang berbeda berada dalam keadaan serupa atau sepadan — memungkinkan berbagi sumber daya dan kemampuan secara menguntungkan.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              Ketersesuaian dapat muncul di mana saja sepanjang rantai nilai: R&amp;D teknologi · aktivitas suplai · manufaktur · penjualan &amp; pemasaran · distribusi · layanan pelanggan.
+            </span></li>
+            <li class="point"><span class="dot d1"></span><span>
+              <strong>Tiga konsekuensi positif ketersesuaian strategik:</strong>
+              <br>→ <strong>Scope Economies:</strong> efisiensi biaya dari berbagi sumber daya
+              <br>→ <strong>Transfer kapabilitas:</strong> memindahkan kompetensi dari satu bisnis ke bisnis lain
+              <br>→ <strong>Keunggulan kompetitif lebih kuat:</strong> sinergi menciptakan kapabilitas yang tidak dimiliki pesaing
+            </span></li>
+          </ul>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Analogi ketersesuaian:</strong> Seperti dua mesin yang berbagi komponen yang sama — perawatan lebih murah, suku cadang bisa digunakan bergantian, dan tim teknisi yang sama bisa menangani keduanya. Itulah <em>nilai nyata ketersesuaian strategik</em>.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4c">
+        <div class="subsection-header" onclick="toggleSub('sub4c')">
+          🎲 Diversifikasi Tak Berkaitan: Peran Induk &amp; 3 Cara Menciptakan Nilai (8.8) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d4"></span><span>
+              Tanpa ketersesuaian strategik, nilai ekonomis pemegang saham dari diversifikasi tak berkaitan bergantung sepenuhnya pada <strong>kemampuan perusahaan induk</strong> untuk memperbaiki bisnis-bisnisnya melalui cara-cara lain.
+            </span></li>
+          </ul>
+          <p style="font-size:0.82rem;color:var(--muted);margin: 0.7rem 0 0.5rem;"><strong style="color:var(--text);">3 cara perusahaan induk menciptakan nilai dalam diversifikasi tak berkaitan:</strong></p>
+          <div class="step-flow">
+            <div class="step-item" style="border-left-color:rgba(244,63,94,0.4);">
+              <div class="step-num" style="background:var(--accent4);color:#fff;">a</div>
+              <div><strong>Perusahaan induk harus cerdas mengelola anak perusahaan</strong> — memupuk bisnis baru, memberi panduan, memperbaiki manajemen, memimpin tata kelola yang efektif sehingga tiap anak bisnis dapat bersaing optimal</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(244,63,94,0.4);">
+              <div class="step-num" style="background:var(--accent4);color:#fff;">b</div>
+              <div><strong>Alokasi sumber daya finansial ke lini usaha yang lain dengan penuh perhitungan</strong> — mengalokasikan modal secara disiplin ke bisnis yang paling menjanjikan, bukan rata ke semua bisnis</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(244,63,94,0.4);">
+              <div class="step-num" style="background:var(--accent4);color:#fff;">c</div>
+              <div><strong>Mengakuisisi dan merestrukturisasi perusahaan-perusahaan di bawah nilai pasar</strong> — membeli perusahaan undervalue, memperbaiki manajemen dan operasionalnya, lalu meningkatkan nilainya secara signifikan</div>
+            </div>
+          </div>
+          <div class="info-box rose">
+            <strong>⚠️ Risiko Diversifikasi Tak Berkaitan:</strong> (a) Terlalu banyak bisnis yang dikelola induk → kompleksitas berlebihan. (b) Tidak ada alasan rasional yang cukup kuat jika sekedar diversifikasi risiko (pemegang saham bisa diversifikasi sendiri via pasar modal). (c) Potensi kehilangan fokus pada bisnis inti yang sebenarnya masih memiliki potensi besar.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4d">
+        <div class="subsection-header" onclick="toggleSub('sub4d')">
+          🔀 Mengkombinasikan Keduanya (8.9) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d5"></span><span>
+              Tidak ada yang menghalangi perusahaan untuk melakukan <em>kombinasi diversifikasi berkaitan dan tak berkaitan sekaligus</em>. Pada praktiknya yang umum, banyak perusahaan melakukan diversifikasi dengan berbagai jenis dan menjadi pemain global yang sangat kuat.
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              Strategi kombinasi ini memberi <strong>fleksibilitas maksimal</strong> — memanfaatkan ketersesuaian strategik di bisnis yang berkaitan sekaligus mengejar peluang profit di bisnis yang tak berkaitan ketika kondisi memungkinkan.
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Contoh nyata:</strong> Samsung — memiliki bisnis berkaitan (semikonduktor, layar, elektronik konsumen) sekaligus bisnis tak berkaitan (konstruksi, asuransi, fashion). Kombinasi ini menciptakan konglomerat multi-bisnis yang sangat kuat.
+            </span></li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: 6 LANGKAH EVALUASI ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">8.10</span>
+      <div>
+        <div class="section-title">6 Langkah Mengevaluasi Strategi Perusahaan yang Diversifikasi</div>
+        <div class="section-eng">Six Steps for Evaluating a Diversified Company's Strategy</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Prosedur untuk mengevaluasi plus-minus strategi diversifikasi dan menentukan tindakan perbaikan melibatkan <strong>enam langkah berurutan</strong>:</p>
+      <div class="eval-steps">
+        <div class="eval-step es-a">
+          <div class="es-num">a</div>
+          <div><strong>Mengevaluasi Daya Tarik Industri</strong> — apakah setiap industri tempat perusahaan beroperasi menarik secara jangka panjang? Apakah secara kolektif portofolio bisnis beroperasi di industri-industri yang menarik?</div>
+        </div>
+        <div class="eval-step es-b">
+          <div class="es-num">b</div>
+          <div><strong>Mengevaluasi Kekuatan Daya Saing Unit Usaha</strong> — seberapa kuat masing-masing unit bisnis perusahaan secara kompetitif di industri masing-masing? Apakah ada unit yang lemah dan perlu dilepas?</div>
+        </div>
+        <div class="eval-step es-c">
+          <div class="es-num">c</div>
+          <div><strong>Mengecek Potensi Keunggulan Kompetitif dari Ketersesuaian Strategik</strong> — seberapa besar peluang yang ada untuk berbagi atau mentransfer sumber daya, kompetensi, dan kapabilitas lintas bisnis?</div>
+        </div>
+        <div class="eval-step es-d">
+          <div class="es-num">d</div>
+          <div><strong>Mengecek Kesesuaian Sumber Daya</strong> — apakah sumber daya keuangan dan non-keuangan yang tersedia cocok dengan kebutuhan masing-masing unit bisnis? Apakah ada unit yang menyerap terlalu banyak sumber daya tanpa hasil yang memadai?</div>
+        </div>
+        <div class="eval-step es-e">
+          <div class="es-num">e</div>
+          <div><strong>Memeringkat Prospek Kinerja Unit Usaha &amp; Memilih Prioritas Alokasi Sumber Daya</strong> — unit bisnis mana yang memiliki prospek kinerja terbaik? Ke mana sumber daya sebaiknya dialokasikan untuk hasil optimal?</div>
+        </div>
+        <div class="eval-step es-f">
+          <div class="es-num">f</div>
+          <div><strong>Menciptakan Tindakan-Tindakan Stratejik Baru untuk Meningkatkan Kinerja</strong> — berdasarkan kelima langkah di atas, tindakan apa yang perlu diambil? Akuisisi bisnis baru, divestasi unit yang lemah, restrukturisasi, atau fokuslah pada lebih sedikit bisnis inti?</div>
+        </div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 6 Langkah:</strong> <em>"Daya Tarik-Kekuatan-Sinergi-Sumber Daya-Prioritas-Tindakan"</em> → <em>"DKSSPT"</em> → <em>"Diversifikasi Kuat? Sinergikan Sumber daya, Prioritas, lalu Tindak!"</em></span>
+      </div>
+      <div class="info-box violet">
+        <strong>📌 Catatan Penutup Bab VIII:</strong> Manajemen bisa saja memutuskan kembali ke strategi diversifikasi yang lebih menyempit jika disimpulkan bahwa strategi diversifikasi yang selama ini diambil terlalu lebar rentang cakupannya. Sarannya: <em>cukup berkonsentrasi membangun posisi yang lebih kuat di beberapa — tak perlu terlalu banyak — lini usaha utama</em>.
+      </div>
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: RANGKUMAN 4 PERTIMBANGAN MANPUNCAK ══ -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <span class="num c6">Rangkuman</span>
+      <div>
+        <div class="section-title">Empat Pertimbangan Manajemen Puncak dalam Strategi Multi-Bisnis</div>
+        <div class="section-eng">Four Top Management Considerations in Multi-Business Strategy</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Manajemen puncak perusahaan multi-bisnis harus secara berkelanjutan mengelola empat pertimbangan ini:</p>
+      <div class="step-flow">
+        <div class="step-item" style="border-left-color:rgba(52,211,153,0.4);">
+          <div class="step-num" style="background:var(--accent);color:#000;">1</div>
+          <div><strong>Memilih industri baru untuk dimasuki</strong> serta memutuskan dengan cara apa (akuisisi, internal, JV) perusahaan akan masuk ke industri tersebut — berdasarkan 3 test nilai pemegang saham</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(245,158,11,0.4);">
+          <div class="step-num" style="background:var(--accent2);color:#000;">2</div>
+          <div><strong>Mencari peluang untuk mengoptimalkan hubungan rantai nilai lintas-usaha</strong> serta kesesuaian strategi ke dalam keunggulan kompetitif — ketersesuaian strategik adalah senjata utama diversifikasi berkaitan</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(96,165,250,0.4);">
+          <div class="step-num" style="background:var(--accent3);color:#000;">3</div>
+          <div><strong>Memilih prioritas investasi &amp; mengendalikan sumber daya</strong> ke dalam unit bisnis yang paling atraktif — tidak semua unit bisnis mendapat perhatian dan modal yang sama</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(244,63,94,0.4);">
+          <div class="step-num" style="background:var(--accent4);color:#fff;">4</div>
+          <div><strong>Memulai aktivitas-aktivitas untuk meningkatkan kinerja</strong> bisnis-bisnis perusahaan secara keseluruhan — termasuk akuisisi, restrukturisasi, divestasi, dan tindakan strategis korporat lainnya</div>
+        </div>
+      </div>
+      <div class="info-box green">
+        <strong>🔑 Prinsip Kunci Bab VIII:</strong> Diversifikasi menciptakan nilai hanya jika: <em>(1)</em> melewati 3 test DBH, <em>(2)</em> menghasilkan ketersesuaian strategik yang dieksploitasi (berkaitan) ATAU perusahaan induk yang mampu mengelola secara superior (tak berkaitan), dan <em>(3)</em> dievaluasi secara rutin melalui 6 langkah untuk memastikan portofolio bisnis tetap optimal.
+      </div>
+      <button class="done-btn" id="btn6" onclick="markDone(6)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab VIII</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);color:#000;">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Diversifikasi Bukan Kewajiban — Hanya Jika Syaratnya Terpenuhi</h3>
+          <p>Selama masih ada peluang pertumbuhan di industri utama, tidak perlu diversifikasi. Diversifikasi baru layak jika memenuhi <strong style="color:#f0f0ff;">4 syarat ABCD</strong>: peluAng baru, sBerdaya, kurangi biaya (Cost), merek kuat (brAnD).</p>
+          <div class="keywords"><span class="kw">4 syarat ABCD</span><span class="kw">tidak ada urgensi</span><span class="kw">industri utama dulu</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);color:#000;">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">3 Test DBH — Gerbang Wajib Sebelum Diversifikasi</h3>
+          <p>Setiap rencana diversifikasi harus melewati: <strong style="color:#f0f0ff;">Daya Tarik</strong> industri baru · <strong style="color:#f0f0ff;">Biaya Masuk</strong> yang tidak membebankan · <strong style="color:#f0f0ff;">Harus Lebih Baik</strong> dari yang ada sekarang. Gagal salah satu = diversifikasi menghancurkan nilai, bukan menciptakannya.</p>
+          <div class="keywords"><span class="kw">DBH test</span><span class="kw">nilai pemegang saham</span><span class="kw">3 test wajib</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);color:#000;">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">3 Cara Masuk: AIJ — Pilih Sesuai Kondisi</h3>
+          <p><strong style="color:#f0f0ff;">Akuisisi</strong>: cepat tapi mahal, hindari hambatan masuk. <strong style="color:#f0f0ff;">Internal</strong>: lebih lambat tapi kendali penuh. <strong style="color:#f0f0ff;">Joint Venture</strong>: bagi risiko dan pengetahuan. Pilihan tergantung kecepatan, modal, dan toleransi risiko.</p>
+          <div class="keywords"><span class="kw">AIJ</span><span class="kw">akuisisi</span><span class="kw">pengembangan internal</span><span class="kw">joint venture</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);color:#fff;">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">Berkaitan vs Tak Berkaitan — Pilih Strategi Nilai yang Tepat</h3>
+          <p><strong style="color:#f0f0ff;">Berkaitan</strong>: manfaatkan ketersesuaian strategik untuk sinergi dan keunggulan kompetitif. <strong style="color:#f0f0ff;">Tak Berkaitan</strong>: bergantung pada kemampuan superior perusahaan induk mengelola &amp; mengalokasikan modal. <strong style="color:#f0f0ff;">Kombinasi</strong>: fleksibilitas maksimal — banyak konglomerat besar sukses dengan kombinasi keduanya.</p>
+          <div class="keywords"><span class="kw">strategic fit</span><span class="kw">scope economies</span><span class="kw">peran induk</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent5);color:#fff;">5</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent5);">6 Langkah DKSSPT — Evaluasi Berkelanjutan Portofolio Bisnis</h3>
+          <p>Evaluasi secara rutin: <strong style="color:#f0f0ff;">Daya Tarik</strong> industri → <strong style="color:#f0f0ff;">Kekuatan</strong> unit bisnis → <strong style="color:#f0f0ff;">Sinergi</strong> ketersesuaian → <strong style="color:#f0f0ff;">Sumber Daya</strong> fit → <strong style="color:#f0f0ff;">Prioritas</strong> alokasi → <strong style="color:#f0f0ff;">Tindakan</strong> stratejik baru. Saran akhir: fokus pada beberapa lini utama, bukan terlalu banyak.</p>
+          <div class="keywords"><span class="kw">DKSSPT</span><span class="kw">6 langkah evaluasi</span><span class="kw">divestasi bila perlu</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-grn">4 Syarat ABCD</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-amr">3 Test DBH</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-blu">Masuk via AIJ</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-ros">Berkaitan / Tak Berkaitan</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-vio">6 Langkah DKSSPT</span>
+      </div>
+      <div class="formula-caption">Alur keputusan strategi korporat diversifikasi — dari kapan mulai hingga cara mengevaluasi portofolio multi-bisnis</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box green" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab VIII:</strong><br>
+      <em>"Sebelum diversifikasi, cek <strong style="color:#f0f0ff;">A</strong>BCD dulu, loloskan <strong style="color:#f0f0ff;">D</strong>BH test, masuk via <strong style="color:#f0f0ff;">A</strong>IJ, pilih <strong style="color:#f0f0ff;">B</strong>erkaitan atau <strong style="color:#f0f0ff;">T</strong>ak Berkaitan, lalu evaluasi dengan <strong style="color:#f0f0ff;">D</strong>KSSPT!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">ABCD → DBH → AIJ → B/T → DKSSPT</strong> — lima blok kunci Bab VIII. Inti segalanya: diversifikasi hanya bermakna jika <em>menciptakan nilai pemegang saham yang tidak bisa diciptakan cara lain</em>.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab VIII Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 6;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

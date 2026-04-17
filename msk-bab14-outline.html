@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB XIV — Perubahan Strategik dan Organisasi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --accent:  #f472b6;   /* pink — chapter 14 color */
+    --accent2: #60a5fa;   /* blue */
+    --accent3: #34d399;   /* emerald */
+    --accent4: #fb923c;   /* orange */
+    --accent5: #a78bfa;   /* violet */
+    --accent6: #facc15;   /* yellow */
+    --accent7: #f43f5e;   /* rose */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events:none; z-index:0; opacity:.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display:inline-block; font-family:'DM Mono',monospace; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; background:var(--accent); color:#000; padding:.3rem .9rem; border-radius:2px; margin-bottom:1rem; font-weight:700; }
+  .tag-final { background: linear-gradient(90deg, var(--accent), var(--accent5)); color: #fff; }
+  h1 { font-family:'Playfair Display',serif; font-size:clamp(1.7rem,5vw,3rem); font-weight:900; line-height:1.1; margin-bottom:.5rem; }
+  h1 span { color:var(--accent); }
+  .subtitle { font-size:.88rem; color:var(--muted); letter-spacing:.05em; }
+  .progress-bar { margin:1.5rem auto 0; width:220px; height:3px; background:var(--border); border-radius:99px; overflow:hidden; }
+  .progress-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent3)); border-radius:99px; transition:width .5s ease; }
+  .progress-label { font-size:.7rem; color:var(--muted); margin-top:.4rem; font-family:'DM Mono',monospace; }
+
+  .mind-map { margin:0 0 2rem; padding:1.5rem; background:var(--surface); border:1px solid var(--border); border-radius:14px; text-align:center; }
+  .mind-map h2 { font-family:'Playfair Display',serif; font-size:1rem; margin-bottom:1.2rem; color:var(--muted); }
+  .mind-center { display:inline-block; background:linear-gradient(135deg,var(--accent),#be185d); color:#fff; font-weight:700; font-size:.88rem; padding:.65rem 1.4rem; border-radius:99px; margin-bottom:1.4rem; }
+  .mind-branches { display:grid; grid-template-columns:repeat(auto-fit,minmax(130px,1fr)); gap:.6rem; }
+  .branch { padding:.75rem; border-radius:10px; font-size:.73rem; font-weight:500; border:1px solid var(--border); transition:transform .2s,box-shadow .2s; cursor:default; text-align:left; }
+  .branch:hover { transform:translateY(-2px); box-shadow:0 6px 24px rgba(0,0,0,.4); }
+  .branch .blabel { font-size:.58rem; font-family:'DM Mono',monospace; margin-bottom:.25rem; opacity:.7; }
+  .b1{background:rgba(244,114,182,.08);border-color:rgba(244,114,182,.25);color:var(--accent);}
+  .b2{background:rgba(96,165,250,.08);border-color:rgba(96,165,250,.25);color:var(--accent2);}
+  .b3{background:rgba(52,211,153,.08);border-color:rgba(52,211,153,.25);color:var(--accent3);}
+  .b4{background:rgba(251,146,60,.08);border-color:rgba(251,146,60,.25);color:var(--accent4);}
+  .b5{background:rgba(167,139,250,.08);border-color:rgba(167,139,250,.25);color:var(--accent5);}
+  .b6{background:rgba(250,204,21,.08);border-color:rgba(250,204,21,.25);color:var(--accent6);}
+
+  .section { background:var(--surface); border:1px solid var(--border); border-radius:14px; margin-bottom:1.1rem; overflow:hidden; transition:border-color .2s,box-shadow .2s; }
+  .section.open { border-color:rgba(255,255,255,.14); box-shadow:0 8px 40px rgba(0,0,0,.45); }
+  .section-header { display:flex; align-items:center; gap:1rem; padding:1.15rem 1.4rem; cursor:pointer; user-select:none; transition:background .2s; }
+  .section-header:hover { background:rgba(255,255,255,.025); }
+  .num { font-family:'DM Mono',monospace; font-size:.68rem; font-weight:700; padding:.25rem .5rem; border-radius:4px; min-width:2.4rem; text-align:center; flex-shrink:0; white-space:nowrap; }
+  .c1{background:var(--accent);color:#000;} .c2{background:var(--accent2);color:#000;}
+  .c3{background:var(--accent3);color:#000;} .c4{background:var(--accent4);color:#000;}
+  .c5{background:var(--accent5);color:#fff;} .c6{background:var(--accent6);color:#000;}
+  .section-title { font-size:.98rem; font-weight:600; flex:1; }
+  .section-eng { font-size:.74rem; font-weight:400; color:var(--muted); font-style:italic; margin-top:.1rem; }
+  .chevron { color:var(--muted); font-size:.75rem; transition:transform .3s ease; flex-shrink:0; }
+  .section.open .chevron { transform:rotate(180deg); }
+  .section-body { display:none; padding:0 1.4rem 1.4rem; }
+  .section.open .section-body { display:block; }
+
+  .points { list-style:none; }
+  .point { display:flex; gap:.75rem; align-items:flex-start; padding:.7rem 0; border-bottom:1px solid var(--border); font-size:.87rem; line-height:1.55; color:#c8c8e0; opacity:0; transform:translateY(6px); transition:opacity .3s ease,transform .3s ease; }
+  .section.open .point { opacity:1; transform:none; }
+  .section.open .point:nth-child(1){transition-delay:.04s;} .section.open .point:nth-child(2){transition-delay:.08s;}
+  .section.open .point:nth-child(3){transition-delay:.12s;} .section.open .point:nth-child(4){transition-delay:.16s;}
+  .section.open .point:nth-child(5){transition-delay:.20s;} .section.open .point:nth-child(6){transition-delay:.24s;}
+  .section.open .point:nth-child(7){transition-delay:.28s;}
+  .point:last-child { border-bottom:none; }
+  .dot { width:6px; height:6px; border-radius:50%; flex-shrink:0; margin-top:.5rem; }
+  .d1{background:var(--accent);} .d2{background:var(--accent2);} .d3{background:var(--accent3);}
+  .d4{background:var(--accent4);} .d5{background:var(--accent5);} .d6{background:var(--accent6);}
+  .d7{background:var(--accent7);}
+  .point strong { color:var(--text); }
+
+  .subsection { background:rgba(0,0,0,.22); border-radius:9px; margin-bottom:.75rem; overflow:hidden; }
+  .subsection-header { display:flex; align-items:center; gap:.6rem; padding:.8rem 1rem; cursor:pointer; font-size:.84rem; font-weight:600; border-left:3px solid transparent; transition:background .2s; }
+  .subsection-header:hover { background:rgba(255,255,255,.03); }
+  .subsection.open .subsection-header { border-left-color:var(--accent); }
+  .sub-chevron { font-size:.62rem; color:var(--muted); transition:transform .3s; margin-left:auto; }
+  .subsection.open .sub-chevron { transform:rotate(180deg); }
+  .subsection-body { display:none; padding:0 1rem 1rem; }
+  .subsection.open .subsection-body { display:block; }
+
+  .memory-tip { margin-top:.9rem; padding:.85rem 1rem; background:rgba(244,114,182,.07); border:1px solid rgba(244,114,182,.2); border-radius:8px; font-size:.81rem; color:var(--accent); display:flex; gap:.6rem; align-items:flex-start; line-height:1.5; }
+  .memory-tip .icon { font-size:1rem; flex-shrink:0; margin-top:.05rem; }
+
+  .info-box { margin-top:.9rem; padding:.9rem 1rem; border-radius:8px; font-size:.84rem; line-height:1.55; color:#c8c8e0; }
+  .info-box.pink   { background:rgba(244,114,182,.07); border:1px solid rgba(244,114,182,.2); }
+  .info-box.blue   { background:rgba(96,165,250,.07);  border:1px solid rgba(96,165,250,.2); }
+  .info-box.green  { background:rgba(52,211,153,.07);  border:1px solid rgba(52,211,153,.2); }
+  .info-box.orange { background:rgba(251,146,60,.07);  border:1px solid rgba(251,146,60,.2); }
+  .info-box.violet { background:rgba(167,139,250,.07); border:1px solid rgba(167,139,250,.2); }
+  .info-box.yellow { background:rgba(250,204,21,.07);  border:1px solid rgba(250,204,21,.2); }
+  .info-box strong { color:var(--text); }
+
+  /* 3 jenis perubahan */
+  .change-types { display:grid; grid-template-columns:repeat(auto-fit,minmax(175px,1fr)); gap:.65rem; margin-top:1rem; }
+  .ct-card { padding:.9rem; border-radius:10px; border:1px solid var(--border); background:rgba(0,0,0,.25); font-size:.79rem; line-height:1.5; color:#c8c8e0; }
+  .ct-card .ctt-num { font-family:'DM Mono',monospace; font-size:.6rem; font-weight:700; display:block; margin-bottom:.25rem; }
+  .ct-card .ctt-title { font-weight:700; font-size:.88rem; display:block; margin-bottom:.25rem; }
+  .ct-card .ctt-desc { color:var(--muted); font-size:.74rem; }
+  .ct-1{border-color:rgba(52,211,153,.3);} .ct-1 .ctt-num,.ct-1 .ctt-title{color:var(--accent3);}
+  .ct-2{border-color:rgba(251,146,60,.3);} .ct-2 .ctt-num,.ct-2 .ctt-title{color:var(--accent4);}
+  .ct-3{border-color:rgba(244,114,182,.3);} .ct-3 .ctt-num,.ct-3 .ctt-title{color:var(--accent);}
+
+  /* Model Lewin — 3 fase visual */
+  .lewin-flow { display:flex; gap:.5rem; align-items:stretch; margin-top:1rem; }
+  .lewin-box { flex:1; padding:1rem; border-radius:10px; border:1px solid var(--border); background:rgba(0,0,0,.25); text-align:center; font-size:.79rem; line-height:1.5; color:#c8c8e0; }
+  .lb-icon { font-size:1.4rem; display:block; margin-bottom:.3rem; }
+  .lb-title { font-weight:700; font-size:.9rem; display:block; margin-bottom:.25rem; }
+  .lb-en { font-family:'DM Mono',monospace; font-size:.6rem; color:var(--muted); display:block; margin-bottom:.4rem; }
+  .lb-desc { color:var(--muted); font-size:.74rem; }
+  .lb-arrow { display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:1.2rem; flex-shrink:0; padding:0 .2rem; }
+  .lb-1{border-color:rgba(244,114,182,.3);} .lb-1 .lb-title{color:var(--accent);}
+  .lb-2{border-color:rgba(96,165,250,.3);}  .lb-2 .lb-title{color:var(--accent2);}
+  .lb-3{border-color:rgba(52,211,153,.3);}  .lb-3 .lb-title{color:var(--accent3);}
+
+  /* Kotter 8 langkah */
+  .kotter-steps { display:flex; flex-direction:column; gap:.5rem; margin-top:1rem; }
+  .ks-item { display:flex; gap:.9rem; align-items:flex-start; background:rgba(0,0,0,.2); border-radius:8px; padding:.75rem 1rem; font-size:.83rem; line-height:1.5; color:#c8c8e0; border-left:3px solid transparent; }
+  .ks-num { font-family:'DM Mono',monospace; font-size:.65rem; font-weight:700; color:#000; width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:.1rem; }
+  .ks-item strong { color:var(--text); }
+  /* Phase colours */
+  .ks-p1{border-left-color:rgba(244,114,182,.4);} .ks-p1 .ks-num{background:var(--accent);}
+  .ks-p2{border-left-color:rgba(96,165,250,.4);}  .ks-p2 .ks-num{background:var(--accent2);}
+  .ks-p3{border-left-color:rgba(52,211,153,.4);}  .ks-p3 .ks-num{background:var(--accent3);color:#000;}
+  .ks-phase-label { font-family:'DM Mono',monospace; font-size:.6rem; font-weight:700; padding:.15rem .45rem; border-radius:3px; margin-bottom:.5rem; display:inline-block; }
+  .pl-unfreeze{background:rgba(244,114,182,.15);color:var(--accent);}
+  .pl-change  {background:rgba(96,165,250,.15);color:var(--accent2);}
+  .pl-refreeze{background:rgba(52,211,153,.15);color:var(--accent3);}
+
+  /* Resistensi */
+  .resist-split { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; margin-top:1rem; }
+  .rs-card { padding:.9rem; border-radius:10px; border:1px solid var(--border); background:rgba(0,0,0,.25); font-size:.79rem; line-height:1.5; color:#c8c8e0; }
+  .rs-card .rsc-title { font-weight:700; font-size:.86rem; display:block; margin-bottom:.4rem; }
+  .rs-card ul { list-style:none; }
+  .rs-card ul li { padding:.22rem 0; border-bottom:1px solid var(--border); font-size:.76rem; color:var(--muted); }
+  .rs-card ul li:last-child { border-bottom:none; }
+  .rs-card ul li::before { content:"→ "; }
+  .rs-penerima{border-color:rgba(244,114,182,.3);} .rs-penerima .rsc-title{color:var(--accent);}
+  .rs-agen    {border-color:rgba(96,165,250,.3);}  .rs-agen    .rsc-title{color:var(--accent2);}
+
+  /* Strategi atasi resistensi */
+  .strat-list { display:flex; flex-direction:column; gap:.5rem; margin-top:.9rem; }
+  .sl-item { display:flex; gap:.8rem; align-items:flex-start; background:rgba(0,0,0,.2); border-radius:8px; padding:.7rem .9rem; border-left:3px solid rgba(250,204,21,.4); font-size:.83rem; line-height:1.5; color:#c8c8e0; }
+  .sl-icon { font-size:1rem; flex-shrink:0; }
+  .sl-item strong { color:var(--text); }
+
+  .done-btn { display:flex; align-items:center; gap:.5rem; margin-top:1.1rem; background:none; border:1px solid var(--border); border-radius:6px; padding:.5rem .9rem; color:var(--muted); font-size:.77rem; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all .2s; }
+  .done-btn:hover { border-color:var(--accent3); color:var(--accent3); }
+  .done-btn.checked { border-color:var(--accent3); color:var(--accent3); background:rgba(52,211,153,.07); }
+
+  /* ULTIMATE */
+  .ultimate { margin-top:2.5rem; background:linear-gradient(135deg,rgba(244,114,182,.08),rgba(52,211,153,.04)); border:1px solid rgba(244,114,182,.3); border-radius:16px; padding:2rem 1.6rem; }
+  .ultimate-header { display:flex; align-items:center; gap:.8rem; margin-bottom:1.6rem; }
+  .ultimate-icon { width:40px; height:40px; background:linear-gradient(135deg,var(--accent),#be185d); border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0; }
+  .ultimate-header h2 { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; }
+  .ultimate-header p { font-size:.78rem; color:var(--muted); margin-top:.1rem; }
+
+  .chain { display:flex; flex-direction:column; gap:0; }
+  .chain-step { display:flex; gap:1rem; align-items:flex-start; }
+  .chain-line { display:flex; flex-direction:column; align-items:center; flex-shrink:0; }
+  .chain-dot { width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-family:'DM Mono',monospace; font-size:.65rem; font-weight:700; flex-shrink:0; }
+  .chain-connector { width:2px; flex:1; min-height:20px; background:var(--border); margin:3px 0; }
+  .chain-content { flex:1; padding-bottom:1.4rem; }
+  .chain-content h3 { font-size:.9rem; font-weight:700; margin-bottom:.3rem; }
+  .chain-content p { font-size:.82rem; color:#9fa3c0; line-height:1.55; }
+  .chain-content .keywords { margin-top:.5rem; display:flex; flex-wrap:wrap; gap:.35rem; }
+  .kw { font-family:'DM Mono',monospace; font-size:.62rem; padding:.15rem .5rem; border-radius:99px; background:rgba(255,255,255,.06); color:var(--muted); border:1px solid var(--border); }
+
+  .grand-formula { margin-top:1.5rem; padding:1.2rem; background:rgba(0,0,0,.3); border-radius:10px; text-align:center; }
+  .formula-line { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.4rem; font-weight:600; }
+  .formula-term { padding:.3rem .75rem; border-radius:6px; font-family:'DM Mono',monospace; font-size:.76rem; }
+  .ft-pnk{background:rgba(244,114,182,.15);color:var(--accent);}
+  .ft-blu{background:rgba(96,165,250,.15);color:var(--accent2);}
+  .ft-grn{background:rgba(52,211,153,.15);color:var(--accent3);}
+  .ft-orng{background:rgba(251,146,60,.15);color:var(--accent4);}
+  .ft-vio{background:rgba(167,139,250,.15);color:var(--accent5);}
+  .formula-op { color:var(--muted); font-size:.9rem; }
+  .formula-caption { font-size:.75rem; color:var(--muted); margin-top:.5rem; font-style:italic; }
+
+  /* FINAL COMPLETION BADGE */
+  .completion-badge { margin-top:1.5rem; padding:1.6rem; background:linear-gradient(135deg,rgba(244,114,182,.1),rgba(167,139,250,.08),rgba(52,211,153,.06)); border:1px solid rgba(244,114,182,.3); border-radius:14px; text-align:center; }
+  .cb-icon { font-size:2.5rem; display:block; margin-bottom:.6rem; }
+  .cb-title { font-family:'Playfair Display',serif; font-size:1.3rem; font-weight:900; color:var(--accent); display:block; margin-bottom:.5rem; }
+  .cb-text { font-size:.84rem; color:#c8c8e0; line-height:1.7; }
+  .cb-stats { display:flex; justify-content:center; gap:2rem; margin-top:1rem; }
+  .cb-stat { text-align:center; }
+  .cb-stat .cs-num { font-family:'DM Mono',monospace; font-size:1.4rem; font-weight:700; display:block; }
+  .cb-stat .cs-lbl { font-size:.68rem; color:var(--muted); font-family:'DM Mono',monospace; }
+
+  footer { text-align:center; margin-top:3rem; font-size:.7rem; color:var(--muted); font-family:'DM Mono',monospace; opacity:.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag tag-final">CA Indonesia · MSK · BAB PENUTUP XIV</div>
+    <h1>BAB XIV — <span>Perubahan Strategik</span><br>&amp; Organisasi</h1>
+    <p class="subtitle">3 Jenis Perubahan · Model Lewin · 8 Langkah Kotter · Pengembangan Org · Resistensi &amp; Mengatasinya</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab XIV</h2>
+    <div class="mind-center">🔄 Perubahan Strategik &amp; Organisasi</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">14.3</div>📊 3 Jenis Perubahan<br><small style="opacity:.7">Adaptif · Inovatif · Inovatif Radikal</small></div>
+      <div class="branch b2"><div class="blabel">14.4</div>🧊 Model Lewin<br><small style="opacity:.7">Unfreeze · Change · Refreeze</small></div>
+      <div class="branch b3"><div class="blabel">14.6</div>🎯 8 Langkah Kotter<br><small style="opacity:.7">Peta jalan perubahan organisasi</small></div>
+      <div class="branch b4"><div class="blabel">14.7</div>🌱 Pengembangan Org<br><small style="opacity:.7">OD · Change Agent · DIEU</small></div>
+      <div class="branch b5"><div class="blabel">14.8–14.9</div>🛡️ Resistensi Perubahan<br><small style="opacity:.7">Penyebab · Karakteristik · Strategi atasi</small></div>
+      <div class="branch b6"><div class="blabel">14.5</div>⚙️ Model Sistem<br><small style="opacity:.7">Input · Rencana strategis · Target · Output</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: PENDAHULUAN & 3 JENIS PERUBAHAN ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">14.1–14.3</span>
+      <div>
+        <div class="section-title">Pendahuluan &amp; Tiga Jenis Perubahan Organisasi</div>
+        <div class="section-eng">Introduction &amp; Three Types of Organizational Change</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          Bab XIV mempelajari <strong>faktor eksternal dan internal yang mendorong perubahan organisasi</strong>. Setiap organisasi memiliki karakteristik yang berbeda dan menghadapi dorongan untuk perubahan yang berbeda pula — dari luar maupun dari dalam.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Perubahan bukan pilihan</strong> — organisasi yang tidak berubah saat lingkungan berubah akan kehilangan relevansi dan daya saing. Pertanyaannya bukan <em>apakah</em> harus berubah, melainkan <em>bagaimana</em> memimpin perubahan dengan efektif.
+        </span></li>
+      </ul>
+      <div class="change-types">
+        <div class="ct-card ct-1">
+          <span class="ctt-num">JENIS 1 — KOMPLEKSITAS RENDAH</span>
+          <span class="ctt-title">🌿 Perubahan Adaptif</span>
+          <span class="ctt-desc">Perubahan sesuai dengan praktik yang umum digunakan. Terendah dari sudut kompleksitas, biaya, dan ketidakpastian. <strong style="color:#f0f0ff;">Tidak dianggap ancaman</strong> oleh karyawan karena dianggap wajar dan lazim. Contoh: perubahan prosedur administratif kecil.</span>
+        </div>
+        <div class="ct-card ct-2">
+          <span class="ctt-num">JENIS 2 — KOMPLEKSITAS SEDANG</span>
+          <span class="ctt-title">⚡ Perubahan Inovatif</span>
+          <span class="ctt-desc">Lebih kompleks, memerlukan biaya lebih besar, dan menyebabkan ketidakpastian lebih tinggi. Ketidaklaziman menciptakan <strong style="color:#f0f0ff;">ketakutan akan perubahan</strong> pada diri karyawan. Contoh: implementasi sistem ERP baru.</span>
+        </div>
+        <div class="ct-card ct-3">
+          <span class="ctt-num">JENIS 3 — KOMPLEKSITAS TINGGI</span>
+          <span class="ctt-title">🚀 Perubahan Inovatif Radikal</span>
+          <span class="ctt-desc">Paling sulit diimplementasikan karena mengancam kepercayaan diri manajerial dan rasa aman karyawan. Namun <strong style="color:#f0f0ff;">memiliki potensi keuntungan terbesar</strong> dan harus didukung budaya organisasi serta aset berwujud. Contoh: restrukturisasi bisnis total.</span>
+        </div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 3 Jenis:</strong> <em>"Adaptif-Inovatif-Inovatif Radikal"</em> → <em>"AIR"</em> → <em>"Adaptasi sebelum Inovasi, Inovasi Radikal hanya jika siap!"</em> — makin radikal perubahan, makin besar potensi tapi makin besar pula tantangan dan resistensinya.</span>
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: MODEL LEWIN & MODEL SISTEM ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c2">14.4–14.5</span>
+      <div>
+        <div class="section-title">Model Perubahan Lewin &amp; Model Sistem Perubahan</div>
+        <div class="section-eng">Lewin's Change Model &amp; Systems Model of Change</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub2a">
+        <div class="subsection-header" onclick="toggleSub('sub2a')">
+          🧊 Model Perubahan Lewin: Unfreeze → Change → Refreeze (14.4) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:.9rem;">Lima asumsi dasar Lewin: perubahan melibatkan pembelajaran · tidak terjadi tanpa motivasi · SDM adalah inti perubahan · resistensi bisa muncul walau tujuan baik · perubahan efektif butuh perilaku, sikap, dan praktik baru.</p>
+          <div class="lewin-flow">
+            <div class="lewin-box lb-1">
+              <span class="lb-icon">🔥</span>
+              <span class="lb-title">Unfreezing</span>
+              <span class="lb-en">Memulai Perubahan</span>
+              <span class="lb-desc">Ciptakan motivasi untuk berubah. Gunakan data efektivitas, efisiensi, kepuasan konsumen. Teknik utama: <em>benchmarking</em> untuk membandingkan kinerja dengan yang terbaik.</span>
+            </div>
+            <div class="lb-arrow">→</div>
+            <div class="lewin-box lb-2">
+              <span class="lb-icon">⚙️</span>
+              <span class="lb-title">Changing</span>
+              <span class="lb-en">Mengelola Perubahan</span>
+              <span class="lb-desc">Lakukan perubahan pada proses, prosedur, produk, layanan. Melibatkan pembelajaran cara baru — informasi, teknologi, perilaku baru untuk menyelesaikan pekerjaan.</span>
+            </div>
+            <div class="lb-arrow">→</div>
+            <div class="lewin-box lb-3">
+              <span class="lb-icon">❄️</span>
+              <span class="lb-title">Refreezing</span>
+              <span class="lb-en">Menstabilisasi Perubahan</span>
+              <span class="lb-desc">Dukung dan perkuat perubahan — bantu karyawan mengintegrasikan perilaku baru menjadi kebiasaan. Gunakan pelatihan, teladan, dan insentif finansial.</span>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Lewin:</strong> <em>"Cairkan es lama → Bentuk es baru → Bekukan kembali"</em> — Metafora yang sempurna: sebelum bisa membentuk perilaku baru, Anda harus terlebih dahulu "mencairkan" pola lama yang sudah mengeras.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub2b">
+        <div class="subsection-header" onclick="toggleSub('sub2b')">
+          ⚙️ Model Sistem Perubahan (14.5) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d2"></span><span>
+              Model sistem perubahan memberikan <strong>kerangka kerja untuk mendiagnosis</strong> apa saja yang harus diubah dan membatasi evaluasi keberhasilan perubahan tersebut.
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              <strong>Komponen inti:</strong> <em>Input</em> (sumber daya dan kondisi awal) → <em>Rencana Strategis</em> (arah dan tujuan perubahan) → <em>Elemen-elemen Target dari Perubahan</em> (apa yang harus diubah: struktur, proses, SDM, teknologi, budaya) → <em>Output</em> (hasil yang diharapkan dari perubahan).
+            </span></li>
+            <li class="point"><span class="dot d2"></span><span>
+              Model ini berbeda dari Lewin dan Kotter karena <strong>tidak memasukkan rangkaian terstruktur yang kaku</strong> — melainkan memiliki fokus diagnosis yang sama dengan pendekatan Pengembangan Organisasi (OD).
+            </span></li>
+          </ul>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: 8 LANGKAH KOTTER ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c3">14.6</span>
+      <div>
+        <div class="section-title">Delapan Langkah Kotter untuk Memimpin Perubahan Organisasi</div>
+        <div class="section-eng">Kotter's Eight-Step Process for Leading Organizational Change</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:.83rem;color:var(--muted);margin-bottom:1rem;">Kotter mengusulkan 8 langkah berdasarkan studinya terhadap lebih dari 100 perusahaan. Langkah 1–4 = <em>Unfreezing</em>, 5–7 = <em>Changing</em>, 8 = <em>Refreezing</em>:</p>
+
+      <span class="ks-phase-label pl-unfreeze" style="margin-bottom:.5rem;display:inline-block;">FASE 1: UNFREEZING (Langkah 1–4)</span>
+      <div class="kotter-steps">
+        <div class="ks-item ks-p1">
+          <div class="ks-num">1</div>
+          <div><strong>Membangun rasa pentingnya perubahan</strong> — ciptakan urgensi yang kuat; tunjukkan dengan data bahwa status quo tidak bisa dipertahankan dan perubahan adalah keharusan bukan pilihan</div>
+        </div>
+        <div class="ks-item ks-p1">
+          <div class="ks-num">2</div>
+          <div><strong>Menyusun koalisi</strong> — bangun kelompok orang-orang berpengaruh yang memiliki komitmen kuat untuk mendorong perubahan dari berbagai level dan fungsi dalam organisasi</div>
+        </div>
+        <div class="ks-item ks-p1">
+          <div class="ks-num">3</div>
+          <div><strong>Mengembangkan visi dan strategi perubahan</strong> — rumuskan visi yang jelas dan menarik tentang seperti apa organisasi setelah perubahan, dan strategi konkret untuk mencapainya</div>
+        </div>
+        <div class="ks-item ks-p1">
+          <div class="ks-num">4</div>
+          <div><strong>Mengkomunikasikan perubahan visi</strong> — sampaikan visi perubahan secara konsisten, jelas, dan berulang-ulang ke seluruh organisasi hingga dipahami dan diterima oleh semua orang</div>
+        </div>
+      </div>
+
+      <span class="ks-phase-label pl-change" style="margin:.9rem 0 .5rem;display:inline-block;">FASE 2: CHANGING (Langkah 5–7)</span>
+      <div class="kotter-steps">
+        <div class="ks-item ks-p2">
+          <div class="ks-num">5</div>
+          <div><strong>Melakukan tindakan yang berdampak luas</strong> — singkirkan hambatan, ubah sistem dan struktur yang menghambat visi perubahan, dan berdayakan karyawan untuk bertindak berdasarkan visi tersebut</div>
+        </div>
+        <div class="ks-item ks-p2">
+          <div class="ks-num">6</div>
+          <div><strong>Menunjukkan keberhasilan jangka pendek</strong> — rencanakan dan ciptakan kemenangan-kemenangan kecil yang terlihat nyata dalam jangka pendek untuk menjaga momentum dan motivasi</div>
+        </div>
+        <div class="ks-item ks-p2">
+          <div class="ks-num">7</div>
+          <div><strong>Mengkonsolidasikan pencapaian dan menghasilkan lebih banyak perubahan</strong> — gunakan kredibilitas dari kemenangan awal untuk mendorong perubahan yang lebih dalam dan lebih luas</div>
+        </div>
+      </div>
+
+      <span class="ks-phase-label pl-refreeze" style="margin:.9rem 0 .5rem;display:inline-block;">FASE 3: REFREEZING (Langkah 8)</span>
+      <div class="kotter-steps">
+        <div class="ks-item ks-p3">
+          <div class="ks-num">8</div>
+          <div><strong>Mengumumkan pendekatan baru dalam budaya organisasi</strong> — institusionalkan perubahan dengan menghubungkan perilaku baru secara eksplisit dengan keberhasilan organisasi; jadikan ini bagian dari budaya dan cara kerja permanen</div>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 8 Langkah Kotter:</strong> <em>"Rasa Penting-Koalisi-Visi-Komunikasi | Tindakan-Kemenangan-Konsolidasi | Budaya Baru"</em> → <em>"Rasa Koalisi Visi Komunikasi, Tindakan Kecil Konsolidasi, Budaya!"</em> — 4+3+1 dalam tiga fase Lewin.</span>
+      </div>
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: PENGEMBANGAN ORGANISASI ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c4">14.7</span>
+      <div>
+        <div class="section-title">Melakukan Perubahan melalui Pengembangan Organisasi (OD)</div>
+        <div class="section-eng">Organizational Development as a Change Implementation Technique</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d4"></span><span>
+          <strong>Pengembangan Organisasi (OD)</strong> = teknik untuk mengimplementasikan perubahan organisasi yang terdiri dari upaya-upaya untuk menolong SDM dalam organisasi bekerja secara efektif, dengan menerapkan prinsip ilmu perilaku, psikologi, sosiologi, pendidikan, dan manajemen.
+        </span></li>
+        <li class="point"><span class="dot d4"></span><span>
+          <strong>Perbedaan dengan Lewin &amp; Kotter:</strong> OD tidak memasukkan rangkaian terstruktur yang kaku, tetapi memiliki fokus diagnosis yang sama dengan model sistem perubahan. OD diterapkan pada langkah 1, 3, 5, 6, dan 7 dari Kotter.
+        </span></li>
+        <li class="point"><span class="dot d4"></span><span>
+          OD membutuhkan <strong>agen perubahan (change agent)</strong> — seseorang yang bertindak sebagai katalis untuk memecahkan masalah yang ada dengan cara yang baru. Agen perubahan bisa berupa konsultan eksternal atau karyawan internal.
+        </span></li>
+        <li class="point"><span class="dot d4"></span><span>
+          <strong>Proses OD:</strong> <em>Diagnosis</em> (identifikasi masalah) → <em>Intervensi</em> (tindakan perubahan) → <em>Evaluasi</em> (ukur hasil) → <em>Umpan Balik</em> (penyesuaian berkelanjutan).
+        </span></li>
+      </ul>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik OD:</strong> <em>"Diagnosis-Intervensi-Evaluasi-Umpan Balik"</em> → <em>"DIEU"</em> → <em>"Diagnosa dulu, Intervensi tepat, Evaluasi hasilnya, Update terus!"</em></span>
+      </div>
+      <div class="info-box orange">
+        <strong>👤 Karakteristik Agen Perubahan yang Efektif:</strong> Memiliki keputusan mengganggu tradisi kebudayaan atau hubungan kelompok yang tidak produktif · berpotensi memulai konflik personal yang diperlukan · memiliki kemampuan dan pembagian waktu yang baik · memiliki gaya kepemimpinan tertentu · dan mampu melegitimasi perubahan melalui penghargaan atau pemberian insentif.
+      </div>
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: RESISTENSI & STRATEGI MENGATASINYA ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">14.8–14.9</span>
+      <div>
+        <div class="section-title">Memahami Resistensi Terhadap Perubahan &amp; Strategi Mengatasinya</div>
+        <div class="section-eng">Understanding Resistance to Change &amp; Strategies to Overcome It</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub5a">
+        <div class="subsection-header" onclick="toggleSub('sub5a')">
+          🛡️ Apa itu Resistensi dan Mengapa Muncul? (14.8) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Resistensi terhadap perubahan</strong> = respons emosional terhadap ancaman yang nyata ataupun imajinatif terhadap rutinitas kerja yang sudah terbentuk. Ini adalah reaksi yang sangat manusiawi dan normal.
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              Resistensi merupakan <strong>interaksi dinamis</strong> antara: karakteristik penerima perubahan · karakteristik agen perubahan · dan hubungan agen-penerima perubahan.
+            </span></li>
+          </ul>
+          <div class="resist-split">
+            <div class="rs-card rs-penerima">
+              <span class="rsc-title">👤 Karakteristik Penerima</span>
+              <ul>
+                <li>Kecenderungan (fleksibilitas) terhadap perubahan</li>
+                <li>Kecemasan terhadap sesuatu yang baru</li>
+                <li>Takut gagal dalam situasi baru</li>
+                <li>Kehilangan status atau keamanan kerja</li>
+                <li>Tekanan rekan kerja untuk tidak berubah</li>
+                <li>Kesuksesan masa lalu yang menyebabkan keras kepala</li>
+              </ul>
+            </div>
+            <div class="rs-card rs-agen">
+              <span class="rsc-title">🏗️ Karakteristik Agen Perubahan</span>
+              <ul>
+                <li>Mengganggu tradisi kebudayaan atau hubungan kelompok</li>
+                <li>Berpotensi menimbulkan konflik personal</li>
+                <li>Kemampuan dan pembagian waktu yang baik</li>
+                <li>Gaya kepemimpinan yang tepat situasi</li>
+                <li>Kemampuan melegitimasi melalui insentif</li>
+                <li>Resistensi berkurang jika ada kepercayaan mutual</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5b">
+        <div class="subsection-header" onclick="toggleSub('sub5b')">
+          🔧 Strategi Alternatif untuk Mengatasi Resistensi (14.9) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:.82rem;color:var(--muted);margin-bottom:.8rem;">Kotter menemukan bahwa penyebab resistensi adalah masalah dalam <strong style="color:var(--text);">struktur organisasi dan sistem penilaian kinerja</strong> yang membuat orang berpikir untuk memilih visi baru atau kepentingan mereka sendiri. Beberapa strategi untuk mengatasi resistensi:</p>
+          <div class="strat-list">
+            <div class="sl-item"><span class="sl-icon">📢</span><div><strong>Pendidikan dan komunikasi</strong> — jelaskan alasan perubahan dan manfaatnya sebelum memulai; kurangi ketidakpastian informasi yang menjadi akar ketakutan</div></div>
+            <div class="sl-item"><span class="sl-icon">🤝</span><div><strong>Partisipasi dan keterlibatan</strong> — libatkan penerima perubahan dalam perencanaan dan implementasi; mereka yang terlibat dalam desain perubahan cenderung lebih menerimanya</div></div>
+            <div class="sl-item"><span class="sl-icon">🛟</span><div><strong>Fasilitasi dan dukungan</strong> — berikan pelatihan, konseling, dan sumber daya yang diperlukan; tunjukkan bahwa organisasi peduli pada kesejahteraan karyawan selama transisi</div></div>
+            <div class="sl-item"><span class="sl-icon">🏆</span><div><strong>Negosiasi dan perjanjian</strong> — tawarkan insentif atau kompensasi kepada mereka yang kehilangan sesuatu akibat perubahan; buat kesepakatan yang adil</div></div>
+            <div class="sl-item"><span class="sl-icon">👑</span><div><strong>Manipulasi dan ko-optasi</strong> — libatkan pemimpin resistensi dalam peran kepemimpinan perubahan; jadikan mereka bagian dari solusi daripada bagian dari masalah</div></div>
+            <div class="sl-item"><span class="sl-icon">⚡</span><div><strong>Pemaksaan eksplisit dan implisit</strong> — gunakan kekuatan/otoritas manajerial jika semua strategi lain gagal; ini adalah pilihan terakhir karena dapat meningkatkan resistensi jika tidak dikelola dengan baik</div></div>
+          </div>
+          <div class="info-box violet">
+            <strong>🎯 Temuan Kotter dari 100 Perusahaan:</strong> Manajemen perlu mendapat umpan balik dari karyawan tentang <em>hal apapun yang dapat mempengaruhi kemampuan atau kemauan mereka untuk menerima perubahan</em>. Perubahan yang berhasil bukan tentang memaksa orang berubah — melainkan tentang menciptakan kondisi di mana mereka <em>mau dan mampu</em> berubah.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">🔄</div>
+      <div>
+        <h2>Ultimate Outline — Bab XIV</h2>
+        <p>Rangkuman inti bab terakhir modul MSK — Perubahan Strategik &amp; Organisasi</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);color:#000;">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">3 Jenis Perubahan AIR — Dari Adaptif hingga Radikal</h3>
+          <p><strong style="color:#f0f0ff;">Adaptif</strong>: rendah risiko, diterima dengan wajar. <strong style="color:#f0f0ff;">Inovatif</strong>: sedang, ada ketakutan. <strong style="color:#f0f0ff;">Inovatif Radikal</strong>: tinggi risiko tapi potensi terbesar, butuh dukungan budaya penuh. Pilih jenis perubahan yang sesuai kapasitas dan kesiapan organisasi.</p>
+          <div class="keywords"><span class="kw">AIR</span><span class="kw">adaptif-inovatif-radikal</span><span class="kw">risiko vs potensi</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);color:#000;">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">Model Lewin — Cairkan, Ubah, Bekukan Kembali</h3>
+          <p>Tiga fase fundamental perubahan: <strong style="color:#f0f0ff;">Unfreeze</strong> (ciptakan motivasi, gunakan benchmarking) → <strong style="color:#f0f0ff;">Change</strong> (implementasi perubahan dengan cara baru) → <strong style="color:#f0f0ff;">Refreeze</strong> (stabilisasi dengan pelatihan, teladan, insentif). Asumsi: perubahan tidak terjadi tanpa motivasi.</p>
+          <div class="keywords"><span class="kw">Lewin 3 fase</span><span class="kw">unfreeze-change-refreeze</span><span class="kw">motivasi dulu</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);color:#000;">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">8 Langkah Kotter — Peta Jalan Perubahan Sistematis</h3>
+          <p>Empat langkah untuk mencairkan (urgensi→koalisi→visi→komunikasi) · tiga untuk berubah (tindakan→kemenangan kecil→konsolidasi) · satu untuk membekukan kembali (budaya baru). Kemenangan <strong style="color:#f0f0ff;">jangka pendek</strong> (langkah 6) sangat penting untuk menjaga momentum.</p>
+          <div class="keywords"><span class="kw">8 langkah</span><span class="kw">4+3+1</span><span class="kw">kemenangan jangka pendek</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);color:#000;">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">OD — Pendekatan Berbasis Ilmu Perilaku, via Change Agent</h3>
+          <p>Pengembangan Organisasi menggunakan ilmu perilaku, psikologi, sosiologi untuk implementasi perubahan. Prosesnya: <strong style="color:#f0f0ff;">DIEU</strong> — Diagnosis → Intervensi → Evaluasi → Umpan Balik. Butuh change agent yang efektif — bisa konsultan eksternal atau internal.</p>
+          <div class="keywords"><span class="kw">DIEU</span><span class="kw">change agent</span><span class="kw">ilmu perilaku</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent5);color:#fff;">5</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent5);">Resistensi = Normal — Pahami Penyebabnya, Atasi dengan Tepat</h3>
+          <p>Resistensi adalah respons emosional yang normal terhadap ancaman terhadap rutinitas. Penyebab: ketakutan, ketidakpastian, kehilangan status. Strategi atasi: <strong style="color:#f0f0ff;">komunikasi → partisipasi → fasilitasi → negosiasi → ko-optasi → paksaan</strong> (terakhir). Kunci: ciptakan kondisi di mana orang <em>mau dan mampu</em> berubah.</p>
+          <div class="keywords"><span class="kw">resistensi normal</span><span class="kw">6 strategi atasi</span><span class="kw">umpan balik penting</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-pnk">3 Jenis AIR</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-blu">Model Lewin (UCR)</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-grn">8 Langkah Kotter</span>
+        <span class="formula-op">+</span>
+        <span class="formula-term ft-orng">OD &amp; DIEU</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-vio">Atasi Resistensi</span>
+      </div>
+      <div class="formula-caption">Kerangka lengkap memimpin perubahan organisasi — dari memahami jenis perubahan hingga mengelola resistensi secara efektif</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box pink" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab XIV:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">AIR</strong> jenis perubahan, Lewin Unfreeze-Change-Refreeze, <strong style="color:#f0f0ff;">Kotter 8</strong> langkah (4+3+1), OD via <strong style="color:#f0f0ff;">DIEU</strong> dengan agen perubahan, atasi <strong style="color:#f0f0ff;">Resistensi</strong> dengan komunikasi-partisipasi-fasilitasi dulu!"</em>
+    </div>
+
+    <!-- FINAL COMPLETION -->
+    <div class="completion-badge">
+      <span class="cb-icon">🎓</span>
+      <span class="cb-title">Selamat! Portal MSK 14 Bab Telah Lengkap!</span>
+      <p class="cb-text">
+        Anda telah menyelesaikan seluruh 14 bab Manajemen Stratejik dan Kepemimpinan — dari Pengantar Strategi (Bab I) hingga Perubahan Strategik &amp; Organisasi (Bab XIV). Perjalanan dari <em>memahami apa itu strategi</em> hingga <em>bagaimana memimpin perubahan strategik</em> yang efektif.
+        <br><br>
+        <strong style="color:var(--accent);">Ingat pesan utama keseluruhan modul:</strong> Strategi terbaik pun akan gagal tanpa eksekusi yang kuat. Dan eksekusi terkuat dibangun di atas fondasi: orang yang tepat, kompetensi yang kuat, sistem yang mendukung, budaya yang sehat, kepemimpinan yang efektif, dan kesiapan untuk terus berubah.
+      </p>
+      <div class="cb-stats">
+        <div class="cb-stat">
+          <span class="cs-num" style="color:var(--accent);">14</span>
+          <span class="cs-lbl">BAB SELESAI</span>
+        </div>
+        <div class="cb-stat">
+          <span class="cs-num" style="color:var(--accent2);">70+</span>
+          <span class="cs-lbl">KONSEP KUNCI</span>
+        </div>
+        <div class="cb-stat">
+          <span class="cs-num" style="color:var(--accent3);">40+</span>
+          <span class="cs-lbl">MNEMONIK</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab XIV (Penutup) · Manajemen Stratejik dan Kepemimpinan<br>🏁 Portal MSK 14 Bab — Lengkap! Selamat Belajar!</footer>
+</div>
+
+<script>
+  const totalSections = 5;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

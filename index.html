@@ -312,6 +312,25 @@
     color: var(--muted);
   }
 
+  /* ── SIDEBAR DIVIDER ── */
+  .nav-divider { padding:.7rem 1rem .3rem; font-family:'DM Mono',monospace; font-size:.58rem; letter-spacing:.12em; text-transform:uppercase; color:rgba(107,114,128,0.5); border-top:1px solid var(--border); margin-top:.4rem; }
+  .nav-btn-exam { display:flex; align-items:center; gap:.7rem; padding:.65rem 1rem; width:100%; background:none; border:none; cursor:pointer; text-align:left; transition:background .15s; position:relative; }
+  .nav-btn-exam:hover { background:rgba(255,255,255,.035); }
+  .nav-btn-exam.active { background:rgba(244,114,182,.09); }
+  .nav-btn-exam.active::before { content:''; position:absolute; left:0; top:0; bottom:0; width:3px; background:#f472b6; border-radius:0 2px 2px 0; }
+  .nav-exam-icon { font-size:1rem; flex-shrink:0; width:26px; text-align:center; }
+  .nav-exam-title { font-size:.78rem; font-weight:600; color:var(--muted); line-height:1.35; transition:color .15s; flex:1; }
+  .nav-btn-exam:hover .nav-exam-title { color:var(--text); }
+  .nav-btn-exam.active .nav-exam-title { color:#f472b6; }
+  .nav-exam-badge { font-family:'DM Mono',monospace; font-size:.55rem; font-weight:700; background:rgba(244,114,182,.15); color:#f472b6; padding:.12rem .4rem; border-radius:3px; flex-shrink:0; border:1px solid rgba(244,114,182,.25); }
+  .chapter-chip-exam { background:var(--surface); border:1px solid rgba(244,114,182,.3); border-radius:10px; padding:.75rem .85rem; cursor:pointer; transition:all .2s; text-align:left; grid-column:1/-1; }
+  .chapter-chip-exam:hover { border-color:rgba(244,114,182,.55); background:rgba(244,114,182,.06); transform:translateY(-2px); }
+  .chip-exam-inner { display:flex; align-items:center; gap:.75rem; }
+  .chip-exam-icon { font-size:1.3rem; flex-shrink:0; }
+  .chip-exam-text .chip-num { color:#f472b6; margin-bottom:.2rem; font-family:'DM Mono',monospace; font-size:.6rem; font-weight:700; }
+  .chip-exam-text .chip-title { font-size:.78rem; font-weight:600; color:var(--text); line-height:1.3; }
+  .chip-exam-text .chip-badge { display:inline-block; margin-top:.3rem; font-family:'DM Mono',monospace; font-size:.55rem; padding:.08rem .4rem; border-radius:99px; background:rgba(244,114,182,.12); color:#f472b6; }
+
   /* ── SCROLLBAR ── */
   .sidebar::-webkit-scrollbar { width: 4px; }
   .sidebar::-webkit-scrollbar-track { background: transparent; }
@@ -363,7 +382,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
       <h2>Outline Materi</h2>
-      <p>14 BAB · MSK</p>
+      <p>14 BAB + LATIHAN SOAL · MSK</p>
     </div>
     <div class="sidebar-search">
       <input type="text" id="searchInput" placeholder="Cari bab..." autocomplete="off">
@@ -380,7 +399,9 @@
       <div class="welcome-logo">MSK · Outline Materi</div>
       <h1>Manajemen Stratejik<br>&amp; Kepemimpinan</h1>
       <p>14 bab materi kuliah CA Indonesia dalam satu portal. Pilih bab di sidebar kiri atau klik salah satu di bawah untuk mulai belajar.</p>
-      <div class="chapter-grid" id="chapterGrid"></div>
+      <div class="chapter-grid" id="chapterGrid">
+        <!-- Exam chip inserted by JS -->
+      </div>
     </div>
   </main>
 </div>
@@ -439,49 +460,49 @@
       id: 7,
       file: 'msk-bab7-outline.html',
       num: 'BAB VII',
-      title: 'Strategi Kompetitif di Pasar Internasional',
+      title: 'Strategi untuk Bersaing di Pasar Internasional',
       color: '#38bdf8',
-      available: false
+      available: true
     },
     {
       id: 8,
       file: 'msk-bab8-outline.html',
       num: 'BAB VIII',
-      title: 'Strategi Korporat dan Diversifikasi',
+      title: 'Strategi Perusahaan: Diversifikasi dan Perusahaan Multi-Bisnis',
       color: '#34d399',
-      available: false
+      available: true
     },
     {
       id: 9,
       file: 'msk-bab9-outline.html',
       num: 'BAB IX',
-      title: 'Merger, Akuisisi, dan Aliansi Strategis',
+      title: 'Etika, CSR, Kelanggengan Lingkungan Sekitar dan Strategi',
       color: '#fb923c',
-      available: false
+      available: true
     },
     {
       id: 10,
       file: 'msk-bab10-outline.html',
       num: 'BAB X',
-      title: 'Implementasi Strategi: Rantai Nilai dan Struktur Organisasi',
+      title: 'Membangun Organisasi yang Mampu Mengimplementasikan Strategi Perusahaan',
       color: '#e879f9',
-      available: false
+      available: true
     },
     {
       id: 11,
       file: 'msk-bab11-outline.html',
       num: 'BAB XI',
-      title: 'Implementasi Strategi: Budaya dan Kepemimpinan',
-      color: '#4ade80',
-      available: false
+      title: 'Mengelola Operasional Internal',
+      color: '#2dd4bf',
+      available: true
     },
     {
       id: 12,
       file: 'msk-bab12-outline.html',
       num: 'BAB XII',
-      title: 'Corporate Governance dan Etika Bisnis',
+      title: 'Kepemimpinan dan Budaya Korporat',
       color: '#818cf8',
-      available: false
+      available: true
     },
     {
       id: 13,
@@ -489,20 +510,21 @@
       num: 'BAB XIII',
       title: 'Kepemimpinan Stratejik',
       color: '#2dd4bf',
-      available: false
+      available: true
     },
     {
       id: 14,
       file: 'msk-bab14-outline.html',
       num: 'BAB XIV',
-      title: 'Manajemen Perubahan dan Inovasi',
+      title: 'Perubahan Strategik dan Organisasi',
       color: '#f472b6',
-      available: false
+      available: true
     }
   ];
 
   let activeId = null;
   const iframes = {};
+  let examIframe = null;
 
   // Build sidebar nav
   const navList = document.getElementById('navList');
@@ -522,8 +544,40 @@
     navList.appendChild(li);
   });
 
-  // Build welcome grid
+  // Add exam divider + entry to sidebar
+  const examDivider = document.createElement('li');
+  examDivider.innerHTML = `<div class="nav-divider">⚡ Latihan Ujian</div>`;
+  navList.appendChild(examDivider);
+
+  const examLi = document.createElement('li');
+  examLi.className = 'nav-item';
+  examLi.dataset.id = 'exam';
+  examLi.dataset.title = 'latihan soal ujian pilihan ganda esai studi kasus ca indonesia';
+  examLi.innerHTML = `
+    <button class="nav-btn-exam" id="examNavBtn" onclick="loadExam()">
+      <span class="nav-exam-icon">📝</span>
+      <span class="nav-exam-title">Latihan Soal Ujian<br><span style="font-size:.68rem;font-weight:400;color:var(--muted);">30 PG · 3 Esai · 1 Studi Kasus</span></span>
+      <span class="nav-exam-badge">NEW</span>
+    </button>`;
+  navList.appendChild(examLi);
+
+  // Add exam chip to welcome grid (full-width, at top)
   const grid = document.getElementById('chapterGrid');
+  const examChip = document.createElement('div');
+  examChip.className = 'chapter-chip-exam';
+  examChip.onclick = loadExam;
+  examChip.innerHTML = `
+    <div class="chip-exam-inner">
+      <span class="chip-exam-icon">📝</span>
+      <div class="chip-exam-text">
+        <div class="chip-num">LATIHAN SOAL UJIAN</div>
+        <div class="chip-title">Contoh Soal CA Indonesia — 30 PG + 3 Esai + 1 Studi Kasus + Pembahasan Lengkap</div>
+        <div class="chip-badge">✓ Tersedia · Kunci Jawaban Otomatis</div>
+      </div>
+    </div>`;
+  grid.appendChild(examChip);
+
+  // Build chapter chips (14 bab)
   chapters.forEach(ch => {
     const div = document.createElement('div');
     div.className = 'chapter-chip' + (ch.available ? '' : ' locked');
@@ -535,6 +589,31 @@
     grid.appendChild(div);
   });
 
+  // Load exam
+  function loadExam() {
+    document.getElementById('welcomeScreen').classList.add('hidden');
+    Object.values(iframes).forEach(f => f.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.nav-btn-exam').forEach(btn => btn.classList.remove('active'));
+
+    document.getElementById('examNavBtn')?.classList.add('active');
+    document.getElementById('currentBabLabel').textContent = '📝 Latihan Soal Ujian — CA Indonesia MSK';
+
+    if (!examIframe) {
+      examIframe = document.createElement('iframe');
+      examIframe.src = 'msk-latihan-soal.html';
+      examIframe.title = 'Latihan Soal Ujian MSK';
+      examIframe.loading = 'lazy';
+      document.getElementById('contentArea').appendChild(examIframe);
+    }
+    // Hide all chapter iframes, show exam
+    Object.values(iframes).forEach(f => f.classList.remove('active'));
+    examIframe.classList.add('active');
+    activeId = 'exam';
+
+    if (window.innerWidth <= 640) closeSidebar();
+  }
+
   function loadChapter(id) {
     const ch = chapters.find(c => c.id === id);
     if (!ch || !ch.available) return;
@@ -542,6 +621,8 @@
     document.getElementById('welcomeScreen').classList.add('hidden');
     Object.values(iframes).forEach(f => f.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.nav-btn-exam').forEach(btn => btn.classList.remove('active'));
+    if (examIframe) examIframe.classList.remove('active');
 
     const navBtn = document.querySelector(`.nav-item[data-id="${id}"] .nav-btn`);
     if (navBtn) navBtn.classList.add('active');
@@ -586,6 +667,12 @@
     document.querySelectorAll('.nav-item').forEach(item => {
       item.style.display = (!q || item.dataset.title.includes(q)) ? '' : 'none';
     });
+    // Also handle divider visibility
+    const examDivEl = document.querySelector('.nav-divider');
+    if (examDivEl) {
+      const examItem = examDivEl.parentElement?.nextElementSibling;
+      examDivEl.parentElement.style.display = (!q || 'latihan soal ujian'.includes(q)) ? '' : 'none';
+    }
   });
 </script>
 </body>

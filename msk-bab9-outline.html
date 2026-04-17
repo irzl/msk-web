@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB IX — Etika, CSR, Kelanggengan Lingkungan Sekitar dan Strategi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #fb923c;   /* orange — chapter 9 color */
+    --accent2: #f43f5e;   /* rose */
+    --accent3: #a78bfa;   /* violet */
+    --accent4: #34d399;   /* emerald */
+    --accent5: #60a5fa;   /* blue */
+    --accent6: #facc15;   /* yellow */
+    --accent7: #e879f9;   /* fuchsia */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--accent); color: #000; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent4)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── MIND MAP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #ea580c); color: #000; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+  .branch { padding: 0.75rem; border-radius: 10px; font-size: 0.73rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.58rem; font-family: 'DM Mono', monospace; margin-bottom: 0.25rem; opacity: 0.7; }
+  .b1 { background: rgba(251,146,60,0.08);  border-color: rgba(251,146,60,0.25);  color: var(--accent); }
+  .b2 { background: rgba(244,63,94,0.08);   border-color: rgba(244,63,94,0.25);   color: var(--accent2); }
+  .b3 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent3); }
+  .b4 { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25);  color: var(--accent4); }
+  .b5 { background: rgba(96,165,250,0.08);  border-color: rgba(96,165,250,0.25);  color: var(--accent5); }
+  .b6 { background: rgba(232,121,249,0.08); border-color: rgba(232,121,249,0.25); color: var(--accent7); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent);  color: #000; }
+  .c2 { background: var(--accent2); color: #fff; }
+  .c3 { background: var(--accent3); color: #fff; }
+  .c4 { background: var(--accent4); color: #000; }
+  .c5 { background: var(--accent5); color: #000; }
+  .c6 { background: var(--accent7); color: #000; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7) { transition-delay: 0.28s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1{background:var(--accent);}  .d2{background:var(--accent2);} .d3{background:var(--accent3);}
+  .d4{background:var(--accent4);} .d5{background:var(--accent5);} .d6{background:var(--accent6);}
+  .d7{background:var(--accent7);}
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(251,146,60,0.07); border: 1px solid rgba(251,146,60,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.orange { background: rgba(251,146,60,0.07);  border: 1px solid rgba(251,146,60,0.2); }
+  .info-box.rose   { background: rgba(244,63,94,0.07);   border: 1px solid rgba(244,63,94,0.2); }
+  .info-box.violet { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box.green  { background: rgba(52,211,153,0.07);  border: 1px solid rgba(52,211,153,0.2); }
+  .info-box.blue   { background: rgba(96,165,250,0.07);  border: 1px solid rgba(96,165,250,0.2); }
+  .info-box.fuchsia{ background: rgba(232,121,249,0.07); border: 1px solid rgba(232,121,249,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── 3 TEORI ETIKA ── */
+  .theory-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.7rem; margin-top: 1rem; }
+  .theory-card { padding: 1rem; border-radius: 11px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.8rem; line-height: 1.5; color: #c8c8e0; }
+  .theory-card .tc-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; display: block; margin-bottom: 0.3rem; }
+  .theory-card .tc-title { font-weight: 700; font-size: 0.9rem; display: block; margin-bottom: 0.25rem; }
+  .theory-card .tc-desc { color: var(--muted); font-size: 0.76rem; }
+  .tc-u  { border-color: rgba(251,146,60,0.35);  } .tc-u  .tc-num,.tc-u  .tc-title { color: var(--accent); }
+  .tc-r  { border-color: rgba(244,63,94,0.35);   } .tc-r  .tc-num,.tc-r  .tc-title { color: var(--accent2); }
+  .tc-i  { border-color: rgba(167,139,250,0.35); } .tc-i  .tc-num,.tc-i  .tc-title { color: var(--accent3); }
+
+  /* ── 3 FAKTOR TAK ETIS ── */
+  .factor-cards { display: flex; flex-direction: column; gap: 0.6rem; margin-top: 1rem; }
+  .factor-card { display: flex; gap: 0.9rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 9px; padding: 0.85rem 1rem; border-left: 3px solid rgba(244,63,94,0.5); font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; }
+  .fc-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; background: var(--accent2); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
+  .factor-card strong { color: var(--text); }
+
+  /* ── 2 PONDASI STRATEGI BERETIKA ── */
+  .foundation-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .foundation-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.8rem; line-height: 1.5; color: #c8c8e0; }
+  .foundation-card .fdc-icon { font-size: 1.3rem; display: block; margin-bottom: 0.3rem; }
+  .foundation-card .fdc-title { font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 0.3rem; }
+  .fdc-moral  { border-color: rgba(251,146,60,0.3);  } .fdc-moral  .fdc-title { color: var(--accent); }
+  .fdc-bisnis { border-color: rgba(52,211,153,0.3);  } .fdc-bisnis .fdc-title { color: var(--accent4); }
+
+  /* ── 3 PERTANYAAN ETIKA STRATEGI ── */
+  .etika-q { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .eq-item { display: flex; gap: 0.8rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.75rem 0.9rem; border-left: 3px solid rgba(251,146,60,0.4); font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; }
+  .eq-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; color: #000; background: var(--accent); width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.05rem; }
+  .eq-item strong { color: var(--text); }
+
+  /* ── CSR PIRAMIDA ── */
+  .csr-levels { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+  .csr-level { border-radius: 9px; padding: 0.8rem 1rem; font-size: 0.81rem; line-height: 1.5; }
+  .csr-level .cl-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; display: block; margin-bottom: 0.25rem; opacity: 0.8; }
+  .csr-level .cl-title { font-weight: 700; font-size: 0.86rem; display: block; margin-bottom: 0.2rem; }
+  .csr-level .cl-desc { color: var(--muted); font-size: 0.76rem; }
+  .cl-eco  { background: rgba(96,165,250,0.08);  border: 1px solid rgba(96,165,250,0.25);  } .cl-eco  .cl-label,.cl-eco  .cl-title { color: var(--accent5); }
+  .cl-leg  { background: rgba(251,146,60,0.08);  border: 1px solid rgba(251,146,60,0.25);  } .cl-leg  .cl-label,.cl-leg  .cl-title { color: var(--accent); }
+  .cl-eth  { background: rgba(167,139,250,0.08); border: 1px solid rgba(167,139,250,0.25); } .cl-eth  .cl-label,.cl-eth  .cl-title { color: var(--accent3); }
+  .cl-fil  { background: rgba(52,211,153,0.08);  border: 1px solid rgba(52,211,153,0.25);  } .cl-fil  .cl-label,.cl-fil  .cl-title { color: var(--accent4); }
+
+  /* ── CSR STRATEGI CARDS ── */
+  .csr-strat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 0.65rem; margin-top: 1rem; }
+  .csr-strat-card { padding: 0.9rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.79rem; line-height: 1.5; color: #c8c8e0; }
+  .csr-strat-card .csc-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; display: block; margin-bottom: 0.25rem; }
+  .csr-strat-card .csc-title { font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 0.25rem; }
+  .csr-strat-card .csc-desc { color: var(--muted); font-size: 0.74rem; }
+  .csc-1 { border-color: rgba(251,146,60,0.3);  } .csc-1 .csc-num,.csc-1 .csc-title { color: var(--accent); }
+  .csc-2 { border-color: rgba(167,139,250,0.3); } .csc-2 .csc-num,.csc-2 .csc-title { color: var(--accent3); }
+  .csc-3 { border-color: rgba(52,211,153,0.3);  } .csc-3 .csc-num,.csc-3 .csc-title { color: var(--accent4); }
+  .csc-4 { border-color: rgba(96,165,250,0.3);  } .csc-4 .csc-num,.csc-4 .csc-title { color: var(--accent5); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent4); color: var(--accent4); }
+  .done-btn.checked { border-color: var(--accent4); color: var(--accent4); background: rgba(52,211,153,0.07); }
+
+  /* ── ULTIMATE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(251,146,60,0.07), rgba(52,211,153,0.04)); border: 1px solid rgba(251,146,60,0.25); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #ea580c); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.75rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.76rem; }
+  .ft-orng { background: rgba(251,146,60,0.15);  color: var(--accent); }
+  .ft-rose { background: rgba(244,63,94,0.15);   color: var(--accent2); }
+  .ft-vio  { background: rgba(167,139,250,0.15); color: var(--accent3); }
+  .ft-grn  { background: rgba(52,211,153,0.15);  color: var(--accent4); }
+  .ft-blue { background: rgba(96,165,250,0.15);  color: var(--accent5); }
+  .ft-fcs  { background: rgba(232,121,249,0.15); color: var(--accent7); }
+  .formula-op { color: var(--muted); font-size: 0.9rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB IX — <span>Etika, CSR &amp;</span><br>Kelanggengan Lingkungan</h1>
+    <p class="subtitle">Etika Bisnis · 3 Teori · Faktor Tak Etis · Strategi Beretika · CSR · Keberlanjutan</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab IX</h2>
+    <div class="mind-center">⚖️ Etika, CSR &amp; Keberlanjutan</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">9.3</div>⚖️ Definisi Etika Bisnis<br><small style="opacity:0.7">Prinsip benar-salah dalam bisnis</small></div>
+      <div class="branch b2"><div class="blabel">9.4</div>📚 3 Teori Standar Etika<br><small style="opacity:0.7">Universal · Relatif · Integratif</small></div>
+      <div class="branch b3"><div class="blabel">9.5–9.6</div>🚨 Faktor &amp; Dampak Tak Etis<br><small style="opacity:0.7">3 pendorong · biaya kegagalan</small></div>
+      <div class="branch b4"><div class="blabel">9.7</div>✅ Mengapa Harus Beretika<br><small style="opacity:0.7">2 pondasi · moral + bisnis</small></div>
+      <div class="branch b5"><div class="blabel">9.8</div>🌱 CSR &amp; Keberlanjutan<br><small style="opacity:0.7">Tanggung jawab sosial · strategi CSR</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: DEFINISI ETIKA BISNIS ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">9.1–9.3</span>
+      <div>
+        <div class="section-title">Pendahuluan &amp; Definisi Etika Bisnis</div>
+        <div class="section-eng">Introduction &amp; What is Business Ethics?</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          Bab IX menguji keterkaitan antara <strong>strategi bisnis</strong> dengan dua hal: (a) cara perusahaan menjalankan aktivitas bisnis secara beretika, dan (b) perilaku yang bertanggung jawab secara sosial.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Etika Bisnis</strong> = penerapan prinsip-prinsip umum atas <em>tindakan-tindakan serta keputusan-keputusan bisnis perusahaan</em>, serta bagaimana para karyawan perusahaan tersebut berperilaku dalam menjalankan bisnis.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Landasan penilaian etika:</strong> Tindakan dan keputusan bisnis selayaknya diukur dalam konteks <em>benar dan salah yang ada di dalam masyarakat</em> di mana perusahaan tersebut beroperasi — bukan semata-mata berdasarkan legalitas atau profitabilitas.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Perbedaan penting:</strong> Ada perusahaan yang memiliki acuan beretika hanya untuk <em>pencitraan saja</em> (sekadar "value statement" di dinding kantor), versus perusahaan yang <em>benar-benar menerapkan</em> standar etika dalam setiap keputusan dan tindakan stratejik nyata.
+        </span></li>
+      </ul>
+      <div class="info-box orange">
+        <strong>💡 Inti:</strong> Etika bisnis bukan tentang <em>terlihat baik</em>, melainkan tentang <em>benar-benar berbuat baik</em>. Perusahaan yang genuinely beretika mengintegrasikan standar etika ke dalam proses pengembangan strategi — bukan hanya memajangnya di brosur perusahaan.
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: 3 TEORI STANDAR ETIKA ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c2">9.4</span>
+      <div>
+        <div class="section-title">Tiga Teori Standar Etika — Universal, Relatif, atau Integratif?</div>
+        <div class="section-eng">Three Ethical Theories: Universal, Relative, or Integrative?</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Ada debat besar tentang apakah standar etika bersifat universal (sama di mana-mana) atau berbeda berdasarkan norma lokal. Tiga pendekatan:</p>
+      <div class="theory-grid">
+        <div class="theory-card tc-u">
+          <span class="tc-num">TEORI 1</span>
+          <span class="tc-title">⚖️ Teori Etika Universal</span>
+          <span class="tc-desc">Standar etika berlaku <em>sama di semua budaya dan bangsa</em> — ada nilai-nilai moral fundamental yang bersifat universal (tidak mencuri, tidak berbohong, menghormati orang lain). Perusahaan multinasional seharusnya menerapkan standar etika yang sama di semua negara tempat mereka beroperasi.</span>
+        </div>
+        <div class="theory-card tc-r">
+          <span class="tc-num">TEORI 2</span>
+          <span class="tc-title">🌐 Teori Etika Relatif</span>
+          <span class="tc-desc">Standar etika <em>berbeda dari satu budaya ke budaya lain</em> — apa yang dianggap etis di satu negara mungkin dianggap tidak etis di negara lain. Perusahaan harus menyesuaikan standar etikanya dengan norma lokal di setiap negara tempat beroperasi.</span>
+        </div>
+        <div class="theory-card tc-i">
+          <span class="tc-num">TEORI 3</span>
+          <span class="tc-title">🤝 Teori Etika &amp; Kontrak Sosial Integratif</span>
+          <span class="tc-desc">Posisi tengah antara Universal dan Relatif. Ada <em>norma etika universal yang mendasar</em> yang harus dipatuhi, namun dalam batas-batas tersebut ada ruang untuk variasi norma lokal yang dapat diterima secara etis.</span>
+        </div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 3 Teori:</strong> <em>"URI"</em> → <em>"Universal-Relatif-Integratif"</em> → <em>"Universal itu Rigid, Integratif jalan Tengah yang Realistis"</em> — dari paling kaku ke paling fleksibel: U → R → I (Integratif = yang paling pragmatis untuk perusahaan global)</span>
+      </div>
+      <div class="info-box violet">
+        <strong>📌 Implikasi Praktis:</strong> Perusahaan multinasional besar umumnya mengadopsi pendekatan <em>Integratif</em> — mempertahankan standar etika inti yang tidak bisa dikompromikan (anti-korupsi, anti-diskriminasi, keselamatan kerja) sambil mengadaptasi praktik bisnis tertentu sesuai norma lokal yang sah.
+      </div>
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: FAKTOR TAK ETIS & DAMPAK ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c3">9.5–9.6</span>
+      <div>
+        <div class="section-title">Dampak Etika pada Strategi &amp; Faktor Pendorong Perilaku Tak Etis</div>
+        <div class="section-eng">Ethics in Strategy Development &amp; Drivers of Unethical Business Behavior</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub3a">
+        <div class="subsection-header" onclick="toggleSub('sub3a')">
+          🔍 3 Pertanyaan Etika dalam Pengembangan Strategi (9.5) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">Saat mengembangkan dan melaksanakan strategi, manajer harus menguji apakah strategi benar-benar menggunakan standar etika sebagai acuan:</p>
+          <div class="etika-q">
+            <div class="eq-item">
+              <div class="eq-num">1</div>
+              <div><strong>Apakah strategi yang dikembangkan tetap sesuai dengan standar etika berbisnis kita?</strong> — Apakah dari strategi-strategi tersebut ada yang masih bersifat 'abu-abu' secara etis?</div>
+            </div>
+            <div class="eq-item">
+              <div class="eq-num">2</div>
+              <div><strong>Apakah tindakan yang akan diambil selaras dengan nilai-nilai utama yang kita junjung?</strong> — Apakah ada potensi konflik atau masalah yang dari awal sudah terlihat?</div>
+            </div>
+            <div class="eq-item">
+              <div class="eq-num">3</div>
+              <div><strong>Apakah dari rencana tindakan tersebut ada yang berpotensi secara etis tidak dapat diterima</strong> oleh pemangku kepentingan, kompetitor, dan lembaga pemerintah yang mengawasi bisnis?</div>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Test Etika Strategi:</strong> Sebelum mengeksekusi strategi apapun, tanyakan: <em>"Apakah saya malu jika tindakan ini muncul di halaman depan koran besok?"</em> — jika jawabannya ya, tinjau ulang strateginya.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub3b">
+        <div class="subsection-header" onclick="toggleSub('sub3b')">
+          🚨 3 Perilaku Bisnis Dominan yang Tak Etis (9.6) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">Setidaknya ada tiga perilaku bisnis dominan yang mendorong strategi dan tindakan menjadi tidak etis:</p>
+          <div class="factor-cards">
+            <div class="factor-card">
+              <div class="fc-num">1</div>
+              <div>
+                <strong>Kelalaian yang membiarkan kepentingan pribadi dan penumpukan kekayaan</strong> — manajer atau pejabat yang secara implisit membiarkan tujuan-tujuan demi keuntungan serta kepentingan pribadi mendominasi keputusan bisnis, mengalahkan kepentingan perusahaan dan pemangku kepentingan lain.
+              </div>
+            </div>
+            <div class="factor-card">
+              <div class="fc-num">2</div>
+              <div>
+                <strong>Tekanan besar untuk mencapai target kinerja jangka pendek</strong> — tekanan yang cukup besar terhadap para manajer untuk mencapai target kinerja jangka pendek mendorong mereka mengambil jalan pintas yang tidak etis demi angka keuangan yang baik dalam waktu dekat.
+              </div>
+            </div>
+            <div class="factor-card">
+              <div class="fc-num">3</div>
+              <div>
+                <strong>Budaya perusahaan yang mengutamakan keuntungan di atas etika</strong> — budaya yang meletakkan keuntungan serta kinerja bisnis sebagai prioritas dan mengesampingkan perilaku etis dalam berbisnis — secara sistematis merusak integritas seluruh organisasi.
+              </div>
+            </div>
+          </div>
+          <div class="info-box rose">
+            <strong>⚠️ Biaya Kegagalan Berbisnis Beretika:</strong> Perusahaan yang menjalankan bisnis tanpa etika menanggung biaya-biaya besar: <em>runtuhnya reputasi · sanksi regulasi · kehilangan kepercayaan pelanggan · eksodus karyawan terbaik · kerugian hukum · dan pada akhirnya kerugian finansial jangka panjang</em>. Biaya etika jauh lebih murah dari biaya ketidaketisan.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: MENGAPA STRATEGI HARUS BERETIKA ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c4">9.7</span>
+      <div>
+        <div class="section-title">Mengapa Strategi Perusahaan Harus Beretika?</div>
+        <div class="section-eng">Why a Company's Strategy Must Be Ethical</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Ada <strong>dua alasan utama</strong> mengapa dalam berbisnis perusahaan wajib beretika:</p>
+      <div class="foundation-grid">
+        <div class="foundation-card fdc-moral">
+          <span class="fdc-icon">🧭</span>
+          <span class="fdc-title">Pondasi Moral</span>
+          <p style="font-size:0.78rem;color:#c8c8e0;margin-bottom:0.5rem;">Strategi bisnis yang tidak etis secara moral adalah <strong style="color:var(--text);">salah</strong> dan merefleksikan betapa buruknya karakter para staf/karyawan dan manajer yang terlibat.</p>
+          <p style="font-size:0.75rem;color:var(--muted);">Proses pengembangan strategi bisnis yang beretika dimulai dari dan oleh para <em>manajer yang memiliki kepribadian, karakter, dan moral yang kuat</em>.</p>
+        </div>
+        <div class="foundation-card fdc-bisnis">
+          <span class="fdc-icon">💰</span>
+          <span class="fdc-title">Pondasi Bisnis</span>
+          <p style="font-size:0.78rem;color:#c8c8e0;margin-bottom:0.5rem;">Strategi bisnis yang beretika dapat menjadi <strong style="color:var(--text);">bisnis yang bagus</strong> dan mampu mewujudkan kepentingan pribadi para pemegang sahamnya secara berkelanjutan.</p>
+          <p style="font-size:0.75rem;color:var(--muted);">Ada biaya-biaya besar yang menjadi konsekuensi bagi perusahaan-perusahaan yang menjalankan bisnis tanpa beretika serta dengan mudah mentolerir perilaku-perilaku bisnis yang tak etis — termasuk runtuhnya reputasi.</p>
+        </div>
+      </div>
+      <div class="info-box green" style="margin-top:1rem;">
+        <strong>🎯 Kesimpulan:</strong> Etika bisnis bukan pilihan antara "berbuat baik" vs "berbisnis baik" — keduanya <em>saling memperkuat</em>. Perusahaan yang genuinely beretika justru membangun fondasi yang lebih kokoh untuk keberhasilan jangka panjang, karena kepercayaan pelanggan, karyawan, dan masyarakat adalah aset kompetitif yang paling sulit ditiru.
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 2 Pondasi:</strong> <em>"Moral + Bisnis = Etika Stratejik"</em> → <em>Karena SALAH secara moral (pondasi moral)</em> DAN <em>karena MAHAL biayanya jika tidak beretika (pondasi bisnis)</em>. Dua sisi koin yang sama.</span>
+      </div>
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: CSR & KEBERLANJUTAN ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">9.8</span>
+      <div>
+        <div class="section-title">Strategi, CSR &amp; Kelanggengan Lingkungan Sekitar</div>
+        <div class="section-eng">Strategy, Corporate Social Responsibility &amp; Environmental Sustainability</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub5a">
+        <div class="subsection-header" onclick="toggleSub('sub5a')">
+          🌱 Apa itu CSR? — 4 Dimensi Tanggung Jawab Sosial <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;"><strong style="color:var(--text);">CSR</strong> (Corporate Social Responsibility / Tanggung Jawab Sosial Perusahaan) = strategi menyeimbangkan kepentingan pemegang saham dengan kepentingan pemangku kepentingan lainnya — karyawan, pelanggan, masyarakat sekitar. Empat dimensi tanggung jawab (dari dasar ke puncak):</p>
+          <div class="csr-levels">
+            <div class="csr-level cl-eco">
+              <span class="cl-label">DASAR (WAJIB)</span>
+              <span class="cl-title">💼 Tanggung Jawab Ekonomis</span>
+              <span class="cl-desc">Menghasilkan keuntungan, menjaga keberlangsungan bisnis, menciptakan nilai bagi pemegang saham. Ini adalah fondasi — tanpa ini, CSR lainnya tidak bisa dijalankan.</span>
+            </div>
+            <div class="csr-level cl-leg">
+              <span class="cl-label">WAJIB</span>
+              <span class="cl-title">⚖️ Tanggung Jawab Legal</span>
+              <span class="cl-desc">Mematuhi semua hukum, peraturan, dan regulasi yang berlaku di setiap wilayah operasi perusahaan.</span>
+            </div>
+            <div class="csr-level cl-eth">
+              <span class="cl-label">DIHARAPKAN</span>
+              <span class="cl-title">🧭 Tanggung Jawab Etis</span>
+              <span class="cl-desc">Berbuat benar bahkan di atas apa yang diwajibkan hukum — menghindari kerugian kepada pihak lain meski tidak diatur secara hukum.</span>
+            </div>
+            <div class="csr-level cl-fil">
+              <span class="cl-label">DIINGINKAN</span>
+              <span class="cl-title">🌱 Tanggung Jawab Filantropik</span>
+              <span class="cl-desc">Berkontribusi aktif kepada masyarakat dan lingkungan melebihi apa yang diharapkan secara etis — investasi dalam komunitas, pendidikan, lingkungan hidup.</span>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Piramida CSR:</strong> <em>"Ekonomis → Legal → Etis → Filantropik"</em> → <em>"ELEF"</em> → <em>"Ekonomi Legal, Etika Filantropik — dari wajib ke mulia!"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5b">
+        <div class="subsection-header" onclick="toggleSub('sub5b')">
+          🌿 Keberlanjutan &amp; Praktik Bisnis Berkesinambungan <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Kesinambungan (Sustainability)</strong> = cara perusahaan dalam memenuhi kebutuhan bisnisnya saat ini tanpa mengompromikan kemampuan generasi mendatang untuk memenuhi kebutuhan mereka — memastikan bahwa operasi bisnis tidak merusak lingkungan alam secara permanen.
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              Praktik bisnis berkesinambungan mencakup: <em>efisiensi energi, pengurangan emisi karbon, manajemen limbah yang bertanggung jawab, penggunaan sumber daya alam secara berkelanjutan, dan rantai pasokan yang etis.</em>
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Keseimbangan kritis:</strong> Perusahaan harus menyeimbangkan kewajiban ekonomi kepada pemegang saham dengan kepentingan jangka panjang karyawan, pelanggan, masyarakat sekitar, dan lingkungan hidup.
+            </span></li>
+          </ul>
+          <div class="info-box green">
+            <strong>📊 Fakta Penting:</strong> Dalam banyak contoh nyata, <em>keseimbangan dalam mewujudkan kepentingan berbagai pihak justru memperbaiki kinerja bisnis</em> perusahaan-perusahaan besar di berbagai belahan dunia. CSR dan keberlanjutan bukan beban biaya — melainkan investasi dalam kepercayaan jangka panjang yang menghasilkan keunggulan kompetitif nyata.
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5c">
+        <div class="subsection-header" onclick="toggleSub('sub5c')">
+          🚀 Mengembangkan Strategi-Strategi CSR yang Efektif <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.9rem;">Empat hal yang perlu dipelajari dalam mengembangkan strategi CSR dan bisnis berkesinambungan:</p>
+          <div class="csr-strat-grid">
+            <div class="csr-strat-card csc-1">
+              <span class="csc-num">① DEFINISI</span>
+              <span class="csc-title">Apakah itu Tanggung Jawab Sosial?</span>
+              <span class="csc-desc">Memahami ruang lingkup dan definisi CSR dalam konteks strategi bisnis modern — bukan sekadar donasi atau PR</span>
+            </div>
+            <div class="csr-strat-card csc-2">
+              <span class="csc-num">② KESINAMBUNGAN</span>
+              <span class="csc-title">Praktik Bisnis Berkesinambungan</span>
+              <span class="csc-desc">Memahami apa yang dimaksud kesinambungan dan bagaimana praktik bisnis yang berkelanjutan dijalankan</span>
+            </div>
+            <div class="csr-strat-card csc-3">
+              <span class="csc-num">③ STRATEGI</span>
+              <span class="csc-title">Mengembangkan Strategi CSR</span>
+              <span class="csc-desc">Merancang strategi CSR dan bisnis berkesinambungan yang terintegrasi dengan strategi bisnis utama perusahaan</span>
+            </div>
+            <div class="csr-strat-card csc-4">
+              <span class="csc-num">④ PONDASI</span>
+              <span class="csc-title">Pondasi Moral CSR</span>
+              <span class="csc-desc">Memahami pondasi moral yang mendasari CSR dan praktik bisnis yang memelihara kesinambungan lingkungan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab IX</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);color:#000;">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Etika Bisnis = Prinsip Benar-Salah, Bukan Sekadar Legalitas</h3>
+          <p>Etika bisnis adalah penerapan prinsip umum atas tindakan dan keputusan bisnis. Standarnya bukan hukum — melainkan norma moral dalam masyarakat. Ada yang etis namun ilegal, ada yang legal namun tidak etis. Perusahaan harus melampaui sekadar "legal".</p>
+          <div class="keywords"><span class="kw">etika bisnis</span><span class="kw">benar-salah</span><span class="kw">bukan sekadar legal</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);color:#fff;">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">3 Teori URI — Universal, Relatif, atau Integratif?</h3>
+          <p><strong style="color:#f0f0ff;">Universal</strong>: etika sama di mana-mana. <strong style="color:#f0f0ff;">Relatif</strong>: etika tergantung norma lokal. <strong style="color:#f0f0ff;">Integratif</strong>: ada standar inti universal + ruang adaptasi lokal yang sah. Pendekatan Integratif paling realistis untuk perusahaan global saat ini.</p>
+          <div class="keywords"><span class="kw">URI</span><span class="kw">integratif = posisi tengah</span><span class="kw">kontrak sosial</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);color:#fff;">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">3 Pendorong Perilaku Tak Etis — Kenali Sebelum Terjadi</h3>
+          <p>Tiga akar masalah: <strong style="color:#f0f0ff;">kepentingan pribadi</strong> yang dibiarkan mendominasi · <strong style="color:#f0f0ff;">tekanan target jangka pendek</strong> yang ekstrem · <strong style="color:#f0f0ff;">budaya perusahaan</strong> yang mengutamakan profit di atas etika. Jika ketiganya ada bersamaan — skandal tinggal menunggu waktu.</p>
+          <div class="keywords"><span class="kw">kepentingan pribadi</span><span class="kw">tekanan target</span><span class="kw">budaya perusahaan</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);color:#000;">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">2 Alasan Wajib Beretika: Moral + Bisnis</h3>
+          <p>Strategi tak etis itu <strong style="color:#f0f0ff;">salah secara moral</strong> (merusak karakter organisasi) DAN <strong style="color:#f0f0ff;">mahal secara bisnis</strong> (reputasi hancur, kerugian hukum, kehilangan kepercayaan). Dua alasan ini saling memperkuat — etika bukan biaya, melainkan investasi.</p>
+          <div class="keywords"><span class="kw">pondasi moral</span><span class="kw">pondasi bisnis</span><span class="kw">reputasi = aset</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent5);color:#000;">5</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent5);">CSR &amp; Keberlanjutan — Dari Kewajiban Menjadi Keunggulan</h3>
+          <p>CSR bukan sekadar filantropi — ia adalah <strong style="color:#f0f0ff;">strategi</strong> yang menyeimbangkan kepentingan pemegang saham dan pemangku kepentingan lain. Piramida CSR: <strong style="color:#f0f0ff;">Ekonomis → Legal → Etis → Filantropik (ELEF)</strong>. Bisnis berkelanjutan menciptakan kepercayaan jangka panjang yang menjadi keunggulan kompetitif sejati.</p>
+          <div class="keywords"><span class="kw">ELEF piramida CSR</span><span class="kw">sustainability</span><span class="kw">multi-stakeholder</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-orng">Definisi Etika</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-rose">3 Teori URI</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-vio">3 Pendorong Tak Etis</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-grn">2 Pondasi Beretika</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-blue">CSR ELEF + Sustainability</span>
+      </div>
+      <div class="formula-caption">Alur pemahaman Bab IX — dari apa itu etika bisnis hingga bagaimana mengintegrasikan CSR dan keberlanjutan dalam strategi</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box orange" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab IX:</strong><br>
+      <em>"Etika bisnis itu <strong style="color:#f0f0ff;">B</strong>ukan sekadar legal, paham teori <strong style="color:#f0f0ff;">U</strong>RI, waspadai 3 <strong style="color:#f0f0ff;">F</strong>aktor pendorong tak etis (kepentingan-tekanan-budaya), wajib beretika karena alasan <strong style="color:#f0f0ff;">M</strong>oral dan <strong style="color:#f0f0ff;">B</strong>isnis, lalu implementasikan <strong style="color:#f0f0ff;">C</strong>SR lewat piramida <strong style="color:#f0f0ff;">ELEF</strong>!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">B-URI-F-MB-CSR-ELEF</strong> — Inti Bab IX: <em>Strategi yang baik harus juga strategi yang benar — secara moral maupun bisnis.</em> Etika, CSR, dan keberlanjutan bukan hambatan, melainkan fondasi keunggulan kompetitif sejati.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab IX Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 5;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

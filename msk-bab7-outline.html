@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB VII — Strategi untuk Bersaing di Pasar Internasional</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #38bdf8;   /* sky blue — chapter 7 color */
+    --accent2: #a78bfa;   /* violet */
+    --accent3: #34d399;   /* emerald */
+    --accent4: #fb923c;   /* orange */
+    --accent5: #f43f5e;   /* rose */
+    --accent6: #facc15;   /* yellow */
+    --accent7: #60a5fa;   /* blue */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--accent); color: #000; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── MIND MAP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #0284c7); color: #000; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+  .branch { padding: 0.75rem; border-radius: 10px; font-size: 0.73rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.58rem; font-family: 'DM Mono', monospace; margin-bottom: 0.25rem; opacity: 0.7; }
+  .b1 { background: rgba(56,189,248,0.08);  border-color: rgba(56,189,248,0.25);  color: var(--accent); }
+  .b2 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent2); }
+  .b3 { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(251,146,60,0.08);  border-color: rgba(251,146,60,0.25);  color: var(--accent4); }
+  .b5 { background: rgba(244,63,94,0.08);   border-color: rgba(244,63,94,0.25);   color: var(--accent5); }
+  .b6 { background: rgba(250,204,21,0.08);  border-color: rgba(250,204,21,0.25);  color: var(--accent6); }
+  .b7 { background: rgba(96,165,250,0.08);  border-color: rgba(96,165,250,0.25);  color: var(--accent7); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent);  color: #000; }
+  .c2 { background: var(--accent2); color: #fff; }
+  .c3 { background: var(--accent3); color: #000; }
+  .c4 { background: var(--accent4); color: #000; }
+  .c5 { background: var(--accent5); color: #fff; }
+  .c6 { background: var(--accent6); color: #000; }
+  .c7 { background: var(--accent7); color: #000; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .section.open .point:nth-child(7) { transition-delay: 0.28s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1{background:var(--accent);}  .d2{background:var(--accent2);} .d3{background:var(--accent3);}
+  .d4{background:var(--accent4);} .d5{background:var(--accent5);} .d6{background:var(--accent6);}
+  .d7{background:var(--accent7);}
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(56,189,248,0.07); border: 1px solid rgba(56,189,248,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.sky    { background: rgba(56,189,248,0.07);  border: 1px solid rgba(56,189,248,0.2); }
+  .info-box.violet { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box.green  { background: rgba(52,211,153,0.07);  border: 1px solid rgba(52,211,153,0.2); }
+  .info-box.orange { background: rgba(251,146,60,0.07);  border: 1px solid rgba(251,146,60,0.2); }
+  .info-box.rose   { background: rgba(244,63,94,0.07);   border: 1px solid rgba(244,63,94,0.2); }
+  .info-box.yellow { background: rgba(250,204,21,0.07);  border: 1px solid rgba(250,204,21,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── 5 ALASAN GO GLOBAL ── */
+  .reason-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(155px, 1fr)); gap: 0.6rem; margin-top: 1rem; }
+  .reason-card { padding: 0.85rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.78rem; line-height: 1.45; color: #c8c8e0; text-align: center; }
+  .reason-card .rc-num { font-family: 'DM Mono', monospace; font-size: 0.58rem; font-weight: 700; margin-bottom: 0.3rem; display: block; }
+  .reason-card .rc-icon { font-size: 1.3rem; display: block; margin-bottom: 0.3rem; }
+  .reason-card .rc-title { font-weight: 700; font-size: 0.82rem; display: block; margin-bottom: 0.2rem; }
+  .reason-card .rc-desc { color: var(--muted); font-size: 0.73rem; }
+  .rc-1 { border-color: rgba(56,189,248,0.3);  } .rc-1 .rc-num { color: var(--accent); }  .rc-1 .rc-title { color: var(--accent); }
+  .rc-2 { border-color: rgba(167,139,250,0.3); } .rc-2 .rc-num { color: var(--accent2); } .rc-2 .rc-title { color: var(--accent2); }
+  .rc-3 { border-color: rgba(52,211,153,0.3);  } .rc-3 .rc-num { color: var(--accent3); } .rc-3 .rc-title { color: var(--accent3); }
+  .rc-4 { border-color: rgba(251,146,60,0.3);  } .rc-4 .rc-num { color: var(--accent4); } .rc-4 .rc-title { color: var(--accent4); }
+  .rc-5 { border-color: rgba(244,63,94,0.3);   } .rc-5 .rc-num { color: var(--accent5); } .rc-5 .rc-title { color: var(--accent5); }
+
+  /* ── MULTI-DOMESTIK vs GLOBAL TABLE ── */
+  .compare-split { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .cs-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.8rem; line-height: 1.5; color: #c8c8e0; }
+  .cs-card .csc-title { font-weight: 700; font-size: 0.88rem; margin-bottom: 0.35rem; display: flex; align-items: center; gap: 0.4rem; }
+  .cs-card .csc-sub { font-size: 0.72rem; color: var(--muted); font-style: italic; margin-bottom: 0.5rem; display: block; }
+  .cs-card ul { list-style: none; }
+  .cs-card ul li { padding: 0.22rem 0; border-bottom: 1px solid var(--border); font-size: 0.76rem; color: var(--muted); }
+  .cs-card ul li:last-child { border-bottom: none; }
+  .cs-card ul li::before { content: "→ "; }
+  .csc-md { border-color: rgba(56,189,248,0.3);  } .csc-md  .csc-title { color: var(--accent); }
+  .csc-gl { border-color: rgba(52,211,153,0.3);  } .csc-gl  .csc-title { color: var(--accent3); }
+
+  /* ── 3 PENDEKATAN CARDS ── */
+  .approach-grid { display: flex; flex-direction: column; gap: 0.7rem; margin-top: 1rem; }
+  .approach-card { padding: 1rem 1.1rem; border-radius: 11px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); }
+  .approach-card .ac-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; }
+  .approach-card .ac-badge { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 700; padding: 0.2rem 0.55rem; border-radius: 4px; flex-shrink: 0; }
+  .approach-card .ac-title { font-weight: 700; font-size: 0.9rem; }
+  .approach-card .ac-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); font-style: italic; }
+  .approach-card .ac-body { font-size: 0.82rem; line-height: 1.55; color: #c8c8e0; }
+  .approach-card .ac-row { display: flex; gap: 0.6rem; margin-top: 0.4rem; font-size: 0.8rem; align-items: flex-start; }
+  .approach-card .ac-lbl { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; padding: 0.15rem 0.4rem; border-radius: 3px; flex-shrink: 0; margin-top: 0.15rem; }
+  .ap-md  { border-color: rgba(56,189,248,0.3);  } .ap-md  .ac-badge { background: var(--accent);  color: #000; } .ap-md  .ac-title { color: var(--accent); }  .ap-md  .ac-lbl { background: var(--accent);  color: #000; }
+  .ap-gl  { border-color: rgba(52,211,153,0.3);  } .ap-gl  .ac-badge { background: var(--accent3); color: #000; } .ap-gl  .ac-title { color: var(--accent3); } .ap-gl  .ac-lbl { background: var(--accent3); color: #000; }
+  .ap-tn  { border-color: rgba(251,146,60,0.3);  } .ap-tn  .ac-badge { background: var(--accent4); color: #000; } .ap-tn  .ac-title { color: var(--accent4); } .ap-tn  .ac-lbl { background: var(--accent4); color: #000; }
+
+  /* ── 6 ENTRY OPTIONS ── */
+  .entry-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 0.65rem; margin-top: 1rem; }
+  .entry-card { padding: 0.9rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.79rem; line-height: 1.5; color: #c8c8e0; }
+  .entry-card .ec-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; display: block; margin-bottom: 0.3rem; }
+  .entry-card .ec-title { font-weight: 700; font-size: 0.84rem; display: block; margin-bottom: 0.3rem; }
+  .entry-card .ec-desc { color: var(--muted); font-size: 0.74rem; }
+  .ec-1 { border-color: rgba(56,189,248,0.3);  } .ec-1 .ec-num,.ec-1 .ec-title { color: var(--accent); }
+  .ec-2 { border-color: rgba(167,139,250,0.3); } .ec-2 .ec-num,.ec-2 .ec-title { color: var(--accent2); }
+  .ec-3 { border-color: rgba(52,211,153,0.3);  } .ec-3 .ec-num,.ec-3 .ec-title { color: var(--accent3); }
+  .ec-4 { border-color: rgba(251,146,60,0.3);  } .ec-4 .ec-num,.ec-4 .ec-title { color: var(--accent4); }
+  .ec-5 { border-color: rgba(244,63,94,0.3);   } .ec-5 .ec-num,.ec-5 .ec-title { color: var(--accent5); }
+  .ec-6 { border-color: rgba(250,204,21,0.3);  } .ec-6 .ec-num,.ec-6 .ec-title { color: var(--accent6); }
+
+  /* ── STEP FLOW ── */
+  .step-flow { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.9rem; }
+  .step-item { display: flex; gap: 0.9rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.75rem 0.9rem; border-left: 3px solid transparent; font-size: 0.84rem; line-height: 1.5; color: #c8c8e0; }
+  .step-num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.05rem; }
+  .step-item strong { color: var(--text); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+  .done-btn.checked { border-color: var(--accent3); color: var(--accent3); background: rgba(52,211,153,0.07); }
+
+  /* ── ULTIMATE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(56,189,248,0.07), rgba(52,211,153,0.04)); border: 1px solid rgba(56,189,248,0.25); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #0284c7); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.75rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.76rem; }
+  .ft-sky  { background: rgba(56,189,248,0.15);  color: var(--accent); }
+  .ft-vio  { background: rgba(167,139,250,0.15); color: var(--accent2); }
+  .ft-grn  { background: rgba(52,211,153,0.15);  color: var(--accent3); }
+  .ft-orng { background: rgba(251,146,60,0.15);  color: var(--accent4); }
+  .ft-rose { background: rgba(244,63,94,0.15);   color: var(--accent5); }
+  .ft-yel  { background: rgba(250,204,21,0.15);  color: var(--accent6); }
+  .formula-op { color: var(--muted); font-size: 0.9rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB VII — <span>Strategi Bersaing</span><br>di Pasar Internasional</h1>
+    <p class="subtitle">Go Global · Kompleksitas · 6 Pilihan Masuk · Multi-Domestik vs Global vs Transnasional · Profit Sanctuary</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 6 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab VII</h2>
+    <div class="mind-center">🌍 Pasar Internasional</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">7.3</div>🚀 Mengapa Go Global?<br><small style="opacity:0.7">5 alasan utama ekspansi</small></div>
+      <div class="branch b2"><div class="blabel">7.4</div>⚠️ Kompleksitas Lintas Negara<br><small style="opacity:0.7">5 tantangan strategi global</small></div>
+      <div class="branch b3"><div class="blabel">7.5</div>🌐 Multi-Domestik vs Global<br><small style="opacity:0.7">2 pola persaingan internasional</small></div>
+      <div class="branch b4"><div class="blabel">7.6</div>🚪 6 Pilihan Masuk Pasar<br><small style="opacity:0.7">Ekspor · Lisensi · Waralaba · dll</small></div>
+      <div class="branch b5"><div class="blabel">7.7</div>📐 3 Pendekatan Stratejik<br><small style="opacity:0.7">MD · Global · Transnasional</small></div>
+      <div class="branch b6"><div class="blabel">7.8–7.11</div>🏆 Keunggulan Internasional<br><small style="opacity:0.7">Lokasi · Transfer · Profit Sanctuary · Berkembang · Lokal vs MNC</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: MENGAPA GO GLOBAL ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">7.1–7.3</span>
+      <div>
+        <div class="section-title">Pendahuluan &amp; 5 Alasan Masuk Pasar Global</div>
+        <div class="section-eng">Introduction &amp; Why Companies Enter International Markets</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          Perusahaan yang ingin <strong>memimpin di pasar harus berpikir dalam konteks kepemimpinan skala global</strong>. Kemajuan teknologi informasi nyaris meniadakan batas-batas geografis, membuka peluang sekaligus menghadirkan ancaman dan risiko baru.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Bab ini memperkenalkan konsep-konsep strategi <em>multi-domestik, global, dan transnasional</em> — tiga pendekatan berbeda untuk bersaing secara internasional.
+        </span></li>
+      </ul>
+
+      <p style="font-size:0.83rem;color:var(--muted);margin: 0.9rem 0 0.5rem;">Lima alasan utama perusahaan memutuskan masuk ke pasar global:</p>
+      <div class="reason-grid">
+        <div class="reason-card rc-1">
+          <span class="rc-num">① PELANGGAN</span>
+          <span class="rc-icon">👥</span>
+          <span class="rc-title">Akses Pelanggan Baru</span>
+          <span class="rc-desc">Pasar domestik terbatas — pasar global membuka segmen pelanggan yang jauh lebih besar</span>
+        </div>
+        <div class="reason-card rc-2">
+          <span class="rc-num">② BIAYA</span>
+          <span class="rc-icon">📉</span>
+          <span class="rc-title">Biaya Lebih Rendah</span>
+          <span class="rc-desc">Mencapai target biaya rendah melalui skala ekonomi yang lebih besar di pasar global</span>
+        </div>
+        <div class="reason-card rc-3">
+          <span class="rc-num">③ KOMPETENSI</span>
+          <span class="rc-icon">💡</span>
+          <span class="rc-title">Eksploitasi Kompetensi Inti</span>
+          <span class="rc-desc">Mengeksploitasi lebih jauh kompetensi utama yang sudah dimiliki ke pasar-pasar baru</span>
+        </div>
+        <div class="reason-card rc-4">
+          <span class="rc-num">④ SUMBER DAYA</span>
+          <span class="rc-icon">🏭</span>
+          <span class="rc-title">Akses Sumber Daya Luar Negeri</span>
+          <span class="rc-desc">Mendapatkan akses pada sumber daya &amp; kemampuan yang tersedia di pasar luar negeri</span>
+        </div>
+        <div class="reason-card rc-5">
+          <span class="rc-num">⑤ RISIKO</span>
+          <span class="rc-icon">🔀</span>
+          <span class="rc-title">Diversifikasi Risiko</span>
+          <span class="rc-desc">Mengurangi risiko bisnis domestik dengan menyalurkannya ke pasar yang lebih besar dan beragam</span>
+        </div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 5 Alasan Go Global:</strong> <em>"Pelanggan-Biaya-Kompetensi-Sumber Daya-Risiko"</em> → <em>"PBKSR"</em> → <em>"Perlu Berkembang? Keluar Saja, Raih Dunia!"</em></span>
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: KOMPLEKSITAS LINTAS NEGARA ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c2">7.4</span>
+      <div>
+        <div class="section-title">Mengapa Strategi Global Jauh Lebih Kompleks</div>
+        <div class="section-eng">Why Cross-Border Strategy Development Is More Complex</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:0.9rem;">Bersaing di pasar global jauh lebih kompleks dari domestik karena <strong style="color:var(--text);">lima hal penting</strong> ini:</p>
+      <div class="step-flow">
+        <div class="step-item" style="border-left-color:rgba(167,139,250,0.4);">
+          <div class="step-num" style="background:var(--accent2);color:#fff;">1</div>
+          <div><strong>Variasi lintas negara</strong> atas faktor daya saing industri, meliputi: (a) kondisi permintaan, (b) kondisi faktor terkait, (c) industri terkait &amp; pendukung, (d) strategi perusahaan &amp; struktur persaingan.</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(167,139,250,0.4);">
+          <div class="step-num" style="background:var(--accent2);color:#fff;">2</div>
+          <div><strong>Menentukan lokasi aktivitas</strong> mata rantai nilai yang tepat untuk membangun keunggulan kompetitif</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(167,139,250,0.4);">
+          <div class="step-num" style="background:var(--accent2);color:#fff;">3</div>
+          <div><strong>Dampak kebijakan pemerintah &amp; kondisi perekonomian</strong> di negara lain tempat perusahaan berinvestasi</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(167,139,250,0.4);">
+          <div class="step-num" style="background:var(--accent2);color:#fff;">4</div>
+          <div><strong>Risiko pergerakan nilai tukar</strong> yang memburuk — fluktuasi kurs dapat mengubah keunggulan biaya secara dramatis</div>
+        </div>
+        <div class="step-item" style="border-left-color:rgba(167,139,250,0.4);">
+          <div class="step-num" style="background:var(--accent2);color:#fff;">5</div>
+          <div><strong>Perbedaan lintas negara</strong> atas kondisi demografi, budaya, dan pasar — satu formula tidak berlaku untuk semua negara</div>
+        </div>
+      </div>
+      <div class="info-box violet">
+        <strong>💡 Implikasi:</strong> Kompleksitas ini berarti strategi yang berhasil di pasar domestik <em>tidak otomatis berhasil di pasar internasional</em>. Manajemen harus melakukan analisis mendalam terhadap setiap pasar tujuan sebelum memutuskan cara masuk dan strategi bersaing.
+      </div>
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: MULTI-DOMESTIK vs GLOBAL + 6 PILIHAN MASUK ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c3">7.5–7.6</span>
+      <div>
+        <div class="section-title">Pola Persaingan Internasional &amp; 6 Pilihan Masuk Pasar</div>
+        <div class="section-eng">Multi-Domestic vs Global Competition &amp; Entry Options</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub3a">
+        <div class="subsection-header" onclick="toggleSub('sub3a')">
+          🌐 Multi-Domestik vs Persaingan Global (7.5) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <div class="compare-split">
+            <div class="cs-card csc-md">
+              <div class="csc-title">🏠 Persaingan Multi-Domestik</div>
+              <span class="csc-sub">"Berpikir Lokal, Bertindak Lokal"</span>
+              <ul>
+                <li>Pembeli di negara berbeda tertarik pada atribut produk yang berbeda pula</li>
+                <li>Penjual berbeda dari satu negara ke negara lain</li>
+                <li>Kondisi industri &amp; kekuatan kompetitif berbeda-beda di tiap negara</li>
+                <li>Posisi saing di satu negara tidak mempengaruhi negara lain</li>
+              </ul>
+            </div>
+            <div class="cs-card csc-gl">
+              <div class="csc-title">🌐 Persaingan Global</div>
+              <span class="csc-sub">"Berpikir Global, Bertindak Global"</span>
+              <ul>
+                <li>Harga &amp; kondisi persaingan antar negara saling terkait</li>
+                <li>Posisi saing di satu negara mempengaruhi &amp; dipengaruhi negara lain</li>
+                <li>Pemain yang sama bersaing di semua negara</li>
+                <li>Standarisasi produk dan operasi lintas batas</li>
+              </ul>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Cara ingat:</strong> <em>Multi-Domestik = setiap negara adalah "dunia sendiri" yang berdiri sendiri</em>. <em>Global = semua negara adalah satu "medan perang tunggal"</em> yang saling terhubung.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub3b">
+        <div class="subsection-header" onclick="toggleSub('sub3b')">
+          🚪 6 Pilihan Stratejik untuk Memasuki Pasar Internasional (7.6) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <div class="entry-grid">
+            <div class="entry-card ec-1">
+              <span class="ec-num">OPSI 1</span>
+              <span class="ec-title">✈️ Ekspor</span>
+              <span class="ec-desc">Mempertahankan basis produksi di negara asal dan mengekspor hasilnya ke negara-negara lain. Risiko rendah, investasi minimal.</span>
+            </div>
+            <div class="entry-card ec-2">
+              <span class="ec-num">OPSI 2</span>
+              <span class="ec-title">📄 Lisensi</span>
+              <span class="ec-desc">Memberikan lisensi kepada perusahaan asing untuk memproduksi serta mendistribusikan produk di luar negeri. Royalti tanpa investasi langsung.</span>
+            </div>
+            <div class="entry-card ec-3">
+              <span class="ec-num">OPSI 3</span>
+              <span class="ec-title">🏪 Waralaba (Franchise)</span>
+              <span class="ec-desc">Memakai strategi waralaba — transfer model bisnis lengkap kepada mitra lokal dengan standar yang ketat.</span>
+            </div>
+            <div class="entry-card ec-4">
+              <span class="ec-num">OPSI 4</span>
+              <span class="ec-title">🏢 Anak Perusahaan 100%</span>
+              <span class="ec-desc">Membuka anak perusahaan 100% kepemilikan dengan mengakuisisi perusahaan lokal di luar negeri. Kontrol penuh, investasi besar.</span>
+            </div>
+            <div class="entry-card ec-5">
+              <span class="ec-num">OPSI 5</span>
+              <span class="ec-title">🤝 Joint Venture</span>
+              <span class="ec-desc">Menciptakan anak perusahaan di luar negeri dengan menggandeng mitra lokal (joint-venture) di industri yang masih bertumbuh. Berbagi risiko dan pengetahuan lokal.</span>
+            </div>
+            <div class="entry-card ec-6">
+              <span class="ec-num">OPSI 6</span>
+              <span class="ec-title">🌐 Aliansi Stratejik</span>
+              <span class="ec-desc">Mengandalkan aliansi strategis atau joint-venture dengan perusahaan asing untuk berbagi sumber daya, teknologi, dan akses pasar.</span>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 6 Opsi Masuk:</strong> <em>"Ekspor-Lisensi-Waralaba-Anak-Joint-Aliansi"</em> → <em>"ELWAJA"</em> → <em>"Ekspansi Luar Wajar? Anak Jangan Alpa!"</em> — urutan dari risiko terendah ke tertinggi (umumnya)</span>
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: 3 PENDEKATAN STRATEJIK ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c4">7.7</span>
+      <div>
+        <div class="section-title">Tiga Pendekatan Stratejik Utama Bersaing Secara Internasional</div>
+        <div class="section-eng">Three Primary Strategic Approaches for International Competition</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Perusahaan yang bersaing di beberapa negara sekaligus harus berhadapan dengan dua tekanan yang bertentangan: <em>adaptasi lokal</em> vs <em>efisiensi dari standardisasi global</em>. Dari sini muncul tiga pendekatan:</p>
+
+      <div class="approach-grid">
+        <!-- MULTI-DOMESTIK -->
+        <div class="approach-card ap-md">
+          <div class="ac-header">
+            <span class="ac-badge">PENDEKATAN 1</span>
+            <div>
+              <div class="ac-title">🏠 Strategi Multi-Domestik</div>
+              <div class="ac-tag">"Berpikir Lokal, Bertindak Secara Lokal"</div>
+            </div>
+          </div>
+          <div class="ac-body">
+            <div class="ac-row"><span class="ac-lbl">INTI</span><span>Menyesuaikan produk, strategi, dan operasi secara signifikan untuk setiap negara — memprioritaskan relevansi lokal di atas efisiensi global.</span></div>
+            <div class="ac-row"><span class="ac-lbl">KAPAN</span><span>Terbaik saat: kebutuhan dan preferensi pembeli sangat berbeda antar negara, regulasi lokal ketat, dan persaingan bersifat multi-domestik (tiap negara berdiri sendiri).</span></div>
+            <div class="ac-row"><span class="ac-lbl">RISIKO</span><span>Tidak bisa menikmati skala ekonomi global — biaya lebih tinggi dan kesulitan mentransfer kompetensi inti lintas negara.</span></div>
+          </div>
+        </div>
+        <!-- GLOBAL -->
+        <div class="approach-card ap-gl">
+          <div class="ac-header">
+            <span class="ac-badge">PENDEKATAN 2</span>
+            <div>
+              <div class="ac-title">🌐 Strategi Global</div>
+              <div class="ac-tag">"Berpikir Global, Bertindak Secara Global"</div>
+            </div>
+          </div>
+          <div class="ac-body">
+            <div class="ac-row"><span class="ac-lbl">INTI</span><span>Standarisasi produk dan operasi secara konsisten di seluruh dunia — memaksimalkan efisiensi dan skala ekonomi global.</span></div>
+            <div class="ac-row"><span class="ac-lbl">KAPAN</span><span>Terbaik saat: kebutuhan pembeli cukup homogen lintas negara, keunggulan biaya sangat penting, dan produk bersifat universal (teknologi, software, komoditas).</span></div>
+            <div class="ac-row"><span class="ac-lbl">RISIKO</span><span>Kurang responsif terhadap kebutuhan lokal yang berbeda — bisa kehilangan pangsa pasar di negara yang membutuhkan adaptasi signifikan.</span></div>
+          </div>
+        </div>
+        <!-- TRANSNASIONAL -->
+        <div class="approach-card ap-tn">
+          <div class="ac-header">
+            <span class="ac-badge">PENDEKATAN 3</span>
+            <div>
+              <div class="ac-title">🔀 Strategi Transnasional</div>
+              <div class="ac-tag">"Berpikir Global, Bertindak Secara Lokal"</div>
+            </div>
+          </div>
+          <div class="ac-body">
+            <div class="ac-row"><span class="ac-lbl">INTI</span><span>Hibrida terbaik: menjaga efisiensi global (standardisasi di mana mungkin) sekaligus melakukan adaptasi lokal (customization di mana perlu). Yang terbaik dari kedua pendekatan di atas.</span></div>
+            <div class="ac-row"><span class="ac-lbl">KAPAN</span><span>Terbaik untuk kebanyakan industri global saat ini — ketika baik efisiensi global maupun responsivitas lokal sama-sama kritis.</span></div>
+            <div class="ac-row"><span class="ac-lbl">CONTOH</span><span>McDonald's: menu inti global (Big Mac) + adaptasi lokal (McRice di Indonesia, McArabia di Timur Tengah). Standar kualitas global, adaptasi selera lokal.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Cara ingat 3 Pendekatan:</strong> <em>"Multi-Domestik = Lokal-Lokal | Global = Global-Global | Transnasional = Global-Lokal"</em>. Makin besar perbedaan kebutuhan lokal &amp; makin penting efisiensi global, makin strategis pilihan Transnasional.</span>
+      </div>
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: KEUNGGULAN INTERNASIONAL + PROFIT SANCTUARY ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c5">7.8–7.9</span>
+      <div>
+        <div class="section-title">Mencari Keunggulan Kompetitif &amp; Profit Sanctuary</div>
+        <div class="section-eng">Building Competitive Advantage Internationally &amp; Profit Sanctuaries</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub5a">
+        <div class="subsection-header" onclick="toggleSub('sub5a')">
+          🏆 3 Cara Membangun Keunggulan Kompetitif di Arena Internasional (7.8) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <div class="step-flow">
+            <div class="step-item" style="border-left-color:rgba(244,63,94,0.4);">
+              <div class="step-num" style="background:var(--accent5);color:#fff;">1</div>
+              <div><strong>Menggunakan lokasi untuk membangun keunggulan kompetitif</strong> — menempatkan aktivitas mata rantai nilai di lokasi-lokasi paling menguntungkan untuk menekan biaya atau mencapai diferensiasi lebih tinggi. <em>Contoh: R&amp;D di Silicon Valley, manufaktur di Vietnam, pemasaran di New York.</em></div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(244,63,94,0.4);">
+              <div class="step-num" style="background:var(--accent5);color:#fff;">2</div>
+              <div><strong>Berbagi dan mentransfer sumber daya bernilai lintas negara</strong> — kompetensi, pengetahuan, dan kemampuan yang dikembangkan di satu negara ditransfer ke negara lain untuk membangun keunggulan kompetitif lintas batas.</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(244,63,94,0.4);">
+              <div class="step-num" style="background:var(--accent5);color:#fff;">3</div>
+              <div><strong>Menggunakan koordinasi lintas batas</strong> untuk mendapat keunggulan — ini sulit ditiru oleh pesaing lokal yang tidak memiliki wilayah operasi lintas batas, menjadikannya sumber keunggulan yang sangat defensif.</div>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 3 Cara:</strong> <em>"Lokasi-Transfer-Koordinasi"</em> → <em>"LTK"</em> → <em>"Langkah Tepat: Koordinasikan sumber daya lintas dunia!"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5b">
+        <div class="subsection-header" onclick="toggleSub('sub5b')">
+          💰 Profit Sanctuary — Kantung Sumber Keuntungan Lintas Negara (7.9) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Profit Sanctuary</strong> = pasar dari satu negara atau lebih di mana perusahaan dapat <em>mengamankan nilai keuntungan tertentu</em> karena sifat pasar yang protektif atau keunggulan kompetitif yang tak dapat disaingi kompetitor lain.
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Contoh klasik:</strong> Jepang — dengan tingkat proteksi pemerintah bagi industri lokalnya yang tergolong sangat tinggi, perusahaan Jepang bisa membangun profit sanctuary di pasar domestiknya sebelum ekspansi global.
+            </span></li>
+            <li class="point"><span class="dot d5"></span><span>
+              <strong>Dua metoda strategis menggunakan Profit Sanctuary:</strong>
+              <br>→ <strong>(1)</strong> Menggunakan subsidi lintas pasar untuk menjalankan <em>serangan strategik</em>: mendorong serangan kompetitif di satu pasar menggunakan sumber daya dan profit yang dialihkan dari pasar lain.
+              <br>→ <strong>(2)</strong> Menggunakan taktik lintas negara untuk <em>mempertahankan diri</em> dari pesaing internasional yang memiliki profit sanctuary di negara lain.
+            </span></li>
+          </ul>
+          <div class="info-box rose">
+            <strong>⚠️ Implikasi:</strong> Perusahaan yang memiliki profit sanctuary memiliki <em>fleksibilitas finansial lebih besar</em> untuk menyerang pesaing di pasar lain bahkan dengan harga di bawah biaya — karena kerugian di satu pasar disubsidi dari keuntungan profit sanctuary-nya.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: PASAR BERKEMBANG + STRATEGI PERUSAHAAN LOKAL ══ -->
+  <div class="section" id="s6">
+    <div class="section-header" onclick="toggle('s6')">
+      <span class="num c6">7.10–7.11</span>
+      <div>
+        <div class="section-title">Pasar Negara Berkembang &amp; Strategi Perusahaan Lokal</div>
+        <div class="section-eng">Emerging Markets Strategy &amp; Defending Against Global Giants</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+
+      <div class="subsection" id="sub6a">
+        <div class="subsection-header" onclick="toggleSub('sub6a')">
+          🌱 Strategi Bersaing di Pasar Negara Berkembang (7.10) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d6"></span><span>
+              Negara berkembang dengan populasi besar dan pertumbuhan ekonomi tinggi — seperti <strong>Cina, India, Brasil, Indonesia, Rusia, Polandia, dan Meksiko</strong> — menawarkan peluang sangat besar bagi perusahaan transnasional karena semakin besarnya kelas menengah.
+            </span></li>
+            <li class="point"><span class="dot d6"></span><span>
+              Meskipun risiko bisnis lebih tinggi, pertumbuhan ekonomi dan ukuran pasar yang besar membuat negara-negara berkembang menjadi <em>medan perang strategis</em> yang tidak bisa diabaikan.
+            </span></li>
+          </ul>
+          <p style="font-size:0.82rem;color:var(--muted);margin: 0.8rem 0 0.5rem;"><strong style="color:var(--text);">4 Pilihan strategi untuk bersaing di pasar negara berkembang:</strong></p>
+          <div class="step-flow">
+            <div class="step-item" style="border-left-color:rgba(250,204,21,0.4);"><div class="step-num" style="background:var(--accent6);color:#000;">1</div><div><strong>Persiapkan persaingan berbasis harga rendah</strong> — pasar berkembang sangat sensitif harga; harus bisa menawarkan value yang jauh lebih baik per rupiah/yuan/real yang dikeluarkan</div></div>
+            <div class="step-item" style="border-left-color:rgba(250,204,21,0.4);"><div class="step-num" style="background:var(--accent6);color:#000;">2</div><div><strong>Modifikasi aspek model bisnis</strong> untuk mengakomodir keadaan lokal — distribusi berbeda, ukuran produk berbeda, cara pembayaran berbeda sesuai kondisi lokal</div></div>
+            <div class="step-item" style="border-left-color:rgba(250,204,21,0.4);"><div class="step-num" style="background:var(--accent6);color:#000;">3</div><div><strong>Upayakan mengubah pasar lokal</strong> agar lebih sepadan dengan praktik bisnis global — edukasi pasar, bangun ekosistem, ubah perilaku konsumen secara bertahap</div></div>
+            <div class="step-item" style="border-left-color:rgba(250,204,21,0.4);"><div class="step-num" style="background:var(--accent6);color:#000;">4</div><div><strong>Jauhi pasar berkembang tertentu</strong> jika modifikasi model bisnis yang diperlukan terlalu besar dan secara ekonomis tidak praktis untuk dilakukan</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub6b">
+        <div class="subsection-header" onclick="toggleSub('sub6b')">
+          🛡️ 5 Strategi Perusahaan Lokal Bertahan Melawan Raksasa Global (7.11) <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <p style="font-size:0.82rem;color:var(--muted);margin-bottom:0.8rem;">Perusahaan multinasional memiliki sumber daya besar untuk "memakan" pasar lokal. Lima strategi bertahan bagi perusahaan lokal:</p>
+          <div class="step-flow">
+            <div class="step-item" style="border-left-color:rgba(96,165,250,0.4);">
+              <div class="step-num" style="background:var(--accent7);color:#000;">1</div>
+              <div><strong>Eksploitasi hambatan distribusi lokal</strong> — ciptakan model bisnis yang memanfaatkan keterbatasan jaringan distribusi lokal atau buruknya infrastruktur yang tidak bisa diatasi oleh perusahaan asing dengan cepat</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(96,165,250,0.4);">
+              <div class="step-num" style="background:var(--accent7);color:#000;">2</div>
+              <div><strong>Manfaatkan pemahaman mendalam tentang konsumen lokal</strong> — perusahaan lokal lebih tahu apa yang konsumen lokal inginkan, preferensi mereka, untuk menciptakan produk atau layanan yang dapat dikustomisasi secara unggul</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(96,165,250,0.4);">
+              <div class="step-num" style="background:var(--accent7);color:#000;">3</div>
+              <div><strong>Gunakan keunggulan tenaga kerja lokal</strong> — perusahaan lokal memiliki akses dan pemahaman atas aspek-aspek pekerja lokal yang tidak dimiliki perusahaan multinasional asing</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(96,165,250,0.4);">
+              <div class="step-num" style="background:var(--accent7);color:#000;">4</div>
+              <div><strong>Gunakan strategi akuisisi dan pertumbuhan cepat</strong> — meningkatkan ketahanan terhadap ekspansi perusahaan asing dengan cara memperbesar skala dan kekuatan lebih dulu</div>
+            </div>
+            <div class="step-item" style="border-left-color:rgba(96,165,250,0.4);">
+              <div class="step-num" style="background:var(--accent7);color:#000;">5</div>
+              <div><strong>Transfer keahlian ke pasar lintas negara</strong> — memulai ekspansi internasional sendiri untuk menghadapi MNC pada level internasional, bukan hanya bertahan di dalam negeri</div>
+            </div>
+          </div>
+          <div class="info-box sky">
+            <strong>🔑 Prinsip:</strong> Perusahaan lokal tidak harus kalah dari MNC besar. Keunggulan lokal yang unik — pengetahuan pasar, jaringan distribusi, budaya kerja, dan kecepatan adaptasi — <em>bisa menjadi senjata yang sama kuatnya</em> jika dimanfaatkan dengan strategi yang tepat.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn6" onclick="markDone(6)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab VII</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);color:#000;">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Mengapa Go Global? — 5 Alasan PBKSR</h3>
+          <p><strong style="color:#f0f0ff;">Pelanggan baru</strong> · <strong style="color:#f0f0ff;">Biaya lebih rendah</strong> melalui skala ekonomi · <strong style="color:#f0f0ff;">Kompetensi inti</strong> dieksploitasi lebih jauh · <strong style="color:#f0f0ff;">Sumber daya</strong> luar negeri diakses · <strong style="color:#f0f0ff;">Risiko</strong> domestik didiversifikasi. Tidak ada satu alasan tunggal — biasanya kombinasi.</p>
+          <div class="keywords"><span class="kw">PBKSR</span><span class="kw">5 alasan go global</span><span class="kw">skala ekonomi</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);color:#fff;">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">Strategi Global = Lebih Kompleks dari Domestik</h3>
+          <p>Lima sumber kompleksitas: variasi faktor daya saing lintas negara · lokasi aktivitas rantai nilai · kebijakan pemerintah asing · risiko nilai tukar · perbedaan demografi/budaya/pasar. Strategi yang berhasil di dalam negeri <strong style="color:#f0f0ff;">tidak otomatis berhasil di luar negeri</strong>.</p>
+          <div class="keywords"><span class="kw">5 kompleksitas</span><span class="kw">nilai tukar</span><span class="kw">adaptasi lokal</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);color:#000;">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">6 Cara Masuk Pasar — Dari Ekspor hingga Aliansi</h3>
+          <p>Pilihan dari <strong style="color:#f0f0ff;">risiko rendah/kontrol rendah</strong> (Ekspor) hingga <strong style="color:#f0f0ff;">risiko tinggi/kontrol penuh</strong> (Anak Perusahaan 100%): Ekspor → Lisensi → Waralaba → Anak Perusahaan → Joint Venture → Aliansi. Pilihan tergantung tujuan, sumber daya, dan hambatan perdagangan di negara tujuan.</p>
+          <div class="keywords"><span class="kw">ELWAJA</span><span class="kw">6 opsi masuk</span><span class="kw">risiko vs kontrol</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);color:#000;">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">3 Pendekatan: Lokal-Lokal · Global-Global · Global-Lokal</h3>
+          <p><strong style="color:#f0f0ff;">Multi-Domestik</strong>: adaptasi penuh tiap negara. <strong style="color:#f0f0ff;">Global</strong>: standarisasi penuh lintas negara. <strong style="color:#f0f0ff;">Transnasional</strong>: hibrida terbaik — efisiensi global + responsivitas lokal. Transnasional paling kompleks tapi paling kuat di era globalisasi saat ini.</p>
+          <div class="keywords"><span class="kw">multi-domestik</span><span class="kw">global</span><span class="kw">transnasional</span><span class="kw">hibrida</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent5);color:#fff;">5</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent5);">Keunggulan Internasional: Lokasi + Transfer + Koordinasi + Profit Sanctuary</h3>
+          <p>Bangun keunggulan melalui: pilihan lokasi strategis, transfer kompetensi lintas negara, koordinasi lintas batas. Tambah kekuatan dengan <strong style="color:#f0f0ff;">Profit Sanctuary</strong> — pasar yang dilindungi di mana profit bisa disubsidi ke serangan di pasar lain.</p>
+          <div class="keywords"><span class="kw">LTK</span><span class="kw">profit sanctuary</span><span class="kw">subsidi lintas pasar</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent6);color:#000;">6</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent6);">Pasar Berkembang + Strategi Bertahan Perusahaan Lokal</h3>
+          <p>Pasar berkembang (Cina, India, Indonesia, dll.) = peluang besar tapi butuh adaptasi model bisnis. Perusahaan lokal vs MNC: andalkan <strong style="color:#f0f0ff;">pengetahuan lokal, distribusi lokal, tenaga kerja lokal</strong> — keunggulan yang MNC tidak mudah tiru.</p>
+          <div class="keywords"><span class="kw">pasar berkembang</span><span class="kw">5 strategi lokal</span><span class="kw">kelas menengah</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-sky">5 Alasan Go Global</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-vio">Pahami Kompleksitas</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-grn">Pilih 1 dari 6 Cara Masuk</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-orng">Pilih Pendekatan MD/Global/TN</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-rose">Bangun Keunggulan Internasional</span>
+      </div>
+      <div class="formula-caption">Alur keputusan strategi internasional — dari motivasi go global hingga membangun keunggulan kompetitif di arena global</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box sky" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab VII:</strong><br>
+      <em>"<strong style="color:#f0f0ff;">P</strong>BK-SR itu alasannya go global, paham <strong style="color:#f0f0ff;">K</strong>ompleksitas 5 faktor, pilih <strong style="color:#f0f0ff;">E</strong>LWAJA cara masuk, tentukan apakah <strong style="color:#f0f0ff;">M</strong>ulti-Domestik, <strong style="color:#f0f0ff;">G</strong>lobal, atau <strong style="color:#f0f0ff;">T</strong>ransnasional, lalu <strong style="color:#f0f0ff;">L</strong>TK untuk keunggulan!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">PBKSR → ELWAJA → MGT → LTK</strong> — empat blok kunci Bab VII. Ditambah: Profit Sanctuary untuk kekuatan finansial lintas pasar, dan strategi lokal untuk bertahan dari MNC.</span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab VII Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 6;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Latihan Ujian MSK — CA Indonesia</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #07070f;
+    --surface: #0f0f1c;
+    --surface2: #17172a;
+    --accent: #e879f9;
+    --correct: #34d399;
+    --wrong: #f43f5e;
+    --neutral: #60a5fa;
+    --text: #f0f0ff;
+    --muted: #6b7090;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden; }
+
+  /* ── NOISE OVERLAY ── */
+  body::before { content:''; position:fixed; inset:0; background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events:none; z-index:0; }
+
+  .container { max-width: 820px; margin: 0 auto; padding: 2rem 1rem 6rem; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  .exam-header { text-align: center; margin-bottom: 2.5rem; padding: 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 16px; position: relative; overflow: hidden; }
+  .exam-header::before { content: ''; position: absolute; top: -60px; right: -60px; width: 160px; height: 160px; background: radial-gradient(circle, rgba(232,121,249,0.12) 0%, transparent 70%); border-radius: 50%; }
+  .exam-header .htag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.2em; background: var(--accent); color: #000; padding: 0.25rem 0.75rem; border-radius: 2px; margin-bottom: 0.9rem; font-weight: 700; }
+  .exam-header h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  .exam-header h1 span { color: var(--accent); }
+  .exam-header p { font-size: 0.84rem; color: var(--muted); }
+  .exam-meta { display: flex; justify-content: center; gap: 2rem; margin-top: 1.2rem; }
+  .em-item { text-align: center; }
+  .em-item .en { font-family: 'DM Mono', monospace; font-size: 1.2rem; font-weight: 700; color: var(--accent); display: block; }
+  .em-item .el { font-size: 0.65rem; color: var(--muted); font-family: 'DM Mono', monospace; letter-spacing: 0.1em; }
+
+  /* ── SCOREBOARD ── */
+  #scoreboard { display: none; margin-bottom: 2rem; }
+  .score-box { background: var(--surface); border: 1px solid rgba(232,121,249,0.3); border-radius: 14px; padding: 1.5rem 2rem; text-align: center; }
+  .sb-title { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 700; color: var(--accent); margin-bottom: 1rem; }
+  .sb-score { font-family: 'DM Mono', monospace; font-size: 2.5rem; font-weight: 700; display: block; }
+  .sb-grade { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
+  .sb-breakdown { display: flex; justify-content: center; gap: 2rem; margin-top: 1rem; }
+  .sbd-item { text-align: center; }
+  .sbd-item .sbd-n { font-family: 'DM Mono', monospace; font-size: 1.1rem; font-weight: 700; display: block; }
+  .sbd-item .sbd-l { font-size: 0.65rem; color: var(--muted); }
+
+  /* ── TABS ── */
+  .tabs { display: flex; gap: 0; border: 1px solid var(--border); border-radius: 10px; overflow: hidden; margin-bottom: 2rem; }
+  .tab { flex: 1; padding: 0.75rem; text-align: center; font-size: 0.82rem; font-weight: 600; cursor: pointer; background: var(--surface); color: var(--muted); transition: all 0.2s; border-right: 1px solid var(--border); font-family: 'DM Mono', monospace; }
+  .tab:last-child { border-right: none; }
+  .tab.active { background: var(--surface2); color: var(--text); }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION HEADER ── */
+  .section-hdr { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 0.9rem 1.2rem; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.8rem; }
+  .sh-badge { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; background: var(--accent); color: #000; padding: 0.2rem 0.5rem; border-radius: 3px; flex-shrink: 0; }
+  .sh-title { font-weight: 600; font-size: 0.9rem; }
+  .sh-sub { font-size: 0.75rem; color: var(--muted); margin-top: 0.1rem; }
+
+  /* ── MCQ QUESTION ── */
+  .question { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1rem; overflow: hidden; transition: border-color 0.2s; }
+  .question.answered-correct { border-color: rgba(52,211,153,0.4); }
+  .question.answered-wrong   { border-color: rgba(244,63,94,0.4); }
+  .question.skipped          { border-color: rgba(250,204,21,0.3); }
+  .q-header { padding: 1rem 1.2rem; }
+  .q-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--muted); display: block; margin-bottom: 0.35rem; }
+  .q-text { font-size: 0.88rem; line-height: 1.6; color: var(--text); }
+  .q-options { padding: 0 0.8rem 0.8rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .q-opt { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.65rem 0.85rem; border-radius: 8px; border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; font-size: 0.84rem; line-height: 1.5; color: #c8c8e0; user-select: none; background: rgba(0,0,0,0.2); }
+  .q-opt:hover { border-color: rgba(232,121,249,0.3); background: rgba(232,121,249,0.05); }
+  .q-opt.selected { border-color: rgba(96,165,250,0.5); background: rgba(96,165,250,0.08); color: var(--text); }
+  .q-opt.correct-ans { border-color: rgba(52,211,153,0.6); background: rgba(52,211,153,0.1); color: var(--correct); font-weight: 600; }
+  .q-opt.wrong-ans   { border-color: rgba(244,63,94,0.6);  background: rgba(244,63,94,0.1);  color: var(--wrong); }
+  .q-opt.show-correct { border-color: rgba(52,211,153,0.5); background: rgba(52,211,153,0.06); }
+  .q-opt .opt-letter { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; background: rgba(255,255,255,0.06); padding: 0.2rem 0.4rem; border-radius: 3px; flex-shrink: 0; margin-top: 0.1rem; }
+  .q-opt.correct-ans .opt-letter { background: var(--correct); color: #000; }
+  .q-opt.wrong-ans   .opt-letter { background: var(--wrong);   color: #fff; }
+  .q-opt.show-correct .opt-letter { background: var(--correct); color: #000; }
+
+  .q-result { padding: 0.65rem 1.2rem 0.9rem; font-size: 0.8rem; display: flex; align-items: flex-start; gap: 0.5rem; border-top: 1px solid var(--border); }
+  .q-result.correct { color: var(--correct); }
+  .q-result.wrong   { color: var(--wrong); }
+  .q-result .qr-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 0.05rem; }
+  .q-result .qr-text { line-height: 1.5; }
+  .q-result .qr-text strong { color: var(--text); }
+
+  /* ── BOTTOM BAR MCQ ── */
+  .mcq-controls { position: sticky; bottom: 0; background: rgba(7,7,15,0.95); backdrop-filter: blur(12px); border-top: 1px solid var(--border); padding: 1rem 1.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; z-index: 10; }
+  .progress-info { font-family: 'DM Mono', monospace; font-size: 0.75rem; color: var(--muted); }
+  .progress-info strong { color: var(--text); }
+  .btn { font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 600; padding: 0.55rem 1.2rem; border-radius: 8px; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; }
+  .btn-primary { background: var(--accent); color: #000; border-color: var(--accent); }
+  .btn-primary:hover { filter: brightness(1.1); }
+  .btn-secondary { background: none; color: var(--muted); border-color: var(--border); }
+  .btn-secondary:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* ── ESSAY SECTION ── */
+  .essay-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 1.2rem; overflow: hidden; }
+  .essay-header { padding: 1rem 1.2rem; background: var(--surface2); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 0.8rem; }
+  .essay-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; background: var(--neutral); color: #000; padding: 0.2rem 0.5rem; border-radius: 3px; flex-shrink: 0; }
+  .essay-header p { font-size: 0.86rem; font-weight: 600; }
+  .essay-body { padding: 1.1rem 1.2rem; }
+  .essay-body .context { font-size: 0.83rem; line-height: 1.65; color: #c8c8e0; margin-bottom: 1rem; }
+  .essay-question { font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text); }
+  .answer-box { margin-top: 0; }
+  .answer-toggle { display: flex; align-items: center; gap: 0.5rem; cursor: pointer; font-size: 0.78rem; color: var(--neutral); font-family: 'DM Mono', monospace; padding: 0.5rem 0; user-select: none; }
+  .answer-toggle:hover { color: var(--text); }
+  .answer-toggle .at-icon { font-size: 0.65rem; transition: transform 0.2s; }
+  .answer-toggle.open .at-icon { transform: rotate(90deg); }
+  .answer-content { display: none; margin-top: 0.75rem; padding: 1rem; background: rgba(96,165,250,0.06); border: 1px solid rgba(96,165,250,0.2); border-radius: 8px; font-size: 0.82rem; line-height: 1.65; color: #c8c8e0; }
+  .answer-content.open { display: block; }
+  .answer-content table { width: 100%; border-collapse: collapse; font-size: 0.78rem; margin: 0.75rem 0; }
+  .answer-content table th { background: rgba(96,165,250,0.1); color: var(--neutral); padding: 0.5rem 0.7rem; text-align: left; border: 1px solid rgba(96,165,250,0.2); font-weight: 600; }
+  .answer-content table td { padding: 0.45rem 0.7rem; border: 1px solid var(--border); color: #c8c8e0; vertical-align: top; }
+  .answer-content ul { padding-left: 1.2rem; margin: 0.5rem 0; }
+  .answer-content ul li { margin: 0.3rem 0; }
+  .answer-content strong { color: var(--text); }
+
+  /* ── CASE STUDY ── */
+  .case-body { font-size: 0.83rem; line-height: 1.7; color: #c8c8e0; }
+  .case-body p { margin-bottom: 0.85rem; }
+  .case-question { background: var(--surface2); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0; padding: 0.8rem 1rem; margin-bottom: 0.6rem; font-size: 0.84rem; }
+  .case-question .cq-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--accent); display: block; margin-bottom: 0.25rem; font-weight: 700; }
+  .case-question p { font-size: 0.83rem; line-height: 1.55; color: #c8c8e0; }
+
+  /* ── ANSWER KEY PANEL ── */
+  .key-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.45rem; margin-top: 0.8rem; }
+  .key-item { display: flex; align-items: center; justify-content: space-between; padding: 0.4rem 0.55rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.72rem; }
+  .key-item .kn { color: var(--muted); }
+  .key-item .ka { font-weight: 700; }
+  .key-item.correct-user { background: rgba(52,211,153,0.1); } .key-item.correct-user .ka { color: var(--correct); }
+  .key-item.wrong-user   { background: rgba(244,63,94,0.1);  } .key-item.wrong-user   .ka { color: var(--wrong); }
+  .key-item.unanswered   { background: rgba(255,255,255,0.03); } .key-item.unanswered .ka { color: var(--muted); }
+
+  /* ── HASIL PANEL ── */
+  .hasil-bar { display: flex; height: 6px; border-radius: 99px; overflow: hidden; margin: 0.75rem 0; }
+  .hb-correct { background: var(--correct); transition: width 0.8s ease; }
+  .hb-wrong   { background: var(--wrong);   transition: width 0.8s ease 0.1s; }
+  .hb-skip    { background: rgba(255,255,255,0.1); flex: 1; }
+
+  footer { text-align: center; padding: 2rem 0 1rem; font-size: 0.68rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.5; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="exam-header">
+    <div class="htag">LATIHAN UJIAN RESMI</div>
+    <h1>Contoh Soal <span>CA Indonesia</span><br>Manajemen Stratejik &amp; Kepemimpinan</h1>
+    <p>Soal Pilihan Ganda + Esai + Studi Kasus — berdasarkan contoh soal resmi IAI</p>
+    <div class="exam-meta">
+      <div class="em-item"><span class="en">30</span><span class="el">PG SOAL</span></div>
+      <div class="em-item"><span class="en">3</span><span class="el">ESAI</span></div>
+      <div class="em-item"><span class="en">1</span><span class="el">STUDI KASUS</span></div>
+      <div class="em-item"><span class="en">120'</span><span class="el">ESTIMASI</span></div>
+    </div>
+  </div>
+
+  <div id="scoreboard">
+    <div class="score-box">
+      <div class="sb-title">📊 Hasil Pilihan Ganda Anda</div>
+      <span class="sb-score" id="sbScore">—</span>
+      <div class="sb-grade" id="sbGrade">—</div>
+      <div class="hasil-bar">
+        <div class="hb-correct" id="hbCorrect" style="width:0%"></div>
+        <div class="hb-wrong"   id="hbWrong"   style="width:0%"></div>
+        <div class="hb-skip"></div>
+      </div>
+      <div class="sb-breakdown">
+        <div class="sbd-item"><span class="sbd-n" style="color:var(--correct)" id="sbC">0</span><span class="sbd-l">BENAR</span></div>
+        <div class="sbd-item"><span class="sbd-n" style="color:var(--wrong)"   id="sbW">0</span><span class="sbd-l">SALAH</span></div>
+        <div class="sbd-item"><span class="sbd-n" id="sbS">0</span><span class="sbd-l">BELUM DIJAWAB</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('pg')">📝 Pilihan Ganda</div>
+    <div class="tab" onclick="switchTab('esai')">✍️ Esai</div>
+    <div class="tab" onclick="switchTab('kasus')">🏢 Studi Kasus</div>
+    <div class="tab" onclick="switchTab('kunci')">🔑 Kunci Jawaban</div>
+  </div>
+
+  <!-- ══ TAB: PILIHAN GANDA ══ -->
+  <div class="tab-panel active" id="panel-pg">
+    <div class="section-hdr">
+      <span class="sh-badge">PG</span>
+      <div><div class="sh-title">Pilihan Ganda — 30 Butir</div><div class="sh-sub">Pilih satu jawaban paling tepat. Jawaban tersimpan otomatis. Klik "Koreksi" setelah selesai.</div></div>
+    </div>
+
+    <div id="questions-container"></div>
+
+    <div class="mcq-controls">
+      <div class="progress-info">Dijawab: <strong id="answeredCount">0</strong> / 30</div>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
+        <button class="btn btn-secondary" onclick="resetAll()">↺ Reset</button>
+        <button class="btn btn-primary" id="submitBtn" onclick="submitExam()">Koreksi Semua →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB: ESAI ══ -->
+  <div class="tab-panel" id="panel-esai">
+    <div class="section-hdr">
+      <span class="sh-badge">ESAI</span>
+      <div><div class="sh-title">Esai — 3 Butir (estimasi 30 menit)</div><div class="sh-sub">Klik "Lihat Jawaban" untuk melihat kunci jawaban resmi.</div></div>
+    </div>
+
+    <!-- Esai 1 -->
+    <div class="essay-card">
+      <div class="essay-header">
+        <span class="essay-num">ESAI 1</span>
+        <p>PT ASIA FARMA — Gaya Kepemimpinan &amp; Pengaruhnya pada Kinerja</p>
+      </div>
+      <div class="essay-body">
+        <div class="context">
+          PT ASIA FARMA terdaftar di BEI. Manajemen puncak menerapkan nilai budaya: <em>profesionalisme, integritas, dan kerja sama</em>. Budaya perusahaan mendorong efisiensi biaya melalui: (i) memperbaiki proses produksi, (ii) mengurangi biaya pembelian produk jadi dari pemasok, (iii) menerapkan pengendalian biaya dan teknik akuntansi berbasis aktivitas, dan (iv) menggunakan teknik pengendalian biaya seperti pengukuran kinerja melalui budget dan analisis penyimpangan.
+        </div>
+        <div class="essay-question">Pertanyaan 1: Jelaskan gaya kepemimpinan apa yang diterapkan oleh manajemen puncak PT ASIA FARMA.</div>
+        <div class="answer-box">
+          <div class="answer-toggle" onclick="toggleAnswer(this)"><span class="at-icon">▶</span> Lihat Jawaban</div>
+          <div class="answer-content">
+            <strong>Jawaban: Gaya Kepemimpinan Transaksional</strong><br><br>
+            Manajemen puncak PT ASIA FARMA menerapkan <strong>gaya kepemimpinan transaksional</strong>. Ciri-cirinya terlihat dari:
+            <ul>
+              <li>Fokus pada pengendalian biaya dan efisiensi operasional (strategi low cost)</li>
+              <li>Penggunaan sistem penilaian kinerja berbasis budget dan analisis penyimpangan</li>
+              <li>Budaya organisasi yang bersifat <em>kontrol</em> — menekankan stabilitas, pengendalian, dan pencapaian tujuan produktivitas</li>
+              <li>Motivasi karyawan melalui reward dan punishment yang terstruktur</li>
+            </ul>
+            Sesuai teori kepemimpinan (Yuliana, 2011), kepemimpinan transaksional mempengaruhi kinerja finansial melalui budaya organisasi kontrol, strategi low cost, dan sistem akuntansi manajemen terkait biaya rendah.
+          </div>
+        </div>
+        <div class="essay-question" style="margin-top:1rem;">Pertanyaan 2: Jelaskan pengaruh gaya kepemimpinan manajemen puncak PT ASIA FARMA terhadap kinerja perusahaan.</div>
+        <div class="answer-box">
+          <div class="answer-toggle" onclick="toggleAnswer(this)"><span class="at-icon">▶</span> Lihat Jawaban</div>
+          <div class="answer-content">
+            <strong>Jawaban: Pengaruh Tidak Langsung melalui Mediasi</strong><br><br>
+            Berdasarkan penelitian Yuliana (2011), gaya kepemimpinan transaksional <strong>tidak mempengaruhi kinerja organisasi secara langsung</strong>, tetapi melalui dua variabel kontinjensi:
+            <ul>
+              <li><strong>Strategi organisasi</strong> — kepemimpinan transaksional mendorong strategi low cost</li>
+              <li><strong>Sistem akuntansi manajemen</strong> — yang dirancang untuk mendukung strategi biaya rendah (budget, variance analysis, ABC)</li>
+            </ul>
+            Hasilnya: kepemimpinan transaksional di PT ASIA FARMA mempengaruhi <strong>kinerja finansial</strong> (bukan non-finansial) melalui budaya kontrol dan strategi low cost. Ini konsisten dengan temuan bahwa kepemimpinan transaksional efektif untuk lingkungan yang stabil dan strategi berbasis efisiensi biaya.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esai 2 -->
+    <div class="essay-card">
+      <div class="essay-header">
+        <span class="essay-num">ESAI 2</span>
+        <p>Bandingkan dan kontraskan strategi Low-Cost dengan Differentiation</p>
+      </div>
+      <div class="essay-body">
+        <div class="answer-box">
+          <div class="answer-toggle" onclick="toggleAnswer(this)"><span class="at-icon">▶</span> Lihat Jawaban</div>
+          <div class="answer-content">
+            <table>
+              <thead>
+                <tr><th>Dimensi</th><th>Low-Cost</th><th>Differentiation</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Target Stratejik</strong></td><td>Bagian pasar yang luas</td><td>Bagian pasar yang luas</td></tr>
+                <tr><td><strong>Dasar Kompetitif</strong></td><td>Segala kos lebih murah dibanding saingan</td><td>Kemampuan menawarkan sesuatu lebih menarik dibanding saingan</td></tr>
+                <tr><td><strong>Lini Produk</strong></td><td>Produk dasar dengan kualitas baik</td><td>Variasi produk dengan fitur pembeda</td></tr>
+                <tr><td><strong>Perhatian Produksi</strong></td><td>Terus cari cara pengurangan kos tanpa korbankan kualitas yang bisa diterima konsumen</td><td>Bangun fitur pembeda yang konsumen bersedia membayarnya</td></tr>
+                <tr><td><strong>Perhatian Pemasaran</strong></td><td>Harga rendah, nilai baik; fitur membantu penurunan kos</td><td>Fitur pembeda; harga premium untuk menutup ekstra kos</td></tr>
+                <tr><td><strong>Kunci Mempertahankan</strong></td><td>Harga keekonomian; terus kurangi kos</td><td>Inovasi; fokus pada fitur pembeda</td></tr>
+                <tr><td><strong>Sumber Daya &amp; Kapabilitas</strong></td><td>Otomatisasi skala besar, efisiensi, daya tawar</td><td>Kualitas, desain, inovasi, R&amp;D, marketing</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Esai 3 -->
+    <div class="essay-card">
+      <div class="essay-header">
+        <span class="essay-num">ESAI 3</span>
+        <p>Strategi bersaing di industri yang baru berkembang</p>
+      </div>
+      <div class="essay-body">
+        <div class="essay-question">Jelaskan strategi bersaing yang seharusnya dijalankan perusahaan ketika perusahaan sedang berada dalam lingkungan bisnis atau industri yang baru berkembang.</div>
+        <div class="answer-box">
+          <div class="answer-toggle" onclick="toggleAnswer(this)"><span class="at-icon">▶</span> Lihat Jawaban</div>
+          <div class="answer-content">
+            <strong>Karakteristik Industri yang Baru Berkembang:</strong>
+            <ul>
+              <li>Pasar masih baru → banyak ketidakpastian, sulit menyusun proyeksi</li>
+              <li>Teknologi masih sederhana</li>
+              <li>Belum ada standar kualitas, atribut, dan sebagainya</li>
+              <li>Hambatan masuk cenderung rendah → pesaing bisa masuk dan keluar dengan mudah</li>
+            </ul>
+            <strong>Strategi yang Direkomendasikan:</strong>
+            <ul>
+              <li><strong>First-mover advantage</strong> — masuk lebih dulu sebelum pesaing lain untuk memimpin pasar</li>
+              <li>Berani mengambil risiko membuat kesalahan, tapi harus bisa segera bangkit dan memulai kembali (difrensiasi)</li>
+              <li>Terus kembangkan <strong>product development dan market development</strong> yang inovatif untuk menjaga loyalitas konsumen</li>
+              <li>Bangun posisi pasar yang kuat sebelum industri matang dan persaingan semakin ketat</li>
+            </ul>
+            Intinya: di industri baru berkembang, strategi terbaik adalah berani masuk lebih dulu, terus berinovasi, dan bangun loyalitas konsumen sebelum pasar menjadi terlalu kompetitif.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB: STUDI KASUS ══ -->
+  <div class="tab-panel" id="panel-kasus">
+    <div class="section-hdr">
+      <span class="sh-badge">KASUS</span>
+      <div><div class="sh-title">Studi Kasus PT AAA — Alat Berat &amp; Diversifikasi (estimasi 60 menit)</div><div class="sh-sub">Baca kasus dengan cermat, kemudian jawab 4 pertanyaan analitis.</div></div>
+    </div>
+
+    <div class="essay-card">
+      <div class="essay-header" style="background:rgba(232,121,249,0.06);">
+        <span class="essay-num" style="background:var(--accent);">KASUS</span>
+        <p style="font-size:.9rem;font-weight:700;">PT AAA — Perusahaan Alat Berat Nasional</p>
+      </div>
+      <div class="essay-body">
+        <div class="case-body">
+          <p>PT AAA, suatu perusahaan alat berat nasional yang operasionalnya juga mencakup beberapa negara di Asia Tenggara, memutuskan untuk mengembangkan lini bisnisnya tidak hanya di alat berat saja namun juga di bisnis lain. Selama ini PT AAA dikenal sebagai pemain papan atas industri alat berat nasional yang lini usahanya mencakup perdagangan, penyewaan dan subkontraktor untuk jasa layanan pertambangan mineral serta migas, dan konstruksi jalan serta perkebunan.</p>
+          <p>PT AAA telah melalui beberapa kali masa keterpurukan ekonomi nasional. Pada tahun 1997-1998 saat krisis, nilai tukar rupiah terjun bebas. Dengan pertimbangan taktis untuk menyelamatkan arus kas, sebagian besar alat berat diekspor ke pasar Eropa, Timur Tengah, Australia dan Amerika Serikat. Tindakan taktis jangka pendek ini membuahkan hasil jutaan dolar.</p>
+          <p>Beberapa tahun setelah masa krisis, hampir semua lini bisnis PT AAA berkembang seiring membaiknya perekonomian. Berpegang pada keuangan yang mulai stabil, PT AAA mulai menjajaki diversifikasi ke bisnis water dispenser premium berteknologi tinggi. Pertimbangannya pragmatis. Namun empat bulan berselang, water dispenser terjual tidak sampai 10 unit. Perusahaan induk berhenti dari bisnis ini.</p>
+          <p>Di tahun yang sama terjadi krisis kredit perumahan murah di Amerika Serikat yang berdampak global. Industri alat berat kembali stagnan. Manajemen melihat tak ada pilihan selain melakukan diversifikasi bisnis di luar alat berat lagi. Akhirnya PT AAA masuk ke bisnis mobil bekas bermitra dengan perusahaan asing. Lebih dari dua tahun beroperasi, PT AAA dan mitra bisnisnya belum mencapai break even point sama sekali.</p>
+        </div>
+
+        <div style="margin-top:1.2rem;">
+          <div class="case-question">
+            <span class="cq-label">PERTANYAAN a</span>
+            <p>Bagaimana Anda menjelaskan keputusan-keputusan manajemen atau pemegang saham yang memilih untuk mengulangi strategi yang sama sementara kondisi dan situasi eksternal sudah berubah?</p>
+          </div>
+          <div class="answer-box" style="margin-bottom:1rem;">
+            <div class="answer-toggle" onclick="toggleAnswer(this)"><span class="at-icon">▶</span> Lihat Jawaban</div>
+            <div class="answer-content">
+              Sebelum memutuskan untuk diversifikasi, bukan soal akan berbisnis di bidang baru yang mana, melainkan <strong>apakah ada urgensi sehingga diversifikasi harus dilakukan</strong>. PT AAA belum secara seksma mempelajari segala sumber daya yang tersedia dan dimilikinya. Satu-satunya faktor pendorong diputuskannya diversifikasi adalah ketersediaan dana yang relatif melimpah.
+              <br><br>
+              Sementara itu manajemen puncak juga kebetulan adalah keluarga pemilik usaha, sehingga kontrol terhadap pengembangan serta penerapan logika bisnis menjadi lemah atau bahkan tidak ada. <strong>Keputusan didasarkan pada opini psikologis saja, bukan pertimbangan profesional</strong> yang mencakup banyak aspek dan elemen.
+            </div>
+          </div>
+
+          <div class="case-question">
+            <span class="cq-label">PERTANYAAN b</span>
+            <p>Bila Anda menjadi konsultan PT AAA mengenai rencana diversifikasi, hal-hal apa sajakah yang akan Anda persiapkan dan rekomendasikan sebagai pilihan terbaik?</p>
+          </div>
+          <div class="answer-box" style="margin-bottom:1rem;">
+            <div class="answer-toggle" onclick="toggleAnswer(this)"><span class="at-icon">▶</span> Lihat Jawaban</div>
+            <div class="answer-content">
+              Cari tahu dahulu kondisi bisnis perusahaan dan situasi eksternal terkini untuk mencari alasan apakah:
+              <ul>
+                <li><strong>a)</strong> Memang perlu diversifikasi (3 Test DBH: Daya Tarik, Biaya Masuk, Harus Lebih Baik)</li>
+                <li><strong>b)</strong> Apakah diversifikasi berkaitan atau tidak berkaitan dengan bisnis utama</li>
+                <li><strong>c)</strong> Apakah kapabilitas perusahaan dan sumber daya yang dimiliki mempermudah pelaksanaan bila diversifikasi dijalankan</li>
+                <li><strong>d)</strong> Apakah dinamika industri mengijinkan perusahaan untuk melakukan diversifikasi</li>
+              </ul>
+              Rekomendasi konsultan harus memastikan bahwa apapun strategi pengembangan bisnis yang diambil sudah diperhitungkan dengan matang dampak jangka pendek dan jangka panjangnya.
+            </div>
+          </div>
+
+          <div class="case-question">
+            <span class="cq-label">PERTANYAAN c</span>
+            <p>Bagaimana Anda mencoba membaca serta mengevaluasi lingkungan eksternal PT AAA selama 15 tahun terakhir? Hal-hal apa yang barangkali luput diperhatikan sehingga keputusan taktis menjadi lebih dominan?</p>
+          </div>
+          <div class="answer-box" style="margin-bottom:1rem;">
+            <div class="answer-toggle" onclick="toggleAnswer(this)"><span class="at-icon">▶</span> Lihat Jawaban</div>
+            <div class="answer-content">
+              Apakah industri alat berat yang dimasuki PT AAA menawarkan potensi pertumbuhan yang menarik? Apakah manajemen puncak melihat bahwa setiap industri memiliki <strong>siklus hidup</strong> yang bergantung pada perubahan permintaan pasar?
+              <br><br>
+              Apakah manajemen puncak melihat peta serta dinamika persaingan bisnis di industri mereka saat ini? Apakah mereka melihat adanya faktor-faktor penentu yang secara dominan merubah pola bisnis atau peta industri?
+              <br><br>
+              Yang barangkali luput: analisis <strong>5 Forces Porter</strong> yang komprehensif, pemahaman siklus industri alat berat yang sangat terkait dengan siklus pertambangan dan konstruksi, serta kegagalan menerapkan analisis <strong>PESTEL</strong> untuk antisipasi perubahan makroekonomi global.
+            </div>
+          </div>
+
+          <div class="case-question">
+            <span class="cq-label">PERTANYAAN d</span>
+            <p>Bagaimana manajemen atau pemegang saham PT AAA seharusnya mempelajari sumber daya dan kapabilitasnya bila dikaitkan dengan karakteristik industri alat berat?</p>
+          </div>
+          <div class="answer-box">
+            <div class="answer-toggle" onclick="toggleAnswer(this)"><span class="at-icon">▶</span> Lihat Jawaban</div>
+            <div class="answer-content">
+              Manajemen puncak PT AAA sebenarnya hanya perlu melakukan <strong>analisa SWOT sederhana</strong> (strength, weakness, opportunity, threat) dan membuat matrix untuk menentukan dengan lebih akurat di mana posisi PT AAA saat ini.
+              <br><br>
+              Industri alat berat, meskipun sudah <em>matured</em>, pemain di bisnis ini relatif tidak banyak karena termasuk bisnis yang memerlukan modal awal cukup tinggi. Pergerakan masing-masing pemain pasti akan diamati oleh pemain lainnya.
+              <br><br>
+              Dengan strategi, sumber daya serta kapabilitas yang relatif seragam dan merata, salah satu cara untuk menjadi berbeda adalah dengan membuat <strong>value proposition yang paling atraktif</strong> bagi konsumen — bukan sekedar pada harga, fitur/spec, tetapi juga pada hal lain-lain (layanan purna jual, kecepatan delivery, fleksibilitas kontrak).
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ TAB: KUNCI JAWABAN ══ -->
+  <div class="tab-panel" id="panel-kunci">
+    <div class="section-hdr">
+      <span class="sh-badge">KUNCI</span>
+      <div><div class="sh-title">Kunci Jawaban Pilihan Ganda</div><div class="sh-sub">Warna hijau = benar, merah = salah, abu = belum dijawab. Kerjakan dulu soal PG sebelum melihat kunci!</div></div>
+    </div>
+    <div class="essay-card">
+      <div class="essay-body">
+        <div class="key-grid" id="keyGrid"></div>
+      </div>
+    </div>
+
+    <div class="section-hdr" style="margin-top:1.5rem;">
+      <span class="sh-badge" style="background:var(--neutral);color:#000;">INFO</span>
+      <div><div class="sh-title">Petunjuk Belajar Berdasarkan Soal</div><div class="sh-sub">Mapping soal ke bab yang perlu dipelajari ulang</div></div>
+    </div>
+    <div class="essay-card">
+      <div class="essay-body">
+        <div style="font-size:.82rem;line-height:1.7;color:#c8c8e0;">
+          <table style="width:100%;border-collapse:collapse;font-size:.79rem;">
+            <thead>
+              <tr style="background:rgba(96,165,250,0.08);">
+                <th style="padding:.5rem .7rem;border:1px solid var(--border);color:var(--neutral);text-align:left;">No. Soal</th>
+                <th style="padding:.5rem .7rem;border:1px solid var(--border);color:var(--neutral);text-align:left;">Topik</th>
+                <th style="padding:.5rem .7rem;border:1px solid var(--border);color:var(--neutral);text-align:left;">Bab Referensi</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">1</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Keunggulan Kompetitif</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab I, IV, V</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">2</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Produk Pengganti (5 Forces)</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab III</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">3</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Diversifikasi Berkaitan — Strategic Fit</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab VIII</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">4</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Diversifikasi Tak Berkaitan</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab VIII</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">5</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Struktur Organisasi</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab X</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">6</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Kode Etik &amp; Budaya Perusahaan</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab IX, XII</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">7</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Budaya Adaptif</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab XII</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">8</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Budaya Tidak Sehat</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab XII</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">9</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Legitimate Power</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab XIII</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">10</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Teori Kontinjensi Kepemimpinan</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab XIII</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">11</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Visi dan Misi</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab II</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">12</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Tingkatan Strategi</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab I</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">13</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Strategi Perusahaan Lemah</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab VI</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">14</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Strategi Perusahaan Kuat</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab VI</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">15</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Proses Perumusan Strategi</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab I, II</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">16–17</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Lingkungan Eksternal &amp; Internal</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab III, IV</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">18–19</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Strategi Cost Leadership</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab V</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">20</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Keunggulan Bersaing</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab I, IV</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">21–23</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Dinamika Persaingan Industri</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab III</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">24–26</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Strategi Biaya Rendah &amp; Diferensiasi</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab V</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">27</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Strategi Turn-Around</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab VI</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">28–29</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Analisis Value Chain &amp; Biaya</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab IV</td></tr>
+              <tr><td style="padding:.4rem .7rem;border:1px solid var(--border);">30</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Key Success Factor (SWOT)</td><td style="padding:.4rem .7rem;border:1px solid var(--border);">Bab III, IV</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>Contoh Soal Ujian CA Indonesia · Manajemen Stratejik dan Kepemimpinan · IAI</footer>
+
+<script>
+// ══ DATA ══
+const questions = [
+  { q: "Sebuah perusahaan mencapai keunggulan kompetitif ketika:", opts: ["Ia mampu memaksimalkan kesejahteraan pemegang saham","Memiliki model bisnis yang menguntungkan","Menyediakan kepada pembeli produk dengan nilai unggul dibandingkan dengan pesaing atau menawarkan nilai yang sama dengan biaya lebih rendah.","Secara konsisten mampu mencapai kedua tujuan strategis dan keuangan"], ans: "C", exp: "Keunggulan kompetitif dicapai ketika perusahaan menawarkan nilai lebih baik atau biaya lebih rendah dari pesaing. (Bab I/IV/V)" },
+  { q: "Persaingan industri yang cenderung melemah karena adanya produk pengganti terjadi ketika ketika:", opts: ["Produk pengganti yang tersedia lemah untuk dibedakan satu sama lain","Pembeli produk sedikit jumlahnya","Pesaing memiliki daya tawar yang kuat terhadap pemasok dan pelanggan yang berpengaruh","Pembeli mengalami switching cost yang tinggi dan produk pengganti berharga lebih tinggi relatif terhadap kualitas, kinerja, dan atribut lainnya yang mereka berikan"], ans: "D", exp: "Ancaman produk pengganti melemah ketika switching cost tinggi dan kualitas produk pengganti lebih rendah untuk harganya. (Bab III — 5 Forces)" },
+  { q: "Persyaratan penting untuk bisnis yang berbeda dikategorikan 'berhubungan atau related' adalah bahwa:", opts: ["Rantai nilai mereka memiliki hubungan lintas-bisnis yang bernilai kompetitif","Produk dari bisnis yang berbeda dibeli oleh jenis pembeli yang sama","Produk dari bisnis yang berbeda dijual oleh jenis toko ritel yang sama","Bisnis memiliki beberapa pemasok kunci yang sama"], ans: "A", exp: "Diversifikasi berkaitan (related) didefinisikan oleh ketersesuaian strategik rantai nilai lintas bisnis. (Bab VIII)" },
+  { q: "Manakah dari pernyataan berikut ini yang benar mengenai strategi diversifikasi ke bisnis yang tidak terkait (unrelated):", opts: ["Ditujukan bukan untuk mencapai fit keuangan yang baik (financial fit)","Adalah cara terbaik bagi perusahaan untuk lulus attractiveness test dalam memilih yang jenis usaha/industri yang akan dimasukinya","Mendiskonto pentingnya manfaat fit strategis (strategic fit) dan lebih berfokus pada membangun dan mengelola kelompok usaha yang mampu memberikan kinerja keuangan yang baik terlepas dari industri bisnis yang dimasukinya","Berkonsentrasi pada diversifikasi ke bisnis di mana sebuah perusahaan dapat memanfaatkan penggunaan nama merek terkenal dengan cara menciptakan nilai tambah bagi pemegang saham"], ans: "C", exp: "Diversifikasi tak berkaitan mendiskonto strategic fit, fokus pada pengelolaan portofolio yang menghasilkan kinerja keuangan baik. (Bab VIII)" },
+  { q: "Sebuah struktur organisasi perusahaan terdiri dari:", opts: ["Kekuatan sumber daya dan kemampuan kompetitif yang memungkinkan untuk menggabungkan atribut dengan biaya lebih rendah daripada pesaing yang produknya memiliki atribut yang sama.","Pengaturan formal dan informal tugas, tanggung jawab, jalur kewenangan, dan hubungan pelaporan dimana perusahaan dikelola.","Keterampilan pemasaran dan penjualan yang sangat baik untuk meyakinkan pembeli untuk membayar harga premium untuk atribut/fitur yang tergabung dalam produknya.","Kompetensi khusus yang berkelanjutan untuk memastikan pengurangan biaya dan daya saing."], ans: "B", exp: "Struktur organisasi adalah pengaturan formal dan informal tugas, kewenangan, dan hubungan pelaporan. (Bab X)" },
+  { q: "Berikut ini yang merupakan kode etik dan pernyataan nilai-nilai inti adalah:", opts: ["Satu cara yang paling efektif untuk menegakkan perilaku etis dan norma-norma budaya, asalkan mereka ditulis dan setiap karyawan diberi salinan","Berfungsi sebagai pilar budaya perusahaan di mana eksekutif benar-benar berkomitmen untuk mempraktekkan nilai-nilai dan standar etika yang telah dianut","Tolok ukur terbaik untuk menilai apakah budaya perusahaan secara mendalam ditanam atau tidak","Harus ditulis secara pribadi oleh CEO agar dianggap serius oleh karyawan"], ans: "B", exp: "Kode etik efektif sebagai pilar budaya hanya bila eksekutif benar-benar mempraktekkan nilai-nilai tersebut, bukan sekadar ditulis. (Bab IX, XII)" },
+  { q: "Dalam budaya perusahaan yang adaptif:", opts: ["Pandangan yang berlaku adalah bahwa cara terbaik adalah melihat keluar demi kepentingan karyawan dengan mengubah nilai-nilai inti dan norma-norma budaya dengan cara apa pun yang diperlukan agar sesuai dengan kebutuhan perubahan strategi","Karyawan perusahaan setuju untuk perubahan kebijakan dan praktek operasi selama unsur-unsur inti dari visi strategis perusahaan dan strategi tetap utuh","Anggota bersedia untuk merangkul pendekatan proaktif untuk mencoba ide-ide baru, mengubah praktek operasi, dan mengubah bagian strategi asalkan tidak membahayakan keamanan pekerjaan mereka, pemotongan kompensasi, atau memerlukan praktek kerja yang berbeda","Ada semangat melakukan apa yang diperlukan untuk memastikan keberhasilan organisasi jangka panjang asalkan nilai-nilai inti dan prinsip-prinsip bisnis tidak terganggu dan memberikan kemungkinan manajemen puncak melakukan perubahan dengan cara yang menunjukkan perhatian yang tulus untuk kepentingan sah para pemangku kepentingan (stakeholders)"], ans: "D", exp: "Budaya adaptif: melakukan apa yang diperlukan untuk keberhasilan jangka panjang, selama nilai inti tidak terganggu dan kepentingan stakeholder diperhatikan. (Bab XII)" },
+  { q: "Budaya perusahaan yang tidak sehat biasanya memiliki karakteristik sebagai berikut:", opts: ["Kontrol yang ketat anggaran, penegakan terlalu ketat kebijakan dan prosedur lama, dan standar etika yang rendah","Preferensi untuk strategi konservatif, keengganan untuk kompensasi insentif, dan penekanan yang berlebihan pada profitabilitas","Lingkungan internal yang dipolitisasi, permusuhan untuk berubah dan keengganan untuk mencari praktik terbaik, pendekatan manajerial baru, dan ide-ide inovatif di luar perusahaan","Penekanan yang berlebihan pada pemberdayaan karyawan, pendekatan lunak untuk membangun kompetensi dan kemampuan, tidak ada filosofi bisnis yang koheren, dan kebijakan dan prosedur terlalu birokratis"], ans: "C", exp: "Budaya tidak sehat: dipolitisasi, resistensi terhadap perubahan, tidak terbuka pada praktik terbaik dan ide baru. (Bab XII)" },
+  { q: "Legitimate power didasarkan pada persepsi bawahan bahwa pemimpin mereka memiliki hak untuk mempengaruhi bawahannya, karena pemimpin itu:", opts: ["Memiliki peran atau posisi formal dalam organisasi","Memiliki kemampuan untuk menghukum atau penghargaan","Memiliki karakteristik pribadi dan kepribadian","Memiliki keahlian dan pengetahuan"], ans: "A", exp: "Legitimate power bersumber dari posisi/jabatan formal seseorang dalam organisasi. (Bab XIII)" },
+  { q: "Teori kontinjensi kepemimpinan didasarkan pada keyakinan bahwa:", opts: ["Ada satu gaya kepemimpinan yang sesuai untuk semua manajer","Ada satu gaya kepemimpinan yang tepat untuk semua situasi","Tidak ada gaya tunggal kepemimpinan yang tepat untuk semua situasi","Tidak ada gaya kepemimpinan yang sesuai untuk semua manajer"], ans: "C", exp: "Contingency theory: tidak ada gaya kepemimpinan tunggal yang cocok untuk semua situasi — gaya terbaik bergantung pada konteks. (Bab XIII)" },
+  { q: "Visi dan misi organisasi sangat penting bagi manajemen dalam menjalankan perusahaan karena dengan adanya hal tersebut membuat manajemen:", opts: ["Mempunyai tuntunan untuk diikuti, mempunyai peta untuk dijalani dan program yang dapat dijalankan dan mempunyai langkah terencana yang dapat diikuti","Berhubungan dengan para stakeholders dengan baik","Mudah membesarkan perusahaan dengan segera","Melakukan tindakan-tindakan dadakan sebagai reaksi terhadap berbagai perkembangan bisnis yang terjadi"], ans: "A", exp: "Visi dan misi memberikan tuntunan, peta arah, program yang dapat dijalankan, dan langkah terencana bagi manajemen. (Bab II)" },
+  { q: "Tingkatan strategi kalau disusun sesuai dengan perkembangan usaha perusahaan akan terdiri atas:", opts: ["Strategi fungsional, strategi bisnis, dan strategi korporasi","Positioning, differentiation, dan brand","Perencanaan strategi, pelaksanaan strategi, dan pengendalian strategi","Strategi besar, menengah, dan kecil"], ans: "A", exp: "Tiga tingkatan strategi: Fungsional → Bisnis → Korporasi. (Bab I)" },
+  { q: "Strategi manajemen yang dapat dijalankan ketika perusahaan melemah karena mengalami penurunan atau pelambatan usaha adalah:", opts: ["Diversifikasi horizontal","Integrasi vertikal","Likuidasi","Retrenchment atau turn-around"], ans: "D", exp: "Retrenchment/turn-around adalah strategi untuk perusahaan yang sedang melemah atau mengalami penurunan. (Bab VI)" },
+  { q: "Strategi yang dapat dijalankan ketika perusahaan sedang kuat dan lingkungan bisnis yang dihadapi sedang tumbuh adalah:", opts: ["Integrasi vertikal dan horizontal","Diversifikasi konsentrik dan konglomerat","Pengembangan pasar dan produk","Semua benar"], ans: "D", exp: "Ketika perusahaan kuat dan industri tumbuh, semua strategi (integrasi, diversifikasi, pengembangan pasar/produk) relevan. (Bab VI)" },
+  { q: "Perumusan strategi dan pelaksanaannya yang tepat memerlukan beberapa langkah yang perlu dilakukan perusahaan antara lain:", opts: ["Mengkomunikasikan visi dan misi terlebih dahulu pada bawahan","Identifikasi lingkungan yang akan dimasuki perusahaan di masa depan","Lakukan analisis lingkungan internal dan eksternal untuk mengukur kekuatan dan kelemahan serta peluang dan ancaman yang akan dihadapi perusahaan","Semua pernyataan benar"], ans: "D", exp: "Semua langkah tersebut merupakan bagian penting dari proses perumusan dan pelaksanaan strategi. (Bab I, II)" },
+  { q: "Lingkungan eskternal mencakup sejumlah variabel yang:", opts: ["Berada di luar organisasi yang dalam jangka pendek dan panjang tidak dapat dikontrol oleh manajemen","Berada di luar organisasi yang biasanya dalam jangka pendek dapat dikontrol oleh manajemen","Berada di luar organisasi yang biasanya dalam jangka pendek tidak dapat dikontrol oleh manajemen","Berada di luar organisasi yang biasanya dalam jangka pendek dan panjang dapat dikontrol oleh manajemen"], ans: "A", exp: "Lingkungan eksternal berada di luar organisasi dan dalam jangka pendek maupun panjang tidak dapat dikontrol oleh manajemen. (Bab III)" },
+  { q: "Lingkungan internal mencakup sejumlah variabel yang:", opts: ["Berada di dalam organisasi dan biasanya dalam jangka pendek berada di dalam pengendalian manajer","Berada di dalam organisasi dan biasanya dalam jangka pendek berada di luar pengendalian manajer","Berada di dalam organisasi dan biasanya dalam jangka pendek maupun panjang panjang berada di luar pengendalian manajer","Berada di dalam organisasi dan biasanya dalam jangka panjang berada di dalam pengendalian manajer"], ans: "A", exp: "Lingkungan internal berada di dalam organisasi dan dalam jangka pendek dapat dikendalikan oleh manajer. (Bab IV)" },
+  { q: "Perusahaan yang menekankan pada strategi cost leadership akan berusaha untuk melakukan berbagai upaya antara lain:", opts: ["Menekan biaya produksi dengan memakai bahan baku lebih murah","Mengurangi biaya dengan memotong gaji karyawan","Mengurangi atau menghilangkan berbagai kegiatan yang tak perlu","Semua benar"], ans: "C", exp: "Cost leadership fokus pada mengurangi/menghilangkan kegiatan yang tidak perlu — bukan sembarangan memotong biaya. Bukan hanya bahan baku murah atau potong gaji. (Bab V)" },
+  { q: "Strategi bersaing generik berupa cost leadership strategi akan efektif terhadap konsumen yang:", opts: ["Mengutamakan harga murah daripada kualitas","Mengutamakan kualitas dan harga murah","Yang sensitif terhadap harga mahal","Sederhana"], ans: "B", exp: "Cost leadership efektif untuk konsumen yang mengutamakan nilai terbaik — kualitas yang dapat diterima dengan harga paling rendah. (Bab V)" },
+  { q: "Suatu perusahaan dikatakan mempunyai keunggulan bersaing (competitive advantage) bilamana memiliki sesuatu yang berbeda atas pesaingnya dan bernilai di mata konsumen yaitu antara lain:", opts: ["Kapasitas pabrik yang lebih besar daripada pabrik lain","Harga jual produk yang murah meriah","Fitur produk yang lebih baik dengan pelayanan pada konsumen yang lebih hebat","Semua pernyataan di atas benar"], ans: "C", exp: "Keunggulan bersaing berasal dari atribut yang berbeda dan bernilai di mata konsumen — fitur lebih baik dan pelayanan superior. (Bab I, IV)" },
+  { q: "Persaingan antar sesama produsen atau penjual dalam suatu industri tertentu akan makin meningkat jika:", opts: ["Jumlah pelaku bisnis bertambah banyak dan kemampuan maupun ukuran mereka relatif tidak seimbang","Jumlah pelaku bisnis makin berkurang dan permintaan meningkat","Biaya pindah ke merk lain mahal dalam industri tertentu","Semua pernyataan di atas salah"], ans: "D", exp: "Rivalitas meningkat saat: banyak pemain berukuran seimbang, pertumbuhan industri lambat, switching cost rendah, exit barriers tinggi. Dari pilihan yang ada, hanya A yang mendekati benar tapi tidak sempurna — semua pilihan A, B, C tidak sepenuhnya benar sehingga jawabannya D. (Bab III)" },
+  { q: "Persaingan antar sesama produsen atau penjual akan makin menurun jika:", opts: ["Biaya keluar dari pasar lebih kecil daripada biaya bertahan","Situasi pasar agak mudah diramal","Biaya pindah ke merk lain mahal","Semua pernyataan di atas benar"], ans: "D", exp: "Rivalitas menurun saat: exit cost rendah (tidak perlu bertahan mati-matian), pasar mudah diprakirakan (mengurangi agresi), switching cost mahal (konsumen terkunci). Semua benar. (Bab III)" },
+  { q: "Berbagai karakteristik ekonomi pasar yang mempunyai nilai strategis adalah:", opts: ["Ukuran pasar yang kecil cenderung tidak menarik bagi pemain besar untuk masuk","Pertumbuhan pasar yang cepat akan mengundang pendatang baru masuk, pertumbuhan lambat akan mempertajam persaingan","Kapasitas lebih akan menekan harga jual dan laba turun dan sebaliknya kalau kapasitas kurang akan mendorong harga jual","Semua pernyataan di atas benar"], ans: "D", exp: "Semua karakteristik tersebut (ukuran pasar, pertumbuhan, kapasitas) memiliki nilai strategis bagi analisis industri. (Bab III)" },
+  { q: "Strategi biaya rendah akan bermanfaat jika keinginan konsumen untuk membeli sangat dipengaruhi oleh tinggi rendahnya harga. Selain itu, strategi ini ampuh jika:", opts: ["Terbuka banyak pilihan untuk membuat diffrensiasi produk yang bernilai di mata pembeli","Pembeli umumnya menggunakan produk dengan cara yang berbeda","Pembeli begitu mudah berpindah dari satu penjual ke penjual yang lain tanpa biaya yang berarti jika ada penjual dapat menjual dengan harga lebih rendah","Jumlah pembeli begitu sedikit dan tidak mempunyai pengaruh signifikan untuk menekan harga lebih rendah"], ans: "C", exp: "Strategi biaya rendah paling efektif ketika switching cost rendah — pembeli mudah berpindah ke yang menawarkan harga lebih murah. (Bab V)" },
+  { q: "Peran diferensiasi dalam memperkuat posisi produk dan perusahaan sangat signifikan. Namun langkah menciptakannya tidak sederhana. Untuk itu perusahaan harus:", opts: ["Ada kompromi dan kombinasi antara kreativitas, fungsi, dan biaya","Ada kombinasi yang serasi antara produk, harga, tempat, dan promosi","Ada kombinasi antara posisi, perbedaan (keunikan), dan merk suatu produk","Ada kombinasi dan kompromi antara merk, proses, dan pelayanan"], ans: "A", exp: "Diferensiasi memerlukan kombinasi kreativitas, fungsi, dan biaya — bukan semata-mata fitur produk atau bauran pemasaran. (Bab V)" },
+  { q: "Nilai suatu produk mempunyai arti penting di benak konsumen sebelum melakukan pembelian. Konsumen mengukur nilai produk atas dasar sinyal tertentu seperti:", opts: ["Harga mahal merupakan konotasi produk berkualitas","Bungkus yang baik menandakan penjualnya adalah perusahaan bonafid","Tahun berdiri yang sudah lama menandakan bahwa perusahaan mempunyai sejarah panjang sehingga bisa dipercaya","Semua benar"], ans: "D", exp: "Semua signal tersebut (harga, kemasan, sejarah perusahaan) menjadi alat konsumen untuk menilai produk sebelum membeli. (Bab V)" },
+  { q: "Strategi memutar haluan (turn-around) diperlukan jika perusahaan mengalami penurunan penjualan menuju krisis yang tujuannya mengulur waktu sambil memecahkan masalah. Strategi putar haluan mencakup antara lain:", opts: ["Tidak perlu merevisi strategi lama","Melakukan penurunan harga untuk mendongkrak penjualan","Menjual aktiva yang tidak perlu untuk menjaga likuiditas","Investasi mesin-mesin baru untuk memperbaiki kualitas produk"], ans: "C", exp: "Turn-around: jual aset tidak perlu untuk menjaga likuiditas sambil mengatasi masalah mendasar. (Bab VI)" },
+  { q: "Dalam analisis value chain, manajemen harus berusaha mengidentifikasi penyebab besar kecilnya biaya yang bersifat struktural seperti di bawah ini, kecuali:", opts: ["Faktor skala ekonomi","Lamanya suatu perusahaan berkecimpung di bidang tertentu","Kompleksitas produk","Kemampuan organisasi dalam menjaga kualitas proses dan output"], ans: "D", exp: "Kemampuan organisasi menjaga kualitas proses/output adalah cost driver EXECUTIONAL, bukan struktural. Cost driver struktural: skala, pengalaman, kompleksitas. (Bab IV)" },
+  { q: "Dibawah ini adalah sejumlah penyebab besar kecilnya biaya yang dipengaruhi oleh bagaimana proses dilaksanakan, kecuali:", opts: ["Sikap karyawan yang proaktif","Lamanya waktu yang diperlukan untuk memasarkan produk baru","Besarnya modal yang diperlukan","Perbaikan terus menerus proses produksi"], ans: "C", exp: "Besarnya modal yang diperlukan adalah cost driver STRUKTURAL (skala/investasi), bukan executional. (Bab IV)" },
+  { q: "Elemen penting dalam kerangka analisis SWOT suatu bisnis adalah menentukan secara tepat faktor-faktor keberhasilan (key success factor) perusahaan dalam bersaing. Key success factor dapat berasal dari:", opts: ["Perubahan faktor-faktor internal yang berada dalam kendali manajemen","Perubahan variabel eksternal di luar kendali manajemen","Karakter industri tertentu seperti faktor kepercayaan atau biaya","Semua pernyataan tersebut di atas benar"], ans: "D", exp: "KSF bisa berasal dari faktor internal (dalam kendali), eksternal (di luar kendali), maupun karakter industri spesifik. (Bab III, IV)" }
+];
+
+const answerKey = ["C","D","A","C","B","B","D","C","A","C","A","A","D","D","D","A","A","C","B","C","D","D","D","C","A","D","C","D","C","D"];
+
+const userAnswers = new Array(30).fill(null);
+let submitted = false;
+
+// ══ RENDER QUESTIONS ══
+function renderQuestions() {
+  const container = document.getElementById('questions-container');
+  container.innerHTML = '';
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'question';
+    div.id = `q${i}`;
+    div.innerHTML = `
+      <div class="q-header">
+        <span class="q-num">SOAL ${i+1} / 30</span>
+        <div class="q-text">${q.q}</div>
+      </div>
+      <div class="q-options">
+        ${q.opts.map((opt, j) => {
+          const letter = ['A','B','C','D'][j];
+          return `<div class="q-opt" id="opt-${i}-${j}" onclick="selectOpt(${i},${j})">
+            <span class="opt-letter">${letter}</span>
+            <span>${opt}</span>
+          </div>`;
+        }).join('')}
+      </div>`;
+    container.appendChild(div);
+  });
+  renderKeyGrid();
+}
+
+// ══ SELECT OPTION ══
+function selectOpt(qi, oi) {
+  if (submitted) return;
+  const letter = ['A','B','C','D'][oi];
+  userAnswers[qi] = letter;
+  // clear previous selection
+  for (let j = 0; j < 4; j++) {
+    document.getElementById(`opt-${qi}-${j}`)?.classList.remove('selected');
+  }
+  document.getElementById(`opt-${qi}-${oi}`)?.classList.add('selected');
+  updateCount();
+  renderKeyGrid();
+}
+
+function updateCount() {
+  const c = userAnswers.filter(a => a !== null).length;
+  document.getElementById('answeredCount').textContent = c;
+}
+
+// ══ SUBMIT ══
+function submitExam() {
+  submitted = true;
+  let correct = 0, wrong = 0, skip = 0;
+  
+  questions.forEach((q, i) => {
+    const qEl = document.getElementById(`q${i}`);
+    const userAns = userAnswers[i];
+    const correctAns = answerKey[i];
+    const correctIdx = ['A','B','C','D'].indexOf(correctAns);
+    const userIdx = userAns ? ['A','B','C','D'].indexOf(userAns) : -1;
+
+    if (!userAns) { skip++; qEl.classList.add('skipped'); }
+    else if (userAns === correctAns) { correct++; qEl.classList.add('answered-correct'); }
+    else { wrong++; qEl.classList.add('answered-wrong'); }
+
+    // Style options
+    for (let j = 0; j < 4; j++) {
+      const optEl = document.getElementById(`opt-${i}-${j}`);
+      if (!optEl) continue;
+      optEl.classList.remove('selected');
+      if (j === correctIdx) {
+        if (userAns && userIdx !== correctIdx) optEl.classList.add('show-correct');
+        else if (j === correctIdx) optEl.classList.add('correct-ans');
+      }
+      if (userIdx === j && userIdx !== correctIdx) optEl.classList.add('wrong-ans');
+      if (userIdx === j && userIdx === correctIdx) optEl.classList.add('correct-ans');
+    }
+
+    // Add result note
+    const existing = qEl.querySelector('.q-result');
+    if (existing) existing.remove();
+    const resultDiv = document.createElement('div');
+    if (!userAns) {
+      resultDiv.className = 'q-result';
+      resultDiv.innerHTML = `<span class="qr-icon">⏭</span><span class="qr-text">Tidak dijawab. Jawaban benar: <strong>${correctAns}</strong>. ${q.exp}</span>`;
+    } else if (userAns === correctAns) {
+      resultDiv.className = 'q-result correct';
+      resultDiv.innerHTML = `<span class="qr-icon">✓</span><span class="qr-text"><strong>Benar!</strong> ${q.exp}</span>`;
+    } else {
+      resultDiv.className = 'q-result wrong';
+      resultDiv.innerHTML = `<span class="qr-icon">✗</span><span class="qr-text">Salah. Jawaban benar: <strong>${correctAns}</strong>. ${q.exp}</span>`;
+    }
+    qEl.appendChild(resultDiv);
+  });
+
+  const pct = Math.round(correct / 30 * 100);
+  let grade = pct >= 75 ? '✅ LULUS — Siap Ujian!' : pct >= 60 ? '⚡ Mendekati — Perlu Sedikit Perbaikan' : '📚 Perlu Belajar Lebih Intensif';
+  const gradeColor = pct >= 75 ? 'var(--correct)' : pct >= 60 ? 'var(--accent)' : 'var(--wrong)';
+
+  document.getElementById('sbScore').textContent = `${correct} / 30 (${pct}%)`;
+  document.getElementById('sbScore').style.color = gradeColor;
+  document.getElementById('sbGrade').textContent = grade;
+  document.getElementById('sbC').textContent = correct;
+  document.getElementById('sbW').textContent = wrong;
+  document.getElementById('sbS').textContent = skip;
+  document.getElementById('hbCorrect').style.width = (correct/30*100)+'%';
+  document.getElementById('hbWrong').style.width = (wrong/30*100)+'%';
+  document.getElementById('scoreboard').style.display = 'block';
+  document.getElementById('scoreboard').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  document.getElementById('submitBtn').disabled = true;
+  document.getElementById('submitBtn').textContent = '✓ Sudah Dikoreksi';
+  renderKeyGrid();
+}
+
+// ══ KEY GRID ══
+function renderKeyGrid() {
+  const grid = document.getElementById('keyGrid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  answerKey.forEach((ans, i) => {
+    const userAns = userAnswers[i];
+    let cls = 'unanswered';
+    let displayAns = submitted ? ans : (userAns || '—');
+    if (submitted && userAns) cls = userAns === ans ? 'correct-user' : 'wrong-user';
+    const item = document.createElement('div');
+    item.className = `key-item ${cls}`;
+    item.innerHTML = `<span class="kn">${i+1}.</span><span class="ka">${displayAns}</span>`;
+    grid.appendChild(item);
+  });
+}
+
+// ══ RESET ══
+function resetAll() {
+  if (!confirm('Reset semua jawaban?')) return;
+  submitted = false;
+  userAnswers.fill(null);
+  renderQuestions();
+  document.getElementById('answeredCount').textContent = '0';
+  document.getElementById('scoreboard').style.display = 'none';
+  document.getElementById('submitBtn').disabled = false;
+  document.getElementById('submitBtn').textContent = 'Koreksi Semua →';
+}
+
+// ══ TABS ══
+function switchTab(name) {
+  document.querySelectorAll('.tab').forEach((t,i) => {
+    const names = ['pg','esai','kasus','kunci'];
+    t.classList.toggle('active', names[i] === name);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(`panel-${name}`).classList.add('active');
+  if (name === 'kunci') renderKeyGrid();
+}
+
+// ══ ANSWER TOGGLE ══
+function toggleAnswer(el) {
+  el.classList.toggle('open');
+  const content = el.nextElementSibling;
+  content.classList.toggle('open');
+}
+
+// ══ INIT ══
+renderQuestions();
+</script>
+</body>
+</html>

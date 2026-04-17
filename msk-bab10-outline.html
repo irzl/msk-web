@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BAB X — Membangun Organisasi yang Mampu Mengimplementasikan Strategi</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a12;
+    --surface: #12121e;
+    --surface2: #1a1a2a;
+    --accent:  #e879f9;   /* fuchsia — chapter 10 color */
+    --accent2: #60a5fa;   /* blue */
+    --accent3: #34d399;   /* emerald */
+    --accent4: #f59e0b;   /* amber */
+    --accent5: #f43f5e;   /* rose */
+    --accent6: #a78bfa;   /* violet */
+    --text: #f0f0ff;
+    --muted: #7b7d9a;
+    --border: rgba(255,255,255,0.07);
+  }
+
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 5rem; overflow-x: hidden; }
+  body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); pointer-events: none; z-index: 0; opacity: 0.6; }
+  .container { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 3rem; }
+  .tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; background: var(--accent); color: #000; padding: 0.3rem 0.9rem; border-radius: 2px; margin-bottom: 1rem; font-weight: 700; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.7rem, 5vw, 3rem); font-weight: 900; line-height: 1.1; margin-bottom: 0.5rem; }
+  h1 span { color: var(--accent); }
+  .subtitle { font-size: 0.88rem; color: var(--muted); letter-spacing: 0.05em; }
+  .progress-bar { margin: 1.5rem auto 0; width: 220px; height: 3px; background: var(--border); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent3)); border-radius: 99px; transition: width 0.5s ease; }
+  .progress-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.4rem; font-family: 'DM Mono', monospace; }
+
+  /* ── MIND MAP ── */
+  .mind-map { margin: 0 0 2rem; padding: 1.5rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; text-align: center; }
+  .mind-map h2 { font-family: 'Playfair Display', serif; font-size: 1rem; margin-bottom: 1.2rem; color: var(--muted); }
+  .mind-center { display: inline-block; background: linear-gradient(135deg, var(--accent), #a21caf); color: #fff; font-weight: 700; font-size: 0.88rem; padding: 0.65rem 1.4rem; border-radius: 99px; margin-bottom: 1.4rem; }
+  .mind-branches { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; }
+  .branch { padding: 0.75rem; border-radius: 10px; font-size: 0.73rem; font-weight: 500; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; cursor: default; text-align: left; }
+  .branch:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,0.4); }
+  .branch .blabel { font-size: 0.58rem; font-family: 'DM Mono', monospace; margin-bottom: 0.25rem; opacity: 0.7; }
+  .b1 { background: rgba(232,121,249,0.08); border-color: rgba(232,121,249,0.25); color: var(--accent); }
+  .b2 { background: rgba(96,165,250,0.08);  border-color: rgba(96,165,250,0.25);  color: var(--accent2); }
+  .b3 { background: rgba(52,211,153,0.08);  border-color: rgba(52,211,153,0.25);  color: var(--accent3); }
+  .b4 { background: rgba(245,158,11,0.08);  border-color: rgba(245,158,11,0.25);  color: var(--accent4); }
+  .b5 { background: rgba(167,139,250,0.08); border-color: rgba(167,139,250,0.25); color: var(--accent6); }
+
+  /* ── SECTION ── */
+  .section { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 1.1rem; overflow: hidden; transition: border-color 0.2s, box-shadow 0.2s; }
+  .section.open { border-color: rgba(255,255,255,0.14); box-shadow: 0 8px 40px rgba(0,0,0,0.45); }
+  .section-header { display: flex; align-items: center; gap: 1rem; padding: 1.15rem 1.4rem; cursor: pointer; user-select: none; transition: background 0.2s; }
+  .section-header:hover { background: rgba(255,255,255,0.025); }
+  .num { font-family: 'DM Mono', monospace; font-size: 0.68rem; font-weight: 700; padding: 0.25rem 0.5rem; border-radius: 4px; min-width: 2.4rem; text-align: center; flex-shrink: 0; white-space: nowrap; }
+  .c1 { background: var(--accent);  color: #000; }
+  .c2 { background: var(--accent2); color: #000; }
+  .c3 { background: var(--accent3); color: #000; }
+  .c4 { background: var(--accent4); color: #000; }
+  .c5 { background: var(--accent6); color: #fff; }
+  .section-title { font-size: 0.98rem; font-weight: 600; flex: 1; }
+  .section-eng { font-size: 0.74rem; font-weight: 400; color: var(--muted); font-style: italic; margin-top: 0.1rem; }
+  .chevron { color: var(--muted); font-size: 0.75rem; transition: transform 0.3s ease; flex-shrink: 0; }
+  .section.open .chevron { transform: rotate(180deg); }
+  .section-body { display: none; padding: 0 1.4rem 1.4rem; }
+  .section.open .section-body { display: block; }
+
+  /* ── POINTS ── */
+  .points { list-style: none; }
+  .point { display: flex; gap: 0.75rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.87rem; line-height: 1.55; color: #c8c8e0; opacity: 0; transform: translateY(6px); transition: opacity 0.3s ease, transform 0.3s ease; }
+  .section.open .point { opacity: 1; transform: none; }
+  .section.open .point:nth-child(1) { transition-delay: 0.04s; }
+  .section.open .point:nth-child(2) { transition-delay: 0.08s; }
+  .section.open .point:nth-child(3) { transition-delay: 0.12s; }
+  .section.open .point:nth-child(4) { transition-delay: 0.16s; }
+  .section.open .point:nth-child(5) { transition-delay: 0.20s; }
+  .section.open .point:nth-child(6) { transition-delay: 0.24s; }
+  .point:last-child { border-bottom: none; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 0.5rem; }
+  .d1{background:var(--accent);}  .d2{background:var(--accent2);} .d3{background:var(--accent3);}
+  .d4{background:var(--accent4);} .d5{background:var(--accent5);} .d6{background:var(--accent6);}
+  .point strong { color: var(--text); }
+
+  /* ── SUBSECTIONS ── */
+  .subsection { background: rgba(0,0,0,0.22); border-radius: 9px; margin-bottom: 0.75rem; overflow: hidden; }
+  .subsection-header { display: flex; align-items: center; gap: 0.6rem; padding: 0.8rem 1rem; cursor: pointer; font-size: 0.84rem; font-weight: 600; border-left: 3px solid transparent; transition: background 0.2s; }
+  .subsection-header:hover { background: rgba(255,255,255,0.03); }
+  .subsection.open .subsection-header { border-left-color: var(--accent); }
+  .sub-chevron { font-size: 0.62rem; color: var(--muted); transition: transform 0.3s; margin-left: auto; }
+  .subsection.open .sub-chevron { transform: rotate(180deg); }
+  .subsection-body { display: none; padding: 0 1rem 1rem; }
+  .subsection.open .subsection-body { display: block; }
+
+  /* ── MEMORY TIP ── */
+  .memory-tip { margin-top: 0.9rem; padding: 0.85rem 1rem; background: rgba(232,121,249,0.07); border: 1px solid rgba(232,121,249,0.2); border-radius: 8px; font-size: 0.81rem; color: var(--accent); display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .memory-tip .icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── INFO BOX ── */
+  .info-box { margin-top: 0.9rem; padding: 0.9rem 1rem; border-radius: 8px; font-size: 0.84rem; line-height: 1.55; color: #c8c8e0; }
+  .info-box.fuchsia { background: rgba(232,121,249,0.07); border: 1px solid rgba(232,121,249,0.2); }
+  .info-box.blue    { background: rgba(96,165,250,0.07);  border: 1px solid rgba(96,165,250,0.2); }
+  .info-box.green   { background: rgba(52,211,153,0.07);  border: 1px solid rgba(52,211,153,0.2); }
+  .info-box.amber   { background: rgba(245,158,11,0.07);  border: 1px solid rgba(245,158,11,0.2); }
+  .info-box.violet  { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.2); }
+  .info-box strong { color: var(--text); }
+
+  /* ── 10 TUGAS MANAJERIAL — GRID ── */
+  .task-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 0.55rem; margin-top: 1rem; }
+  .task-item { display: flex; gap: 0.75rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.7rem 0.85rem; font-size: 0.8rem; line-height: 1.45; color: #c8c8e0; border-left: 3px solid transparent; }
+  .task-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; font-weight: 700; color: #000; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .task-item strong { color: var(--text); }
+  /* Color-coded 10 tasks */
+  .t1  { border-left-color: rgba(232,121,249,0.5); } .t1  .task-num { background: var(--accent); }
+  .t2  { border-left-color: rgba(232,121,249,0.5); } .t2  .task-num { background: var(--accent); }
+  .t3  { border-left-color: rgba(96,165,250,0.5);  } .t3  .task-num { background: var(--accent2); }
+  .t4  { border-left-color: rgba(96,165,250,0.5);  } .t4  .task-num { background: var(--accent2); }
+  .t5  { border-left-color: rgba(52,211,153,0.5);  } .t5  .task-num { background: var(--accent3); color:#000; }
+  .t6  { border-left-color: rgba(52,211,153,0.5);  } .t6  .task-num { background: var(--accent3); color:#000; }
+  .t7  { border-left-color: rgba(245,158,11,0.5);  } .t7  .task-num { background: var(--accent4); color:#000; }
+  .t8  { border-left-color: rgba(245,158,11,0.5);  } .t8  .task-num { background: var(--accent4); color:#000; }
+  .t9  { border-left-color: rgba(167,139,250,0.5); } .t9  .task-num { background: var(--accent6); }
+  .t10 { border-left-color: rgba(167,139,250,0.5); } .t10 .task-num { background: var(--accent6); }
+
+  /* ── 3 PENDEKATAN BANGUN KAPABILITAS ── */
+  .cap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(185px, 1fr)); gap: 0.7rem; margin-top: 1rem; }
+  .cap-card { padding: 1rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.8rem; line-height: 1.5; color: #c8c8e0; }
+  .cap-card .cc-num { font-family: 'DM Mono', monospace; font-size: 0.6rem; font-weight: 700; display: block; margin-bottom: 0.3rem; }
+  .cap-card .cc-icon { font-size: 1.2rem; display: block; margin-bottom: 0.3rem; }
+  .cap-card .cc-title { font-weight: 700; font-size: 0.88rem; display: block; margin-bottom: 0.25rem; }
+  .cap-card .cc-desc { color: var(--muted); font-size: 0.76rem; }
+  .cap-1 { border-color: rgba(232,121,249,0.3); } .cap-1 .cc-num,.cap-1 .cc-title { color: var(--accent); }
+  .cap-2 { border-color: rgba(96,165,250,0.3);  } .cap-2 .cc-num,.cap-2 .cc-title { color: var(--accent2); }
+  .cap-3 { border-color: rgba(52,211,153,0.3);  } .cap-3 .cc-num,.cap-3 .cc-title { color: var(--accent3); }
+
+  /* ── SDM QUALITIES ── */
+  .sdm-qualities { display: flex; flex-direction: column; gap: 0.5rem; margin-top: 1rem; }
+  .sdm-q { display: flex; gap: 0.8rem; align-items: center; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.65rem 0.9rem; font-size: 0.82rem; line-height: 1.45; color: #c8c8e0; border-left: 3px solid rgba(96,165,250,0.4); }
+  .sdm-icon { font-size: 1.1rem; flex-shrink: 0; }
+  .sdm-q strong { color: var(--text); }
+
+  /* ── 4 KEPUTUSAN STRUKTURISASI ── */
+  .struct-grid { display: flex; flex-direction: column; gap: 0.55rem; margin-top: 1rem; }
+  .struct-item { display: flex; gap: 0.9rem; align-items: flex-start; background: rgba(0,0,0,0.2); border-radius: 8px; padding: 0.8rem 1rem; border-left: 3px solid transparent; font-size: 0.83rem; line-height: 1.5; color: #c8c8e0; }
+  .si-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; color: #000; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem; }
+  .struct-item strong { color: var(--text); }
+  .si-1 { border-left-color: rgba(245,158,11,0.5);  } .si-1 .si-num { background: var(--accent4); }
+  .si-2 { border-left-color: rgba(232,121,249,0.5); } .si-2 .si-num { background: var(--accent); }
+  .si-3 { border-left-color: rgba(52,211,153,0.5);  } .si-3 .si-num { background: var(--accent3); color:#000; }
+  .si-4 { border-left-color: rgba(96,165,250,0.5);  } .si-4 .si-num { background: var(--accent2); color:#000; }
+
+  /* ── SENTRALISASI vs DESENTRALISASI ── */
+  .sv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 1rem; }
+  .sv-card { padding: 0.9rem; border-radius: 10px; border: 1px solid var(--border); background: rgba(0,0,0,0.25); font-size: 0.79rem; line-height: 1.5; color: #c8c8e0; }
+  .sv-card .svc-icon { font-size: 1.1rem; display: block; margin-bottom: 0.25rem; }
+  .sv-card .svc-title { font-weight: 700; font-size: 0.86rem; display: block; margin-bottom: 0.4rem; }
+  .sv-card ul { list-style: none; }
+  .sv-card ul li { padding: 0.2rem 0; border-bottom: 1px solid var(--border); font-size: 0.76rem; color: var(--muted); }
+  .sv-card ul li:last-child { border-bottom: none; }
+  .sv-card ul li::before { content: "→ "; }
+  .sv-s { border-color: rgba(245,158,11,0.3);  } .sv-s .svc-title { color: var(--accent4); }
+  .sv-d { border-color: rgba(52,211,153,0.3);  } .sv-d .svc-title { color: var(--accent3); }
+
+  /* ── DONE BUTTON ── */
+  .done-btn { display: flex; align-items: center; gap: 0.5rem; margin-top: 1.1rem; background: none; border: 1px solid var(--border); border-radius: 6px; padding: 0.5rem 0.9rem; color: var(--muted); font-size: 0.77rem; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.2s; }
+  .done-btn:hover { border-color: var(--accent3); color: var(--accent3); }
+  .done-btn.checked { border-color: var(--accent3); color: var(--accent3); background: rgba(52,211,153,0.07); }
+
+  /* ── ULTIMATE ── */
+  .ultimate { margin-top: 2.5rem; background: linear-gradient(135deg, rgba(232,121,249,0.07), rgba(96,165,250,0.04)); border: 1px solid rgba(232,121,249,0.25); border-radius: 16px; padding: 2rem 1.6rem; }
+  .ultimate-header { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1.6rem; }
+  .ultimate-icon { width: 40px; height: 40px; background: linear-gradient(135deg, var(--accent), #a21caf); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+  .ultimate-header h2 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; }
+  .ultimate-header p { font-size: 0.78rem; color: var(--muted); margin-top: 0.1rem; }
+
+  .chain { display: flex; flex-direction: column; gap: 0; }
+  .chain-step { display: flex; gap: 1rem; align-items: flex-start; }
+  .chain-line { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+  .chain-dot { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'DM Mono', monospace; font-size: 0.65rem; font-weight: 700; flex-shrink: 0; }
+  .chain-connector { width: 2px; flex: 1; min-height: 20px; background: var(--border); margin: 3px 0; }
+  .chain-content { flex: 1; padding-bottom: 1.4rem; }
+  .chain-content h3 { font-size: 0.9rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .chain-content p { font-size: 0.82rem; color: #9fa3c0; line-height: 1.55; }
+  .chain-content .keywords { margin-top: 0.5rem; display: flex; flex-wrap: wrap; gap: 0.35rem; }
+  .kw { font-family: 'DM Mono', monospace; font-size: 0.62rem; padding: 0.15rem 0.5rem; border-radius: 99px; background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+  .grand-formula { margin-top: 1.5rem; padding: 1.2rem; background: rgba(0,0,0,0.3); border-radius: 10px; text-align: center; }
+  .formula-line { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 0.4rem; font-weight: 600; }
+  .formula-term { padding: 0.3rem 0.75rem; border-radius: 6px; font-family: 'DM Mono', monospace; font-size: 0.76rem; }
+  .ft-fcs { background: rgba(232,121,249,0.15); color: var(--accent); }
+  .ft-blu { background: rgba(96,165,250,0.15);  color: var(--accent2); }
+  .ft-grn { background: rgba(52,211,153,0.15);  color: var(--accent3); }
+  .ft-amr { background: rgba(245,158,11,0.15);  color: var(--accent4); }
+  .ft-vio { background: rgba(167,139,250,0.15); color: var(--accent6); }
+  .formula-op { color: var(--muted); font-size: 0.9rem; }
+  .formula-caption { font-size: 0.75rem; color: var(--muted); margin-top: 0.5rem; font-style: italic; }
+
+  footer { text-align: center; margin-top: 3rem; font-size: 0.7rem; color: var(--muted); font-family: 'DM Mono', monospace; opacity: 0.6; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="tag">CA Indonesia · MSK</div>
+    <h1>BAB X — <span>Membangun Organisasi</span><br>untuk Implementasi Strategi</h1>
+    <p class="subtitle">10 Tugas Manajerial · SDM Andal · Kompetensi Inti · Struktur Organisasi Suportif</p>
+    <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="progress-label" id="progressLabel">0 / 5 bagian dipelajari</div>
+  </header>
+
+  <!-- PETA KONSEP -->
+  <div class="mind-map">
+    <h2>🗺 Peta Konsep Bab X</h2>
+    <div class="mind-center">🏗️ Organisasi Siap Implementasi</div>
+    <div class="mind-branches">
+      <div class="branch b1"><div class="blabel">10.3</div>📋 Kerangka Implementasi<br><small style="opacity:0.7">10 tugas manajerial dasar</small></div>
+      <div class="branch b2"><div class="blabel">10.4</div>🚀 Dari Mana Mulai?<br><small style="opacity:0.7">3 fungsi pertama organisasi</small></div>
+      <div class="branch b3"><div class="blabel">10.5</div>👥 Rekrut SDM Andal<br><small style="opacity:0.7">Kualitas orang, bukan hanya kapabilitas</small></div>
+      <div class="branch b4"><div class="blabel">10.6</div>💡 Bangun Kompetensi Inti<br><small style="opacity:0.7">3 pendekatan · Knowledge management</small></div>
+      <div class="branch b5"><div class="blabel">10.7</div>🏛️ Struktur Organisasi Suportif<br><small style="opacity:0.7">4 keputusan · Sentralisasi vs Desentralisasi</small></div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 1: KONTEKS & PERBEDAAN STRATEGI vs IMPLEMENTASI ══ -->
+  <div class="section" id="s1">
+    <div class="section-header" onclick="toggle('s1')">
+      <span class="num c1">10.1–10.2</span>
+      <div>
+        <div class="section-title">Pendahuluan: Strategi vs Implementasi — Dua Keahlian Berbeda</div>
+        <div class="section-eng">Introduction: Strategy Building vs. Strategy Execution</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Dua fase yang sangat berbeda:</strong>
+          <br>→ <strong>Membangun strategi</strong> = dipengaruhi oleh faktor pasar (<em>market-driven</em>) dan sumber daya yang tersedia
+          <br>→ <strong>Mengimplementasikan strategi</strong> = dipengaruhi oleh aktivitas para eksekutif dan proses bisnis operasional sehari-hari (<em>operation-driven</em>)
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Implementasi strategi berorientasi pada <strong>tindakan/aktivitas eksekutif</strong> (<em>action-driven</em>) — serangkaian upaya untuk membuat segalanya 'terjadi' yang sekaligus menguji ketrampilan dan keahlian manajer dalam membawa perubahan organisasional positif.
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          Implementasi yang baik mencakup: <em>mencapai perbaikan berkelanjutan dalam proses bisnis · menciptakan dan memupuk budaya perusahaan yang mendukung strategi · dan pada akhirnya mencapai atau melebihi setiap target perusahaan.</em>
+        </span></li>
+        <li class="point"><span class="dot d1"></span><span>
+          <strong>Catatan penting:</strong> Tidak ada resep manajerial tunggal yang dapat memastikan keberhasilan implementasi strategi karena situasi dan kondisi setiap perusahaan berbeda-beda — adaptasi terhadap konteks spesifik perusahaan adalah kunci.
+        </span></li>
+      </ul>
+      <div class="info-box fuchsia">
+        <strong>💡 Inti Bab X:</strong> Bab ini adalah jembatan antara <em>strategi yang dipilih</em> (Bab I–IX) dengan <em>pelaksanaannya</em> (Bab XI–XII). Fokus utama: membangun tiga fondasi organisasional yang memungkinkan implementasi berhasil — SDM andal, kompetensi inti kuat, dan struktur organisasi yang suportif.
+      </div>
+      <button class="done-btn" id="btn1" onclick="markDone(1)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: 10 TUGAS MANAJERIAL ══ -->
+  <div class="section" id="s2">
+    <div class="section-header" onclick="toggle('s2')">
+      <span class="num c1">10.3</span>
+      <div>
+        <div class="section-title">Kerangka Implementasi: 10 Tugas Manajerial Dasar</div>
+        <div class="section-eng">Strategy Execution Framework: Ten Managerial Tasks</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <p style="font-size:0.83rem;color:var(--muted);margin-bottom:1rem;">Komponen-komponen utama yang sekaligus menjadi <strong style="color:var(--text);">10 tugas mendasar manajer</strong> dalam mengimplementasikan strategi:</p>
+      <div class="task-grid">
+        <div class="task-item t1">
+          <div class="task-num">1</div>
+          <div><strong>Penuhi dengan SDM andal</strong> — rekrut manajer dan SDM yang mampu mengeksekusi strategi perusahaan dengan baik</div>
+        </div>
+        <div class="task-item t2">
+          <div class="task-num">2</div>
+          <div><strong>Bangun kemampuan organisasional</strong> yang diperlukan dalam pengimplementasian strategi yang berhasil</div>
+        </div>
+        <div class="task-item t3">
+          <div class="task-num">3</div>
+          <div><strong>Ciptakan struktur organisasi</strong> yang mendukung strategi perusahaan secara langsung</div>
+        </div>
+        <div class="task-item t4">
+          <div class="task-num">4</div>
+          <div><strong>Alokasikan sumber daya anggaran</strong> yang cukup untuk mendukung upaya pengimplementasian strategi</div>
+        </div>
+        <div class="task-item t5">
+          <div class="task-num">5</div>
+          <div><strong>Ciptakan kebijakan dan prosedur</strong> yang mampu memfasilitasi proses pengimplementasian strategi</div>
+        </div>
+        <div class="task-item t6">
+          <div class="task-num">6</div>
+          <div><strong>Pilih praktik terbaik dan proses bisnis</strong> yang mendorong perbaikan berkesinambungan</div>
+        </div>
+        <div class="task-item t7">
+          <div class="task-num">7</div>
+          <div><strong>Bangun sistem informasi dan operasi</strong> yang memberdayakan karyawan untuk menjalankan peran stratejik mereka</div>
+        </div>
+        <div class="task-item t8">
+          <div class="task-num">8</div>
+          <div><strong>Masukkan mekanisme penghargaan dan insentif</strong> dalam satu paket nilai target yang dicapai karyawan</div>
+        </div>
+        <div class="task-item t9">
+          <div class="task-num">9</div>
+          <div><strong>Pertahankan budaya korporat</strong> yang mempromosikan pengimplementasian strategi perusahaan dengan baik</div>
+        </div>
+        <div class="task-item t10">
+          <div class="task-num">10</div>
+          <div><strong>Latih kemampuan kepemimpinan internal</strong> yang sangat diperlukan untuk mendorong implementasi strategi</div>
+        </div>
+      </div>
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Kelompok 10 Tugas menjadi 5 Pasang:</strong> <em>SDM+Kemampuan</em> · <em>Struktur+Anggaran</em> · <em>Kebijakan+Praktik Terbaik</em> · <em>Sistem+Insentif</em> · <em>Budaya+Kepemimpinan</em> → <em>"SK-KP-SI-BK"</em> dengan fondasi SDM di awal dan Leadership di akhir.</span>
+      </div>
+      <div class="info-box blue">
+        <strong>📌 Catatan:</strong> Bab X membahas tiga tugas pertama (1, 2, 3) secara mendalam. Tugas 4–10 akan dibahas di Bab XI dan XII sebagai lanjutan. Ketiga tugas pertama membentuk <em>fondasi struktural</em> implementasi strategi — tanpa ketiganya, tujuh tugas lainnya tidak akan efektif.
+      </div>
+      <button class="done-btn" id="btn2" onclick="markDone(2)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: REKRUT SDM ANDAL ══ -->
+  <div class="section" id="s3">
+    <div class="section-header" onclick="toggle('s3')">
+      <span class="num c2">10.5</span>
+      <div>
+        <div class="section-title">Merekrut SDM yang Andal dalam Organisasi</div>
+        <div class="section-eng">Recruiting Capable People for the Organization</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>Membangun tim manajemen yang andal</strong> adalah tujuan utama dari tugas membangun organisasi. Strategi dan kondisi yang berbeda menuntut kombinasi pengalaman, latar belakang, dan gaya manajemen yang berbeda pula.
+        </span></li>
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>Prinsip yang tidak boleh diabaikan:</strong> Mengisi posisi-posisi kunci di manajemen dengan orang-orang yang cerdas, berpikir jernih, mampu memikirkan hal-hal apa saja yang perlu dilakukan, orang yang terampil mengelola anak buah, dan yang lihai dalam mencapai tujuan atau hasil yang baik.
+        </span></li>
+        <li class="point"><span class="dot d2"></span><span>
+          <strong>Proses yang dibahas:</strong> Rekrutmen, pelatihan, dan mempertahankan karyawan yang memenuhi syarat-syarat yang telah dipaparkan — termasuk bagaimana mempertahankan orang-orang terbaik agar tidak pindah ke perusahaan lain.
+        </span></li>
+      </ul>
+
+      <p style="font-size:0.82rem;color:var(--muted);margin: 0.9rem 0 0.5rem;"><strong style="color:var(--text);">Kualitas SDM yang dibutuhkan lebih dari sekadar kapabilitas teknis:</strong></p>
+      <div class="sdm-qualities">
+        <div class="sdm-q"><span class="sdm-icon">🧠</span><div><strong>Mampu berpikir jernih</strong> — tidak hanya pintar secara teknis, tapi juga mampu menganalisis situasi kompleks dan membuat keputusan yang tepat di bawah tekanan</div></div>
+        <div class="sdm-q"><span class="sdm-icon">🎯</span><div><strong>Mampu memikirkan apa yang perlu dilakukan</strong> — inisiatif dan orientasi pada tindakan; tidak menunggu instruksi untuk setiap hal kecil</div></div>
+        <div class="sdm-q"><span class="sdm-icon">👥</span><div><strong>Terampil mengelola anak buah</strong> — kemampuan memimpin, memotivasi, dan mengembangkan tim; bukan hanya hebat secara individual</div></div>
+        <div class="sdm-q"><span class="sdm-icon">🏆</span><div><strong>Lihai mencapai tujuan</strong> — kemampuan mengeksekusi dan menghasilkan hasil nyata, bukan hanya merencanakan dengan baik</div></div>
+        <div class="sdm-q"><span class="sdm-icon">🤝</span><div><strong>Memiliki karakter yang menyatu dalam tim</strong> — bukan hanya <em>mampu</em>, tapi juga <em>tepat</em> secara karakter dan nilai — itulah sumber terbaik ide kreatif bagi perbaikan operasional</div></div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Prinsip SDM:</strong> Kapabilitas tinggi saja tidak cukup. <em>"Sungguh diperlukan orang-orang yang tak hanya mampu, tetapi juga tepat dan memiliki karakter yang menyatu dalam tim"</em> — karena merekalah yang akan menghasilkan ide-ide kreatif terbaik untuk perbaikan operasional.</span>
+      </div>
+      <button class="done-btn" id="btn3" onclick="markDone(3)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: MEMBANGUN KOMPETENSI INTI ══ -->
+  <div class="section" id="s4">
+    <div class="section-header" onclick="toggle('s4')">
+      <span class="num c3">10.6</span>
+      <div>
+        <div class="section-title">Membangun &amp; Memperkuat Kompetensi Inti serta Kemampuan Kompetitif</div>
+        <div class="section-eng">Building Core Competencies &amp; Competitive Capabilities</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d3"></span><span>
+          Kemampuan perusahaan untuk menjalankan aktivitas yang menciptakan nilai dan mengekspresikan strateginya terbentuk dari <strong>sumber daya dan kapabilitasnya</strong> — yang terdiri dari keterampilan, talenta, pengalaman, dan pengetahuan yang dibangun pada SDM.
+        </span></li>
+        <li class="point"><span class="dot d3"></span><span>
+          <strong>Langkah pertama yang wajib:</strong> Memastikan bahwa sumber daya serta kapabilitas yang diperlukan memang telah tersedia, selalu diperbaharui, dan ditingkatkan kualitasnya secara berkelanjutan.
+        </span></li>
+        <li class="point"><span class="dot d3"></span><span>
+          <strong>Tujuan akhir:</strong> Membangun serta memperkuat secara kompetitif seluruh kompetensi utama serta kapabilitas yang sangat bernilai — agar manajer dapat mengerahkan seluruh sumber daya dalam bentuk aktivitas-aktivitas yang menciptakan nilai.
+        </span></li>
+      </ul>
+
+      <p style="font-size:0.82rem;color:var(--muted);margin: 0.9rem 0 0.5rem;"><strong style="color:var(--text);">Tiga pendekatan untuk membangun dan memperkuat kapabilitas:</strong></p>
+      <div class="cap-grid">
+        <div class="cap-card cap-1">
+          <span class="cc-num">PENDEKATAN 1</span>
+          <span class="cc-icon">🏠</span>
+          <span class="cc-title">Kembangkan Secara Internal</span>
+          <span class="cc-desc">Mengembangkan kapabilitas secara internal dari waktu ke waktu — melalui pelatihan, pengembangan, dan pembelajaran organisasional. Lebih lambat tapi membangun kapabilitas yang benar-benar unik milik perusahaan.</span>
+        </div>
+        <div class="cap-card cap-2">
+          <span class="cc-num">PENDEKATAN 2</span>
+          <span class="cc-icon">🤝</span>
+          <span class="cc-title">Peroleh via Merger &amp; Akuisisi</span>
+          <span class="cc-desc">Memperoleh kapabilitas melalui merger dan akuisisi perusahaan yang sudah memiliki kapabilitas yang dibutuhkan. Lebih cepat, namun memerlukan integrasi yang berhasil agar kapabilitas benar-benar berpindah.</span>
+        </div>
+        <div class="cap-card cap-3">
+          <span class="cc-num">PENDEKATAN 3</span>
+          <span class="cc-icon">🌐</span>
+          <span class="cc-title">Akses via Kerjasama Kemitraan</span>
+          <span class="cc-desc">Mengakses kapabilitas melalui kerjasama kemitraan atau aliansi strategis — tanpa harus membangun atau membeli. Fleksibel namun kapabilitas tidak sepenuhnya dimiliki.</span>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub4a">
+        <div class="subsection-header" onclick="toggleSub('sub4a')">
+          📚 Meningkatkan Keterampilan Karyawan &amp; Knowledge Management <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <ul class="points">
+            <li class="point"><span class="dot d3"></span><span>
+              Selain tiga pendekatan di atas, perusahaan juga harus terus meningkatkan <strong>keterampilan karyawan</strong> serta sumber-sumber daya pengetahuan yang lain melalui program pengembangan berkelanjutan.
+            </span></li>
+            <li class="point"><span class="dot d3"></span><span>
+              <strong>Kemampuan mengimplementasikan strategi</strong> dan keunggulan kompetitif sesungguhnya berasal dari seluruh kapabilitas organisasi yang terus-menerus diperbarui dan dikembangkan — bukan hanya dari individu yang brilian.
+            </span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="memory-tip">
+        <span class="icon">💡</span>
+        <span><strong>Mnemonik 3 Pendekatan Kapabilitas:</strong> <em>"Internal-Akuisisi-Kemitraan"</em> → <em>"IAK"</em> → <em>"Internal dulu, Akuisisi jika perlu cepat, Kemitraan jika ingin fleksibel!"</em></span>
+      </div>
+      <button class="done-btn" id="btn4" onclick="markDone(4)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: STRUKTUR ORGANISASI SUPORTIF ══ -->
+  <div class="section" id="s5">
+    <div class="section-header" onclick="toggle('s5')">
+      <span class="num c4">10.7</span>
+      <div>
+        <div class="section-title">Mengorganisasikan dengan Struktur Organisasi yang Suportif</div>
+        <div class="section-eng">Organizing Work Efforts with a Strategy-Supportive Structure</div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="section-body">
+      <ul class="points">
+        <li class="point"><span class="dot d4"></span><span>
+          Struktur organisasi perusahaan adalah <strong>produk dari situasi dan kondisi</strong> yang ada di perusahaan — biasanya merefleksikan pola-pola organisasional sebelumnya, perbedaan kondisi internal, serta "politik" tentang siapa mendapatkan tugas apa.
+        </span></li>
+        <li class="point"><span class="dot d4"></span><span>
+          <strong>Prinsip kunci:</strong> Setiap strategi didasarkan pada kapabilitas organisasionalnya sendiri dan aktivitas-aktivitas mata rantai nilainya. Oleh karena itu, <em>struktur organisasi harus diselaraskan dengan strategi</em> — bukan sebaliknya.
+        </span></li>
+      </ul>
+
+      <div class="subsection" id="sub5a">
+        <div class="subsection-header" onclick="toggleSub('sub5a')">
+          🏛️ 4 Keputusan Kritis dalam Strukturisasi Upaya Kerja <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <div class="struct-grid">
+            <div class="struct-item si-1">
+              <div class="si-num">1</div>
+              <div><strong>Tentukan aktivitas mana yang dijalankan internal vs outsource</strong> — aktivitas mata rantai nilai mana yang akan dilakukan secara internal, dan mana yang harus diambil dari luar (outsource).</div>
+            </div>
+            <div class="struct-item si-2">
+              <div class="si-num">2</div>
+              <div><strong>Selaraskan struktur organisasi dengan strategi perusahaan</strong> — struktur harus mengikuti strategi, bukan strategi yang harus menyesuaikan diri dengan struktur yang ada.</div>
+            </div>
+            <div class="struct-item si-3">
+              <div class="si-num">3</div>
+              <div><strong>Tentukan tingkat sentralisasi vs desentralisasi</strong> — seberapa besar otoritas pada level pucuk pimpinan, dan seberapa besar pendelegasian yang diserahkan pada level manajer dan staf di bawahnya.</div>
+            </div>
+            <div class="struct-item si-4">
+              <div class="si-num">4</div>
+              <div><strong>Fasilitasi kerjasama dengan mitra eksternal dan mitra strategik</strong> — membangun mekanisme koordinasi yang efektif antara perusahaan dengan mitra-mitra di luar organisasi.</div>
+            </div>
+          </div>
+          <div class="memory-tip">
+            <span class="icon">💡</span>
+            <span><strong>Mnemonik 4 Keputusan Struktur:</strong> <em>"Internal-Selaras-Sentralisasi-Fasilitasi"</em> → <em>"ISSF"</em> → <em>"Inovasi Struktur Selalu Fasilitasi strategi!"</em></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="subsection" id="sub5b">
+        <div class="subsection-header" onclick="toggleSub('sub5b')">
+          ⚖️ Sentralisasi vs Desentralisasi: Kelebihan &amp; Kekurangan <span class="sub-chevron">▼</span>
+        </div>
+        <div class="subsection-body">
+          <div class="sv-grid">
+            <div class="sv-card sv-s">
+              <span class="svc-icon">🏛️</span>
+              <span class="svc-title">Sentralisasi</span>
+              <ul>
+                <li>Kontrol kualitas dan konsistensi lebih terjaga</li>
+                <li>Koordinasi antar unit lebih mudah</li>
+                <li>Pengambilan keputusan lebih cepat di level atas</li>
+                <li>Cocok untuk lingkungan stabil dan strategi standarisasi</li>
+              </ul>
+            </div>
+            <div class="sv-card sv-d">
+              <span class="svc-icon">🌐</span>
+              <span class="svc-title">Desentralisasi</span>
+              <ul>
+                <li>Respons lebih cepat terhadap kondisi lokal</li>
+                <li>Memotivasi manajer level menengah dan bawah</li>
+                <li>Mendorong inovasi dan kreativitas lebih luas</li>
+                <li>Cocok untuk lingkungan dinamis dan strategi adaptasi lokal</li>
+              </ul>
+            </div>
+          </div>
+          <div class="info-box amber">
+            <strong>🎯 Prinsip Pilihan:</strong> Tidak ada yang universally lebih baik. Pilihan sentralisasi vs desentralisasi harus disesuaikan dengan <em>ukuran perusahaan, kecepatan perubahan lingkungan, jenis strategi yang dijalankan, dan tingkat kepercayaan terhadap manajer level bawah</em>.
+          </div>
+        </div>
+      </div>
+
+      <button class="done-btn" id="btn5" onclick="markDone(5)">☐ &nbsp;Tandai sudah dipelajari</button>
+    </div>
+  </div>
+
+  <!-- ══ ULTIMATE OUTLINE ══ -->
+  <div class="ultimate">
+    <div class="ultimate-header">
+      <div class="ultimate-icon">⚡</div>
+      <div>
+        <h2>Ultimate Outline — Bab X</h2>
+        <p>Rangkuman inti untuk mengingat seluruh bab dalam satu pandangan</p>
+      </div>
+    </div>
+
+    <div class="chain">
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent);color:#000;">1</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent);">Implementasi ≠ Membangun Strategi — Butuh Keahlian Berbeda</h3>
+          <p>Membangun strategi = <em>market-driven</em>. Mengimplementasikan strategi = <em>operation-driven &amp; action-driven</em>. Implementasi adalah tentang membuat segalanya <strong style="color:#f0f0ff;">'terjadi'</strong> di lapangan — membutuhkan keahlian manajerial yang berbeda dan lebih operasional dari sekadar analisis strategis.</p>
+          <div class="keywords"><span class="kw">market-driven vs operation-driven</span><span class="kw">action-driven</span><span class="kw">adaptif per konteks</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent2);color:#000;">2</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent2);">10 Tugas Manajerial — Fondasi Eksekusi Strategi</h3>
+          <p>Sepuluh tugas manajerial dasar yang harus dijalankan: SDM+Kemampuan · Struktur+Anggaran · Kebijakan+Praktik Terbaik · Sistem+Insentif · Budaya+Kepemimpinan. <strong style="color:#f0f0ff;">Bab X membahas 3 pertama</strong>; Bab XI–XII membahas sisanya.</p>
+          <div class="keywords"><span class="kw">10 tugas</span><span class="kw">5 pasang</span><span class="kw">fondasi eksekusi</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent3);color:#000;">3</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent3);">SDM Andal = Lebih dari Sekadar Kapabilitas Teknis</h3>
+          <p>Rekrut orang yang berpikir jernih, berorientasi tindakan, terampil memimpin, dan memiliki karakter yang menyatu dalam tim. <strong style="color:#f0f0ff;">Kapabilitas tinggi saja tidak cukup</strong> — karakter dan kecocokan tim sama pentingnya. Mereka adalah sumber ide kreatif terbaik perusahaan.</p>
+          <div class="keywords"><span class="kw">SDM andal</span><span class="kw">karakter + kapabilitas</span><span class="kw">tim yang kohesif</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent4);color:#000;">4</div>
+          <div class="chain-connector"></div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent4);">Kompetensi Inti = Dibangun 3 Cara (IAK)</h3>
+          <p>Kapabilitas bisa dibangun melalui: <strong style="color:#f0f0ff;">Internal</strong> (organik, lambat tapi unik) · <strong style="color:#f0f0ff;">Akuisisi</strong> (cepat tapi perlu integrasi) · <strong style="color:#f0f0ff;">Kemitraan</strong> (fleksibel tapi tidak dimiliki). Langkah pertama: pastikan sumber daya dan kapabilitas yang diperlukan tersedia dan terus diperbarui.</p>
+          <div class="keywords"><span class="kw">IAK</span><span class="kw">internal-akuisisi-kemitraan</span><span class="kw">knowledge management</span></div>
+        </div>
+      </div>
+      <div class="chain-step">
+        <div class="chain-line">
+          <div class="chain-dot" style="background:var(--accent6);color:#fff;">5</div>
+        </div>
+        <div class="chain-content">
+          <h3 style="color:var(--accent6);">Struktur Organisasi Harus Mengikuti Strategi — Bukan Sebaliknya</h3>
+          <p>4 keputusan kritis: Internal vs Outsource · Selaraskan dengan Strategi · Sentralisasi vs Desentralisasi · Fasilitasi Mitra Eksternal (ISSF). Pilihan sentralisasi vs desentralisasi tidak ada yang universally terbaik — tergantung konteks strategi dan kecepatan perubahan lingkungan.</p>
+          <div class="keywords"><span class="kw">ISSF</span><span class="kw">struktur mengikuti strategi</span><span class="kw">sentralisasi vs desentralisasi</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GRAND FORMULA -->
+    <div class="grand-formula">
+      <div class="formula-line">
+        <span class="formula-term ft-fcs">Kerangka 10 Tugas</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-blu">SDM Andal (Tugas 1)</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-grn">Kompetensi IAK (Tugas 2)</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-amr">Struktur ISSF (Tugas 3)</span>
+        <span class="formula-op">→</span>
+        <span class="formula-term ft-vio">Tugas 4–10 (Bab XI–XII)</span>
+      </div>
+      <div class="formula-caption">Bab X membangun tiga fondasi struktural implementasi strategi — landasan bagi tujuh tugas manajerial berikutnya</div>
+    </div>
+
+    <!-- MEGA MNEMONIC -->
+    <div class="info-box fuchsia" style="margin-top:1.2rem;">
+      <strong>🧠 Mega-Mnemonik Bab X:</strong><br>
+      <em>"Implementasi itu <strong style="color:#f0f0ff;">A</strong>ction-driven bukan Market-driven, punya <strong style="color:#f0f0ff;">10</strong> tugas manajerial, dimulai dengan rekrut <strong style="color:#f0f0ff;">S</strong>DM andal (karakter+kapabilitas), bangun kompetensi via <strong style="color:#f0f0ff;">I</strong>AK, dan buat struktur <strong style="color:#f0f0ff;">ISSF</strong> yang selaras strategi!"</em>
+      <br><br>
+      <span style="opacity:0.75;font-size:0.8rem;"><strong style="color:#f0f0ff;">A-10-S-IAK-ISSF</strong> — Lima konsep kunci Bab X. Pesan utama: <em>Organisasi yang mampu mengimplementasikan strategi dibangun di atas tiga fondasi: orang yang tepat, kompetensi yang kuat, dan struktur yang selaras.</em></span>
+    </div>
+  </div>
+
+  <footer>Dibuat dari Modul CA Indonesia · IAI — Bab X Manajemen Stratejik dan Kepemimpinan</footer>
+</div>
+
+<script>
+  const totalSections = 5;
+  const done = {};
+  for (let i = 1; i <= totalSections; i++) done[i] = false;
+
+  function toggle(id) { document.getElementById(id).classList.toggle('open'); }
+  function toggleSub(id) { document.getElementById(id).classList.toggle('open'); }
+
+  function markDone(n) {
+    done[n] = !done[n];
+    const btn = document.getElementById('btn' + n);
+    if (done[n]) { btn.textContent = '✔  Sudah dipelajari!'; btn.classList.add('checked'); }
+    else { btn.innerHTML = '☐ &nbsp;Tandai sudah dipelajari'; btn.classList.remove('checked'); }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const count = Object.values(done).filter(Boolean).length;
+    document.getElementById('progressFill').style.width = (count / totalSections * 100) + '%';
+    document.getElementById('progressLabel').textContent = count + ' / ' + totalSections + ' bagian dipelajari';
+  }
+
+  document.getElementById('s1').classList.add('open');
+</script>
+</body>
+</html>
